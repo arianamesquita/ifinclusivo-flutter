@@ -2,15 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../ui/pages/about_us/about_us_page.dart';
+import '../../../../ui/pages/presentation/aboult_us/about_us_page.dart';
+import '../../../app_routes.dart';
 
 
 part 'about_us_router.g.dart';
 
+
 @TypedGoRoute<AboutUsRoute>(
-  path: '/about-us',
+  path: AppRoutes.aboutUs,
 )
-class AboutUsRoute extends GoRouteData with $AboutUsRoute{
+
+class AboutUsRoute extends GoRouteData with $AboutUsRoute {
   const AboutUsRoute();
 
   @override

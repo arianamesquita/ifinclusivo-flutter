@@ -8,14 +8,16 @@ part of 'about_us_router.dart';
 
 List<RouteBase> get $appRoutes => [$aboutUsRoute];
 
-RouteBase get $aboutUsRoute =>
-    GoRouteData.$route(path: '/about-us', factory: $AboutUsRoute._fromState);
+RouteBase get $aboutUsRoute => GoRouteData.$route(
+  path: '/presentation',
+  factory: $AboutUsRoute._fromState,
+);
 
 mixin $AboutUsRoute on GoRouteData {
   static AboutUsRoute _fromState(GoRouterState state) => const AboutUsRoute();
 
   @override
-  String get location => GoRouteData.$location('/about-us');
+  String get location => GoRouteData.$location('/presentation');
 
   @override
   void go(BuildContext context) => context.go(location);
