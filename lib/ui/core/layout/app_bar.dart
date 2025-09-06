@@ -45,7 +45,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
-                  'assets/logo_oficial.png',
+                  'assets/favicon.png',
                   height: 100,
                 ),
               ),
