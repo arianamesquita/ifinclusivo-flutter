@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
     final brightness = View.of(context).platformDispatcher.platformBrightness;
     TextTheme textTheme = createTextTheme(context, "Poppins", "Poppins");
     MaterialTheme theme = MaterialTheme(textTheme);
-
     final router = createRouter();
     return MaterialApp.router(
       title: 'IF Inclusivo',
