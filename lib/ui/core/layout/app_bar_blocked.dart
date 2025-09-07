@@ -88,7 +88,7 @@ class CustomAppBarBlocked extends StatelessWidget {
         ElevatedButton(
           onPressed: onPressedSingIn,
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromRGBO(28, 122, 229, 1),
+            backgroundColor: const Color.fromRGBO(28, 122, 229, 1.0),
             textStyle: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -105,7 +105,7 @@ class CustomAppBarBlocked extends StatelessWidget {
         ElevatedButton(
           onPressed: onPressedSingUp,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.secondary,
+            backgroundColor: Color.fromRGBO(98, 191, 98, 1.0),
             textStyle: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),

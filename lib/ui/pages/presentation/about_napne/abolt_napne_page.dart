@@ -11,16 +11,14 @@ class AboltNapnePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomContainer(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ElevatedButton(onPressed: (){
-              context.go(AboutUsRoute().location);
-            }, child: Text('ir para about - us'))
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          ElevatedButton(onPressed: (){
+            context.go(AboutUsRoute().location);
+          }, child: Text('ir para about - us'))
+        ],
       ),
     );
   }

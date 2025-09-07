@@ -14,7 +14,7 @@ class CustomContainer extends StatefulWidget {
     super.key,
     required this.child,
     this.showBackButton = true,
-    this.alwaysActive = true,
+    this.alwaysActive = false,
     this.onBack,
   });
 
@@ -30,7 +30,7 @@ class _CustomContainerState extends State<CustomContainer> {
     final deviceType = ResponsiveUtils.getDeviceType(context);
 
 
-    final double figura2Top = (264 + _childHeight).clamp(572, 1100);
+    final double figura2Top = (264 + _childHeight).clamp(497, 1100);
 
     final bool canShowBack =
         widget.showBackButton &&
@@ -96,7 +96,7 @@ class _CustomContainerState extends State<CustomContainer> {
 
                 Column(
                   children: [
-                    SizedBox(height: figura2Top),
+                    SizedBox(height: figura2Top ),
                     SvgPicture.asset(
                       "assets/figuras decorativas lado esquerdo.svg",
                       fit: BoxFit.cover,
