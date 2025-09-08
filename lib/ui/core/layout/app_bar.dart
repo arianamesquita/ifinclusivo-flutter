@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/routing/pages/app/routes/forum_router.dart';
+
+import '../../../routing/pages/about_routes/routes/about_us_router.dart';
+import '../widgets/hoverable_logo.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final int selectedIndex;
@@ -44,8 +49,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
               flex: 1,
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Image.asset(
-                  'assets/favicon.png',
+                child: HoverableLogo(
+                  onTap: () => context.go(ForumRouter().location),
+                  imagePath: 'assets/favicon.png',
                   height: 100,
                 ),
               ),

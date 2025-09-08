@@ -11,12 +11,12 @@ part 'shell_about_router.g.dart';
 
 @TypedStatefulShellRoute<ShellAboutRoute>(
   branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
-    TypedStatefulShellBranch<BranchAData>(
+    TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<AboutUsRoute>(path: AppRoutes.aboutUs),
       ],
     ),
-    TypedStatefulShellBranch<BranchBData>(
+    TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<AboutNapneRoute>(path: AppRoutes.aboutNapne),
       ],
@@ -34,12 +34,4 @@ class ShellAboutRoute extends StatefulShellRouteData  {
       ) {
     return PresentationPage(child: navigationShell);
   }
-}
-
-class BranchAData extends StatefulShellBranchData {
-  const BranchAData();
-}
-
-class BranchBData extends StatefulShellBranchData {
-  const BranchBData();
 }

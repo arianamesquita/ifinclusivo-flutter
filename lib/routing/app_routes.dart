@@ -1,10 +1,21 @@
 class AppRoutes {
   // Rotas da Seção de Apresentação
   static const String aboutUs = '/presentation';
-  static const String aboutNapne = '/presentation/about-napne';
+  static const String aboutNapne = '$aboutUs/about-napne';
+// Rotas de autenticação
+  static const String signIn = '/login';
+  static const String signUp = '/register';
+
 
   // Rotas da Aplicação Principal
-  static const String home = '/home';
-  static const String profile = '/profile';
+  static const String _app = '/app';
+  static const String forum = '$_app/forum';
+  static const String libras = '$_app/libras';
+  static const String topico = '$_app/topicos';
+  static const String chat = '$_app/chat';
+
+
+
+
 
 }
