@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/pages/about_routes/routes/about_us_router.dart';
 
 import '../../../utils/responsive_utils.dart';
+import '../widgets/hoverable_logo.dart';
 
 class CustomAppBarBlocked extends StatelessWidget {
   const CustomAppBarBlocked({
@@ -57,8 +58,8 @@ class CustomAppBarBlocked extends StatelessWidget {
                 isMobile ? WrapAlignment.center : WrapAlignment.spaceBetween,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              _HoverableLogo(
-                onTap: () => context.go('/presentation'),
+              HoverableLogo(
+                onTap: () => context.go(AboutUsRoute().location),
                 imagePath: 'assets/logo_oficial_expanded.png',
                 height: 138,
               ),
@@ -120,59 +121,6 @@ class CustomAppBarBlocked extends StatelessWidget {
           child: const Text('Cadastre-se'),
         ),
       ],
-    );
-  }
-}
-
-
-class _HoverableLogo extends StatefulWidget {
-  final String imagePath;
-  final double height;
-  final VoidCallback onTap;
-
-  const _HoverableLogo({
-    required this.imagePath,
-    required this.height,
-    required this.onTap,
-  });
-
-  @override
-  State<_HoverableLogo> createState() => _HoverableLogoState();
-}
-
-class _HoverableLogoState extends State<_HoverableLogo> {
-  bool _hovering = false;
-  bool _pressed = false;
-
-  void _onTapDown(TapDownDetails details) => setState(() => _pressed = true);
-  void _onTapUp(TapUpDetails details) => setState(() => _pressed = false);
-  void _onTapCancel() => setState(() => _pressed = false);
-
-  @override
-  Widget build(BuildContext context) {
-    // calcula deslocamento: sobe no hover, afunda no click
-    double translateY = 0;
-    if (_hovering) translateY -= 5;   // sobe 5px
-    if (_pressed) translateY += 3;     // afunda 3px ao clicar
-
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _hovering = true),
-      onExit: (_) => setState(() => _hovering = false),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        onTapDown: _onTapDown,
-        onTapUp: _onTapUp,
-        onTapCancel: _onTapCancel,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
-          transform: Matrix4.identity()..translate(0, translateY, 0),
-          child: Image.asset(
-            widget.imagePath,
-            height: widget.height,
-          ),
-        ),
-      ),
     );
   }
 }

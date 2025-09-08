@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/core/theme/theme.dart';
 import 'package:if_inclusivo/ui/core/theme/util.dart';
+import 'package:provider/provider.dart';
+
+import 'config/dependencies.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: providersRemote, child: const MyApp()));
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

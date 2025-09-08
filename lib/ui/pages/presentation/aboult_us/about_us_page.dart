@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/pages/about_routes/routes/about_napne_router.dart';
+import 'package:if_inclusivo/routing/pages/app/routes/chat_router.dart';
+import 'package:if_inclusivo/routing/pages/app/routes/libras_router.dart';
+import 'package:if_inclusivo/routing/pages/app/routes/topico_router.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 
@@ -27,21 +30,21 @@ class _AboutUsPageState extends State<AboutUsPage> {
       title: 'Converte Libras',
       label: 'Converte palavras em sinais para deficientes auditivos.',
       color: color1,
-      onTap: () {},
+      onTap: () {context.go(LibrasRouter().location);},
     ),
       StackItemInfo(
         iconPath: 'assets/icons/Livro.png',
         title: 'Tópicos',
         label: 'Sugestões de leitura adaptadas para todos.',
         color: color2,
-        onTap: () {},
+        onTap: () {context.go(TopicoRouter().location);},
       ),
       StackItemInfo(
         iconPath: 'assets/icons/Chat.png',
         title: 'Fórum',
         label: 'Espaço de diálogo e apoio entre os alunos.',
         color: color1,
-        onTap: () {},
+        onTap: () {context.go(ChatRouter().location);},
       ),
       StackItemInfo(
         iconPath: 'assets/icons/napne.png',

@@ -4,6 +4,7 @@ import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
 
 import '../../core/layout/app_bar_blocked.dart';
 import '../../core/layout/footer.dart';
+
 class PresentationPage extends StatefulWidget {
   const PresentationPage({super.key, required this.child});
 
@@ -14,9 +15,7 @@ class PresentationPage extends StatefulWidget {
 }
 
 class _PresentationPageState extends State<PresentationPage> {
-
   Key _scrollViewKey = UniqueKey();
-
 
   @override
   void didUpdateWidget(covariant PresentationPage oldWidget) {
@@ -37,7 +36,14 @@ class _PresentationPageState extends State<PresentationPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppBarBlocked(onPressedSingIn: () {}, onPressedSingUp: () {}),
+            CustomAppBarBlocked(
+              onPressedSingIn: () {
+                context.push('/login');
+              },
+              onPressedSingUp: () {
+                context.push('/register');
+              },
+            ),
             CustomContainer(child: widget.child),
             Footer(),
           ],
