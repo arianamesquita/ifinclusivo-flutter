@@ -55,7 +55,7 @@ class ClickableLink extends StatelessWidget {
 
     return InkWell(
       onTap: _launch,
-      child: Text(label, style: defaultStyle),
+      child: Text(label, style: defaultStyle, softWrap: true,),
     );
   }
 }
