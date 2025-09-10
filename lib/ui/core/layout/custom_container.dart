@@ -45,22 +45,25 @@ class _CustomContainerState extends State<CustomContainer> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding:  EdgeInsets.only(top: 49, left:deviceType == DeviceScreenType.desktop ?75:5),
-                  child: ElevatedButton.icon(
-                    onPressed:
-                    widget.onBack ??
-                            () {
-                          if (GoRouter.of(context).canPop()) {
-                            GoRouter.of(context).pop();
-                          }
-                        },
-                    label: Text('voltar'),
-                    icon: Icon(Icons.logout_rounded, size: 24),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor:
-                      Theme.of(context).colorScheme.inverseSurface,
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                      elevation: 0,
-                      textStyle: Theme.of(context).textTheme.labelLarge,
+                  child: Tooltip(
+                    message: 'Voltar à página anterior',
+                    child: ElevatedButton.icon(
+                      onPressed:
+                      widget.onBack ??
+                              () {
+                            if (GoRouter.of(context).canPop()) {
+                              GoRouter.of(context).pop();
+                            }
+                          },
+                      label: Text('voltar'),
+                      icon: Icon(Icons.logout_rounded, size: 24),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor:
+                        Theme.of(context).colorScheme.inverseSurface,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
+                        elevation: 0,
+                        textStyle: Theme.of(context).textTheme.labelLarge,
+                      ),
                     ),
                   ),
                 ),
