@@ -7,7 +7,7 @@ import 'package:if_inclusivo/routing/pages/app/shell_app_router.dart';
 import 'package:if_inclusivo/routing/pages/auth/shell_auth_router.dart';
 
 GoRouter createRouter() => GoRouter(
-  initialLocation: AboutNapneRoute().location,
+  initialLocation: AboutUsRoute().location,
   routes: [
     $shellAboutRoute,
     $shellAuthRoute,
