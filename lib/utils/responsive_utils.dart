@@ -29,6 +29,13 @@ class ResponsiveUtils {
     }
   }
 
+  static TextStyle scaleFontStyle(BuildContext context, TextStyle style){
+    return style.copyWith(
+      fontSize:  style.fontSize! * fontScale(context),
+    );
+
+  }
+
   /// Padding padrão por device type
   static EdgeInsets defaultPadding(BuildContext context) {
     switch (getDeviceType(context)) {
