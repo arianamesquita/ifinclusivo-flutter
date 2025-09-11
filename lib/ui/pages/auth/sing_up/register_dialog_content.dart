@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../routing/pages/about_routes/routes/about_us_router.dart';
+import '../../../../utils/responsive_utils.dart';
 import '../../../core/widgets/custom_text_field.dart';
 import '../../../core/widgets/hoverable_logo.dart';
 import '../../../core/widgets/password_text_field.dart';
@@ -15,8 +16,183 @@ class RegisterDialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceType = ResponsiveUtils.getDeviceType(context);
+    final fontScale = ResponsiveUtils.fontScale(context);
     return Dialog.fullscreen(
       child: Stack(
+        children: [
+          if (deviceType == DeviceScreenType.desktop)
+            _buildIntro(context),
+          Row(
+            children: [
+              if (deviceType == DeviceScreenType.desktop)
+                const Expanded(flex: 1, child: SizedBox()),
+              Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: Container(
+                      width: deviceType == DeviceScreenType.desktop ? 600 :
+                        deviceType == DeviceScreenType.tablet ? 500 : 300,
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                              'Cadastre-se',
+                            style: TextStyle(
+                                color: Color.fromRGBO(0, 0, 0, 1),
+                                fontStyle: FontStyle.normal,
+                                fontSize: (Theme.of(context).textTheme.headlineMedium?.fontSize
+                                    ?? 20) * fontScale,
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
+                          Form(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      "Nome:",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                              ?? 18) * fontScale,
+                                          fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                  ),
+                                  CustomTextField(
+                                      labelText: 'Nome',
+                                      placeholderText: 'Digite seu nome',
+                                      onChanged: (String text) {}
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      "Login",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                              ?? 18) * fontScale,
+                                          fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                  ),
+                                  CustomTextField(
+                                      labelText: 'Login',
+                                      placeholderText: 'Digite seu login',
+                                      onChanged: (String text) {}
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      "Matrícula:",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                              ?? 18) * fontScale,
+                                          fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                  ),
+                                  CustomTextField(
+                                      labelText: 'Matrícula',
+                                      placeholderText: 'Digite sua matrícula',
+                                      onChanged: (String text) {}
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      "Senha",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                              ?? 18) * fontScale,
+                                          fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                  ),
+                                  PasswordTextField(
+                                      onValueChange: (String text) { },
+                                      title: 'Senha',
+                                      placeholder: 'Digite sua Senha'
+                                  ),
+                                  SizedBox(height: 30),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                        onPressed: (){},
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color.fromRGBO(76, 159, 132, 1),
+                                            foregroundColor: Color.fromRGBO(255, 255, 255, 1)
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Entrar',
+                                            style: TextStyle(
+                                                fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                    ?? 18) * fontScale,
+                                                fontWeight: FontWeight.w500
+                                            ),
+                                          ),
+                                        )
+                                    ),
+                                  ),
+                                  SizedBox(height: 15),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Já possui conta?',
+                                          style: TextStyle(
+                                            color: Color.fromRGBO(22, 29, 27, 1),
+                                            fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
+                                                ?? 16) * fontScale,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              context.pushReplacement('/login');
+                                            },
+                                            child: Text(
+                                              'Entre!',
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(22, 29, 27, 1),
+                                                  fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
+                                                      ?? 16) * fontScale,
+                                                  fontWeight: FontWeight.w700
+                                              ),
+                                            )
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+  _buildIntro(context){
+    return Stack(
         children: [
           Positioned(
             left: 40,
@@ -64,163 +240,7 @@ class RegisterDialogContent extends StatelessWidget {
               height: 396,
             ),
           ),
-          Row(
-            children: [
-              const Expanded(flex: 1, child: SizedBox()),
-              Expanded(
-                  flex: 2,
-                  child: Center(
-                    child: Container(
-                      width: 600,
-                      padding: const EdgeInsets.all(8),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                              'Cadastre-se',
-                            style: TextStyle(
-                                color: Color.fromRGBO(0, 0, 0, 1),
-                                fontStyle: FontStyle.normal,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600
-                            ),
-                          ),
-                          SizedBox(height: 15),
-                          Form(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      "Nome:",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400
-                                      ),
-                                    ),
-                                  ),
-                                  CustomTextField(
-                                      labelText: 'Nome',
-                                      placeholderText: 'Digite seu nome',
-                                      onChanged: (String text) {}
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      "Login",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400
-                                      ),
-                                    ),
-                                  ),
-                                  CustomTextField(
-                                      labelText: 'Login',
-                                      placeholderText: 'Digite seu login',
-                                      onChanged: (String text) {}
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      "Matrícula:",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400
-                                      ),
-                                    ),
-                                  ),
-                                  CustomTextField(
-                                      labelText: 'Matrícula',
-                                      placeholderText: 'Digite sua matrícula',
-                                      onChanged: (String text) {}
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      "Senha",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400
-                                      ),
-                                    ),
-                                  ),
-                                  PasswordTextField(
-                                      onValueChange: (String text) { },
-                                      title: 'Senha',
-                                      placeholder: 'Digite sua Senha'
-                                  ),
-                                  SizedBox(height: 30),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: ElevatedButton(
-                                        onPressed: (){},
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color.fromRGBO(76, 159, 132, 1),
-                                            foregroundColor: Color.fromRGBO(255, 255, 255, 1)
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: const Text(
-                                            'Entrar',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500
-                                            ),
-                                          ),
-                                        )
-                                    ),
-                                  ),
-                                  SizedBox(height: 15),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Já possui conta?',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(22, 29, 27, 1),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        TextButton(
-                                            onPressed: () {
-                                              context.pushReplacement('/login');
-                                            },
-                                            child: Text(
-                                              'Entre!',
-                                              style: TextStyle(
-                                                  color: Color.fromRGBO(22, 29, 27, 1),
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700
-                                              ),
-                                            )
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              )
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-              )
-            ],
-          )
-        ],
-      ),
+        ]
     );
   }
 }
