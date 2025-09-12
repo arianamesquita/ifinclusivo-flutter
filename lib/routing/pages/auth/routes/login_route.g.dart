@@ -9,9 +9,9 @@ part of 'login_route.dart';
 List<RouteBase> get $appRoutes => [$loginRoute];
 
 RouteBase get $loginRoute =>
-    GoRouteData.$route(path: '/login', factory: $LoginRoute._fromState);
+    GoRouteData.$route(path: '/login', factory: _$LoginRoute._fromState);
 
-mixin $LoginRoute on GoRouteData {
+mixin _$LoginRoute on GoRouteData {
   static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
 
   @override

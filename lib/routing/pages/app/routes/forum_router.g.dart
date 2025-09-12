@@ -9,9 +9,9 @@ part of 'forum_router.dart';
 List<RouteBase> get $appRoutes => [$forumRouter];
 
 RouteBase get $forumRouter =>
-    GoRouteData.$route(path: '/app/forum', factory: $ForumRouter._fromState);
+    GoRouteData.$route(path: '/app/forum', factory: _$ForumRouter._fromState);
 
-mixin $ForumRouter on GoRouteData {
+mixin _$ForumRouter on GoRouteData {
   static ForumRouter _fromState(GoRouterState state) => const ForumRouter();
 
   @override

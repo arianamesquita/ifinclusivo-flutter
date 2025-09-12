@@ -9,7 +9,7 @@ part 'about_napne_router.g.dart';
 @TypedGoRoute<AboutNapneRoute>(
   path: AppRoutes.aboutNapne,
 )
-class AboutNapneRoute extends GoRouteData with $AboutNapneRoute{
+class AboutNapneRoute extends GoRouteData with _$AboutNapneRoute{
   const AboutNapneRoute();
 
   @override

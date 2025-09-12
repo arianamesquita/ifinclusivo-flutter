@@ -8,7 +8,7 @@ import '../../../app_routes.dart';
 part 'sign_up_route.g.dart';
 
 @TypedGoRoute<RegisterRoute>(path: AppRoutes.signUp)
-class RegisterRoute extends GoRouteData with $RegisterRoute {
+class RegisterRoute extends GoRouteData with _$RegisterRoute {
   const RegisterRoute();
 
   @override

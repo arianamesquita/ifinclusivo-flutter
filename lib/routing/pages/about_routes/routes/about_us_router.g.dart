@@ -10,10 +10,11 @@ List<RouteBase> get $appRoutes => [$aboutUsRoute];
 
 RouteBase get $aboutUsRoute => GoRouteData.$route(
   path: '/presentation',
-  factory: $AboutUsRoute._fromState,
+
+  factory: _$AboutUsRoute._fromState,
 );
 
-mixin $AboutUsRoute on GoRouteData {
+mixin _$AboutUsRoute on GoRouteData {
   static AboutUsRoute _fromState(GoRouterState state) => const AboutUsRoute();
 
   @override

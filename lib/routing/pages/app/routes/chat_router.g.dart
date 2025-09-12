@@ -9,9 +9,9 @@ part of 'chat_router.dart';
 List<RouteBase> get $appRoutes => [$chatRouter];
 
 RouteBase get $chatRouter =>
-    GoRouteData.$route(path: '/app/chat', factory: $ChatRouter._fromState);
+    GoRouteData.$route(path: '/app/chat', factory: _$ChatRouter._fromState);
 
-mixin $ChatRouter on GoRouteData {
+mixin _$ChatRouter on GoRouteData {
   static ChatRouter _fromState(GoRouterState state) => const ChatRouter();
 
   @override

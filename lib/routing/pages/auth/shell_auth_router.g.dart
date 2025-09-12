@@ -13,14 +13,15 @@ RouteBase get $shellAuthRoute => StatefulShellRouteData.$route(
   branches: [
     StatefulShellBranchData.$branch(
       routes: [
-        GoRouteData.$route(path: '/login', factory: $LoginRoute._fromState),
+        GoRouteData.$route(path: '/login', factory: _$LoginRoute._fromState),
       ],
     ),
     StatefulShellBranchData.$branch(
       routes: [
         GoRouteData.$route(
           path: '/register',
-          factory: $RegisterRoute._fromState,
+
+          factory: _$RegisterRoute._fromState,
         ),
       ],
     ),
@@ -32,7 +33,7 @@ extension $ShellAuthRouteExtension on ShellAuthRoute {
       const ShellAuthRoute();
 }
 
-mixin $LoginRoute on GoRouteData {
+mixin _$LoginRoute on GoRouteData {
   static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
 
   @override
@@ -52,7 +53,7 @@ mixin $LoginRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $RegisterRoute on GoRouteData {
+mixin _$RegisterRoute on GoRouteData {
   static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
 
   @override

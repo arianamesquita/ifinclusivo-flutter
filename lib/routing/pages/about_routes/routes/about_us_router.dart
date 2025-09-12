@@ -13,7 +13,7 @@ part 'about_us_router.g.dart';
   path: AppRoutes.aboutUs,
 )
 
-class AboutUsRoute extends GoRouteData with $AboutUsRoute {
+class AboutUsRoute extends GoRouteData with _$AboutUsRoute {
   const AboutUsRoute();
 
   @override

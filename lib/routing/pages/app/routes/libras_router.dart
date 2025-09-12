@@ -8,7 +8,7 @@ part 'libras_router.g.dart';
 @TypedGoRoute<LibrasRouter>(
   path: AppRoutes.libras,
 )
-class LibrasRouter extends GoRouteData with $LibrasRouter{
+class LibrasRouter extends GoRouteData with _$LibrasRouter{
   const LibrasRouter();
 
   @override

@@ -15,7 +15,8 @@ RouteBase get $shellAboutRoute => StatefulShellRouteData.$route(
       routes: [
         GoRouteData.$route(
           path: '/presentation',
-          factory: $AboutUsRoute._fromState,
+
+          factory: _$AboutUsRoute._fromState,
         ),
       ],
     ),
@@ -23,7 +24,8 @@ RouteBase get $shellAboutRoute => StatefulShellRouteData.$route(
       routes: [
         GoRouteData.$route(
           path: '/presentation/about-napne',
-          factory: $AboutNapneRoute._fromState,
+
+          factory: _$AboutNapneRoute._fromState,
         ),
       ],
     ),
@@ -35,7 +37,7 @@ extension $ShellAboutRouteExtension on ShellAboutRoute {
       const ShellAboutRoute();
 }
 
-mixin $AboutUsRoute on GoRouteData {
+mixin _$AboutUsRoute on GoRouteData {
   static AboutUsRoute _fromState(GoRouterState state) => const AboutUsRoute();
 
   @override
@@ -55,7 +57,7 @@ mixin $AboutUsRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $AboutNapneRoute on GoRouteData {
+mixin _$AboutNapneRoute on GoRouteData {
   static AboutNapneRoute _fromState(GoRouterState state) =>
       const AboutNapneRoute();
 

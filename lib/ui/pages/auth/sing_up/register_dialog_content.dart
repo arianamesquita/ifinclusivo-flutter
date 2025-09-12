@@ -223,7 +223,7 @@ class RegisterDialogContent extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child:
                     HoverableLogo(
-                      onTap: () => context.go(AboutUsRoute().location),
+                      onTap: () => AboutUsRoute().go(context),
                       imagePath: 'assets/logo_oficial_expanded.png',
                       height: 94,
                     ),

@@ -9,9 +9,9 @@ part of 'sign_up_route.dart';
 List<RouteBase> get $appRoutes => [$registerRoute];
 
 RouteBase get $registerRoute =>
-    GoRouteData.$route(path: '/register', factory: $RegisterRoute._fromState);
+    GoRouteData.$route(path: '/register', factory: _$RegisterRoute._fromState);
 
-mixin $RegisterRoute on GoRouteData {
+mixin _$RegisterRoute on GoRouteData {
   static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
 
   @override

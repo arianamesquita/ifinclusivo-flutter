@@ -8,7 +8,7 @@ part 'topico_router.g.dart';
 @TypedGoRoute<TopicoRouter>(
   path: AppRoutes.topico,
 )
-class TopicoRouter extends GoRouteData with $TopicoRouter{
+class TopicoRouter extends GoRouteData with _$TopicoRouter{
   const TopicoRouter();
 
   @override

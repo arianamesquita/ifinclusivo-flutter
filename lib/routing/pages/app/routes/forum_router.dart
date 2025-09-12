@@ -8,7 +8,7 @@ part 'forum_router.g.dart';
 @TypedGoRoute<ForumRouter>(
   path: AppRoutes.forum,
 )
-class ForumRouter extends GoRouteData with $ForumRouter{
+class ForumRouter extends GoRouteData with _$ForumRouter{
   const ForumRouter();
 
   @override

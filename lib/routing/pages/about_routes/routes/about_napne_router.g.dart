@@ -10,10 +10,11 @@ List<RouteBase> get $appRoutes => [$aboutNapneRoute];
 
 RouteBase get $aboutNapneRoute => GoRouteData.$route(
   path: '/presentation/about-napne',
-  factory: $AboutNapneRoute._fromState,
+
+  factory: _$AboutNapneRoute._fromState,
 );
 
-mixin $AboutNapneRoute on GoRouteData {
+mixin _$AboutNapneRoute on GoRouteData {
   static AboutNapneRoute _fromState(GoRouterState state) =>
       const AboutNapneRoute();
 
