@@ -13,7 +13,7 @@ class FilterBlock extends StatelessWidget {
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(40),
       child: InkWell(
-        hoverColor:const Color.fromRGBO(133, 224, 224, 1) ,
+        hoverColor:const Color.fromRGBO(133, 224, 224, 1),
         borderRadius: BorderRadius.circular(40),
         onTap: onTap,
         child: Container(

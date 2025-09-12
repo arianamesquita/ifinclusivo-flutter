@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../core/widgets/search_bar.dart';
 
-class TopicsCustomSearchBar extends CustomSearchBar {
+class LibrasCustomSearchBar extends CustomSearchBar {
   static const Color textInputColor = Color.fromRGBO(255, 255, 255, 1);
 
-  const TopicsCustomSearchBar({
+  const LibrasCustomSearchBar({
     super.key,
     super.backgroundColor = const WidgetStatePropertyAll(Color.fromRGBO(196, 149, 247, 0.45)),
     super.hintText = 'Buscar',

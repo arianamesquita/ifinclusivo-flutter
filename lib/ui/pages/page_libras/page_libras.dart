@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:if_inclusivo/ui/pages/page_libras/widgets/topics_custom_search_bar.dart';
+import 'package:if_inclusivo/ui/pages/page_libras/widgets/libras_custom_search_bar.dart';
 
 import '../../core/filter_block/filter_block_grid.dart';
 
@@ -21,7 +21,7 @@ class LibrasPage extends StatelessWidget {
       color: const Color.fromRGBO(242, 242, 242, 1),
       child: Column(
         children: [
-          const TopicsCustomSearchBar(),
+          const LibrasCustomSearchBar(),
           Expanded(child: FilterBlockGrid(filterBlockList: items)),
         ],
       ),
