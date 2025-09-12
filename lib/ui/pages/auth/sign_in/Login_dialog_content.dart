@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/ui/core/widgets/custom_text_field.dart';
 import 'package:if_inclusivo/ui/core/widgets/password_text_field.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 
 import '../../../../routing/pages/about_routes/routes/about_us_router.dart';
 import '../../../core/widgets/hoverable_logo.dart';
@@ -16,6 +17,8 @@ class LoginDialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceType = ResponsiveUtils.getDeviceType(context);
+    final fontScale = ResponsiveUtils.fontScale(context);
     return Dialog.fullscreen(
       child: Container(
         decoration: BoxDecoration(
@@ -28,54 +31,16 @@ class LoginDialogContent extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child:
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: HoverableLogo(
-                          onTap: () => context.go(AboutUsRoute().location),
-                          imagePath: 'assets/logo_oficial_expanded.png',
-                          height: 114,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              right: 270,
-              top: 150,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  'assets/login_register/login_notebook.png',
-                  height: 370,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              bottom: 0,
-              child: Image.asset(
-                'assets/login_register/login_decorativa.png',
-                height: 150,
-              ),
-            ),
+            if (deviceType == DeviceScreenType.desktop)
+              _buildIntro(context),
             Row(
               children: [
                 Expanded(
                     flex: 2,
                     child: Center(
                         child: Container(
-                          width: 500,
+                          width: deviceType == DeviceScreenType.desktop ? 500 :
+                            deviceType == DeviceScreenType.tablet ? 400 : 300,
                           padding: const EdgeInsets.all(8),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -85,7 +50,8 @@ class LoginDialogContent extends StatelessWidget {
                                 style: TextStyle(
                                     color: Color.fromRGBO(0, 0, 0, 1),
                                     fontStyle: FontStyle.normal,
-                                    fontSize: 25,
+                                    fontSize: (Theme.of(context).textTheme.headlineMedium?.fontSize
+                                        ?? 25) * fontScale,
                                     fontWeight: FontWeight.w600
                                 ),
                               ),
@@ -101,7 +67,8 @@ class LoginDialogContent extends StatelessWidget {
                                           style: TextStyle(
                                               color: Color.fromRGBO(0, 0, 0, 1),
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 18,
+                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                  ?? 18) * fontScale,
                                               fontWeight: FontWeight.w400
                                           ),
                                         ),
@@ -118,7 +85,8 @@ class LoginDialogContent extends StatelessWidget {
                                           style: TextStyle(
                                               color: Color.fromRGBO(0, 0, 0, 1),
                                               fontStyle: FontStyle.normal,
-                                              fontSize: 18,
+                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                  ?? 18) * fontScale,
                                               fontWeight: FontWeight.w400
                                           ),
                                         ),
@@ -139,10 +107,11 @@ class LoginDialogContent extends StatelessWidget {
                                             ),
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child: const Text(
+                                              child: Text(
                                                   'Entrar',
                                                 style: TextStyle(
-                                                    fontSize: 18,
+                                                    fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                        ?? 18) * fontScale,
                                                     fontWeight: FontWeight.w500
                                                 ),
                                               ),
@@ -158,7 +127,8 @@ class LoginDialogContent extends StatelessWidget {
                                                 'Esqueci minha Senha',
                                               style: TextStyle(
                                                 color: Color.fromRGBO(22, 29, 27, 1),
-                                                fontSize: 16,
+                                                  fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
+                                                      ?? 16) * fontScale,
                                                 fontWeight: FontWeight.w400,
                                                 decoration: TextDecoration.underline
                                               ),
@@ -175,7 +145,8 @@ class LoginDialogContent extends StatelessWidget {
                                                 'Não possui conta?',
                                               style: TextStyle(
                                                   color: Color.fromRGBO(22, 29, 27, 1),
-                                                  fontSize: 16,
+                                                fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
+                                                    ?? 16) * fontScale,
                                                   fontWeight: FontWeight.w400,
                                               ),
                                             ),
@@ -187,7 +158,8 @@ class LoginDialogContent extends StatelessWidget {
                                                   'Cadastre-se',
                                                   style: TextStyle(
                                                       color: Color.fromRGBO(22, 29, 27, 1),
-                                                      fontSize: 16,
+                                                      fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
+                                                          ?? 16) * fontScale,
                                                       fontWeight: FontWeight.w700
                                                   ),
                                                 )
@@ -203,12 +175,65 @@ class LoginDialogContent extends StatelessWidget {
                         )
                     )
                 ),
-                const Expanded(flex: 1, child: SizedBox())
+                if (deviceType == DeviceScreenType.desktop)
+                  const Expanded(flex: 1, child: SizedBox()),
               ]
             )
           ],
         ),
       ),
+    );
+  }
+
+  _buildIntro(context){
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child:
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: HoverableLogo(
+                      onTap: () => AboutUsRoute().go(context),
+                      imagePath: 'assets/logo_oficial_expanded.png',
+                      height: 114,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          right: MediaQuery.of(context).size.width < 1240 ?
+           MediaQuery.of(context).size.width * 0.12 :
+           MediaQuery.of(context).size.width * 0.20,
+          top: MediaQuery.of(context).size.width < 1240 ?
+            MediaQuery.of(context).size.width * 0.60 :
+            MediaQuery.of(context).size.width * 0.10,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/login_register/login_notebook.png',
+              height: 370,
+            ),
+          ),
+        ),
+        Positioned(
+          left: 0,
+          bottom: 0,
+          child: Image.asset(
+            'assets/login_register/login_decorativa.png',
+            height: 150,
+          ),
+        ),
+      ]
     );
   }
 }
