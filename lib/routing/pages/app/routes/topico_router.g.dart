@@ -8,10 +8,13 @@ part of 'topico_router.dart';
 
 List<RouteBase> get $appRoutes => [$topicoRouter];
 
-RouteBase get $topicoRouter =>
-    GoRouteData.$route(path: '/app/topicos', factory: $TopicoRouter._fromState);
+RouteBase get $topicoRouter => GoRouteData.$route(
+  path: '/app/topicos',
 
-mixin $TopicoRouter on GoRouteData {
+  factory: _$TopicoRouter._fromState,
+);
+
+mixin _$TopicoRouter on GoRouteData {
   static TopicoRouter _fromState(GoRouterState state) => const TopicoRouter();
 
   @override

@@ -17,8 +17,7 @@ class CustomAppBarBlocked extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile =
-        ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile;
+    final isMobile = MediaQuery.of(context).size.width<621;
     return Stack(
       children: [
         Container(

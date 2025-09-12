@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../ui/pages/presentation/about_napne/abolt_napne_page.dart';
+import '../../../../ui/pages/presentation/about_napne/about_napne_page.dart';
 import '../../../app_routes.dart';
 
 part 'about_napne_router.g.dart';
@@ -9,7 +9,7 @@ part 'about_napne_router.g.dart';
 @TypedGoRoute<AboutNapneRoute>(
   path: AppRoutes.aboutNapne,
 )
-class AboutNapneRoute extends GoRouteData with $AboutNapneRoute{
+class AboutNapneRoute extends GoRouteData with _$AboutNapneRoute{
   const AboutNapneRoute();
 
   @override

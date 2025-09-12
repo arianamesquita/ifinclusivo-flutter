@@ -8,7 +8,7 @@ part 'chat_router.g.dart';
 @TypedGoRoute<ChatRouter>(
   path: AppRoutes.chat,
 )
-class ChatRouter extends GoRouteData with $ChatRouter{
+class ChatRouter extends GoRouteData with _$ChatRouter{
   const ChatRouter();
 
   @override

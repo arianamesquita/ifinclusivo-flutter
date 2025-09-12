@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
 
 import '../../core/layout/app_bar_blocked.dart';
 import '../../core/layout/footer.dart';
@@ -37,6 +36,7 @@ class _PresentationPageState extends State<PresentationPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomAppBarBlocked(
+
               onPressedSingIn: () {
                 context.push('/login');
               },
@@ -44,11 +44,27 @@ class _PresentationPageState extends State<PresentationPage> {
                 context.push('/register');
               },
             ),
-            CustomContainer(child: widget.child),
+            widget.child,
             Footer(),
           ],
         ),
       ),
     );
   }
+}
+// MOLDE DE DADOS PARA CADA ITEM DO GRID
+class StackItemInfo {
+  final String iconPath;
+  final String title;
+  final String label;
+  final Color color;
+  final void Function()? onTap;
+
+  const StackItemInfo({
+    required this.iconPath,
+    required this.title,
+    required this.label,
+    required this.color,
+    this.onTap,
+  });
 }

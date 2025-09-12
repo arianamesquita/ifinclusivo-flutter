@@ -6,7 +6,7 @@ import '../../../app_routes.dart';
 
 part 'login_route.g.dart';
 @TypedGoRoute<LoginRoute>(path: AppRoutes.signIn)
-class LoginRoute extends GoRouteData with $LoginRoute {
+class LoginRoute extends GoRouteData with _$LoginRoute {
   const LoginRoute();
 
 

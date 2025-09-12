@@ -32,10 +32,8 @@ class ShellAuthRoute extends StatefulShellRouteData {
 
     return DialogPage(
       key: state.pageKey,
-      child: Dialog(
-        insetPadding: const EdgeInsets.all(50), // margem mínima da tela
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 600), // opcional
+      child: Dialog.fullscreen(
+        child: Center(
           child: navigationShell,
         ),
       ),

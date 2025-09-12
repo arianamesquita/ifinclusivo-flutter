@@ -21,12 +21,19 @@ class ResponsiveUtils {
   static double fontScale(BuildContext context) {
     switch (getDeviceType(context)) {
       case DeviceScreenType.mobile:
-        return 0.8;
+        return 0.6;
       case DeviceScreenType.tablet:
         return 0.9;
       case DeviceScreenType.desktop:
         return 1.0;
     }
+  }
+
+  static TextStyle scaleFontStyle(BuildContext context, TextStyle style){
+    return style.copyWith(
+      fontSize:  style.fontSize! * fontScale(context),
+    );
+
   }
 
   /// Padding padrão por device type

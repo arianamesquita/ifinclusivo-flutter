@@ -9,9 +9,9 @@ part of 'libras_router.dart';
 List<RouteBase> get $appRoutes => [$librasRouter];
 
 RouteBase get $librasRouter =>
-    GoRouteData.$route(path: '/app/libras', factory: $LibrasRouter._fromState);
+    GoRouteData.$route(path: '/app/libras', factory: _$LibrasRouter._fromState);
 
-mixin $LibrasRouter on GoRouteData {
+mixin _$LibrasRouter on GoRouteData {
   static LibrasRouter _fromState(GoRouterState state) => const LibrasRouter();
 
   @override
