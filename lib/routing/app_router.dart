@@ -105,10 +105,6 @@ class RootRouter extends GoRouteData with _$RootRouter {
     );
   }
 
-  @override
-  String? redirect(BuildContext context, GoRouterState state) {
-    return AboutUsRoute().location;
-  }
 }
 
 GoRouter createRouter() => GoRouter(initialLocation: AboutUsRoute().location, routes: $appRoutes);
