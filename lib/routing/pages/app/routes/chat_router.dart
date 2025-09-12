@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import '../../../app_router.dart';
 import '../../../app_routes.dart';
 
-part 'chat_router.g.dart';
 
-@TypedGoRoute<ChatRouter>(
-  path: AppRoutes.chat,
-)
+
 class ChatRouter extends GoRouteData with $ChatRouter{
   const ChatRouter();
 

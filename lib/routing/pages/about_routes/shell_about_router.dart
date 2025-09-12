@@ -7,22 +7,6 @@ import '../../../ui/pages/presentation/presentation_page.dart';
 import '../../app_routes.dart';
 import 'routes/about_napne_router.dart';
 
-part 'shell_about_router.g.dart';
-
-@TypedStatefulShellRoute<ShellAboutRoute>(
-  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<AboutUsRoute>(path: AppRoutes.aboutUs),
-      ],
-    ),
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<AboutNapneRoute>(path: AppRoutes.aboutNapne),
-      ],
-    ),
-  ],
-)
 class ShellAboutRoute extends StatefulShellRouteData  {
   const ShellAboutRoute();
 

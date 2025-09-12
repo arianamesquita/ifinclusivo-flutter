@@ -95,14 +95,15 @@ class AboltNapnePage extends StatelessWidget {
                 items,
                 padding,
               ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            vertical:
-            deviceType == DeviceScreenType.desktop
-                ? 116
-                : spacing.$2 + 20,
-          ),
-          child:_buildMoreInfo(context, textScale)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical:
+                      deviceType == DeviceScreenType.desktop
+                          ? 116
+                          : spacing.$2 + 20,
+                ),
+                child: _buildMoreInfo(context, textScale),
+              ),
             ],
           ),
         ),
@@ -111,11 +112,11 @@ class AboltNapnePage extends StatelessWidget {
   }
 
   _buildMoreInfo(context, textScale) {
-    final style = Theme.of(context).textTheme.headlineSmall?.copyWith(
+    final style = ResponsiveUtils.scaleFontStyle(
+      context,
+      Theme.of(context).textTheme.headlineSmall!,
+    ).copyWith(
       fontWeight: FontWeight.w500,
-      fontSize:
-          (Theme.of(context).textTheme.headlineSmall?.fontSize ?? 24) *
-          textScale,
       color: Theme.of(context).colorScheme.onSurfaceVariant,
     );
     return Center(
@@ -126,12 +127,11 @@ class AboltNapnePage extends StatelessWidget {
         children: [
           Text(
             'Para mais informações:',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            style: ResponsiveUtils.scaleFontStyle(
+              context,
+              Theme.of(context).textTheme.headlineSmall!,
+            ).copyWith(
               fontWeight: FontWeight.w600,
-              fontSize:
-                  (Theme.of(context).textTheme.headlineSmall?.fontSize ??
-                      25) *
-                  textScale,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
@@ -151,14 +151,13 @@ class AboltNapnePage extends StatelessWidget {
             ],
           ),
           Wrap(
-
-            crossAxisAlignment:WrapCrossAlignment.center ,
+            crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 5,
             children: [
               Text('Email:', style: style),
               ClickableLink(
                 label: 'monica.canuto@ifgoiano.edu.br',
-                style: style?.copyWith(  decoration: TextDecoration.underline,),
+                style: style?.copyWith(decoration: TextDecoration.underline),
                 value: 'monica.canuto@ifgoiano.edu.br',
                 type: LinkType.email,
               ),
@@ -184,11 +183,11 @@ class AboltNapnePage extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
             'Conceitos e Diferenças. Saiba um pouco mais...',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            style: ResponsiveUtils.scaleFontStyle(
+              context,
+              Theme.of(context).textTheme.headlineSmall!,
+            ).copyWith(
               fontWeight: FontWeight.w600,
-              fontSize:
-                  (Theme.of(context).textTheme.headlineSmall?.fontSize ?? 25) *
-                  textScale,
               color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
@@ -220,11 +219,11 @@ class AboltNapnePage extends StatelessWidget {
           spacing: 29,
           maxWidth: 470,
           title: '     O QUE É O NAPNE?',
-          titleStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+          titleStyle: ResponsiveUtils.scaleFontStyle(
+            context,
+            Theme.of(context).textTheme.headlineSmall!,
+          ).copyWith(
             fontWeight: FontWeight.w600,
-            fontSize:
-                (Theme.of(context).textTheme.headlineSmall?.fontSize ?? 25) *
-                textScale,
             color: Theme.of(context).colorScheme.primary,
           ),
           textAlign: TextAlign.start,
@@ -246,7 +245,7 @@ class AboltNapnePage extends StatelessWidget {
     spacing,
   ) {
     return HoverEffect(
-      enableHover: deviceType ==  DeviceScreenType.desktop,
+      enableHover: deviceType == DeviceScreenType.desktop,
       child: Card(
         clipBehavior: Clip.antiAlias,
         color: Theme.of(context).colorScheme.onPrimary,
@@ -281,25 +280,21 @@ class AboltNapnePage extends StatelessWidget {
                   children: [
                     Text(
                       itemInfo.title,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      style: ResponsiveUtils.scaleFontStyle(
+                        context,
+                        Theme.of(context).textTheme.headlineSmall!,
+                      ).copyWith(
                         fontWeight: FontWeight.w600,
-                        fontSize:
-                            (Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall?.fontSize ??
-                                24) *
-                            fontScale,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     Text(
                       itemInfo.label,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      style: ResponsiveUtils.scaleFontStyle(
+                        context,
+                        Theme.of(context).textTheme.titleLarge!,
+                      ).copyWith(
                         fontWeight: FontWeight.w500,
-                        fontSize:
-                            (Theme.of(context).textTheme.titleLarge?.fontSize ??
-                                20) *
-                            fontScale,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       softWrap: true,
@@ -315,4 +310,3 @@ class AboltNapnePage extends StatelessWidget {
     );
   }
 }
-
