@@ -18,7 +18,7 @@ class FilterBlock extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: 201,
-          height: 161,
+          height: 156,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40),
             color: const Color.fromRGBO(133, 224, 224, 0.7),

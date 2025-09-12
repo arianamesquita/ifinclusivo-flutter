@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/pages/page_libras/widgets/libras_custom_search_bar.dart';
+import 'package:if_inclusivo/ui/pages/page_libras/widgets/top_content_libras.dart';
 
 import 'filter_block/filter_block_grid.dart';
 
@@ -20,7 +21,7 @@ class LibrasPage extends StatelessWidget {
     return Material(
       child: Column(
         children: [
-          const LibrasCustomSearchBar(),
+          const TopContentLibras(title: "CONVERTE LIBRAS", searchBar: LibrasCustomSearchBar(), subtitle: "Um dicionário de sinais criado para a comunidade",),
           FilterBlockGrid(filterBlockList: items),
         ],
       ),
