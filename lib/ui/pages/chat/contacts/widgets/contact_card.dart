@@ -54,14 +54,13 @@ class _ContactCardState extends State<ContactCard> {
   Widget build(BuildContext context) {
     final values = _getValuesByRole(widget.role, context);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: (widget.unreadMessagesCount != null && widget.unreadMessagesCount! > 0)
-                ? Color(0xFFC8FFC0)
-                : Color.fromRGBO(97, 94, 240, 0.04),
-        borderRadius: BorderRadius.circular(20),
-      ),
+    return Material(
+      color: (widget.unreadMessagesCount != null && widget.unreadMessagesCount! > 0)
+          ? Color(0xFFC8FFC0)
+          : Color.fromRGBO(97, 94, 240, 0.04),
+      borderRadius: BorderRadius.circular(20),
       child: InkWell(
+        borderRadius: BorderRadius.circular(20),
         onTap: widget.onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
