@@ -33,7 +33,6 @@ class ResponsiveUtils {
     return style.copyWith(
       fontSize:  style.fontSize! * fontScale(context),
     );
-
   }
 
   /// Padding padrão por device type

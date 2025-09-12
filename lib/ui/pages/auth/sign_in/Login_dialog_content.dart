@@ -7,7 +7,7 @@ import 'package:if_inclusivo/ui/core/widgets/custom_text_field.dart';
 import 'package:if_inclusivo/ui/core/widgets/password_text_field.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 
-import '../../../../routing/pages/about_routes/routes/about_us_router.dart';
+import '../../../../routing/app_router.dart';
 import '../../../core/widgets/hoverable_logo.dart';
 
 class LoginDialogContent extends StatelessWidget {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/routing/pages/app/routes/forum_router.dart';
-
-import '../../../routing/pages/about_routes/routes/about_us_router.dart';
+import '../../../routing/app_router.dart';
 import '../widgets/hoverable_logo.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
