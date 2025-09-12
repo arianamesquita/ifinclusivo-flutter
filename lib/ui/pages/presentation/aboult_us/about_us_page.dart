@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/routing/pages/about_routes/routes/about_napne_router.dart';
-import 'package:if_inclusivo/routing/pages/app/routes/chat_router.dart';
-import 'package:if_inclusivo/routing/pages/app/routes/libras_router.dart';
-import 'package:if_inclusivo/routing/pages/app/routes/topico_router.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 
+import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
 import '../presentation_page.dart';
 

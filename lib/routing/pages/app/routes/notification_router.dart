@@ -1,17 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../utils/dialog_page.dart';
-import '../../../app_router.dart';
+part of '../../../app_router.dart';
 
-
-class NotificationRouter extends GoRouteData with $NotificationRouter{
+class NotificationRouter extends GoRouteData with _$NotificationRouter {
   const NotificationRouter();
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    // Retorna nossa página de Dialog customizada
     return DialogPage(
-      builder: (_) => AlertDialog( // Ou qualquer outro widget de popup
+      builder: (_) => AlertDialog(
         title: const Text('Notificações'),
         content: const Text('Aqui estão suas novas notificações.'),
         actions: [

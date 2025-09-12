@@ -1,17 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+part of '../../../app_router.dart';
 
-import '../../../../ui/pages/auth/sign_in/Login_dialog_content.dart';
-import '../../../app_router.dart';
-
-
-class LoginRoute extends GoRouteData with $LoginRoute {
+class LoginRoute extends GoRouteData with _$LoginRoute {
   const LoginRoute();
-
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const LoginDialogContent();
+    return LoginDialogContent();
   }
-
 }

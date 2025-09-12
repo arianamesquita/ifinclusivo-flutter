@@ -6,7 +6,7 @@ import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 import 'package:if_inclusivo/ui/core/widgets/clickable_link.dart';
 
-import '../../../../routing/pages/about_routes/routes/about_us_router.dart';
+import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
 import '../presentation_page.dart';
 

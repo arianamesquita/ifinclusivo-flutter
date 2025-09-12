@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/routing/pages/about_routes/routes/about_us_router.dart';
 
+import '../../../routing/app_router.dart';
 import '../../../utils/responsive_utils.dart';
 import '../theme/theme.dart';
 import '../widgets/hoverable_logo.dart';

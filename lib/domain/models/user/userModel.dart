@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'userModel.freezed.dart';
@@ -6,6 +5,7 @@ part 'userModel.g.dart';
 
 @freezed
 class UserModel with _$UserModel{
+  // Forçar a atualização
   const factory UserModel({
     required String id,
     required String nome,

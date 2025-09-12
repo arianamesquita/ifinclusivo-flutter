@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../app_router.dart';
-import '../../../app_routes.dart';
+part of '../../../app_router.dart';
 
-class ProfileRouter extends GoRouteData with $ProfileRouter{
+class ProfileRouter extends GoRouteData with _$ProfileRouter{
   const ProfileRouter();
 
   @override

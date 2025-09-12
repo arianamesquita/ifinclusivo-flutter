@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../app_router.dart';
-import '../../../app_routes.dart';
+part of '../../../app_router.dart';
 
 
-
-class ForumRouter extends GoRouteData with $ForumRouter{
+class ForumRouter extends GoRouteData with _$ForumRouter{
   const ForumRouter();
 
   @override

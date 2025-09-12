@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../app_router.dart';
-import '../../../app_routes.dart';
+part of '../../../app_router.dart';
 
-
-
-class LibrasRouter extends GoRouteData with $LibrasRouter{
+class LibrasRouter extends GoRouteData with _$LibrasRouter{
   const LibrasRouter();
 
   @override

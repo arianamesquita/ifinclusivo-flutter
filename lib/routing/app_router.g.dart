@@ -10,7 +10,8 @@ List<RouteBase> get $appRoutes => [$rootRouter];
 
 RouteBase get $rootRouter => GoRouteData.$route(
   path: '/',
-  factory: $RootRouter._fromState,
+
+  factory: _$RootRouter._fromState,
   routes: [
     StatefulShellRouteData.$route(
       factory: $ShellAboutRouteExtension._fromState,
@@ -19,7 +20,8 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/presentation',
-              factory: $AboutUsRoute._fromState,
+
+              factory: _$AboutUsRoute._fromState,
             ),
           ],
         ),
@@ -27,7 +29,8 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/presentation/about-napne',
-              factory: $AboutNapneRoute._fromState,
+
+              factory: _$AboutNapneRoute._fromState,
             ),
           ],
         ),
@@ -38,14 +41,19 @@ RouteBase get $rootRouter => GoRouteData.$route(
       branches: [
         StatefulShellBranchData.$branch(
           routes: [
-            GoRouteData.$route(path: '/login', factory: $LoginRoute._fromState),
+            GoRouteData.$route(
+              path: '/login',
+
+              factory: _$LoginRoute._fromState,
+            ),
           ],
         ),
         StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
               path: '/register',
-              factory: $RegisterRoute._fromState,
+
+              factory: _$RegisterRoute._fromState,
             ),
           ],
         ),
@@ -58,7 +66,8 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/app/forum',
-              factory: $ForumRouter._fromState,
+
+              factory: _$ForumRouter._fromState,
             ),
           ],
         ),
@@ -66,7 +75,8 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/app/libras',
-              factory: $LibrasRouter._fromState,
+
+              factory: _$LibrasRouter._fromState,
             ),
           ],
         ),
@@ -74,7 +84,8 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/app/topicos',
-              factory: $TopicoRouter._fromState,
+
+              factory: _$TopicoRouter._fromState,
             ),
           ],
         ),
@@ -82,7 +93,8 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/app/chat',
-              factory: $ChatRouter._fromState,
+
+              factory: _$ChatRouter._fromState,
             ),
           ],
         ),
@@ -90,7 +102,8 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/app/more',
-              factory: $MorePageRouter._fromState,
+
+              factory: _$MorePageRouter._fromState,
             ),
           ],
         ),
@@ -98,20 +111,22 @@ RouteBase get $rootRouter => GoRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/app/profile',
-              factory: $ProfileRouter._fromState,
+
+              factory: _$ProfileRouter._fromState,
             ),
           ],
         ),
       ],
     ),
     GoRouteData.$route(
-      path: 'notification',
-      factory: $NotificationRouter._fromState,
+      path: '/app/notification',
+
+      factory: _$NotificationRouter._fromState,
     ),
   ],
 );
 
-mixin $RootRouter on GoRouteData {
+mixin _$RootRouter on GoRouteData {
   static RootRouter _fromState(GoRouterState state) => const RootRouter();
 
   @override
@@ -136,7 +151,7 @@ extension $ShellAboutRouteExtension on ShellAboutRoute {
       const ShellAboutRoute();
 }
 
-mixin $AboutUsRoute on GoRouteData {
+mixin _$AboutUsRoute on GoRouteData {
   static AboutUsRoute _fromState(GoRouterState state) => const AboutUsRoute();
 
   @override
@@ -156,7 +171,7 @@ mixin $AboutUsRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $AboutNapneRoute on GoRouteData {
+mixin _$AboutNapneRoute on GoRouteData {
   static AboutNapneRoute _fromState(GoRouterState state) =>
       const AboutNapneRoute();
 
@@ -182,7 +197,7 @@ extension $ShellAuthRouteExtension on ShellAuthRoute {
       const ShellAuthRoute();
 }
 
-mixin $LoginRoute on GoRouteData {
+mixin _$LoginRoute on GoRouteData {
   static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
 
   @override
@@ -202,7 +217,7 @@ mixin $LoginRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $RegisterRoute on GoRouteData {
+mixin _$RegisterRoute on GoRouteData {
   static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
 
   @override
@@ -227,7 +242,7 @@ extension $ShellAppRouterExtension on ShellAppRouter {
       const ShellAppRouter();
 }
 
-mixin $ForumRouter on GoRouteData {
+mixin _$ForumRouter on GoRouteData {
   static ForumRouter _fromState(GoRouterState state) => const ForumRouter();
 
   @override
@@ -247,7 +262,7 @@ mixin $ForumRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $LibrasRouter on GoRouteData {
+mixin _$LibrasRouter on GoRouteData {
   static LibrasRouter _fromState(GoRouterState state) => const LibrasRouter();
 
   @override
@@ -267,7 +282,7 @@ mixin $LibrasRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $TopicoRouter on GoRouteData {
+mixin _$TopicoRouter on GoRouteData {
   static TopicoRouter _fromState(GoRouterState state) => const TopicoRouter();
 
   @override
@@ -287,7 +302,7 @@ mixin $TopicoRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $ChatRouter on GoRouteData {
+mixin _$ChatRouter on GoRouteData {
   static ChatRouter _fromState(GoRouterState state) => const ChatRouter();
 
   @override
@@ -307,7 +322,7 @@ mixin $ChatRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $MorePageRouter on GoRouteData {
+mixin _$MorePageRouter on GoRouteData {
   static MorePageRouter _fromState(GoRouterState state) =>
       const MorePageRouter();
 
@@ -328,7 +343,7 @@ mixin $MorePageRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $ProfileRouter on GoRouteData {
+mixin _$ProfileRouter on GoRouteData {
   static ProfileRouter _fromState(GoRouterState state) => const ProfileRouter();
 
   @override
@@ -348,12 +363,12 @@ mixin $ProfileRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin $NotificationRouter on GoRouteData {
+mixin _$NotificationRouter on GoRouteData {
   static NotificationRouter _fromState(GoRouterState state) =>
       const NotificationRouter();
 
   @override
-  String get location => GoRouteData.$location('/notification');
+  String get location => GoRouteData.$location('/app/notification');
 
   @override
   void go(BuildContext context) => context.go(location);

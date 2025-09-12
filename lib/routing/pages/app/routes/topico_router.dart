@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../app_router.dart';
-import '../../../app_routes.dart';
+part of '../../../app_router.dart';
 
-class TopicoRouter extends GoRouteData with $TopicoRouter{
+
+class TopicoRouter extends GoRouteData with _$TopicoRouter{
 
   const TopicoRouter();
 

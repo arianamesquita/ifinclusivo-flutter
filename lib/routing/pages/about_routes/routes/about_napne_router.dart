@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../ui/pages/presentation/about_napne/about_napne_page.dart';
-import '../../../app_routes.dart';
-import '../../../app_router.dart';
+part of '../../../app_router.dart';
 
-
-class AboutNapneRoute extends GoRouteData with $AboutNapneRoute{
+class AboutNapneRoute extends GoRouteData with _$AboutNapneRoute{
   const AboutNapneRoute();
 
   @override
