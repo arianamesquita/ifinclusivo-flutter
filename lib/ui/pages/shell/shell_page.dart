@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/ui/core/layout/app_bar.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
+import 'package:if_inclusivo/ui/core/layout/custom_navigation_rail.dart';
 import 'package:if_inclusivo/ui/core/layout/footer.dart';
 
 class ShellPage extends StatefulWidget {
@@ -17,14 +18,20 @@ class _ShellPageState extends State<ShellPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        selectedIndex: widget.child.currentIndex,
-        onDestinationSelected:widget.child.goBranch ,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [CustomContainer(child: widget.child), Footer()],
-        ),
+      body: Row(
+        children: [
+          CustomNavigationRail(
+            selectedIndex: widget.child.currentIndex,
+            onDestinationSelected: widget.child.goBranch,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [CustomContainer(child: widget.child), Footer()],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+part of '../../../app_router.dart';
 
-import '../../../app_routes.dart';
 
-part 'forum_router.g.dart';
-
-@TypedGoRoute<ForumRouter>(
-  path: AppRoutes.forum,
-)
 class ForumRouter extends GoRouteData with _$ForumRouter{
   const ForumRouter();
 

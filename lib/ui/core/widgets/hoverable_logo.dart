@@ -4,11 +4,12 @@ class HoverableLogo extends StatefulWidget {
   final String imagePath;
   final double height;
   final VoidCallback onTap;
+  final BoxFit? fit;
   const HoverableLogo({
     super.key,
     required this.imagePath,
     required this.height,
-    required this.onTap,
+    required this.onTap, this.fit,
   });
 
   @override
@@ -41,7 +42,7 @@ class _HoverableLogoState extends State<HoverableLogo> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
           transform: Matrix4.identity()..translate(0, translateY, 0),
-          child: Image.asset(widget.imagePath, height: widget.height),
+          child: Image.asset(widget.imagePath, height: widget.height,fit: widget.fit,),
         ),
       ),
     );

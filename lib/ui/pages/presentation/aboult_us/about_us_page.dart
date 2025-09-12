@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/routing/pages/about_routes/routes/about_napne_router.dart';
-import 'package:if_inclusivo/routing/pages/app/routes/chat_router.dart';
-import 'package:if_inclusivo/routing/pages/app/routes/libras_router.dart';
-import 'package:if_inclusivo/routing/pages/app/routes/topico_router.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 
+import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
 import '../presentation_page.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    final Color color1 = Color.fromRGBO(
-      114,
-      17,
-      153,
-      1,
-    );
+    final Color color1 = Color.fromRGBO(114, 17, 153, 1);
     // Opacidade 100% é 1, não 100
     final Color color2 = Color.fromRGBO(70, 163, 74, 1);
-    List<StackItemInfo>  items = [
+    List<StackItemInfo> items = [
       StackItemInfo(
         iconPath: 'assets/icons/Mãos.png',
         title: 'Converte Libras',
@@ -79,7 +70,7 @@ class AboutUsPage extends StatelessWidget {
                 vertical:
                     deviceType == DeviceScreenType.desktop ? 164 : spacing.$2,
               ),
-              child: _buildIntro(fontScale, deviceType, spacing,context),
+              child: _buildIntro(fontScale, deviceType, spacing, context),
             ),
             _buildMainStacks(context, fontScale, deviceType, spacing, items),
             Padding(
@@ -102,7 +93,7 @@ class AboutUsPage extends StatelessWidget {
     );
   }
 
-  _buildIntro(fontScale, deviceType, spacing,context) {
+  _buildIntro(fontScale, deviceType, spacing, context) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 1000),
       child: Wrap(
@@ -117,13 +108,10 @@ class AboutUsPage extends StatelessWidget {
             constraints: BoxConstraints(maxWidth: 426),
             child: Text(
               'Um espaço seguro para Interação e troca de Conhecimentos.',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                fontWeight: FontWeight.w600,
-                fontSize:
-                    (Theme.of(context).textTheme.headlineLarge?.fontSize ??
-                        30) *
-                    fontScale,
-              ),
+              style: ResponsiveUtils.scaleFontStyle(
+                context,
+                Theme.of(context).textTheme.headlineLarge!,
+              ).copyWith(fontWeight: FontWeight.w600),
               softWrap: true,
               textAlign: TextAlign.center,
             ),
@@ -140,7 +128,13 @@ class AboutUsPage extends StatelessWidget {
     );
   }
 
-  _buildMainStacks(BuildContext context, fontScale, deviceType, spacing, List<StackItemInfo> items) {
+  _buildMainStacks(
+    BuildContext context,
+    fontScale,
+    deviceType,
+    spacing,
+    List<StackItemInfo> items,
+  ) {
     var isDesktop = deviceType == DeviceScreenType.desktop;
     final double horizontalSpacing = isDesktop ? 79 : spacing.$1;
 
@@ -158,12 +152,10 @@ class AboutUsPage extends StatelessWidget {
               constraints: BoxConstraints(maxWidth: 757),
               child: Text(
                 'Conheça as principais áreas do sistema e explore o que ele pode oferecer para você.',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize:
-                      (Theme.of(context).textTheme.titleLarge?.fontSize ?? 25) *
-                      fontScale,
-                ),
+                style: ResponsiveUtils.scaleFontStyle(
+                  context,
+                  Theme.of(context).textTheme.headlineMedium!,
+                ).copyWith(fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -181,7 +173,7 @@ class AboutUsPage extends StatelessWidget {
                       itemInfo, // Passa o objeto inteiro
                       fontScale,
                       deviceType,
-                      context
+                      context,
                     );
                   }).toList(),
             ),
@@ -194,7 +186,8 @@ class AboutUsPage extends StatelessWidget {
   buildStackItem(
     StackItemInfo itemInfo, // Recebe o objeto com todos os dados
     double fontScale,
-    deviceType,context
+    deviceType,
+    context,
   ) {
     double w = deviceType == DeviceScreenType.mobile ? 200 : 399;
     double h = deviceType == DeviceScreenType.mobile ? 167 : 180;
@@ -236,17 +229,10 @@ class AboutUsPage extends StatelessWidget {
                     Expanded(
                       child: Text(
                         itemInfo.title,
-                        style: Theme.of(
+                        style: ResponsiveUtils.scaleFontStyle(
                           context,
-                        ).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          fontSize:
-                              (Theme.of(
-                                    context,
-                                  ).textTheme.titleLarge?.fontSize ??
-                                  23) *
-                              fontScale,
-                        ),
+                          Theme.of(context).textTheme.headlineMedium!,
+                        ).copyWith(fontWeight: FontWeight.w600),
                         softWrap: true,
                       ),
                     ),
@@ -259,15 +245,10 @@ class AboutUsPage extends StatelessWidget {
                     children: [
                       Text(
                         itemInfo.label,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize:
-                              (Theme.of(
-                                    context,
-                                  ).textTheme.titleLarge?.fontSize ??
-                                  20) *
-                              fontScale,
-                        ),
+                        style: ResponsiveUtils.scaleFontStyle(
+                          context,
+                          Theme.of(context).textTheme.titleLarge!,
+                        ).copyWith(fontWeight: FontWeight.w500),
                         textAlign: TextAlign.start,
                       ),
                     ],
@@ -281,4 +262,3 @@ class AboutUsPage extends StatelessWidget {
     );
   }
 }
-
