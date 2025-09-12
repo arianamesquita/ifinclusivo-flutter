@@ -1,7 +1,7 @@
 part of '../../../app_router.dart';
 
-class LibrasRouter extends GoRouteData with _$LibrasRouter{
-  const LibrasRouter();
+class ProfileRouter extends GoRouteData with _$ProfileRouter{
+  const ProfileRouter();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

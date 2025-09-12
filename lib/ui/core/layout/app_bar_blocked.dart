@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/routing/pages/about_routes/routes/about_us_router.dart';
 
+import '../../../routing/app_router.dart';
 import '../../../utils/responsive_utils.dart';
+import '../theme/theme.dart';
 import '../widgets/hoverable_logo.dart';
 
 class CustomAppBarBlocked extends StatelessWidget {
@@ -80,6 +81,10 @@ class CustomAppBarBlocked extends StatelessWidget {
   }
 
   Row _buildButtons(BuildContext context) {
+    final secondary40 = MaterialTheme(Theme.of(context).textTheme)
+        .extendedColors.first;
+    final blue = MaterialTheme(Theme.of(context).textTheme)
+        .extendedColors[1];
     return Row(
       mainAxisSize: MainAxisSize.min,
       spacing: ResponsiveUtils.spacing(context).$1,
@@ -88,11 +93,11 @@ class CustomAppBarBlocked extends StatelessWidget {
         ElevatedButton(
           onPressed: onPressedSingIn,
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromRGBO(28, 122, 229, 1.0),
+            backgroundColor: blue.light.color,
             textStyle: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-            foregroundColor: Theme.of(context).colorScheme.onTertiary,
+            foregroundColor: blue.light.onColor,
             maximumSize: Size(141.61, 50),
             minimumSize: Size(140, 50),
             shape: RoundedRectangleBorder(
@@ -105,11 +110,11 @@ class CustomAppBarBlocked extends StatelessWidget {
         ElevatedButton(
           onPressed: onPressedSingUp,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color.fromRGBO(98, 191, 98, 1.0),
+            backgroundColor: secondary40.light.color,
             textStyle: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-            foregroundColor: Theme.of(context).colorScheme.onTertiary,
+            foregroundColor: secondary40.light.onColor,
             maximumSize: Size(179.5, 50),
             minimumSize: Size(170, 50),
 
