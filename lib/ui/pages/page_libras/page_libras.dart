@@ -9,19 +9,61 @@ class LibrasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     var items = [
-      FilterBlockGridParams(label: 'Teste', icon: Icons.storage, onTap: (){print("qualquer ");},),
-      FilterBlockGridParams(label: 'Teste', icon: Icons.storage, onTap: (){print("qualquer ");},),
-      FilterBlockGridParams(label: 'Teste', icon: Icons.storage, onTap: (){print("qualquer ");},),
-      FilterBlockGridParams(label: 'Teste', icon: Icons.storage, onTap: (){print("qualquer ");},),
-      FilterBlockGridParams(label: 'Teste', icon: Icons.storage, onTap: (){print("qualquer ");},),
-      FilterBlockGridParams(label: 'Teste', icon: Icons.storage, onTap: (){print("qualquer ");},),
+      FilterBlockGridParams(
+        label: 'Teste',
+        icon: Icons.storage,
+        onTap: () {
+          print("qualquer ");
+        },
+      ),
+      FilterBlockGridParams(
+        label: 'Teste',
+        icon: Icons.storage,
+        onTap: () {
+          print("qualquer ");
+        },
+      ),
+      FilterBlockGridParams(
+        label: 'Teste',
+        icon: Icons.storage,
+        onTap: () {
+          print("qualquer ");
+        },
+      ),
+      FilterBlockGridParams(
+        label: 'Teste',
+        icon: Icons.storage,
+        onTap: () {
+          print("qualquer ");
+        },
+      ),
+      FilterBlockGridParams(
+        label: 'Teste',
+        icon: Icons.storage,
+        onTap: () {
+          print("qualquer ");
+        },
+      ),
+      FilterBlockGridParams(
+        label: 'Teste',
+        icon: Icons.storage,
+        onTap: () {
+          print("qualquer ");
+        },
+      ),
     ];
 
     return Material(
       child: Column(
         children: [
-          const TopContentLibras(title: "CONVERTE LIBRAS", searchBar: LibrasCustomSearchBar(), subtitle: "Um dicionário de sinais criado para a comunidade",),
+          const TopContentLibras(
+            title: "CONVERTE LIBRAS",
+            searchBar: LibrasCustomSearchBar(),
+            subtitle: "Um dicionário de sinais criado para a comunidade",
+          ),
+          SizedBox(height: 90),
           FilterBlockGrid(filterBlockList: items),
         ],
       ),

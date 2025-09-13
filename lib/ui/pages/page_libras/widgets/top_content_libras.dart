@@ -16,12 +16,15 @@ class TopContentLibras extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final styleText = theme.textTheme.displayMedium!.copyWith(color: theme.colorScheme.primary);
+    final titleStyleText = theme.textTheme.titleLarge!.copyWith(color: Color.fromRGBO(43, 50, 48, 1),);
+    final subtitleStyleText = theme.textTheme.labelMedium!.copyWith(color: Color.fromRGBO(118, 80, 132, 1));
 
     return Column(
       children: [
-        Text(title, style: styleText,),
-        Text(subtitle ?? "Sem título de seção."),
+        Text(title, style: titleStyleText,),
+        SizedBox(height: 17,),
+        Text(subtitle ?? "Sem título de seção.", style: subtitleStyleText,),
+        SizedBox(height: 46,),
         searchBar ?? const SizedBox.shrink(),
       ],
     );
