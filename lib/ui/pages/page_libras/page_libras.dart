@@ -12,43 +12,43 @@ class LibrasPage extends StatelessWidget {
 
     var items = [
       FilterBlockGridParams(
-        label: 'Teste',
-        icon: Icons.storage,
+        label: 'Redes',
+        imageAsset: "assets/card_libras_icons/redes.png",
         onTap: () {
           print("qualquer ");
         },
       ),
       FilterBlockGridParams(
-        label: 'Teste',
-        icon: Icons.storage,
+        label: 'Banco de Dados',
+        imageAsset: "assets/card_libras_icons/banco_de_dados.png",
         onTap: () {
           print("qualquer ");
         },
       ),
       FilterBlockGridParams(
-        label: 'Teste',
-        icon: Icons.storage,
+        label: 'Programação',
+        imageAsset: "assets/card_libras_icons/programacao.png",
         onTap: () {
           print("qualquer ");
         },
       ),
       FilterBlockGridParams(
-        label: 'Teste',
-        icon: Icons.storage,
+        label: 'Web',
+        imageAsset: "assets/card_libras_icons/web.png",
         onTap: () {
           print("qualquer ");
         },
       ),
       FilterBlockGridParams(
-        label: 'Teste',
-        icon: Icons.storage,
+        label: 'Estrutura de Dados',
+        imageAsset: "assets/card_libras_icons/estrutura_de_dados.png",
         onTap: () {
           print("qualquer ");
         },
       ),
       FilterBlockGridParams(
-        label: 'Teste',
-        icon: Icons.storage,
+        label: 'Arquitetura de Computadores',
+        imageAsset: "assets/card_libras_icons/arquitetura_de_comp.png",
         onTap: () {
           print("qualquer ");
         },

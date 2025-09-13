@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'filter_block.dart';
 
 class FilterBlockGridParams {
-  final IconData icon;
+  final String imageAsset;
   final String label;
   final GestureTapCallback onTap;
 
-  FilterBlockGridParams({required this.icon, required this.label, required this.onTap});
+  FilterBlockGridParams({required this.imageAsset, required this.label, required this.onTap});
 }
 
 class FilterBlockGrid extends StatelessWidget {
@@ -61,7 +61,7 @@ class FilterBlockGrid extends StatelessWidget {
                   width: itemWidth,
                   height: itemHeight,
                   child: FilterBlock(
-                    icon: arg.icon,
+                    imageAsset: arg.imageAsset,
                     label: arg.label,
                     onTap: arg.onTap,
                   ),

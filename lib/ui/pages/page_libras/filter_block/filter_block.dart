@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class FilterBlock extends StatelessWidget {
-  final IconData icon;
+  final String imageAsset;
   final String label;
   final GestureTapCallback onTap;
 
-  const FilterBlock({required this.label, required this.onTap, required this.icon, super.key});
+  const FilterBlock({required this.label, required this.onTap, required this.imageAsset, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +21,22 @@ class FilterBlock extends StatelessWidget {
           height: 156,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40),
-            color: const Color.fromRGBO(133, 224, 224, 0.7),
+            color: Color.fromRGBO(104, 187, 158, 1),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 87, color: const Color.fromRGBO(1, 0, 4, 0.69)),
-              Text(
-                label,
-                style: const TextStyle(
-                  color: Color.fromRGBO(1, 0, 4, 0.69),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Image.asset(imageAsset, width: 57, height: 57, color: Colors.white),
+              SizedBox(height: 15,),
+              Center(
+                child: Text(
+                  textAlign: TextAlign.center,
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
