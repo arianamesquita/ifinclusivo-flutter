@@ -5,7 +5,7 @@ import 'package:if_inclusivo/routing/app_routes.dart';
 import 'package:if_inclusivo/routing/pages/about_routes/shell_about_router.dart';
 import 'package:if_inclusivo/routing/pages/app/shell_app_router.dart';
 import 'package:if_inclusivo/routing/pages/auth/shell_auth_router.dart' hide DialogPage;
-import 'package:if_inclusivo/ui/pages/page_libras/page_libras.dart';
+import 'package:if_inclusivo/ui/pages/libras/page_libras.dart';
 
 import '../ui/pages/auth/sign_in/Login_dialog_content.dart';
 import '../ui/pages/auth/sing_up/register_dialog_content.dart';

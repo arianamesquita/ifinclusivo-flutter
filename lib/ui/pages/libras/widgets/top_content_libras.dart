@@ -28,7 +28,7 @@ class TopContentLibras extends StatelessWidget {
       children: [
         Text(title, style: titleStyleText),
         SizedBox(height: 17),
-        Text(subtitle ?? "Sem subtítulo de seção.", style: subtitleStyleText),
+        Text(subtitle ?? "", style: subtitleStyleText),
         SizedBox(height: 46),
         searchBar ?? const SizedBox.shrink(),
       ],
