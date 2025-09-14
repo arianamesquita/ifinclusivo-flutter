@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
+import 'package:if_inclusivo/ui/pages/chat/contacts/contacts_side_bar_page.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
