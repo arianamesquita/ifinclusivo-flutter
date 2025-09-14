@@ -157,7 +157,7 @@ class AboltNapnePage extends StatelessWidget {
               Text('Email:', style: style),
               ClickableLink(
                 label: 'monica.canuto@ifgoiano.edu.br',
-                style: style?.copyWith(decoration: TextDecoration.underline),
+                style: style.copyWith(decoration: TextDecoration.underline),
                 value: 'monica.canuto@ifgoiano.edu.br',
                 type: LinkType.email,
               ),

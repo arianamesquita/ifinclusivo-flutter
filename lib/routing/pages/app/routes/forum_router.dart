@@ -6,10 +6,10 @@ class ForumRouter extends GoRouteData with _$ForumRouter{
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return Column(
+    return CustomContainerShell(child:Column(
       children: [
         const Placeholder(color: Colors.green,),  const Placeholder(color: Colors.green,),
       ],
-    );
+    ));
   }
 }

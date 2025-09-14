@@ -5,6 +5,6 @@ class ProfileRouter extends GoRouteData with _$ProfileRouter{
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Placeholder(color: Colors.yellow,);
+    return Placeholder(color: Colors.yellow,);
   }
 }

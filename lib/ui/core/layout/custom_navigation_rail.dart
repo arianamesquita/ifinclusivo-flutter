@@ -8,12 +8,14 @@ class CustomNavigationRail extends StatefulWidget {
   final Function(int)? onDestinationSelected;
   final List<NavigationRailDestination> destinations;
   final bool isLoggedIn;
+  final void Function()? onPressedMenu;
   const CustomNavigationRail({
     super.key,
     required this.selectedIndex,
     this.onDestinationSelected,
     required this.destinations,
     required this.isLoggedIn,
+    required this.onPressedMenu,
   });
 
   @override
@@ -175,9 +177,7 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
       child: Column(
         children: [
           IconButton(
-            onPressed: () {
-              setState(() {});
-            },
+            onPressed: widget.onPressedMenu,
             icon: Icon(
               Icons.menu,
               size: 24,
