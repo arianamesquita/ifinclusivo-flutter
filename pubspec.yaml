@@ -41,4 +41,5 @@ flutter:
     - assets/footer/
     - assets/icons/
     - assets/login_register/
+    - assets/card_libras_icons/
     - assets/env/.env
