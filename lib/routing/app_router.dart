@@ -26,7 +26,7 @@ part 'pages/app/routes/more_page_router.dart';
 part 'pages/app/routes/topico_router.dart';
 part 'pages/app/routes/profile_router.dart';
 part 'pages/app/routes/forum_router.dart';
-
+part 'pages/app/routes/midia_router.dart';
 // part dos shells
 part 'pages/app/shell_app_router.dart';
 part 'pages/about_routes/shell_about_router.dart';

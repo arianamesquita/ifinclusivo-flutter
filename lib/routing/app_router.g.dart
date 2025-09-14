@@ -58,6 +58,13 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           path: '/app/libras',
 
           factory: _$LibrasRouter._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'midia',
+
+              factory: _$MidiaRouter._fromState,
+            ),
+          ],
         ),
       ],
     ),
@@ -126,6 +133,26 @@ mixin _$LibrasRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/libras');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$MidiaRouter on GoRouteData {
+  static MidiaRouter _fromState(GoRouterState state) => const MidiaRouter();
+
+  @override
+  String get location => GoRouteData.$location('/app/libras/midia');
 
   @override
   void go(BuildContext context) => context.go(location);

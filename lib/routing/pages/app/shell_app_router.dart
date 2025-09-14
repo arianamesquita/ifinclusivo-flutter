@@ -10,7 +10,8 @@ part of '../../app_router.dart';
     ),
     TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<LibrasRouter>(path: AppRoutes.libras),
+        TypedGoRoute<LibrasRouter>(path: AppRoutes.libras,
+        routes: [TypedGoRoute<MidiaRouter>(path: AppRoutes.midia)]),
       ],
     ),
     TypedStatefulShellBranch<StatefulShellBranchData>(
