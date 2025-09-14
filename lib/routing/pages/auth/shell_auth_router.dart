@@ -1,6 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+part of '../../app_router.dart';
 
+
+@TypedStatefulShellRoute<ShellAuthRoute>(
+  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
+    TypedStatefulShellBranch<StatefulShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<LoginRoute>(path: AppRoutes.signIn),
+      ],
+    ),
+    TypedStatefulShellBranch<StatefulShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<RegisterRoute>(path: AppRoutes.signUp),
+      ],
+    ),
+  ],
+)
 class ShellAuthRoute extends StatefulShellRouteData {
   const ShellAuthRoute();
 
@@ -11,7 +25,7 @@ class ShellAuthRoute extends StatefulShellRouteData {
     StatefulNavigationShell navigationShell,
   ) {
 
-    return DialogPage(
+    return _DialogPage(
       key: state.pageKey,
       child: Dialog.fullscreen(
         child: Center(
@@ -22,8 +36,8 @@ class ShellAuthRoute extends StatefulShellRouteData {
   }
 }
 
-class DialogPage extends CustomTransitionPage<void> {
-  DialogPage({required super.child, super.key})
+class _DialogPage extends CustomTransitionPage<void> {
+  _DialogPage({required super.child, super.key})
     : super(
         barrierDismissible: true,
         barrierColor: Colors.black54,

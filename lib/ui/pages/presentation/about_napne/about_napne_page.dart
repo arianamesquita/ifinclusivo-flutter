@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/ui/core/animations/hover_effect.dart';
-import 'package:if_inclusivo/ui/core/layout/custom_container.dart';
+import 'package:if_inclusivo/ui/pages/presentation/widgets/custom_container.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 import 'package:if_inclusivo/ui/core/widgets/clickable_link.dart';
 
