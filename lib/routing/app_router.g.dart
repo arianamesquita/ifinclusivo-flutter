@@ -6,236 +6,95 @@ part of 'app_router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$rootRouter];
+List<RouteBase> get $appRoutes => [
+  $notificationRouter,
+  $shellAppRouter,
+  $shellAboutRoute,
+  $shellAuthRoute,
+];
 
-RouteBase get $rootRouter => GoRouteData.$route(
-  path: '/',
+RouteBase get $notificationRouter => GoRouteData.$route(
+  path: '/app/notification',
 
-  factory: _$RootRouter._fromState,
-  routes: [
-    StatefulShellRouteData.$route(
-      factory: $ShellAboutRouteExtension._fromState,
-      branches: [
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/presentation',
+  factory: _$NotificationRouter._fromState,
+);
 
-              factory: _$AboutUsRoute._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/presentation/about-napne',
+mixin _$NotificationRouter on GoRouteData {
+  static NotificationRouter _fromState(GoRouterState state) =>
+      const NotificationRouter();
 
-              factory: _$AboutNapneRoute._fromState,
-            ),
-          ],
-        ),
-      ],
-    ),
-    StatefulShellRouteData.$route(
-      factory: $ShellAuthRouteExtension._fromState,
-      branches: [
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/login',
+  @override
+  String get location => GoRouteData.$location('/app/notification');
 
-              factory: _$LoginRoute._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/register',
+  @override
+  void go(BuildContext context) => context.go(location);
 
-              factory: _$RegisterRoute._fromState,
-            ),
-          ],
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
+  factory: $ShellAppRouterExtension._fromState,
+  branches: [
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/app/forum',
+
+          factory: _$ForumRouter._fromState,
         ),
       ],
     ),
-    StatefulShellRouteData.$route(
-      factory: $ShellAppRouterExtension._fromState,
-      branches: [
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/app/forum',
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/app/libras',
 
-              factory: _$ForumRouter._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/app/libras',
-
-              factory: _$LibrasRouter._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/app/topicos',
-
-              factory: _$TopicoRouter._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/app/chat',
-
-              factory: _$ChatRouter._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/app/more',
-
-              factory: _$MorePageRouter._fromState,
-            ),
-          ],
-        ),
-        StatefulShellBranchData.$branch(
-          routes: [
-            GoRouteData.$route(
-              path: '/app/profile',
-
-              factory: _$ProfileRouter._fromState,
-            ),
-          ],
+          factory: _$LibrasRouter._fromState,
         ),
       ],
     ),
-    GoRouteData.$route(
-      path: '/app/notification',
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/app/topicos',
 
-      factory: _$NotificationRouter._fromState,
+          factory: _$TopicoRouter._fromState,
+        ),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(path: '/app/chat', factory: _$ChatRouter._fromState),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/app/more',
+
+          factory: _$MorePageRouter._fromState,
+        ),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/app/profile',
+
+          factory: _$ProfileRouter._fromState,
+        ),
+      ],
     ),
   ],
 );
-
-mixin _$RootRouter on GoRouteData {
-  static RootRouter _fromState(GoRouterState state) => const RootRouter();
-
-  @override
-  String get location => GoRouteData.$location('/');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $ShellAboutRouteExtension on ShellAboutRoute {
-  static ShellAboutRoute _fromState(GoRouterState state) =>
-      const ShellAboutRoute();
-}
-
-mixin _$AboutUsRoute on GoRouteData {
-  static AboutUsRoute _fromState(GoRouterState state) => const AboutUsRoute();
-
-  @override
-  String get location => GoRouteData.$location('/presentation');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-mixin _$AboutNapneRoute on GoRouteData {
-  static AboutNapneRoute _fromState(GoRouterState state) =>
-      const AboutNapneRoute();
-
-  @override
-  String get location => GoRouteData.$location('/presentation/about-napne');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $ShellAuthRouteExtension on ShellAuthRoute {
-  static ShellAuthRoute _fromState(GoRouterState state) =>
-      const ShellAuthRoute();
-}
-
-mixin _$LoginRoute on GoRouteData {
-  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
-
-  @override
-  String get location => GoRouteData.$location('/login');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-mixin _$RegisterRoute on GoRouteData {
-  static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
-
-  @override
-  String get location => GoRouteData.$location('/register');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
 
 extension $ShellAppRouterExtension on ShellAppRouter {
   static ShellAppRouter _fromState(GoRouterState state) =>
@@ -363,12 +222,126 @@ mixin _$ProfileRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$NotificationRouter on GoRouteData {
-  static NotificationRouter _fromState(GoRouterState state) =>
-      const NotificationRouter();
+RouteBase get $shellAboutRoute => StatefulShellRouteData.$route(
+  factory: $ShellAboutRouteExtension._fromState,
+  branches: [
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/presentation',
+
+          factory: _$AboutUsRoute._fromState,
+        ),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/presentation/about-napne',
+
+          factory: _$AboutNapneRoute._fromState,
+        ),
+      ],
+    ),
+  ],
+);
+
+extension $ShellAboutRouteExtension on ShellAboutRoute {
+  static ShellAboutRoute _fromState(GoRouterState state) =>
+      const ShellAboutRoute();
+}
+
+mixin _$AboutUsRoute on GoRouteData {
+  static AboutUsRoute _fromState(GoRouterState state) => const AboutUsRoute();
 
   @override
-  String get location => GoRouteData.$location('/app/notification');
+  String get location => GoRouteData.$location('/presentation');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$AboutNapneRoute on GoRouteData {
+  static AboutNapneRoute _fromState(GoRouterState state) =>
+      const AboutNapneRoute();
+
+  @override
+  String get location => GoRouteData.$location('/presentation/about-napne');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $shellAuthRoute => StatefulShellRouteData.$route(
+  factory: $ShellAuthRouteExtension._fromState,
+  branches: [
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(path: '/login', factory: _$LoginRoute._fromState),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/register',
+
+          factory: _$RegisterRoute._fromState,
+        ),
+      ],
+    ),
+  ],
+);
+
+extension $ShellAuthRouteExtension on ShellAuthRoute {
+  static ShellAuthRoute _fromState(GoRouterState state) =>
+      const ShellAuthRoute();
+}
+
+mixin _$LoginRoute on GoRouteData {
+  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
+
+  @override
+  String get location => GoRouteData.$location('/login');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$RegisterRoute on GoRouteData {
+  static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
+
+  @override
+  String get location => GoRouteData.$location('/register');
 
   @override
   void go(BuildContext context) => context.go(location);
