@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
+import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
+import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
 
 import '../ui/core/layout/custom_container_shell.dart';
 import '../ui/pages/auth/sign_in/Login_dialog_content.dart';

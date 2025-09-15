@@ -25,78 +25,19 @@ class _ShellPageState extends State<ShellPage> {
     scaffoldKey.currentState!.closeDrawer();
   }
 
-  bool open = true;
-
   @override
   Widget build(BuildContext context) {
     final isLoggedIn = true;
     final userRoles = [...Roles.values];
 
     final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
-    final allowedBranches = auth.allowedBranches();
     var deviceType = ResponsiveUtils.getDeviceType(context);
-    return deviceType == DeviceScreenType.desktop
-        ? _buildAppWeb(auth, allowedBranches, context, isLoggedIn)
-        : deviceType == DeviceScreenType.tablet
-        ? _buildAppTablet(auth, allowedBranches, context, isLoggedIn)
-        : _buildAppTablet(auth, allowedBranches, context, isLoggedIn);
+    return deviceType == DeviceScreenType.mobile
+        ? _buildAppMobile(auth, auth.allowedBranchesMobile(), context, isLoggedIn)
+        : _buildAppWebAndTablet(auth, auth.allowedBranches(), context, isLoggedIn);
   }
 
-  Scaffold _buildAppWeb(
-    AuthGuardShell auth,
-    List<int> allowedBranches,
-    BuildContext context,
-    bool isLoggedIn,
-  ) {
-    return Scaffold(
-      key: scaffoldKey,
-      body: Row(
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 700),
-            curve: Curves.easeInOut,
-            width: open ? 300 : 96, // largura do drawer ou rail
-            child:
-                open
-                    ? _customNavigationDrawer(
-                      auth,
-                      allowedBranches,
-                      context,
-                      isLoggedIn,
-                      () {
-                        setState(() {
-                          open = false;
-                        });
-                      },
-                    )
-                    : CustomNavigationRail(
-                      selectedIndex: auth.mapSelectedIndex(
-                        allowedBranches,
-                        widget.child.currentIndex,
-                      ),
-                      onDestinationSelected: (newIndex) {
-                        final branch = allowedBranches[newIndex];
-                        widget.child.goBranch(branch);
-                      },
-                      destinations:
-                          allowedBranches
-                              .map((i) => AppDestinations.rail(context)[i])
-                              .toList(),
-                      isLoggedIn: isLoggedIn,
-                      onPressedMenu: () {
-                        setState(() {
-                          open = true;
-                        });
-                      },
-                    ),
-          ),
-          Expanded(child: widget.child),
-        ],
-      ),
-    );
-  }
-
-  Scaffold _buildAppTablet(
+  Scaffold _buildAppWebAndTablet(
     AuthGuardShell auth,
     List<int> allowedBranches,
     BuildContext context,
@@ -157,6 +98,34 @@ class _ShellPageState extends State<ShellPage> {
               .toList(),
       isLoggedIn: isLoggedIn,
       onPressedMenu: onPressedMenu,
+    );
+  }
+
+  _buildAppMobile(
+    AuthGuardShell auth,
+    List<int> allowedBranches,
+    BuildContext context,
+    bool isLoggedIn,
+  ) {
+    return Scaffold(
+      appBar: AppBar(title: Text('if inclusivo')),
+      body: widget.child,
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex:auth.mapSelectedIndex(
+          allowedBranches,
+          widget.child.currentIndex,
+        ),
+        onTap: (newIndex) {
+          final branch = allowedBranches[newIndex];
+          widget.child.goBranch(branch);
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home_rounded),label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.sign_language_outlined),label: 'libras'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat),label: 'chat'),
+        ],
+      ),
     );
   }
 }
