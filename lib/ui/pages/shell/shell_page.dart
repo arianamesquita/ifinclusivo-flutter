@@ -59,36 +59,36 @@ class _ShellPageState extends State<ShellPage> {
             child:
                 open
                     ? _customNavigationDrawer(
-                          auth,
-                          allowedBranches,
-                          context,
-                          isLoggedIn,
-                          () {
-                            setState(() {
-                              open = false;
-                            });
-                          },
-                        )
+                      auth,
+                      allowedBranches,
+                      context,
+                      isLoggedIn,
+                      () {
+                        setState(() {
+                          open = false;
+                        });
+                      },
+                    )
                     : CustomNavigationRail(
-                          selectedIndex: auth.mapSelectedIndex(
-                            allowedBranches,
-                            widget.child.currentIndex,
-                          ),
-                          onDestinationSelected: (newIndex) {
-                            final branch = allowedBranches[newIndex];
-                            widget.child.goBranch(branch);
-                          },
-                          destinations:
-                              allowedBranches
-                                  .map((i) => AppDestinations.rail(context)[i])
-                                  .toList(),
-                          isLoggedIn: isLoggedIn,
-                          onPressedMenu: () {
-                            setState(() {
-                              open = true;
-                            });
-                          },
-                        ),
+                      selectedIndex: auth.mapSelectedIndex(
+                        allowedBranches,
+                        widget.child.currentIndex,
+                      ),
+                      onDestinationSelected: (newIndex) {
+                        final branch = allowedBranches[newIndex];
+                        widget.child.goBranch(branch);
+                      },
+                      destinations:
+                          allowedBranches
+                              .map((i) => AppDestinations.rail(context)[i])
+                              .toList(),
+                      isLoggedIn: isLoggedIn,
+                      onPressedMenu: () {
+                        setState(() {
+                          open = true;
+                        });
+                      },
+                    ),
           ),
           Expanded(child: widget.child),
         ],
