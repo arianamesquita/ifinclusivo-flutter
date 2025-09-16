@@ -136,7 +136,7 @@ class _ShellPageState extends State<ShellPage> {
             isHomePage
                 ? AppBar(
                   title: SvgPicture.asset(
-                    'assets/favicon-expanded-green.svg',
+                    'assets/logo/logo_expanded_dark.svg',
                     height: 55,
                   ),
                   actions: [
