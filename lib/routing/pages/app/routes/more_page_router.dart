@@ -6,6 +6,6 @@ class MorePageRouter extends GoRouteData with _$MorePageRouter{
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Placeholder(color: Colors.yellow,);
+    return const CustomContainerShell(child:Placeholder(color: Colors.yellow,));
   }
 }

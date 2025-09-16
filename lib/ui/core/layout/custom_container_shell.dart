@@ -29,58 +29,57 @@ class CustomContainerShell extends StatelessWidget {
         ).state.uri.path.startsWith(NotificationRouter().location)) );
 
     return web
-        ? Expanded(
-          child: SizedBox.expand(
-            child: Stack(
-            children: [
-              Row(
-                crossAxisAlignment:
-                    CrossAxisAlignment.center, // centraliza verticalmente
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/figuras decorativas.svg",
-                        fit: BoxFit.contain,
-                      ),
-                      SizedBox(height: 200),
-                    ],
-                  ),
-                  Expanded(child: SingleChildScrollView(child:ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: MediaQuery.of(context).size.height,
-                      ),
-                      child: child))),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(height: 200),
-                      SvgPicture.asset(
-                        "assets/icons/figuras decorativas-1.svg",
-                        fit: BoxFit.contain,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              if (canShowBack)
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 35, left: web ? 20 : 5),
-                    child: buildElevatedButton(context),
-                  ),
-                ),
-            ],
-                        ),
-        ))
-        : Expanded(child: SingleChildScrollView(child: Column(
+        ? SizedBox.expand(
+          child: Stack(
           children: [
-            buildElevatedButton(context),
+            Row(
+              crossAxisAlignment:
+                  CrossAxisAlignment.center, // centraliza verticalmente
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/icons/figuras decorativas.svg",
+                      fit: BoxFit.contain,
+                    ),
+                    SizedBox(height: 200),
+                  ],
+                ),
+                Expanded(child: SingleChildScrollView(child:ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: MediaQuery.of(context).size.height,
+                    ),
+                    child: child))),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 200),
+                    SvgPicture.asset(
+                      "assets/icons/figuras decorativas-1.svg",
+                      fit: BoxFit.contain,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            if (canShowBack)
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 35, left: web ? 20 : 5),
+                  child: buildElevatedButton(context),
+                ),
+              ),
+          ],
+                      ),
+                )
+        : SingleChildScrollView(child: Column(
+          children: [
+            if (canShowBack) buildElevatedButton(context),
             child,
           ],
-        )));
+        ));
   }
 
   Widget buildElevatedButton(BuildContext context) {

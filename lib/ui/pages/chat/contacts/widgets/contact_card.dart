@@ -1,16 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/ui/pages/chat/chat/widgets/status_label.dart';
+import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/roles_custom_chip.dart';
 
+import '../../../../../guards/roles.dart';
 import '../../../../../utils/date_utils.dart';
-
-enum RolesChip { PROFESSOR, TUTOR, ALUNO_NAPNE, INTERPRETE }
 
 class ContactCard extends StatefulWidget {
   final String profileImageUrl;
   final String name;
   final String lastMessage;
-  final RolesChip role;
+  final Roles role;
   final VoidCallback? onTap;
   final int? unreadMessagesCount;
   final DateTime lastMessageDate;
@@ -52,7 +53,7 @@ class _ContactCardState extends State<ContactCard> {
 
   @override
   Widget build(BuildContext context) {
-    final values = _getValuesByRole(widget.role, context);
+    final values = getValuesByRole(widget.role, context);
 
     return Material(
       color: (widget.unreadMessagesCount != null && widget.unreadMessagesCount! > 0)
@@ -132,7 +133,6 @@ class _ContactCardState extends State<ContactCard> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  // Só mostra o contador se houver mensagens não lidas
                   if (widget.unreadMessagesCount != null &&
                       widget.unreadMessagesCount! > 0)
                     Row(
@@ -170,51 +170,5 @@ class _ContactCardState extends State<ContactCard> {
         ),
       ),
     );
-  }
-}
-
-class _ChipValues {
-  final String label;
-  final TextStyle? textStyle;
-  final Color? backgroundColor;
-  final StadiumBorder? border;
-
-  _ChipValues(this.label, this.textStyle, this.backgroundColor, this.border);
-}
-
-_ChipValues _getValuesByRole(RolesChip role, BuildContext context) {
-  TextStyle? baseStyle = Theme.of(
-    context,
-  ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold);
-
-  switch (role) {
-    case RolesChip.PROFESSOR:
-      return _ChipValues(
-        "Professor",
-        baseStyle?.copyWith(color: Color(0xFFDD6B20)),
-        Color(0xFFFEEBC8),
-        StadiumBorder(side: BorderSide(color: Color(0xFFFEEBC8), width: 1)),
-      );
-    case RolesChip.TUTOR:
-      return _ChipValues(
-        "Tutor",
-        baseStyle?.copyWith(color: Color(0xFF718096)),
-        Color.fromRGBO(97, 94, 240, 0.04),
-        StadiumBorder(side: BorderSide(color: Color(0xFFCBD5E0), width: 1)),
-      );
-    case RolesChip.ALUNO_NAPNE:
-      return _ChipValues(
-        "Aluno",
-        baseStyle?.copyWith(color: Color(0xFF38A169)),
-        Color(0xFFC6F6D5),
-        StadiumBorder(side: BorderSide(color: Color(0xFFC6F6D5), width: 1)),
-      );
-    case RolesChip.INTERPRETE:
-      return _ChipValues(
-        "Intérprete",
-        baseStyle?.copyWith(color: Color(0xFF275C7C)),
-        Color(0xFFC6F6D5),
-        StadiumBorder(side: BorderSide(color: Color(0xFFC6F6D5), width: 1)),
-      );
   }
 }

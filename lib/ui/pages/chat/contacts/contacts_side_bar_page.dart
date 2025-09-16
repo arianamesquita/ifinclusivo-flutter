@@ -1,69 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/contact_card.dart';
+import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/contacts_custom_search_bar.dart';
+import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/roles_custom_filter_chip.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 
-class ContactsPage extends StatelessWidget {
-  const ContactsPage({super.key});
+import '../../../../guards/roles.dart';
+import '../../../../routing/app_router.dart';
+
+class ContactsSideBarPage extends StatelessWidget {
+  final void Function(String contactId) onTapContact;
+
+  const ContactsSideBarPage({
+    super.key,
+    required this.onTapContact,
+  });
+
 
   @override
   Widget build(BuildContext context) {
-    final contatos = [
+    final contacts = [
       ContactCard(
         profileImageUrl: "https://via.placeholder.com/150",
         name: "Maria Silva",
         lastMessage: "Oi, tudo bem?",
-        role: RolesChip.PROFESSOR,
+        role: Roles.ROLE_TUTOR,
         unreadMessagesCount: 2,
         lastMessageDate: DateTime.now().subtract(const Duration(minutes: 5)),
-        onTap: () => print("Clicou em Maria"),
+        onTap: () {
+          onTapContact('maria');
+        },
+
       ),
       ContactCard(
         profileImageUrl: "",
         name: "João Oliveira",
         lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
+        role: Roles.ROLE_ALUNO_NAPNE,
         unreadMessagesCount: 3,
         lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
+        onTap: () {
+          onTapContact('maria1');
+        },
       ),
       ContactCard(
         profileImageUrl: "",
         name: "João Oliveira",
         lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
+        role: Roles.ROLE_INTERPRETE,
         unreadMessagesCount: 1,
         lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
+        onTap: () {
+          onTapContact('1');
+        },
       ),
       ContactCard(
         profileImageUrl: "",
         name: "João Oliveira",
         lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
+        role: Roles.ROLE_PROFESSOR,
         unreadMessagesCount: 0,
         lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
+        onTap: () {
+          onTapContact('4');
+        },
       ),
       ContactCard(
         profileImageUrl: "",
         name: "João Oliveira",
         lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
+        role: Roles.ROLE_ALUNO_NAPNE,
         unreadMessagesCount: 0,
         lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
         onTap: () => print("Clicou em João"),
@@ -72,7 +77,7 @@ class ContactsPage extends StatelessWidget {
         profileImageUrl: "",
         name: "João Oliveira",
         lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
+        role: Roles.ROLE_ALUNO_NAPNE,
         unreadMessagesCount: 0,
         lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
         onTap: () => print("Clicou em João"),
@@ -81,7 +86,7 @@ class ContactsPage extends StatelessWidget {
         profileImageUrl: "",
         name: "João Oliveira",
         lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
+        role: Roles.ROLE_ALUNO_NAPNE,
         unreadMessagesCount: 0,
         lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
         onTap: () => print("Clicou em João"),
@@ -90,20 +95,39 @@ class ContactsPage extends StatelessWidget {
         profileImageUrl: "",
         name: "João Oliveira",
         lastMessage: "Pode me ajudar?",
-        role: RolesChip.ALUNO_NAPNE,
+        role: Roles.ROLE_ALUNO_NAPNE,
+        unreadMessagesCount: 0,
+        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
+        onTap: () => print("Clicou em João"),
+      ),
+      ContactCard(
+        profileImageUrl: "",
+        name: "João Oliveira",
+        lastMessage: "Pode me ajudar?",
+        role: Roles.ROLE_ALUNO_NAPNE,
+        unreadMessagesCount: 0,
+        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
+        onTap: () => print("Clicou em João"),
+      ),
+      ContactCard(
+        profileImageUrl: "",
+        name: "João Oliveira",
+        lastMessage: "Pode me ajudar?",
+        role: Roles.ROLE_ALUNO_NAPNE,
         unreadMessagesCount: 0,
         lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
         onTap: () => print("Clicou em João"),
       ),
     ];
 
-    final int unreadMessagesCount = contatos.where((contato) => contato.unreadMessagesCount! > 0).length;
+    final int unreadMessagesCount =
+        contacts.where((contato) => contato.unreadMessagesCount! > 0).length;
 
-    return Column(
-      children: [
-        Container(
-          color: Color(0xFFF6FFF0),
-          child: Padding(
+    return Container(
+      color: Color(0xFFF6FFF0),
+      child: Column(
+        children: [
+          Padding(
             padding: const EdgeInsets.all(24.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,7 +139,9 @@ class ContactsPage extends StatelessWidget {
                     children: [
                       Text(
                         "Mensagens",
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
@@ -130,21 +156,23 @@ class ContactsPage extends StatelessWidget {
                       Container(
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xFFEDF2F7)
+                          color: Color(0xFFEDF2F7),
                         ),
                         alignment: Alignment.center,
                         child: Padding(
                           padding: const EdgeInsets.all(9),
                           child: Text(
                             unreadMessagesCount.toString(),
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
-                          )
+                          ),
                         ),
                       ),
-                    ]
+                    ],
                   ),
                 ),
                 FloatingActionButton(
@@ -156,37 +184,45 @@ class ContactsPage extends StatelessWidget {
                   child: Icon(Icons.add),
                 ),
               ],
-            )
+            ),
           ),
-        ),
-        Divider(
-          color: Colors.black,
-          thickness: 2,
-        ),
-        Container(
-          color: Color(0xFFF6FFF0),
-          child: Padding (
-            padding: const EdgeInsets.all(24.0),
-            child: Row (
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      SearchBar(
-                      ),
-                    ],
+          Divider(color: Color(0xFFE2EBDD), thickness: 2),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    child: Column(
+                      children: [
+                        ContactsCustomSearchBar(),
+                        SizedBox(height: 20.0),
+                        RolesCustomFilterChips(),
+                      ],
+                    ),
                   ),
-                )
-              ]
-            )
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: contacts.length,
+                      itemBuilder: (context, index) {
+                        return contacts[index];
+                      },
+                      separatorBuilder: ((context, index) {
+                        return const SizedBox(height: 8.0);
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        Expanded(
-          child: ListView(
-            children: contatos,
-          ),
-        ),
-      ]
+        ],
+      ),
     );
   }
 }
