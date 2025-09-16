@@ -106,7 +106,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
               ),
 
               HoverableLogo(
-                imagePath: 'assets/favicon-expanded.png',
+                imagePath: 'assets/favicon-expanded.svg',
                 height: 80,
                 onTap: () {},
               ),

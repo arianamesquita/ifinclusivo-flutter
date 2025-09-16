@@ -186,7 +186,7 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
           ),
 
           HoverableLogo(
-            imagePath: 'assets/favicon.png',
+            imagePath: 'assets/favicon.svg',
             height: 80,
             onTap: () {},
           ),

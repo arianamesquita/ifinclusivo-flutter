@@ -146,5 +146,60 @@ class AppDestinations {
             ),
           ),
         ),
+      ];  static List<NavigationDestination> bottom(BuildContext context) =>
+      <NavigationDestination>[
+        NavigationDestination(
+            icon: Icon(
+              Icons.home_outlined,
+              color: Theme.of(context).colorScheme.onTertiary,
+            ),
+            selectedIcon: Icon(
+              Icons.home_rounded,
+              color: Theme.of(context).colorScheme.onTertiary,
+            ),
+            label:'Home'
+        ),
+
+        NavigationDestination(
+          icon: Icon(
+            Icons.sign_language_outlined,
+            color: Theme.of(context).colorScheme.onTertiary,
+          ),
+          selectedIcon: Icon(
+            Icons.sign_language,
+            color: Theme.of(context).colorScheme.onTertiary,
+          ),
+          label:'Libras'
+        ),
+
+        NavigationDestination(
+          icon: Icon(
+            Icons.chat_outlined,
+            color: Theme.of(context).colorScheme.onTertiary,
+          ),
+          selectedIcon: Icon(
+            Icons.chat,
+            color: Theme.of(context).colorScheme.onTertiary,
+          ),
+          label:'Chat'
+
+        ),
+
+        NavigationDestination(
+          icon: SizedBox(
+            height: 24,
+            width: 24,
+            child: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+              child: Icon(
+                Icons.person,
+                color: Theme.of(context).colorScheme.onTertiaryContainer,
+                size: 20,
+              ),
+            ),
+          ),
+          label:
+            'Perfil',
+        ),
       ];
 }
