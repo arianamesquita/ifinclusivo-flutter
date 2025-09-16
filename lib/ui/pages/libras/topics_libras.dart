@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/routing/app_router.dart';
+import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/libras_custom_search_bar.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 
+import '../../core/layout/custom_container_shell.dart';
 import 'filter_block/filter_block_grid.dart';
 
 class TopicLibras extends StatelessWidget{
@@ -11,14 +12,11 @@ class TopicLibras extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    var index = 0;
-
     var items = [
       FilterBlockGridParams(
         label: 'Redes',
         imageAsset: "assets/card_libras_icons/redes.png",
         onTap: () {
-          index = 1;
           print("tepou");
         },
       ),
@@ -26,7 +24,6 @@ class TopicLibras extends StatelessWidget{
         label: 'Banco de Dados',
         imageAsset: "assets/card_libras_icons/banco_de_dados.png",
         onTap: () {
-          index = 2;
           print("tepou");
         },
       ),
@@ -34,7 +31,6 @@ class TopicLibras extends StatelessWidget{
         label: 'Programação',
         imageAsset: "assets/card_libras_icons/programacao.png",
         onTap: () {
-          index = 3;
           print("tepou");
         },
       ),
@@ -42,7 +38,6 @@ class TopicLibras extends StatelessWidget{
         label: 'Web',
         imageAsset: "assets/card_libras_icons/web.png",
         onTap: () {
-          index = 4;
           print("tepou");
         },
       ),
@@ -50,7 +45,6 @@ class TopicLibras extends StatelessWidget{
         label: 'Estrutura de Dados',
         imageAsset: "assets/card_libras_icons/estrutura_de_dados.png",
         onTap: () {
-          index = 5;
           print("tepou");
         },
       ),
@@ -58,40 +52,31 @@ class TopicLibras extends StatelessWidget{
         label: 'Arquitetura de Computadores',
         imageAsset: "assets/card_libras_icons/arquitetura_de_comp.png",
         onTap: () {
-          index = 6;
           print("tepou");
         },
       ),
     ];
 
-    Widget page;
-    switch (index) {
-      case 0:
-        page = const TopicLibras();
-        break;
-      case 1:
-        page = const TopicLibras();
-        break;
-      case 2:
-        page = const TopicLibras();
-        break;
-      case 3:
-        page = const TopicLibras();
-        break;
-      case 4:
-        page = const TopicLibras();
-        break;
-      case 5:
-        page = const TopicLibras();
-        break;
-      case 6:
-        page = const TopicLibras();
-        break;
-      default:
-        throw UnimplementedError('no widget for $index');
-    }
+    DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
 
-    return Column(
+    return device == DeviceScreenType.mobile?
+        Scaffold(
+          appBar: AppBar(title:  Text('Converte libras'),),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  LibrasCustomSearchBar(),
+                  Text("Um dicionário de sinais criado para a comunidade"),
+                  SizedBox(height: 90),
+                  FilterBlockGrid(filterBlockList: items),
+                ],
+              ),
+            ),
+          ),
+        )
+
+        :CustomContainerShell(child: Column(
       children: [
         const TopContentLibras(
           title: "CONVERTE LIBRAS",
@@ -101,6 +86,6 @@ class TopicLibras extends StatelessWidget{
         SizedBox(height: 90),
         FilterBlockGrid(filterBlockList: items),
       ],
-    );
+    ));
   }
 }

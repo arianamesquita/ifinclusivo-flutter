@@ -6,12 +6,6 @@ class LibrasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
-        children: [
-          TopicLibras(),
-        ],
-      ),
-    );
+    return TopicLibras();
   }
 }
