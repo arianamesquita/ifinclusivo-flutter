@@ -114,8 +114,6 @@ class _ShellPageState extends State<ShellPage> {
     );
   }
 
-  int lastIndexTabBar = 1;
-
   Widget _buildAppMobile(
     AuthGuardShell auth,
     List<int>
@@ -123,87 +121,123 @@ class _ShellPageState extends State<ShellPage> {
     BuildContext context,
     bool isLoggedIn,
   ) {
-    final bool isHomePage =
-        widget.child.currentIndex == 0 || widget.child.currentIndex == 2;
-    setState(() {
-      lastIndexTabBar = (widget.child.currentIndex == 2) ? 1 : 0;
+    return BuildMobileAPP(child: widget.child);
+  }
+}
+
+class BuildMobileAPP extends StatefulWidget {
+  final StatefulNavigationShell child;
+
+  const BuildMobileAPP({super.key, required this.child});
+
+  @override
+  State<BuildMobileAPP> createState() => _BuildMobileAPPState();
+}
+
+class _BuildMobileAPPState extends State<BuildMobileAPP>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+  int lastIndexTabBar = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) return;
+
+      if (_tabController.index == 0) {
+        widget.child.goBranch(0); // Fórum
+        setState(() => lastIndexTabBar = 0);
+      } else {
+        widget.child.goBranch(2); // Tópicos
+        setState(() => lastIndexTabBar = 2);
+      }
     });
-    return DefaultTabController(
-      length: 2, // Temos 2 abas: Fórum e Tópicos
-      initialIndex: lastIndexTabBar,
-      child: Scaffold(
-        appBar:
-            isHomePage
-                ? AppBar(
-                  title: SvgPicture.asset(
-                    'assets/logo/logo_expanded_dark.svg',
-                    height: 55,
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isHomePage =
+        widget.child.currentIndex == 0 || widget.child.currentIndex == 2;
+
+    // garante que o TabController fique alinhado com a branch
+    if (widget.child.currentIndex == 0 && _tabController.index != 0) {
+      _tabController.index = 0;
+    } else if (widget.child.currentIndex == 2 && _tabController.index != 1) {
+      _tabController.index = 1;
+    }
+
+    return Scaffold(
+      appBar:
+          isHomePage
+              ? AppBar(
+                toolbarHeight: 76,
+                title: SvgPicture.asset(
+                  'assets/logo/logo_expanded_dark.svg',
+                  height: 60,
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () => NotificationRouter().push(context),
+                    icon: Icon(
+                      Icons.notifications_outlined,
+                      size: 24,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                   ),
-                  actions: [
-                    IconButton(
-                      onPressed: () =>NotificationRouter().push(context),
-                      icon: Icon(Icons.notifications_outlined, size: 24),
+                ],
+                actionsPadding: EdgeInsets.symmetric(vertical: 16),
+                bottom: TabBar(
+                  controller: _tabController,
+                  tabs: const [
+                    Tab(text: 'Fórum', icon: Icon(Icons.group_work_outlined)),
+                    Tab(
+                      text: 'Tópicos',
+                      icon: Icon(Icons.dashboard_customize_outlined),
                     ),
                   ],
-                  bottom: TabBar(
-                    onTap: (index) {
-                      if (index == 0) {
-                        widget.child.goBranch(0); // Rota do Fórum
-                        setState(() {
-                          lastIndexTabBar = 0;
-                        });
-                      } else if (index == 1) {
-                        widget.child.goBranch(2);
-                        setState(() {
-                          lastIndexTabBar = 2;
-                        });
-                      }
-                    },
-                    tabs: const <Widget>[
-                      Tab(text: 'Fórum', icon: Icon(Icons.group_work_outlined)),
-                      Tab(
-                        text: 'Tópicos',
-                        icon: Icon(Icons.dashboard_customize_outlined),
-                      ),
-                    ],
-                  ),
-                )
-                : null,
-
-        body: SafeArea(child: widget.child),
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: () {
-            final currentBranch = widget.child.currentIndex;
-            if (currentBranch == 0 || currentBranch == 2) return 0; // Fórum/Tópicos -> Início
-            if (currentBranch == 1) return 1; // Libras
-            if (currentBranch == 3) return 2; // Chat
-            if (currentBranch == 5) return 3; // Chat
-            return 0; // Padrão
-          }(),
-          onDestinationSelected: (newIndex) {
-            switch (newIndex) {
-              case 0:
-                widget.child.goBranch(
-                  lastIndexTabBar,
-                ); // Clicou em Início -> vai para Fórum
-                break;
-              case 1:
-                widget.child.goBranch(1); // Clicou em Libras -> vai para Libras
-                break;
-              case 2:
-                widget.child.goBranch(3); // Clicou em Chat -> vai para Chat
-              case 3:
-                widget.child.goBranch(5);// clicou em Profile
-                break;
-            }
-          },
-          destinations: AppDestinations.bottom(context),
-          backgroundColor: Theme.of(context).colorScheme.tertiary,
-          indicatorColor: Theme.of(context).colorScheme.primary,
-          labelTextStyle: WidgetStatePropertyAll(
-            Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onTertiary,
-            ),
+                ),
+              )
+              : null,
+      body: SafeArea(child: widget.child),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: () {
+          final currentBranch = widget.child.currentIndex;
+          if (currentBranch == 0 || currentBranch == 2) return 0; // Home
+          if (currentBranch == 1) return 1; // Libras
+          if (currentBranch == 3) return 2; // Chat
+          if (currentBranch == 5) return 3; // Profile
+          return 0;
+        }(),
+        onDestinationSelected: (newIndex) {
+          switch (newIndex) {
+            case 0:
+              widget.child.goBranch(lastIndexTabBar); // volta à última tab
+              break;
+            case 1:
+              widget.child.goBranch(1);
+              break;
+            case 2:
+              widget.child.goBranch(3);
+              break;
+            case 3:
+              widget.child.goBranch(5);
+              break;
+          }
+        },
+        destinations: AppDestinations.bottom(context),
+        indicatorColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        labelTextStyle: WidgetStatePropertyAll(
+          Theme.of(context).textTheme.labelMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onTertiary,
           ),
         ),
       ),
