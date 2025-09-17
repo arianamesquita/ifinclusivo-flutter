@@ -8,7 +8,7 @@ import 'package:if_inclusivo/utils/responsive_utils.dart';
 import '../../core/layout/custom_container_shell.dart';
 import 'filter_block/filter_block_grid.dart';
 
-class TopicLibras extends StatefulWidget{
+class TopicLibras extends StatefulWidget {
   const TopicLibras({super.key});
 
   @override
@@ -67,18 +67,19 @@ class _TopicLibrasState extends State<TopicLibras> {
 
     String word = '';
 
-    return device == DeviceScreenType.mobile?
-        Scaffold(
-          appBar: AppBar(title:  Text('Converte libras'),),
+    return device == DeviceScreenType.mobile
+        ? Scaffold(
+          appBar: AppBar(title: Text('Converte libras')),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  LibrasCustomSearchBar(onChanged: (findString) {
-                    setState(() {
-                      word = findString.toString();
-                      print(word);
-                    });
+                  LibrasCustomSearchBar(
+                    onChanged: (findString) {
+                      setState(() {
+                        word = findString.toString();
+                        print(word);
+                      });
                     },
                   ),
                   Text("Um dicionário de sinais criado para a comunidade"),
@@ -89,25 +90,27 @@ class _TopicLibrasState extends State<TopicLibras> {
             ),
           ),
         )
-
-        :CustomContainerShell(child: Column(
-      children: [
-        SizedBox(height: 100,),
-        TopContentLibras(
-          title: "CONVERTE LIBRAS",
-          searchBar: LibrasCustomSearchBar(onChanged: (findString) {
-            setState(() {
-              word = findString.toString();
-              print(word);
-            });
-          },
+        : CustomContainerShell(
+          child: Column(
+            children: [
+              SizedBox(height: 100),
+              TopContentLibras(
+                title: "CONVERTE LIBRAS",
+                searchBar: LibrasCustomSearchBar(
+                  onChanged: (findString) {
+                    setState(() {
+                      word = findString.toString();
+                      print(word);
+                    });
+                  },
+                ),
+                subtitle: "Um dicionário de sinais criado para a comunidade",
+              ),
+              SizedBox(height: 15),
+              FilterBlockGrid(filterBlockList: items),
+              SizedBox(height: 100),
+            ],
           ),
-          subtitle: "Um dicionário de sinais criado para a comunidade",
-        ),
-        SizedBox(height: 15),
-        FilterBlockGrid(filterBlockList: items),
-        SizedBox(height: 100,),
-      ],
-    ));
+        );
   }
 }
