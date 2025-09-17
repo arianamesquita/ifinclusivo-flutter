@@ -16,13 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = View.of(context).platformDispatcher.platformBrightness;
     TextTheme textTheme = createTextTheme(context, "Poppins", "Poppins");
     MaterialTheme theme = MaterialTheme(textTheme);
     final router = createRouter();
     return MaterialApp.router(
       title: 'IF Inclusivo',
-      theme: brightness == Brightness.light ? theme.light() : theme.dark(),
+      theme: theme.light(),
+      darkTheme: theme.dark(),
+      themeMode: ThemeMode.system,
       routerConfig: router,
     );
   }

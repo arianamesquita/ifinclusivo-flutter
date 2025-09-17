@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
+import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
+import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
 
 import '../ui/core/layout/custom_container_shell.dart';
+import '../ui/exceptions/internal_server_error_500.dart';
+import '../ui/exceptions/unauthorized_401.dart';
 import '../ui/pages/auth/sign_in/Login_dialog_content.dart';
 import '../ui/pages/auth/sing_up/register_dialog_content.dart';
 import '../ui/pages/libras/page_libras.dart';
@@ -35,8 +39,13 @@ part 'pages/app/shell_app_router.dart';
 part 'pages/about_routes/shell_about_router.dart';
 part 'pages/auth/shell_auth_router.dart';
 
+part 'pages/exceptions/exceptions_routes.dart';
+
 GoRouter createRouter() =>
     GoRouter(
         initialLocation: ForumRouter().location,
+        errorBuilder: (context, state){
+            return NotFound404();
+        },
         routes: $appRoutes
     );

@@ -25,6 +25,8 @@ dependencies:
   url_launcher: ^6.3.0
   flutter_dotenv: ^5.1.0
   intl: ^0.20.2
+  dio: ^5.9.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -43,3 +45,5 @@ flutter:
     - assets/login_register/
     - assets/card_libras_icons/
     - assets/env/.env
+    - assets/logo/
+    - assets/exceptions/

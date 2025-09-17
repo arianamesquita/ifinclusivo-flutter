@@ -201,7 +201,7 @@ class LoginDialogContent extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: HoverableLogo(
                       onTap: () => AboutUsRoute().go(context),
-                      imagePath: 'assets/logo_oficial_expanded.png',
+                      imagePath: 'assets/logo/logo_expanded_light.svg',
                       height: 114,
                     ),
                   ),

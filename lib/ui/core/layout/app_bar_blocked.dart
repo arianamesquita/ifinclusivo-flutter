@@ -60,7 +60,7 @@ class CustomAppBarBlocked extends StatelessWidget {
             children: [
               HoverableLogo(
                 onTap: () => context.go(AboutUsRoute().location),
-                imagePath: 'assets/logo_oficial_expanded.png',
+                imagePath: 'assets/logo/logo_expanded_light.svg',
                 height: 138,
               ),
               Padding(
