@@ -7,6 +7,7 @@ class LibrasCustomSearchBar extends CustomSearchBar {
 
   const LibrasCustomSearchBar({
     super.key,
+    required super.onChanged,
     super.backgroundColor = const WidgetStatePropertyAll(Color.fromRGBO(255, 255, 255, 1)),
     super.hintText = 'Buscar',
     super.leading = const Icon(Icons.search, color: textInputColor),
@@ -47,7 +48,7 @@ class LibrasCustomSearchBar extends CustomSearchBar {
           BoxShadow(
             color: Colors.black26,
             offset: Offset(0, 1), // sombra só embaixo
-            blurRadius: 1,
+            blurRadius: 0,
             spreadRadius: 0,
           ),
         ],
