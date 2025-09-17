@@ -12,6 +12,10 @@ List<RouteBase> get $appRoutes => [
   $shellAppRouter,
   $shellAboutRoute,
   $shellAuthRoute,
+  $unauthorizedRoute,
+  $forbiddenRoute,
+  $serverErrorRoute,
+  $notFoundRoute,
 ];
 
 RouteBase get $notificationRouter => GoRouteData.$route(
@@ -422,6 +426,110 @@ mixin _$RegisterRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/register');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $unauthorizedRoute => GoRouteData.$route(
+  path: '/unauthorized',
+
+  factory: _$UnauthorizedRoute._fromState,
+);
+
+mixin _$UnauthorizedRoute on GoRouteData {
+  static UnauthorizedRoute _fromState(GoRouterState state) =>
+      const UnauthorizedRoute();
+
+  @override
+  String get location => GoRouteData.$location('/unauthorized');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $forbiddenRoute => GoRouteData.$route(
+  path: '/forbidden',
+
+  factory: _$ForbiddenRoute._fromState,
+);
+
+mixin _$ForbiddenRoute on GoRouteData {
+  static ForbiddenRoute _fromState(GoRouterState state) =>
+      const ForbiddenRoute();
+
+  @override
+  String get location => GoRouteData.$location('/forbidden');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $serverErrorRoute => GoRouteData.$route(
+  path: '/server-error',
+
+  factory: _$ServerErrorRoute._fromState,
+);
+
+mixin _$ServerErrorRoute on GoRouteData {
+  static ServerErrorRoute _fromState(GoRouterState state) =>
+      const ServerErrorRoute();
+
+  @override
+  String get location => GoRouteData.$location('/server-error');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $notFoundRoute =>
+    GoRouteData.$route(path: '/not-found', factory: _$NotFoundRoute._fromState);
+
+mixin _$NotFoundRoute on GoRouteData {
+  static NotFoundRoute _fromState(GoRouterState state) => NotFoundRoute();
+
+  @override
+  String get location => GoRouteData.$location('/not-found');
 
   @override
   void go(BuildContext context) => context.go(location);
