@@ -1,10 +1,11 @@
+/*
 
 
-import 'package:if_inclusivo/data/services/registerService.dart';
+import 'package:if_inclusivo/data/services/auth_service.dart';
 import 'package:if_inclusivo/domain/models/user/userModel.dart';
 
 class RegisterRepository {
-  final RegisterService _registerService;
+  final AuthService _registerService;
 
   RegisterRepository(this._registerService);
 
@@ -12,4 +13,4 @@ class RegisterRepository {
     return _registerService.fetchUsers();
   }
 
-}
+}*/

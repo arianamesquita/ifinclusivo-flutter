@@ -25,7 +25,9 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   void initState() {
     super.initState();
     Future.microtask(() {
+/*
       context.read<RegisterViewModel>().loadUsers();
+*/
     });
   }
 

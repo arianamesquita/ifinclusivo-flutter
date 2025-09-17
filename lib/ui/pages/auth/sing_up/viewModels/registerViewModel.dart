@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+/*
 import 'package:if_inclusivo/data/repositories/userRepository/registerRepository.dart';
-import 'package:if_inclusivo/data/services/registerService.dart';
+import 'package:if_inclusivo/data/services/auth_service.dart';
 import 'package:if_inclusivo/domain/models/user/userModel.dart';
+*/
 
 class RegisterViewModel extends ChangeNotifier {
-  final RegisterRepository _repository = RegisterRepository(RegisterService());
+/*  final RegisterRepository _repository = RegisterRepository(RegisterService());
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -28,5 +30,5 @@ class RegisterViewModel extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
-  }
+  }*/
 }
