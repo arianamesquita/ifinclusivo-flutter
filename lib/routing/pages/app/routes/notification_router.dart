@@ -1,5 +1,5 @@
 part of '../../../app_router.dart';
-
+@TypedGoRoute<NotificationRouter>(path: AppRoutes.notification)
 class NotificationRouter extends GoRouteData with _$NotificationRouter {
   const NotificationRouter();
 

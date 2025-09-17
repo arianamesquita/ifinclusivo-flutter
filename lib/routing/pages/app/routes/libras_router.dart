@@ -5,6 +5,6 @@ class LibrasRouter extends GoRouteData with _$LibrasRouter{
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Placeholder(color: Colors.yellow,);
+    return LibrasPage();
   }
 }

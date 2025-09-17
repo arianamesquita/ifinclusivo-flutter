@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../utils/responsive_utils.dart';
+import '../../../../utils/responsive_utils.dart';
 
 class CustomContainer extends StatefulWidget {
   final Widget child;

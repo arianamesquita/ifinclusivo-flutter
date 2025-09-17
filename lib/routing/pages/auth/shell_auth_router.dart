@@ -1,6 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+part of '../../app_router.dart';
 
+
+@TypedStatefulShellRoute<ShellAuthRoute>(
+  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
+    TypedStatefulShellBranch<StatefulShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<LoginRoute>(path: AppRoutes.signIn),
+      ],
+    ),
+    TypedStatefulShellBranch<StatefulShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<RegisterRoute>(path: AppRoutes.signUp),
+      ],
+    ),
+  ],
+)
 class ShellAuthRoute extends StatefulShellRouteData {
   const ShellAuthRoute();
 

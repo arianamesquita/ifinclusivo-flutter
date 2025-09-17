@@ -240,7 +240,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                     child:
                     HoverableLogo(
                       onTap: () => AboutUsRoute().go(context),
-                      imagePath: 'assets/logo_oficial_expanded.png',
+                      imagePath: 'assets/logo/logo_expanded_dark.svg',
                       height: 94,
                     ),
                   ),

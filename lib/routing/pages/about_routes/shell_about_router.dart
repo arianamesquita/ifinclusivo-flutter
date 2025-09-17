@@ -1,9 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../ui/pages/presentation/presentation_page.dart';
+part of '../../app_router.dart';
 
 
-
+@TypedStatefulShellRoute<ShellAboutRoute>(
+  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
+    TypedStatefulShellBranch<StatefulShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<AboutUsRoute>(path: AppRoutes.aboutUs),
+      ],
+    ),
+    TypedStatefulShellBranch<StatefulShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<AboutNapneRoute>(path: AppRoutes.aboutNapne),
+      ],
+    ),
+  ],
+)
 class ShellAboutRoute extends StatefulShellRouteData  {
   const ShellAboutRoute();
 

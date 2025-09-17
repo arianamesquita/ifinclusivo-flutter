@@ -1,19 +1,27 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
-import 'package:if_inclusivo/routing/pages/about_routes/shell_about_router.dart';
-import 'package:if_inclusivo/routing/pages/app/shell_app_router.dart';
-import 'package:if_inclusivo/routing/pages/auth/shell_auth_router.dart' hide DialogPage;
+import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
+import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
+import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
+import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
 
+import '../ui/core/layout/custom_container_shell.dart';
+import '../ui/exceptions/internal_server_error_500.dart';
+import '../ui/exceptions/unauthorized_401.dart';
 import '../ui/pages/auth/sign_in/Login_dialog_content.dart';
 import '../ui/pages/auth/sing_up/register_dialog_content.dart';
+import '../ui/pages/libras/page_libras.dart';
 import '../ui/pages/presentation/aboult_us/about_us_page.dart';
 import '../ui/pages/presentation/about_napne/about_napne_page.dart';
+import '../ui/pages/presentation/presentation_page.dart';
+import '../ui/pages/shell/shell_page.dart';
 import '../utils/dialog_page.dart';
 
-// ---- Aqui entram os parts ----
+// gerador de rota único
 part 'app_router.g.dart';
+
+// Parts das rotas
 part 'pages/app/routes/notification_router.dart';
 part 'pages/about_routes/routes/about_napne_router.dart';
 part 'pages/about_routes/routes/about_us_router.dart';
@@ -26,84 +34,18 @@ part 'pages/app/routes/topico_router.dart';
 part 'pages/app/routes/profile_router.dart';
 part 'pages/app/routes/forum_router.dart';
 
-@TypedGoRoute<RootRouter>(
-  path: '/',
-  routes: <TypedRoute<RouteData>>[
-    TypedStatefulShellRoute<ShellAboutRoute>(
-      branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<AboutUsRoute>(path: AppRoutes.aboutUs),
-          ],
-        ),
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<AboutNapneRoute>(path: AppRoutes.aboutNapne),
-          ],
-        ),
-      ],
-    ),
-    TypedStatefulShellRoute<ShellAuthRoute>(
-      branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<LoginRoute>(path: AppRoutes.signIn),
-          ],
-        ),
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<RegisterRoute>(path: AppRoutes.signUp),
-          ],
-        ),
-      ],
-    ),
-    TypedStatefulShellRoute<ShellAppRouter>(
-      branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<ForumRouter>(path: AppRoutes.forum),
-          ],
-        ),
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<LibrasRouter>(path: AppRoutes.libras),
-          ],
-        ),
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<TopicoRouter>(path: AppRoutes.topico),
-          ],
-        ),
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<ChatRouter>(path: AppRoutes.chat),
-          ],
-        ),
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<MorePageRouter>(path: AppRoutes.more),
-          ],
-        ),
+// part dos shells
+part 'pages/app/shell_app_router.dart';
+part 'pages/about_routes/shell_about_router.dart';
+part 'pages/auth/shell_auth_router.dart';
 
-        TypedStatefulShellBranch<StatefulShellBranchData>(
-          routes: <TypedRoute<RouteData>>[
-            TypedGoRoute<ProfileRouter>(path: AppRoutes.profile),
-          ],
-        ),
-      ],
-    ),
-    TypedGoRoute<NotificationRouter>(path: AppRoutes.notification),
-  ],
-)
-class RootRouter extends GoRouteData with _$RootRouter {
-  const RootRouter();
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      body: Center(child: Text('Root Page')),
+part 'pages/exceptions/exceptions_routes.dart';
+
+GoRouter createRouter() =>
+    GoRouter(
+        initialLocation: ForumRouter().location,
+        errorBuilder: (context, state){
+            return NotFound404();
+        },
+        routes: $appRoutes
     );
-  }
-
-}
-
-GoRouter createRouter() => GoRouter(initialLocation: AboutUsRoute().location, routes: $appRoutes);
