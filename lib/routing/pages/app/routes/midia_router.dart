@@ -7,5 +7,4 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter{
   Widget build(BuildContext context, GoRouterState state) {
     return const Placeholder(color: Colors.black,);
   }
-
 }

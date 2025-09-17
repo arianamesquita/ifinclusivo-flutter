@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/libras_custom_search_bar.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
@@ -17,7 +17,7 @@ class TopicLibras extends StatelessWidget{
         label: 'Redes',
         imageAsset: "assets/card_libras_icons/redes.png",
         onTap: () {
-          print("tepou");
+          context.push('midia');
         },
       ),
       FilterBlockGridParams(
@@ -78,13 +78,15 @@ class TopicLibras extends StatelessWidget{
 
         :CustomContainerShell(child: Column(
       children: [
+        SizedBox(height: 100,),
         const TopContentLibras(
           title: "CONVERTE LIBRAS",
           searchBar: LibrasCustomSearchBar(),
           subtitle: "Um dicionário de sinais criado para a comunidade",
         ),
-        SizedBox(height: 90),
+        SizedBox(height: 15),
         FilterBlockGrid(filterBlockList: items),
+
       ],
     ));
   }
