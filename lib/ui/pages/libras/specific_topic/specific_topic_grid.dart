@@ -52,23 +52,26 @@ class SpecificTopicGrid extends StatelessWidget{
             totalItemsWidth + (crossAxisCount - 1) * horizontalSpacing;
 
         return Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: wrapWidth),
-            child: Wrap(
-              spacing: horizontalSpacing,
-              runSpacing: verticalSpacing,
-              children: specificTopicsList.map((arg) {
-                return SizedBox(
-                  width: itemWidth,
-                  height: itemHeight,
-                  child: SpecificTopic(
-                    title: arg.title,
-                    description: arg.description,
-                    urlVideo: arg.plyaerUrl,
-                    onTap: arg.onTap,
-                  ),
-                );
-              }).toList(),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 50),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: wrapWidth),
+              child: Wrap(
+                spacing: horizontalSpacing,
+                runSpacing: verticalSpacing,
+                children: specificTopicsList.map((arg) {
+                  return SizedBox(
+                    width: itemWidth,
+                    height: itemHeight,
+                    child: SpecificTopic(
+                      title: arg.title,
+                      description: arg.description,
+                      urlVideo: arg.plyaerUrl,
+                      onTap: arg.onTap,
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
           ),
         );

@@ -69,7 +69,6 @@ class FilterBlockGrid extends StatelessWidget {
               }).toList(),
             ),
           ),
-
         );
       },
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/ui/core/animations/hover_effect.dart';
 
 class SpecificTopic extends StatelessWidget {
   final String title;
@@ -16,12 +17,10 @@ class SpecificTopic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      borderRadius: BorderRadius.circular(40),
-      child: InkWell(
-        hoverColor: const Color.fromRGBO(133, 224, 224, 1),
-        onTap: onTap,
+    return HoverEffect(
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(40),
         child: Container(
           width: 387,
           height: 361,
