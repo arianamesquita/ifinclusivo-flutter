@@ -52,29 +52,40 @@ class SearchResult extends StatelessWidget {
               child: Text(
                 'Resultados Encontrados para html',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Color.fromRGBO(28,122,229, 1),
+                  color: Color.fromRGBO(28, 122, 229, 1),
                 ),
                 textAlign: TextAlign.left,
               ),
-            )
+            ),
           ],
         ),
         Material(
-          child: items2.isNotEmpty
-                  ? ListView.builder(
-                    itemCount: items2.length,
-                    itemBuilder: (context, index) {
-                      final item = items2[index];
-                      return SearchResultBlock(
-                        topicName: item.topicName,
-                        description: item.description,
-                      );
-                    },
-                  )
-                  : SearchNotFound(
-                errorIcon: Icons.error,
-                onPressed: () {  },
-              ),
+          child: Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(top: 100),
+              child:
+                  items2.isNotEmpty
+                      ? ListView.builder(
+                        itemCount: items2.length,
+                        itemBuilder: (context, index) {
+                          final item = items2[index];
+                          return SearchResultBlock(
+                            topicName: item.topicName,
+                            description: item.description,
+                          );
+                        },
+                      )
+                      : Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: SearchNotFound(
+                          errorIcon: Icons.error,
+                          onPressed: () {
+                            print('listview');
+                          },
+                        ),
+                      ),
+            ),
+          ),
         ),
       ],
     );
