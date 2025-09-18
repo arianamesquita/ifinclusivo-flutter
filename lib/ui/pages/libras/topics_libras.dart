@@ -23,42 +23,42 @@ class _TopicLibrasState extends State<TopicLibras> {
         label: 'Redes',
         imageAsset: "assets/card_libras_icons/redes.png",
         onTap: () {
-          context.push(MidiaRouter().location);
+          context.push(RedesRouter().location);
         },
       ),
       FilterBlockGridParams(
         label: 'Banco de Dados',
         imageAsset: "assets/card_libras_icons/banco_de_dados.png",
         onTap: () {
-          print("tepou");
+          context.push(RedesRouter().location);
         },
       ),
       FilterBlockGridParams(
         label: 'Programação',
         imageAsset: "assets/card_libras_icons/programacao.png",
         onTap: () {
-          print("tepou");
+          context.push(RedesRouter().location);
         },
       ),
       FilterBlockGridParams(
         label: 'Web',
         imageAsset: "assets/card_libras_icons/web.png",
         onTap: () {
-          print("tepou");
+          context.push(RedesRouter().location);
         },
       ),
       FilterBlockGridParams(
         label: 'Estrutura de Dados',
         imageAsset: "assets/card_libras_icons/estrutura_de_dados.png",
         onTap: () {
-          print("tepou");
+          context.push(RedesRouter().location);
         },
       ),
       FilterBlockGridParams(
         label: 'Arquitetura de Computadores',
         imageAsset: "assets/card_libras_icons/arquitetura_de_comp.png",
         onTap: () {
-          print("tepou");
+          context.push(RedesRouter().location);
         },
       ),
     ];
@@ -93,9 +93,9 @@ class _TopicLibrasState extends State<TopicLibras> {
         : CustomContainerShell(
           child: Column(
             children: [
-              SizedBox(height: 100),
               TopContentLibras(
                 title: "CONVERTE LIBRAS",
+                subtitle: "Um dicionário de sinais criado para a comunidade",
                 searchBar: LibrasCustomSearchBar(
                   onChanged: (findString) {
                     setState(() {
@@ -104,7 +104,6 @@ class _TopicLibrasState extends State<TopicLibras> {
                     });
                   },
                 ),
-                subtitle: "Um dicionário de sinais criado para a comunidade",
               ),
               SizedBox(height: 15),
               FilterBlockGrid(filterBlockList: items),

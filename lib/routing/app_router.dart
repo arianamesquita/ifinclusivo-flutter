@@ -5,6 +5,8 @@ import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
+import 'package:if_inclusivo/ui/pages/libras/modal_midia_page.dart';
+import 'package:if_inclusivo/ui/pages/specific_topic/specific_topic_page.dart';
 
 import '../ui/core/layout/custom_container_shell.dart';
 import '../ui/exceptions/internal_server_error_500.dart';
@@ -28,12 +30,13 @@ part 'pages/about_routes/routes/about_us_router.dart';
 part 'pages/auth/routes/login_route.dart';
 part 'pages/auth/routes/sign_up_route.dart';
 part 'pages/app/routes/chat_router.dart';
-part 'pages/app/routes/libras_router.dart';
+part 'pages/app/routes/libras_routers/libras_router.dart';
 part 'pages/app/routes/more_page_router.dart';
 part 'pages/app/routes/topico_router.dart';
 part 'pages/app/routes/profile_router.dart';
 part 'pages/app/routes/forum_router.dart';
-part 'pages/app/routes/midia_router.dart';
+part 'pages/app/routes/libras_routers/midia_router.dart';
+part 'pages/app/routes/libras_routers/redes_router.dart';
 // part dos shells
 part 'pages/app/shell_app_router.dart';
 part 'pages/about_routes/shell_about_router.dart';

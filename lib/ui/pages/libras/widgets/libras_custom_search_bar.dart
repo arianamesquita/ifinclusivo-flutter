@@ -47,7 +47,7 @@ class LibrasCustomSearchBar extends CustomSearchBar {
         boxShadow: [
           BoxShadow(
             color: Colors.black26,
-            offset: Offset(0, 1), // sombra só embaixo
+            offset: Offset(0, 1),
             blurRadius: 0,
             spreadRadius: 0,
           ),
