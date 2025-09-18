@@ -26,12 +26,9 @@ class TopContentLibras extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(height: 100),
-        Text(title ?? "CONVERTE LIBRAS", style: titleStyleText),
-        SizedBox(height: 17),
-        Text(subtitle ?? "", style: subtitleStyleText),
-        SizedBox(height: 46),
-        searchBar ?? const SizedBox.shrink(),
+        Padding(padding: EdgeInsets.only(top: 100), child: Text(title ?? "CONVERTE LIBRAS", style: titleStyleText),),
+        Padding(padding: EdgeInsets.only(top: 17), child: Text(subtitle ?? "", style: subtitleStyleText),),
+        Padding(padding: EdgeInsets.only(top: 41), child: searchBar ?? const SizedBox.shrink(),)
       ],
     );
   }

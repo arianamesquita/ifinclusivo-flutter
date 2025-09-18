@@ -44,14 +44,6 @@ class LibrasCustomSearchBar extends CustomSearchBar {
           left: Radius.circular(20),
           right: Radius.circular(20),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(0, 1),
-            blurRadius: 0,
-            spreadRadius: 0,
-          ),
-        ],
       ),
       child: super.build(context),
     );

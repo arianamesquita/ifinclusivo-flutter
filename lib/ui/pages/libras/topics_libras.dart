@@ -75,14 +75,14 @@ class _TopicLibrasState extends State<TopicLibras> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Text("Um dicionário de sinais criado para a comunidade"),
                   LibrasCustomSearchBar(
                     onChanged: (findString) {
                       setState(() {
-                        word = findString.toString();
+                        word = findString;
                       });
                     },
                   ),
-                  Text("Um dicionário de sinais criado para a comunidade"),
                   SizedBox(height: 90),
                   word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
                 ],
@@ -100,7 +100,7 @@ class _TopicLibrasState extends State<TopicLibras> {
                     searchBar: LibrasCustomSearchBar(
                       onChanged: (findString) {
                         setState(() {
-                          word = findString.toString();
+                          word = findString;
                         });
                       },
                     ),
