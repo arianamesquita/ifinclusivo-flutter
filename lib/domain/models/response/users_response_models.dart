@@ -1,13 +1,13 @@
 part of 'gen_responses.dart';
 
-@freezed
+@Freezed(unionKey: 'userType')
 class UsuarioResponseModel with _$UsuarioResponseModel {
 
   const factory UsuarioResponseModel.aluno({
-    required String id,
+    required int id,
     required String nome,
     required String login,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -17,10 +17,10 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   }) = _AlunoResponseModel;
 
   const factory UsuarioResponseModel.alunoNapne({
-    required String id,
+    required int id,
     required String nome,
     required String login,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -37,10 +37,10 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
 
   // --- Caso 3: Professor ---
   const factory UsuarioResponseModel.professor({
-    required String id,
+    required int id,
     required String nome,
     required String login,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -51,10 +51,10 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   }) = _ProfessorResponseModel;
 
   const factory UsuarioResponseModel.tutor({
-    required String id,
+    required int id,
     required String nome,
     required String login,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -64,10 +64,10 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   }) = _TutorResponseModel;
 
   const factory UsuarioResponseModel.interprete({
-    required String id,
+    required int id,
     required String nome,
     required String login,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required ConfigAcblResponseModel configAcessibilidadeEntity,

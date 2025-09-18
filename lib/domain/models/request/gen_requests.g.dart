@@ -12,7 +12,7 @@ _$AlunoRequestModelImpl _$$AlunoRequestModelImplFromJson(
   nome: json['nome'] as String,
   login: json['login'] as String,
   senha: json['senha'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
 );
 
@@ -32,7 +32,7 @@ _$AlunoNapneRequestModelImpl _$$AlunoNapneRequestModelImplFromJson(
   nome: json['nome'] as String,
   login: json['login'] as String,
   senha: json['senha'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   condicao: json['condicao'] as String,
   laudo: json['laudo'] as String,
@@ -64,7 +64,7 @@ _$ProfessorRequestModelImpl _$$ProfessorRequestModelImplFromJson(
   nome: json['nome'] as String,
   login: json['login'] as String,
   senha: json['senha'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   formacao: json['formacao'] as String,
 );
@@ -86,7 +86,7 @@ _$TutorRequestModelImpl _$$TutorRequestModelImplFromJson(
   nome: json['nome'] as String,
   login: json['login'] as String,
   senha: json['senha'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   especialidade: json['especialidade'] as String,
 );
@@ -108,7 +108,7 @@ _$InterpreteRequestModelImpl _$$InterpreteRequestModelImplFromJson(
   nome: json['nome'] as String,
   login: json['login'] as String,
   senha: json['senha'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   especialidade: json['especialidade'] as String,
   salary: (json['salary'] as num).toDouble(),

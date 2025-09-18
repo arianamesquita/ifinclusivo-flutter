@@ -9,10 +9,10 @@ part of 'gen_responses.dart';
 _$AlunoResponseModelImpl _$$AlunoResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$AlunoResponseModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
   login: json['login'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
@@ -24,7 +24,7 @@ _$AlunoResponseModelImpl _$$AlunoResponseModelImplFromJson(
           .toList(),
   token: json['token'] as String?,
   curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
-  $type: json['runtimeType'] as String?,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$AlunoResponseModelImplToJson(
@@ -40,7 +40,7 @@ Map<String, dynamic> _$$AlunoResponseModelImplToJson(
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'token': instance.token,
   'curso': instance.curso,
-  'runtimeType': instance.$type,
+  'userType': instance.$type,
 };
 
 const _$RolesEnumMap = {
@@ -54,10 +54,10 @@ const _$RolesEnumMap = {
 _$AlunoNapneResponseModelImpl _$$AlunoNapneResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$AlunoNapneResponseModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
   login: json['login'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
@@ -75,7 +75,7 @@ _$AlunoNapneResponseModelImpl _$$AlunoNapneResponseModelImplFromJson(
   necessidadeEscolar: json['necessidadeEscolar'] as String,
   acompanhamento: json['acompanhamento'] as String,
   situacao: json['situacao'] as String,
-  $type: json['runtimeType'] as String?,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$AlunoNapneResponseModelImplToJson(
@@ -97,16 +97,16 @@ Map<String, dynamic> _$$AlunoNapneResponseModelImplToJson(
   'necessidadeEscolar': instance.necessidadeEscolar,
   'acompanhamento': instance.acompanhamento,
   'situacao': instance.situacao,
-  'runtimeType': instance.$type,
+  'userType': instance.$type,
 };
 
 _$ProfessorResponseModelImpl _$$ProfessorResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$ProfessorResponseModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
   login: json['login'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
@@ -122,7 +122,7 @@ _$ProfessorResponseModelImpl _$$ProfessorResponseModelImplFromJson(
       (json['topicos'] as List<dynamic>)
           .map((e) => SimpleTopicoModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-  $type: json['runtimeType'] as String?,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$ProfessorResponseModelImplToJson(
@@ -139,16 +139,16 @@ Map<String, dynamic> _$$ProfessorResponseModelImplToJson(
   'token': instance.token,
   'formacao': instance.formacao,
   'topicos': instance.topicos,
-  'runtimeType': instance.$type,
+  'userType': instance.$type,
 };
 
 _$TutorResponseModelImpl _$$TutorResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$TutorResponseModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
   login: json['login'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
@@ -160,7 +160,7 @@ _$TutorResponseModelImpl _$$TutorResponseModelImplFromJson(
           .toList(),
   token: json['token'] as String?,
   especialidade: json['especialidade'] as String,
-  $type: json['runtimeType'] as String?,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$TutorResponseModelImplToJson(
@@ -176,16 +176,16 @@ Map<String, dynamic> _$$TutorResponseModelImplToJson(
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'token': instance.token,
   'especialidade': instance.especialidade,
-  'runtimeType': instance.$type,
+  'userType': instance.$type,
 };
 
 _$InterpreteResponseModelImpl _$$InterpreteResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$InterpreteResponseModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
   login: json['login'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
@@ -202,7 +202,7 @@ _$InterpreteResponseModelImpl _$$InterpreteResponseModelImplFromJson(
       (json['libras'] as List<dynamic>)
           .map((e) => SimpleLibrasModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-  $type: json['runtimeType'] as String?,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$InterpreteResponseModelImplToJson(
@@ -220,7 +220,7 @@ Map<String, dynamic> _$$InterpreteResponseModelImplToJson(
   'especialidade': instance.especialidade,
   'salary': instance.salary,
   'libras': instance.libras,
-  'runtimeType': instance.$type,
+  'userType': instance.$type,
 };
 
 _$TopicoResponseModelImpl _$$TopicoResponseModelImplFromJson(

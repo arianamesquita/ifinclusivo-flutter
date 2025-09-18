@@ -7,8 +7,10 @@ import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_navigation_drawer.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_navigation_rail.dart';
 import 'package:if_inclusivo/ui/core/widgets/hoverable_logo.dart';
+import 'package:if_inclusivo/ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
 import 'package:if_inclusivo/ui/pages/shell/app_destinations.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
+import 'package:provider/provider.dart';
 
 class ShellPage extends StatefulWidget {
   const ShellPage({super.key, required this.child});
@@ -32,6 +34,8 @@ class _ShellPageState extends State<ShellPage> {
   Widget build(BuildContext context) {
     final isLoggedIn = true;
     final userRoles = [...Roles.values];
+    final viewModel = RegisterViewModel(repository: context.read());
+    viewModel.registerNewTutor();
 
     final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
     var deviceType = ResponsiveUtils.getDeviceType(context);

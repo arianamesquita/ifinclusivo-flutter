@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 UsuarioResponseModel _$UsuarioResponseModelFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
+  switch (json['userType']) {
     case 'aluno':
       return _AlunoResponseModel.fromJson(json);
     case 'alunoNapne':
@@ -31,19 +31,19 @@ UsuarioResponseModel _$UsuarioResponseModelFromJson(Map<String, dynamic> json) {
     default:
       throw CheckedFromJsonException(
         json,
-        'runtimeType',
+        'userType',
         'UsuarioResponseModel',
-        'Invalid union type "${json['runtimeType']}"!',
+        'Invalid union type "${json['userType']}"!',
       );
   }
 }
 
 /// @nodoc
 mixin _$UsuarioResponseModel {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get nome => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
-  String get matricula => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
   DateTime get dataCriacao => throw _privateConstructorUsedError;
   ConfigAcblResponseModel get configAcessibilidadeEntity =>
@@ -53,10 +53,10 @@ mixin _$UsuarioResponseModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -66,10 +66,10 @@ mixin _$UsuarioResponseModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -85,10 +85,10 @@ mixin _$UsuarioResponseModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -99,10 +99,10 @@ mixin _$UsuarioResponseModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -112,10 +112,10 @@ mixin _$UsuarioResponseModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -130,10 +130,10 @@ mixin _$UsuarioResponseModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -143,10 +143,10 @@ mixin _$UsuarioResponseModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -162,10 +162,10 @@ mixin _$UsuarioResponseModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -176,10 +176,10 @@ mixin _$UsuarioResponseModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -189,10 +189,10 @@ mixin _$UsuarioResponseModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -207,10 +207,10 @@ mixin _$UsuarioResponseModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -220,10 +220,10 @@ mixin _$UsuarioResponseModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -239,10 +239,10 @@ mixin _$UsuarioResponseModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -253,10 +253,10 @@ mixin _$UsuarioResponseModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -266,10 +266,10 @@ mixin _$UsuarioResponseModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -326,10 +326,10 @@ abstract class $UsuarioResponseModelCopyWith<$Res> {
   ) = _$UsuarioResponseModelCopyWithImpl<$Res, UsuarioResponseModel>;
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
     String login,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -374,7 +374,7 @@ class _$UsuarioResponseModelCopyWithImpl<
                 null == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             nome:
                 null == nome
                     ? _value.nome
@@ -389,7 +389,7 @@ class _$UsuarioResponseModelCopyWithImpl<
                 null == matricula
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -446,10 +446,10 @@ abstract class _$$AlunoResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
     String login,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -494,7 +494,7 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -509,7 +509,7 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -577,13 +577,13 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       _$$AlunoResponseModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
   final String login;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -603,7 +603,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   @override
   final CursoRequestModel curso;
 
-  @JsonKey(name: 'runtimeType')
+  @JsonKey(name: 'userType')
   final String $type;
 
   @override
@@ -667,10 +667,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -680,10 +680,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -699,10 +699,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -713,10 +713,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -726,10 +726,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -759,10 +759,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -772,10 +772,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -791,10 +791,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -805,10 +805,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -818,10 +818,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -851,10 +851,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -864,10 +864,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -883,10 +883,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -897,10 +897,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -910,10 +910,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -991,10 +991,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
 
 abstract class _AlunoResponseModel implements UsuarioResponseModel {
   const factory _AlunoResponseModel({
-    required final String id,
+    required final int id,
     required final String nome,
     required final String login,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1007,13 +1007,13 @@ abstract class _AlunoResponseModel implements UsuarioResponseModel {
       _$AlunoResponseModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
   String get login;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -1044,10 +1044,10 @@ abstract class _$$AlunoNapneResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
     String login,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1105,7 +1105,7 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -1120,7 +1120,7 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -1224,13 +1224,13 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       _$$AlunoNapneResponseModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
   final String login;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -1262,7 +1262,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   @override
   final String situacao;
 
-  @JsonKey(name: 'runtimeType')
+  @JsonKey(name: 'userType')
   final String $type;
 
   @override
@@ -1342,10 +1342,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1355,10 +1355,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1374,10 +1374,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1388,10 +1388,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1401,10 +1401,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1440,10 +1440,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1453,10 +1453,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1472,10 +1472,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1486,10 +1486,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1499,10 +1499,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1538,10 +1538,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1551,10 +1551,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1570,10 +1570,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1584,10 +1584,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1597,10 +1597,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1684,10 +1684,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
 
 abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
   const factory _AlunoNapneResponseModel({
-    required final String id,
+    required final int id,
     required final String nome,
     required final String login,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1706,13 +1706,13 @@ abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
       _$AlunoNapneResponseModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
   String get login;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -1749,10 +1749,10 @@ abstract class _$$ProfessorResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
     String login,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1799,7 +1799,7 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -1814,7 +1814,7 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -1879,13 +1879,13 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       _$$ProfessorResponseModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
   final String login;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -1912,7 +1912,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     return EqualUnmodifiableListView(_topicos);
   }
 
-  @JsonKey(name: 'runtimeType')
+  @JsonKey(name: 'userType')
   final String $type;
 
   @override
@@ -1980,10 +1980,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -1993,10 +1993,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2012,10 +2012,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2026,10 +2026,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2039,10 +2039,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2073,10 +2073,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2086,10 +2086,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2105,10 +2105,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2119,10 +2119,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2132,10 +2132,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2166,10 +2166,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2179,10 +2179,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2198,10 +2198,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2212,10 +2212,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2225,10 +2225,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2307,10 +2307,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
 
 abstract class _ProfessorResponseModel implements UsuarioResponseModel {
   const factory _ProfessorResponseModel({
-    required final String id,
+    required final int id,
     required final String nome,
     required final String login,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2324,13 +2324,13 @@ abstract class _ProfessorResponseModel implements UsuarioResponseModel {
       _$ProfessorResponseModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
   String get login;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -2362,10 +2362,10 @@ abstract class _$$TutorResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
     String login,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2409,7 +2409,7 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -2424,7 +2424,7 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -2482,13 +2482,13 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       _$$TutorResponseModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
   final String login;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -2508,7 +2508,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @override
   final String especialidade;
 
-  @JsonKey(name: 'runtimeType')
+  @JsonKey(name: 'userType')
   final String $type;
 
   @override
@@ -2573,10 +2573,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2586,10 +2586,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2605,10 +2605,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2619,10 +2619,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2632,10 +2632,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2665,10 +2665,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2678,10 +2678,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2697,10 +2697,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2711,10 +2711,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2724,10 +2724,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2757,10 +2757,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2770,10 +2770,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2789,10 +2789,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2803,10 +2803,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2816,10 +2816,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2897,10 +2897,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
 
 abstract class _TutorResponseModel implements UsuarioResponseModel {
   const factory _TutorResponseModel({
-    required final String id,
+    required final int id,
     required final String nome,
     required final String login,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -2913,13 +2913,13 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
       _$TutorResponseModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
   String get login;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -2950,10 +2950,10 @@ abstract class _$$InterpreteResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
     String login,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3002,7 +3002,7 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -3017,7 +3017,7 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -3088,13 +3088,13 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       _$$InterpreteResponseModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
   final String login;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -3123,7 +3123,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     return EqualUnmodifiableListView(_libras);
   }
 
-  @JsonKey(name: 'runtimeType')
+  @JsonKey(name: 'userType')
   final String $type;
 
   @override
@@ -3191,10 +3191,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3204,10 +3204,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3223,10 +3223,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3237,10 +3237,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3250,10 +3250,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3285,10 +3285,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3298,10 +3298,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3317,10 +3317,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3331,10 +3331,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3344,10 +3344,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3379,10 +3379,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3392,10 +3392,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3411,10 +3411,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3425,10 +3425,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3438,10 +3438,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
       String login,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3521,10 +3521,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
 
 abstract class _InterpreteResponseModel implements UsuarioResponseModel {
   const factory _InterpreteResponseModel({
-    required final String id,
+    required final int id,
     required final String nome,
     required final String login,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final ConfigAcblResponseModel configAcessibilidadeEntity,
@@ -3539,13 +3539,13 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
       _$InterpreteResponseModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
   String get login;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override

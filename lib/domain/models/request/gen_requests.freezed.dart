@@ -24,7 +24,7 @@ mixin _$AlunoRequestModel {
   String get nome => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   String get senha => throw _privateConstructorUsedError;
-  String get matricula => throw _privateConstructorUsedError; // Long -> String
+  int get matricula => throw _privateConstructorUsedError; // Long -> String
   String? get biografia => throw _privateConstructorUsedError;
 
   /// Serializes this AlunoRequestModel to a JSON map.
@@ -48,7 +48,7 @@ abstract class $AlunoRequestModelCopyWith<$Res> {
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
   });
 }
@@ -95,7 +95,7 @@ class _$AlunoRequestModelCopyWithImpl<$Res, $Val extends AlunoRequestModel>
                 null == matricula
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -120,7 +120,7 @@ abstract class _$$AlunoRequestModelImplCopyWith<$Res>
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
   });
 }
@@ -166,7 +166,7 @@ class __$$AlunoRequestModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -198,7 +198,7 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
   @override
   final String senha;
   @override
-  final String matricula;
+  final int matricula;
   // Long -> String
   @override
   final String? biografia;
@@ -249,7 +249,7 @@ abstract class _AlunoRequestModel implements AlunoRequestModel {
     required final String nome,
     required final String login,
     required final String senha,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
   }) = _$AlunoRequestModelImpl;
 
@@ -263,7 +263,7 @@ abstract class _AlunoRequestModel implements AlunoRequestModel {
   @override
   String get senha;
   @override
-  String get matricula; // Long -> String
+  int get matricula; // Long -> String
   @override
   String? get biografia;
 
@@ -286,7 +286,7 @@ mixin _$AlunoNapneRequestModel {
   String get nome => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   String get senha => throw _privateConstructorUsedError;
-  String get matricula => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
   String get condicao => throw _privateConstructorUsedError;
   String get laudo => throw _privateConstructorUsedError;
@@ -316,7 +316,7 @@ abstract class $AlunoNapneRequestModelCopyWith<$Res> {
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String condicao,
     String laudo,
@@ -378,7 +378,7 @@ class _$AlunoNapneRequestModelCopyWithImpl<
                 null == matricula
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -433,7 +433,7 @@ abstract class _$$AlunoNapneRequestModelImplCopyWith<$Res>
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String condicao,
     String laudo,
@@ -492,7 +492,7 @@ class __$$AlunoNapneRequestModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -560,7 +560,7 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
   @override
   final String senha;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -646,7 +646,7 @@ abstract class _AlunoNapneRequestModel implements AlunoNapneRequestModel {
     required final String nome,
     required final String login,
     required final String senha,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final String condicao,
     required final String laudo,
@@ -666,7 +666,7 @@ abstract class _AlunoNapneRequestModel implements AlunoNapneRequestModel {
   @override
   String get senha;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -701,7 +701,7 @@ mixin _$ProfessorRequestModel {
   String get nome => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   String get senha => throw _privateConstructorUsedError;
-  String get matricula => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
   String get formacao => throw _privateConstructorUsedError;
 
@@ -726,7 +726,7 @@ abstract class $ProfessorRequestModelCopyWith<$Res> {
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String formacao,
   });
@@ -778,7 +778,7 @@ class _$ProfessorRequestModelCopyWithImpl<
                 null == matricula
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -808,7 +808,7 @@ abstract class _$$ProfessorRequestModelImplCopyWith<$Res>
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String formacao,
   });
@@ -857,7 +857,7 @@ class __$$ProfessorRequestModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -895,7 +895,7 @@ class _$ProfessorRequestModelImpl implements _ProfessorRequestModel {
   @override
   final String senha;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -957,7 +957,7 @@ abstract class _ProfessorRequestModel implements ProfessorRequestModel {
     required final String nome,
     required final String login,
     required final String senha,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final String formacao,
   }) = _$ProfessorRequestModelImpl;
@@ -972,7 +972,7 @@ abstract class _ProfessorRequestModel implements ProfessorRequestModel {
   @override
   String get senha;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -995,7 +995,7 @@ mixin _$TutorRequestModel {
   String get nome => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   String get senha => throw _privateConstructorUsedError;
-  String get matricula => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
   String get especialidade => throw _privateConstructorUsedError;
 
@@ -1020,7 +1020,7 @@ abstract class $TutorRequestModelCopyWith<$Res> {
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String especialidade,
   });
@@ -1069,7 +1069,7 @@ class _$TutorRequestModelCopyWithImpl<$Res, $Val extends TutorRequestModel>
                 null == matricula
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -1099,7 +1099,7 @@ abstract class _$$TutorRequestModelImplCopyWith<$Res>
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String especialidade,
   });
@@ -1147,7 +1147,7 @@ class __$$TutorRequestModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -1185,7 +1185,7 @@ class _$TutorRequestModelImpl implements _TutorRequestModel {
   @override
   final String senha;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -1246,7 +1246,7 @@ abstract class _TutorRequestModel implements TutorRequestModel {
     required final String nome,
     required final String login,
     required final String senha,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final String especialidade,
   }) = _$TutorRequestModelImpl;
@@ -1261,7 +1261,7 @@ abstract class _TutorRequestModel implements TutorRequestModel {
   @override
   String get senha;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -1286,7 +1286,7 @@ mixin _$InterpreteRequestModel {
   String get nome => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   String get senha => throw _privateConstructorUsedError;
-  String get matricula => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
   String get especialidade =>
       throw _privateConstructorUsedError; // Campo do Tutor
@@ -1313,7 +1313,7 @@ abstract class $InterpreteRequestModelCopyWith<$Res> {
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String especialidade,
     double salary,
@@ -1367,7 +1367,7 @@ class _$InterpreteRequestModelCopyWithImpl<
                 null == matricula
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -1402,7 +1402,7 @@ abstract class _$$InterpreteRequestModelImplCopyWith<$Res>
     String nome,
     String login,
     String senha,
-    String matricula,
+    int matricula,
     String? biografia,
     String especialidade,
     double salary,
@@ -1453,7 +1453,7 @@ class __$$InterpreteRequestModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -1497,7 +1497,7 @@ class _$InterpreteRequestModelImpl implements _InterpreteRequestModel {
   @override
   final String senha;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -1564,7 +1564,7 @@ abstract class _InterpreteRequestModel implements InterpreteRequestModel {
     required final String nome,
     required final String login,
     required final String senha,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final String especialidade,
     required final double salary,
@@ -1580,7 +1580,7 @@ abstract class _InterpreteRequestModel implements InterpreteRequestModel {
   @override
   String get senha;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override

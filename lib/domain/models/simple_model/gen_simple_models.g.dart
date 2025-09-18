@@ -96,15 +96,16 @@ Map<String, dynamic> _$$SimpleComentarioModelImplToJson(
 _$SimpleUsuarioModelUsuarioImpl _$$SimpleUsuarioModelUsuarioImplFromJson(
   Map<String, dynamic> json,
 ) => _$SimpleUsuarioModelUsuarioImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   roles:
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$SimpleUsuarioModelUsuarioImplToJson(
@@ -116,6 +117,7 @@ Map<String, dynamic> _$$SimpleUsuarioModelUsuarioImplToJson(
   'biografia': instance.biografia,
   'dataCriacao': instance.dataCriacao.toIso8601String(),
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
+  'userType': instance.$type,
 };
 
 const _$RolesEnumMap = {
@@ -129,9 +131,9 @@ const _$RolesEnumMap = {
 _$SimpleTutorModelImpl _$$SimpleTutorModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$SimpleTutorModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   roles:
@@ -139,6 +141,7 @@ _$SimpleTutorModelImpl _$$SimpleTutorModelImplFromJson(
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   especialidade: json['especialidade'] as String,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$SimpleTutorModelImplToJson(
@@ -151,14 +154,15 @@ Map<String, dynamic> _$$SimpleTutorModelImplToJson(
   'dataCriacao': instance.dataCriacao.toIso8601String(),
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'especialidade': instance.especialidade,
+  'userType': instance.$type,
 };
 
 _$SimpleProfessorModelImpl _$$SimpleProfessorModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$SimpleProfessorModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   roles:
@@ -166,6 +170,7 @@ _$SimpleProfessorModelImpl _$$SimpleProfessorModelImplFromJson(
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   formacao: json['formacao'] as String,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$SimpleProfessorModelImplToJson(
@@ -178,14 +183,15 @@ Map<String, dynamic> _$$SimpleProfessorModelImplToJson(
   'dataCriacao': instance.dataCriacao.toIso8601String(),
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'formacao': instance.formacao,
+  'userType': instance.$type,
 };
 
 _$SimpleAlunoModelImpl _$$SimpleAlunoModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$SimpleAlunoModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   roles:
@@ -193,6 +199,7 @@ _$SimpleAlunoModelImpl _$$SimpleAlunoModelImplFromJson(
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$SimpleAlunoModelImplToJson(
@@ -205,14 +212,15 @@ Map<String, dynamic> _$$SimpleAlunoModelImplToJson(
   'dataCriacao': instance.dataCriacao.toIso8601String(),
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'curso': instance.curso,
+  'userType': instance.$type,
 };
 
 _$SimpleAlunoNapneModelImpl _$$SimpleAlunoNapneModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$SimpleAlunoNapneModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   roles:
@@ -223,6 +231,7 @@ _$SimpleAlunoNapneModelImpl _$$SimpleAlunoNapneModelImplFromJson(
   condicao: json['condicao'] as String,
   necessidadeEspecial: json['necessidadeEspecial'] as String,
   necessidadeEscolar: json['necessidadeEscolar'] as String,
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$SimpleAlunoNapneModelImplToJson(
@@ -238,14 +247,15 @@ Map<String, dynamic> _$$SimpleAlunoNapneModelImplToJson(
   'condicao': instance.condicao,
   'necessidadeEspecial': instance.necessidadeEspecial,
   'necessidadeEscolar': instance.necessidadeEscolar,
+  'userType': instance.$type,
 };
 
 _$SimpleInterpreteModelImpl _$$SimpleInterpreteModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$SimpleInterpreteModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
-  matricula: json['matricula'] as String,
+  matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
   roles:
@@ -254,6 +264,7 @@ _$SimpleInterpreteModelImpl _$$SimpleInterpreteModelImplFromJson(
           .toList(),
   especialidade: json['especialidade'] as String,
   salary: (json['salary'] as num).toDouble(),
+  $type: json['userType'] as String?,
 );
 
 Map<String, dynamic> _$$SimpleInterpreteModelImplToJson(
@@ -267,6 +278,7 @@ Map<String, dynamic> _$$SimpleInterpreteModelImplToJson(
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'especialidade': instance.especialidade,
   'salary': instance.salary,
+  'userType': instance.$type,
 };
 
 _$SimpleMessageModelImpl _$$SimpleMessageModelImplFromJson(

@@ -1,13 +1,13 @@
 part of 'gen_simple_models.dart';
 
-@Freezed(unionKey: 'roles')
+@Freezed(unionKey: 'userType')
 class SimpleUsuarioModel with _$SimpleUsuarioModel {
 
   // Caso base
   const factory SimpleUsuarioModel.usuario({
-    required String id,
+    required int id,
     required String nome,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
@@ -15,9 +15,9 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
 
   // Tipos específicos
   const factory SimpleUsuarioModel.tutor({
-    required String id,
+    required int id,
     required String nome,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
@@ -25,9 +25,9 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
   }) = _SimpleTutorModel;
 
   const factory SimpleUsuarioModel.professor({
-    required String id,
+    required int id,
     required String nome,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
@@ -35,9 +35,9 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
   }) = _SimpleProfessorModel;
 
   const factory SimpleUsuarioModel.aluno({
-    required String id,
+    required int id,
     required String nome,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
@@ -45,9 +45,9 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
   }) = _SimpleAlunoModel;
 
   const factory SimpleUsuarioModel.alunoNapne({
-    required String id,
+    required int id,
     required String nome,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
@@ -58,9 +58,9 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
   }) = _SimpleAlunoNapneModel;
 
   const factory SimpleUsuarioModel.interprete({
-    required String id,
+    required int id,
     required String nome,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
@@ -70,5 +70,4 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
 
 
   factory SimpleUsuarioModel.fromJson(Map<String, dynamic> json) =>
-      _$SimpleUsuarioModelFromJson(json);
-}
+      _$SimpleUsuarioModelFromJson(json);}

@@ -1041,7 +1041,7 @@ abstract class _SimpleComentarioModel implements SimpleComentarioModel {
 }
 
 SimpleUsuarioModel _$SimpleUsuarioModelFromJson(Map<String, dynamic> json) {
-  switch (json['roles']) {
+  switch (json['userType']) {
     case 'usuario':
       return _SimpleUsuarioModelUsuario.fromJson(json);
     case 'tutor':
@@ -1058,36 +1058,36 @@ SimpleUsuarioModel _$SimpleUsuarioModelFromJson(Map<String, dynamic> json) {
     default:
       throw CheckedFromJsonException(
         json,
-        'roles',
+        'userType',
         'SimpleUsuarioModel',
-        'Invalid union type "${json['roles']}"!',
+        'Invalid union type "${json['userType']}"!',
       );
   }
 }
 
 /// @nodoc
 mixin _$SimpleUsuarioModel {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get nome => throw _privateConstructorUsedError;
-  String get matricula => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
   DateTime get dataCriacao => throw _privateConstructorUsedError;
   List<Roles> get roles => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )
     usuario,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1095,9 +1095,9 @@ mixin _$SimpleUsuarioModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1105,9 +1105,9 @@ mixin _$SimpleUsuarioModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1115,9 +1115,9 @@ mixin _$SimpleUsuarioModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1128,9 +1128,9 @@ mixin _$SimpleUsuarioModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1142,18 +1142,18 @@ mixin _$SimpleUsuarioModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1161,9 +1161,9 @@ mixin _$SimpleUsuarioModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1171,9 +1171,9 @@ mixin _$SimpleUsuarioModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1181,9 +1181,9 @@ mixin _$SimpleUsuarioModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1194,9 +1194,9 @@ mixin _$SimpleUsuarioModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1208,18 +1208,18 @@ mixin _$SimpleUsuarioModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1227,9 +1227,9 @@ mixin _$SimpleUsuarioModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1237,9 +1237,9 @@ mixin _$SimpleUsuarioModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1247,9 +1247,9 @@ mixin _$SimpleUsuarioModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1260,9 +1260,9 @@ mixin _$SimpleUsuarioModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1319,9 +1319,9 @@ abstract class $SimpleUsuarioModelCopyWith<$Res> {
   ) = _$SimpleUsuarioModelCopyWithImpl<$Res, SimpleUsuarioModel>;
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
@@ -1356,7 +1356,7 @@ class _$SimpleUsuarioModelCopyWithImpl<$Res, $Val extends SimpleUsuarioModel>
                 null == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             nome:
                 null == nome
                     ? _value.nome
@@ -1366,7 +1366,7 @@ class _$SimpleUsuarioModelCopyWithImpl<$Res, $Val extends SimpleUsuarioModel>
                 null == matricula
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -1398,9 +1398,9 @@ abstract class _$$SimpleUsuarioModelUsuarioImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
@@ -1435,7 +1435,7 @@ class __$$SimpleUsuarioModelUsuarioImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -1445,7 +1445,7 @@ class __$$SimpleUsuarioModelUsuarioImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -1476,17 +1476,19 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     this.biografia,
     required this.dataCriacao,
     required final List<Roles> roles,
-  }) : _roles = roles;
+    final String? $type,
+  }) : _roles = roles,
+       $type = $type ?? 'usuario';
 
   factory _$SimpleUsuarioModelUsuarioImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimpleUsuarioModelUsuarioImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -1498,6 +1500,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_roles);
   }
+
+  @JsonKey(name: 'userType')
+  final String $type;
 
   @override
   String toString() {
@@ -1546,18 +1551,18 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )
     usuario,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1565,9 +1570,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1575,9 +1580,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1585,9 +1590,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1598,9 +1603,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1616,18 +1621,18 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1635,9 +1640,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1645,9 +1650,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1655,9 +1660,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1668,9 +1673,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1686,18 +1691,18 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1705,9 +1710,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1715,9 +1720,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1725,9 +1730,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1738,9 +1743,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -1807,9 +1812,9 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
 
 abstract class _SimpleUsuarioModelUsuario implements SimpleUsuarioModel {
   const factory _SimpleUsuarioModelUsuario({
-    required final String id,
+    required final int id,
     required final String nome,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
@@ -1819,11 +1824,11 @@ abstract class _SimpleUsuarioModelUsuario implements SimpleUsuarioModel {
       _$SimpleUsuarioModelUsuarioImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -1849,9 +1854,9 @@ abstract class _$$SimpleTutorModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
@@ -1887,7 +1892,7 @@ class __$$SimpleTutorModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -1897,7 +1902,7 @@ class __$$SimpleTutorModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -1934,17 +1939,19 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     required this.dataCriacao,
     required final List<Roles> roles,
     required this.especialidade,
-  }) : _roles = roles;
+    final String? $type,
+  }) : _roles = roles,
+       $type = $type ?? 'tutor';
 
   factory _$SimpleTutorModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimpleTutorModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -1959,6 +1966,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
 
   @override
   final String especialidade;
+
+  @JsonKey(name: 'userType')
+  final String $type;
 
   @override
   String toString() {
@@ -2011,18 +2021,18 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )
     usuario,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2030,9 +2040,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2040,9 +2050,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2050,9 +2060,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2063,9 +2073,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2089,18 +2099,18 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2108,9 +2118,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2118,9 +2128,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2128,9 +2138,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2141,9 +2151,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2167,18 +2177,18 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2186,9 +2196,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2196,9 +2206,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2206,9 +2216,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2219,9 +2229,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2296,9 +2306,9 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
 
 abstract class _SimpleTutorModel implements SimpleUsuarioModel {
   const factory _SimpleTutorModel({
-    required final String id,
+    required final int id,
     required final String nome,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
@@ -2309,11 +2319,11 @@ abstract class _SimpleTutorModel implements SimpleUsuarioModel {
       _$SimpleTutorModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -2340,9 +2350,9 @@ abstract class _$$SimpleProfessorModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
@@ -2378,7 +2388,7 @@ class __$$SimpleProfessorModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -2388,7 +2398,7 @@ class __$$SimpleProfessorModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -2425,17 +2435,19 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     required this.dataCriacao,
     required final List<Roles> roles,
     required this.formacao,
-  }) : _roles = roles;
+    final String? $type,
+  }) : _roles = roles,
+       $type = $type ?? 'professor';
 
   factory _$SimpleProfessorModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimpleProfessorModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -2450,6 +2462,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
 
   @override
   final String formacao;
+
+  @JsonKey(name: 'userType')
+  final String $type;
 
   @override
   String toString() {
@@ -2503,18 +2518,18 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )
     usuario,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2522,9 +2537,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2532,9 +2547,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2542,9 +2557,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2555,9 +2570,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2581,18 +2596,18 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2600,9 +2615,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2610,9 +2625,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2620,9 +2635,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2633,9 +2648,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2659,18 +2674,18 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2678,9 +2693,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2688,9 +2703,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2698,9 +2713,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2711,9 +2726,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -2788,9 +2803,9 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
 
 abstract class _SimpleProfessorModel implements SimpleUsuarioModel {
   const factory _SimpleProfessorModel({
-    required final String id,
+    required final int id,
     required final String nome,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
@@ -2801,11 +2816,11 @@ abstract class _SimpleProfessorModel implements SimpleUsuarioModel {
       _$SimpleProfessorModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -2832,9 +2847,9 @@ abstract class _$$SimpleAlunoModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
@@ -2872,7 +2887,7 @@ class __$$SimpleAlunoModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -2882,7 +2897,7 @@ class __$$SimpleAlunoModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -2929,17 +2944,19 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     required this.dataCriacao,
     required final List<Roles> roles,
     required this.curso,
-  }) : _roles = roles;
+    final String? $type,
+  }) : _roles = roles,
+       $type = $type ?? 'aluno';
 
   factory _$SimpleAlunoModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimpleAlunoModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -2954,6 +2971,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
 
   @override
   final CursoRequestModel curso;
+
+  @JsonKey(name: 'userType')
+  final String $type;
 
   @override
   String toString() {
@@ -3005,18 +3025,18 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )
     usuario,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3024,9 +3044,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3034,9 +3054,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3044,9 +3064,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3057,9 +3077,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3075,18 +3095,18 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3094,9 +3114,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3104,9 +3124,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3114,9 +3134,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3127,9 +3147,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3153,18 +3173,18 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3172,9 +3192,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3182,9 +3202,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3192,9 +3212,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3205,9 +3225,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3274,9 +3294,9 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
 
 abstract class _SimpleAlunoModel implements SimpleUsuarioModel {
   const factory _SimpleAlunoModel({
-    required final String id,
+    required final int id,
     required final String nome,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
@@ -3287,11 +3307,11 @@ abstract class _SimpleAlunoModel implements SimpleUsuarioModel {
       _$SimpleAlunoModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -3318,9 +3338,9 @@ abstract class _$$SimpleAlunoNapneModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
@@ -3364,7 +3384,7 @@ class __$$SimpleAlunoNapneModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -3374,7 +3394,7 @@ class __$$SimpleAlunoNapneModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -3439,17 +3459,19 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     required this.condicao,
     required this.necessidadeEspecial,
     required this.necessidadeEscolar,
-  }) : _roles = roles;
+    final String? $type,
+  }) : _roles = roles,
+       $type = $type ?? 'alunoNapne';
 
   factory _$SimpleAlunoNapneModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimpleAlunoNapneModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -3470,6 +3492,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
   final String necessidadeEspecial;
   @override
   final String necessidadeEscolar;
+
+  @JsonKey(name: 'userType')
+  final String $type;
 
   @override
   String toString() {
@@ -3531,18 +3556,18 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )
     usuario,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3550,9 +3575,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3560,9 +3585,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3570,9 +3595,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3583,9 +3608,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3612,18 +3637,18 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3631,9 +3656,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3641,9 +3666,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3651,9 +3676,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3664,9 +3689,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3693,18 +3718,18 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3712,9 +3737,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3722,9 +3747,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3732,9 +3757,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3745,9 +3770,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -3825,9 +3850,9 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
 
 abstract class _SimpleAlunoNapneModel implements SimpleUsuarioModel {
   const factory _SimpleAlunoNapneModel({
-    required final String id,
+    required final int id,
     required final String nome,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
@@ -3841,11 +3866,11 @@ abstract class _SimpleAlunoNapneModel implements SimpleUsuarioModel {
       _$SimpleAlunoNapneModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override
@@ -3875,9 +3900,9 @@ abstract class _$$SimpleInterpreteModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String nome,
-    String matricula,
+    int matricula,
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
@@ -3915,7 +3940,7 @@ class __$$SimpleInterpreteModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         nome:
             null == nome
                 ? _value.nome
@@ -3925,7 +3950,7 @@ class __$$SimpleInterpreteModelImplCopyWithImpl<$Res>
             null == matricula
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -3968,17 +3993,19 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     required final List<Roles> roles,
     required this.especialidade,
     required this.salary,
-  }) : _roles = roles;
+    final String? $type,
+  }) : _roles = roles,
+       $type = $type ?? 'interprete';
 
   factory _$SimpleInterpreteModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimpleInterpreteModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String nome;
   @override
-  final String matricula;
+  final int matricula;
   @override
   final String? biografia;
   @override
@@ -3995,6 +4022,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
   final String especialidade;
   @override
   final double salary;
+
+  @JsonKey(name: 'userType')
+  final String $type;
 
   @override
   String toString() {
@@ -4050,18 +4080,18 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )
     usuario,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4069,9 +4099,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )
     tutor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4079,9 +4109,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )
     professor,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4089,9 +4119,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )
     aluno,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4102,9 +4132,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )
     alunoNapne,
     required TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4129,18 +4159,18 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4148,9 +4178,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     tutor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4158,9 +4188,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     professor,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4168,9 +4198,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     aluno,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4181,9 +4211,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     alunoNapne,
     TResult? Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4208,18 +4238,18 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
     )?
     usuario,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4227,9 +4257,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     tutor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4237,9 +4267,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     professor,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4247,9 +4277,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     aluno,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4260,9 +4290,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     )?
     alunoNapne,
     TResult Function(
-      String id,
+      int id,
       String nome,
-      String matricula,
+      int matricula,
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
@@ -4338,9 +4368,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
 
 abstract class _SimpleInterpreteModel implements SimpleUsuarioModel {
   const factory _SimpleInterpreteModel({
-    required final String id,
+    required final int id,
     required final String nome,
-    required final String matricula,
+    required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
@@ -4352,11 +4382,11 @@ abstract class _SimpleInterpreteModel implements SimpleUsuarioModel {
       _$SimpleInterpreteModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get nome;
   @override
-  String get matricula;
+  int get matricula;
   @override
   String? get biografia;
   @override

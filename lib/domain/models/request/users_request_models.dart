@@ -6,7 +6,7 @@ class AlunoRequestModel with _$AlunoRequestModel {
     required String nome,
     required String login,
     required String senha,
-    required String matricula, // Long -> String
+    required int matricula, // Long -> String
     String? biografia,
   }) = _AlunoRequestModel;
 
@@ -20,7 +20,7 @@ class AlunoNapneRequestModel with _$AlunoNapneRequestModel {
     required String nome,
     required String login,
     required String senha,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required String condicao,
     required String laudo,
@@ -40,7 +40,7 @@ class ProfessorRequestModel with _$ProfessorRequestModel {
     required String nome,
     required String login,
     required String senha,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required String formacao,
   }) = _ProfessorRequestModel;
@@ -55,7 +55,7 @@ class TutorRequestModel with _$TutorRequestModel {
     required String nome,
     required String login,
     required String senha,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required String especialidade,
   }) = _TutorRequestModel;
@@ -70,7 +70,7 @@ class InterpreteRequestModel with _$InterpreteRequestModel {
     required String nome,
     required String login,
     required String senha,
-    required String matricula,
+    required int matricula,
     String? biografia,
     required String especialidade, // Campo do Tutor
     required double salary,
