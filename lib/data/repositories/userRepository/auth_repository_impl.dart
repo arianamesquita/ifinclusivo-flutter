@@ -96,4 +96,9 @@ class AuthRepositoryImpl implements AuthRepository {
   void dispose() {
     _authStateController.close();
   }
+
+  @override
+  Future<String> verifyEmail(String token) {
+    return _authService.verifyEmail(token);
+  }
 }

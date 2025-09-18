@@ -34,8 +34,6 @@ class _ShellPageState extends State<ShellPage> {
   Widget build(BuildContext context) {
     final isLoggedIn = true;
     final userRoles = [...Roles.values];
-    final viewModel = RegisterViewModel(repository: context.read());
-    viewModel.registerNewTutor();
 
     final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
     var deviceType = ResponsiveUtils.getDeviceType(context);

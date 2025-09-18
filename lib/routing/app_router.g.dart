@@ -9,6 +9,7 @@ part of 'app_router.dart';
 List<RouteBase> get $appRoutes => [
   $notificationRouter,
   $mobileConversationRoute,
+  $tokenValidateRouter,
   $shellAppRouter,
   $shellAboutRoute,
   $shellAuthRoute,
@@ -60,6 +61,38 @@ mixin _$MobileConversationRoute on GoRouteData {
   @override
   String get location => GoRouteData.$location(
     '/app/chat/con/${Uri.encodeComponent(_self.chatId)}',
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $tokenValidateRouter => GoRouteData.$route(
+  path: '/auth/verify-email',
+
+  factory: _$TokenValidateRouter._fromState,
+);
+
+mixin _$TokenValidateRouter on GoRouteData {
+  static TokenValidateRouter _fromState(GoRouterState state) =>
+      TokenValidateRouter(token: state.uri.queryParameters['token']);
+
+  TokenValidateRouter get _self => this as TokenValidateRouter;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/auth/verify-email',
+    queryParams: {if (_self.token != null) 'token': _self.token},
   );
 
   @override

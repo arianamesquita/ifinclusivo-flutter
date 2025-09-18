@@ -18,6 +18,8 @@ class AppRoutes {
   static const String notification = '$_app/notification';
   static const String profile = '$_app/profile';
 
+  static const String token = '/auth/verify-email';
+
   // Permissões de acesso por rota
   static final Map<String, List<Roles>> permissions = {
     forum: Roles.values,
@@ -32,6 +34,7 @@ class AppRoutes {
     ],
     more: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR],
     profile: Roles.values,
+    token: Roles.values,
   };
 
   static final Set<String> publicRoutes = {
@@ -42,6 +45,7 @@ class AppRoutes {
     forum,
     libras,
     topico,
+    token
   };
 }
 

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
 import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
+import 'package:if_inclusivo/ui/pages/auth/token/token_page.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
 
@@ -33,6 +34,7 @@ part 'pages/app/routes/more_page_router.dart';
 part 'pages/app/routes/topico_router.dart';
 part 'pages/app/routes/profile_router.dart';
 part 'pages/app/routes/forum_router.dart';
+part 'pages/auth/routes/token_validate_router.dart';
 
 // part dos shells
 part 'pages/app/shell_app_router.dart';
