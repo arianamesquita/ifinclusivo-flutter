@@ -7,18 +7,20 @@ import 'package:if_inclusivo/ui/pages/auth/token/widgets/header_token.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../domain/validators/email_validador.dart';
+
 class TokenPage extends StatefulWidget {
   final String? token;
 
-  const TokenPage({
-    super.key,
-    required this.token,
-  });
+  const TokenPage({super.key, required this.token});
   @override
   State<TokenPage> createState() => _TokenPageState();
 }
 
 class _TokenPageState extends State<TokenPage> {
+  final _resendEmailController = TextEditingController();
+  bool _isResendEmailValid = false;
+  final _resendValidator = EmailFieldValidator();
 
   @override
   void initState() {
@@ -26,55 +28,101 @@ class _TokenPageState extends State<TokenPage> {
     // 2. Usamos o WidgetsBinding para garantir que o contexto esteja pronto.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.token != null) {
-               context.read<ValidateTokenViewModel>().verifyEmail(widget.token!);
+        context.read<ValidateTokenViewModel>().verifyEmail(widget.token!);
       } else {
-        context.read<ValidateTokenViewModel>().handleInvalidToken(); // Crie este método no ViewModel
+        context
+            .read<ValidateTokenViewModel>()
+            .handleInvalidToken(); // Crie este método no ViewModel
       }
     });
+    _resendEmailController.addListener(_validateResendEmail);
   }
+
+  void _validateResendEmail() {
+    final modelToValidate = EmailModel(email: _resendEmailController.text);
+    final result = _resendValidator.validate(modelToValidate);
+    final bool isValid = result.isValid;
+
+    if (isValid != _isResendEmailValid) {
+      setState(() {
+        _isResendEmailValid = isValid;
+      });
+    }
+  }
+  @override
+  void dispose() {
+    _resendEmailController.dispose();
+    super.dispose();
+  }
+  void _handleResendLink() async {
+    if (!_isResendEmailValid) return;
+    final viewModel = context.read<ValidateTokenViewModel>();
+    final email = _resendEmailController.text;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Enviando solicitação...')),
+    );
+    final resultMessage = await viewModel.resendVerificationEmail(email);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(resultMessage)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceScreenType = ResponsiveUtils.getDeviceType(context);
     return Consumer<ValidateTokenViewModel>(
       builder: (context, viewModel, child) {
         return Scaffold(
-        appBar: CustomAppBarToken(),
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (deviceScreenType == DeviceScreenType.desktop)
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SvgPicture.asset('assets/exceptions/Figuras Decorativas.svg'),
-                ],
-              ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  spacing: 50,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+          appBar: CustomAppBarToken(),
+          body: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (deviceScreenType == DeviceScreenType.desktop)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                   _buildBody(viewModel.state, viewModel.errorMessage, context)
+                    SvgPicture.asset(
+                      'assets/exceptions/Figuras Decorativas.svg',
+                    ),
                   ],
                 ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    spacing: 50,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildBody(
+                        viewModel.state,
+                        viewModel.errorMessage,
+                        context,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            if (deviceScreenType == DeviceScreenType.desktop)
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SvgPicture.asset('assets/exceptions/Figuras Decorativas-1.svg'),
-                ],
-              ),
-          ],
-        ),
-      );}
+              if (deviceScreenType == DeviceScreenType.desktop)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/exceptions/Figuras Decorativas-1.svg',
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildBody(TokenValidationState state, String errorMessage, BuildContext context) {
+  Widget _buildBody(
+    TokenValidationState state,
+    String errorMessage,
+    BuildContext context,
+  ) {
     switch (state) {
       case TokenValidationState.loading:
         return Padding(
@@ -98,9 +146,7 @@ class _TokenPageState extends State<TokenPage> {
     return Column(
       spacing: 30,
       children: [
-        HeaderToken(
-          title: title,
-        ),
+        HeaderToken(title: title),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Container(
@@ -168,7 +214,11 @@ class _TokenPageState extends State<TokenPage> {
                         ),
                       ),
                       TextField(
-                        decoration: InputDecoration(border: OutlineInputBorder()),
+                        controller: _resendEmailController,
+                        decoration: InputDecoration(
+                          hintText: 'exmplo@gmail.com',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
                     ],
                   ),
@@ -182,7 +232,7 @@ class _TokenPageState extends State<TokenPage> {
                       right: 36,
                     ),
                     child: FilledButton(
-                      onPressed: () {},
+                      onPressed: _isResendEmailValid ? _handleResendLink : null,
                       style: FilledButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.error,
                         textStyle: Theme.of(context).textTheme.titleMedium,
@@ -203,10 +253,7 @@ class _TokenPageState extends State<TokenPage> {
     return Column(
       spacing: 30,
       children: [
-        HeaderToken(
-          title: 'Sucesso!',
-          label: 'Seu E-mail foi confirmado',
-        ),
+        HeaderToken(title: 'Sucesso!', label: 'Seu E-mail foi confirmado'),
         Wrap(
           alignment: WrapAlignment.center,
           runAlignment: WrapAlignment.center,
@@ -236,7 +283,8 @@ class _TokenPageState extends State<TokenPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: double.infinity, // 🔹 ocupa toda a largura disponível
+                      width:
+                          double.infinity, // 🔹 ocupa toda a largura disponível
                       child: Container(
                         color: Theme.of(context).colorScheme.primary,
                         child: Padding(
@@ -246,7 +294,9 @@ class _TokenPageState extends State<TokenPage> {
                           ),
                           child: Text(
                             'Sucesso!',
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleSmall?.copyWith(
                               color: Theme.of(context).colorScheme.onPrimary,
                               fontWeight: FontWeight.w500,
                             ),

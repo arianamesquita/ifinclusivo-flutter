@@ -55,5 +55,16 @@ class ValidateTokenViewModel extends ChangeNotifier {
     _errorMessage = "Token não fornecido na URL.";
     notifyListeners();
   }
+
+  Future<String> resendVerificationEmail(String email) async {
+    try {
+      final message = await _repository.forgotPassword(email);
+      return message;
+    } on DioException catch (e) {
+      return e.response?.data['error'] ?? "Não foi possível solicitar o link. Tente novamente.";
+    } catch (e) {
+      return "Ocorreu um erro inesperado.";
+    }
+  }
 }
 
