@@ -97,7 +97,7 @@ class _MessagesAreaState extends State<MessagesArea> {
           ChatAppBar(
             profileImageUrl: "url",
             name: "User ${widget.chatId}",
-            role: Roles.ROLE_ALUNO,
+            role: Roles.ROLE_ALUNO_NAPNE,
             status: Status.OFFLINE,
           ),
           Expanded(
