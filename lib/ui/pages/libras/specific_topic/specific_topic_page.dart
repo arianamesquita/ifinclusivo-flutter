@@ -19,7 +19,6 @@ class SpecificTopicPage extends StatelessWidget {
         description: "Aprenda o sinal para o identificador único de dispositivos em uma rede.",
         onTap: () {
           context.push(MidiaRouter().location);
-          print('tepou');
         },
       ),
       SpecificTopicGridParams(
@@ -28,7 +27,6 @@ class SpecificTopicPage extends StatelessWidget {
         description: "Aprenda a como sinalizar esses dois equipamentos essenciais.",
         onTap: () {
           context.push(MidiaRouter().location);
-          print('tepou');
         },
       ),
       SpecificTopicGridParams(
@@ -37,7 +35,6 @@ class SpecificTopicPage extends StatelessWidget {
         description: "Veja como sinalizar o conceito de barreira de segurança de redes.",
         onTap: () {
           context.push(MidiaRouter().location);
-          print('tepou');
         },
       ),
       SpecificTopicGridParams(
@@ -46,7 +43,6 @@ class SpecificTopicPage extends StatelessWidget {
         description: "Aprenda o sinal para o principal protocolo de comunicação.",
         onTap: () {
           context.push(MidiaRouter().location);
-          print('tepou');
         },
       ),
     ];
