@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_grid.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 
+import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
 import '../../../core/layout/custom_container_shell.dart';
 
@@ -11,36 +13,40 @@ class SpecificTopicPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var items = [
-      SpecificTopicParams(
-        "assets/player.png",
-        'Enderço IP',
-        "Aprenda o sinal para o identificador único de dispositivos em uma rede.",
-        () {
-          print("tepou endereço ip");
+      SpecificTopicGridParams(
+        plyaerUrl: "assets/player.png",
+        title: 'Enderço IP',
+        description: "Aprenda o sinal para o identificador único de dispositivos em uma rede.",
+        onTap: () {
+          context.push(MidiaRouter().location);
+          print('tepou');
         },
       ),
-      SpecificTopicParams(
-        "assets/player.png",
-        'Roteador e WI-FI',
-        "Aprenda a como sinalizar esses dois equipamentos essenciais.",
-        () {
-          print("tepou roteador e wifi");
+      SpecificTopicGridParams(
+        plyaerUrl: "assets/player.png",
+        title: 'Roteador e WI-FI',
+        description: "Aprenda a como sinalizar esses dois equipamentos essenciais.",
+        onTap: () {
+          context.push(MidiaRouter().location);
+          print('tepou');
         },
       ),
-      SpecificTopicParams(
-        "assets/player.png",
-        'Firewall',
-        "Veja como sinalizar o conceito de barreira de segurança de redes.",
-        () {
-          print("tepou firewall");
+      SpecificTopicGridParams(
+        plyaerUrl: "assets/player.png",
+        title: 'Firewall',
+        description: "Veja como sinalizar o conceito de barreira de segurança de redes.",
+        onTap: () {
+          context.push(MidiaRouter().location);
+          print('tepou');
         },
       ),
-      SpecificTopicParams(
-        "assets/player.png",
-        'Protocolo TCP/IP',
-        "Aprenda o sinal para o principal protocolo de comunicação.",
-        () {
-          print("tepou protocolo tcp/ip");
+      SpecificTopicGridParams(
+        plyaerUrl: "assets/player.png",
+        title: 'Protocolo TCP/IP',
+        description: "Aprenda o sinal para o principal protocolo de comunicação.",
+        onTap: () {
+          context.push(MidiaRouter().location);
+          print('tepou');
         },
       ),
     ];

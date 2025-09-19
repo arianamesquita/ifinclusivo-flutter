@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic.dart';
 
-class SpecificTopicParams {
+class SpecificTopicGridParams {
   final String plyaerUrl;
   final String title;
   final String description;
   final GestureTapCallback onTap;
 
-  SpecificTopicParams(this.plyaerUrl, this.title, this.description, this.onTap,);
+  SpecificTopicGridParams({required this.plyaerUrl, required this.title, required this.description, required this.onTap,});
 }
 
 class SpecificTopicGrid extends StatelessWidget{
-  final List<SpecificTopicParams> specificTopicsList;
+  final List<SpecificTopicGridParams> specificTopicsList;
   const SpecificTopicGrid({super.key, required this.specificTopicsList});
 
   @override

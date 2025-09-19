@@ -5,7 +5,7 @@ import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
-import 'package:if_inclusivo/ui/pages/libras/modal_midia_page.dart';
+import 'package:if_inclusivo/ui/pages/libras/midia_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_page.dart';
 
 import '../ui/core/layout/custom_container_shell.dart';

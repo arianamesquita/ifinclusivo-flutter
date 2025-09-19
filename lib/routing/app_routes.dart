@@ -13,7 +13,7 @@ class AppRoutes {
   static const String forum = '$_app/forum';
   static const String libras = '$_app/libras';
   static const String midia = 'midia';
-  static const String publicacoesPorTopico = 'publicacoes/:id';
+  static const String publicacoesPorTopico = 'publicacoes';
   static const String topico = '$_app/topicos';
   static const String chat = '$_app/chat';
   static const String more = '$_app/more';
