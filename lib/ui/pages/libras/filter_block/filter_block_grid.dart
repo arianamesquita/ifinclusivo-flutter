@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/widgets/card_info.dart';
 import 'filter_block.dart';
 
 class FilterBlockGridParams {
@@ -50,25 +51,35 @@ class FilterBlockGrid extends StatelessWidget {
         double wrapWidth =
             totalItemsWidth + (crossAxisCount - 1) * horizontalSpacing;
 
-        return Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: wrapWidth),
-            child: Wrap(
-              spacing: horizontalSpacing,
-              runSpacing: verticalSpacing,
-              children: filterBlockList.map((arg) {
-                return SizedBox(
-                  width: itemWidth,
-                  height: itemHeight,
-                  child: FilterBlock(
-                    imageAsset: arg.imageAsset,
-                    label: arg.label,
-                    onTap: arg.onTap,
-                  ),
-                );
-              }).toList(),
+        return Column(
+          children: [
+            Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: wrapWidth),
+                child: Wrap(
+                  spacing: horizontalSpacing,
+                  runSpacing: verticalSpacing,
+                  children: filterBlockList.map((arg) {
+                    return SizedBox(
+                      width: itemWidth,
+                      height: itemHeight,
+                      child: FilterBlock(
+                        imageAsset: arg.imageAsset,
+                        label: arg.label,
+                        onTap: arg.onTap,
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
             ),
-          ),
+            SizedBox(height: 15,),
+            CardInfo(
+              title: 'Dicionário de Sinais',
+              label: 'Digite palavras e veja a tradução para Libras em vídeos explicativos. \n\n Um recurso pensado para facilitar a comunicação e promover a inclusão.',
+              maxWidth: 592,
+            ),
+          ],
         );
       },
     );

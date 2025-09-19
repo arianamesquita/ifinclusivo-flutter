@@ -50,7 +50,7 @@ class SearchResult extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 90),
               child: Text(
-                'Resultados Encontrados para html',
+                'Resultados Encontrados para o Tópico Buscado:',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Color.fromRGBO(28, 122, 229, 1),
                 ),

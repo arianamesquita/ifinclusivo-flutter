@@ -107,8 +107,7 @@ class _TopicLibrasState extends State<TopicLibras> {
                   ),
                   SizedBox(height: 15),
                   word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
-                  SizedBox(height: 100),
-                ]
+                  SizedBox(height: 20),]
             ),
           ),
         );
