@@ -10,6 +10,7 @@ List<RouteBase> get $appRoutes => [
   $notificationRouter,
   $mobileConversationRoute,
   $tokenValidateRouter,
+  $resetPasswordRoute,
   $shellAppRouter,
   $shellAboutRoute,
   $shellAuthRoute,
@@ -92,6 +93,38 @@ mixin _$TokenValidateRouter on GoRouteData {
   @override
   String get location => GoRouteData.$location(
     '/auth/verify-email',
+    queryParams: {if (_self.token != null) 'token': _self.token},
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $resetPasswordRoute => GoRouteData.$route(
+  path: '/auth/reset_password',
+
+  factory: _$ResetPasswordRoute._fromState,
+);
+
+mixin _$ResetPasswordRoute on GoRouteData {
+  static ResetPasswordRoute _fromState(GoRouterState state) =>
+      ResetPasswordRoute(token: state.uri.queryParameters['token']);
+
+  ResetPasswordRoute get _self => this as ResetPasswordRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/auth/reset_password',
     queryParams: {if (_self.token != null) 'token': _self.token},
   );
 
