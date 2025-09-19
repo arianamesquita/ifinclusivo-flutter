@@ -27,7 +27,7 @@ class _ContactsPopUpState extends State<ContactsPopUp> {
 
     return Dialog(
       backgroundColor: Color(0xFFFFFFFF),
-      insetPadding: const EdgeInsets.all(200), // deixar responsivo
+      insetPadding: const EdgeInsets.all(50), // deixar responsivo
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
