@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/core/widgets/search_bar.dart';
 
 class TopContentLibras extends StatelessWidget {
-  final String title;
+  final String? title;
   final String? subtitle;
   final CustomSearchBar? searchBar;
 
   const TopContentLibras({
     super.key,
-    required this.title,
+    this.title,
     this.subtitle,
     this.searchBar,
   });
@@ -26,11 +26,9 @@ class TopContentLibras extends StatelessWidget {
 
     return Column(
       children: [
-        Text(title, style: titleStyleText),
-        SizedBox(height: 17),
-        Text(subtitle ?? "", style: subtitleStyleText),
-        SizedBox(height: 46),
-        searchBar ?? const SizedBox.shrink(),
+        Padding(padding: EdgeInsets.only(top: 100), child: Text(title ?? "CONVERTE LIBRAS", style: titleStyleText),),
+        Padding(padding: EdgeInsets.only(top: 17), child: Text(subtitle ?? "", style: subtitleStyleText),),
+        Padding(padding: EdgeInsets.only(top: 41), child: searchBar ?? const SizedBox.shrink(),)
       ],
     );
   }

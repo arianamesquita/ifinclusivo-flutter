@@ -12,6 +12,8 @@ class AppRoutes {
   static const String _app = '/app';
   static const String forum = '$_app/forum';
   static const String libras = '$_app/libras';
+  static const String midia = 'midia';
+  static const String publicacoesPorTopico = 'publicacoes';
   static const String topico = '$_app/topicos';
   static const String chat = '$_app/chat';
   static const String more = '$_app/more';
@@ -26,6 +28,8 @@ class AppRoutes {
   static final Map<String, List<Roles>> permissions = {
     forum: Roles.values,
     libras: Roles.values,
+    midia: Roles.values,
+    publicacoesPorTopico: Roles.values,
     notification: Roles.values,
     topico: Roles.values,
     chat: [
@@ -48,6 +52,8 @@ class AppRoutes {
     forum,
     libras,
     topico,
+    midia,
+    publicacoesPorTopico,
     token,
     resetPassword
   };
