@@ -4,7 +4,23 @@ class DateFormatUtil {
   static String formatToBrazilianDate(DateTime date) {
     return DateFormat('dd/MM/yyyy', 'pt_BR').format(date);
   }
+
+  static String formatMessageTimestamp(DateTime date) {
+    const Map<int, String> weekDays = {
+      1: 'segunda',
+      2: 'terça',
+      3: 'quarta',
+      4: 'quinta',
+      5: 'sexta',
+      6: 'sábado',
+      7: 'domingo',
+    };
+    final day = weekDays[date.weekday] ?? DateFormat.E('pt_BR').format(date);
+    final time = DateFormat('HH:mm').format(date);
+    return '$day - $time';
+  }
 }
+
 
 class TimeAgoUtil {
   static String timeAgo(DateTime dateTime) {

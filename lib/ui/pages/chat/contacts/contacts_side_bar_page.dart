@@ -1,127 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/contact_card.dart';
-import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/contacts_custom_search_bar.dart';
+import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/messages_custom_search_bar.dart';
+import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/contacts_pop_up.dart';
 import 'package:if_inclusivo/ui/pages/chat/contacts/widgets/roles_custom_filter_chip.dart';
+import 'package:if_inclusivo/ui/pages/chat/user.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 
 import '../../../../guards/roles.dart';
 import '../../../../routing/app_router.dart';
+import '../chat/widgets/status_label.dart';
 
-class ContactsSideBarPage extends StatelessWidget {
-  final void Function(String contactId) onTapContact;
+class ContactsSideBarPage extends StatefulWidget {
+  final void Function(String chatId) onTapContact;
+  const ContactsSideBarPage({super.key, required this.onTapContact});
 
-  const ContactsSideBarPage({
-    super.key,
-    required this.onTapContact,
-  });
+  @override
+  State<ContactsSideBarPage> createState() => _ContactsSideBarPageState();
+}
+
+class _ContactsSideBarPageState extends State<ContactsSideBarPage> {
+  final List<ContactCard> _contacts = [];
 
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final contacts = [
-      ContactCard(
-        profileImageUrl: "https://via.placeholder.com/150",
-        name: "Maria Silva",
-        lastMessage: "Oi, tudo bem?",
-        role: Roles.ROLE_TUTOR,
-        unreadMessagesCount: 2,
-        lastMessageDate: DateTime.now().subtract(const Duration(minutes: 5)),
-        onTap: () {
-          onTapContact('maria');
-        },
-
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_ALUNO_NAPNE,
-        unreadMessagesCount: 3,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () {
-          onTapContact('maria1');
-        },
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_INTERPRETE,
-        unreadMessagesCount: 1,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () {
-          onTapContact('1');
-        },
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_PROFESSOR,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () {
-          onTapContact('4');
-        },
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),
-      ContactCard(
-        profileImageUrl: "",
-        name: "João Oliveira",
-        lastMessage: "Pode me ajudar?",
-        role: Roles.ROLE_ALUNO_NAPNE,
-        unreadMessagesCount: 0,
-        lastMessageDate: DateTime.now().subtract(const Duration(hours: 2)),
-        onTap: () => print("Clicou em João"),
-      ),
-    ];
-
+    int counter = 0;
     final int unreadMessagesCount =
-        contacts.where((contato) => contato.unreadMessagesCount! > 0).length;
+        _contacts.where((contact) => contact.unreadMessagesCount! > 0).length;
 
     return Container(
       color: Color(0xFFF6FFF0),
@@ -139,9 +49,7 @@ class ContactsSideBarPage extends StatelessWidget {
                     children: [
                       Text(
                         "Mensagens",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleLarge?.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
@@ -176,7 +84,65 @@ class ContactsSideBarPage extends StatelessWidget {
                   ),
                 ),
                 FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder:
+                          (context) => ContactsPopUp(
+                            contacts: [
+                              User(
+                                name: "Maria Silva",
+                                profileImageURL:
+                                    "https://via.placeholder.com/150",
+                                role: Roles.ROLE_TUTOR,
+                                status: Status.ONLINE,
+                                chatId: counter++,
+                              ),
+                              User(
+                                name: "João de Barros",
+                                profileImageURL:
+                                    "https://via.placeholder.com/150",
+                                role: Roles.ROLE_PROFESSOR,
+                                status: Status.OFFLINE,
+                                chatId: counter++,
+                              ),
+                              User(
+                                name: "Ananda",
+                                profileImageURL:
+                                    "https://via.placeholder.com/150",
+                                role: Roles.ROLE_ALUNO_NAPNE,
+                                status: Status.OFFLINE,
+                                chatId: counter++,
+                              ),
+                              User(
+                                name: "Fernanda",
+                                profileImageURL:
+                                    "https://via.placeholder.com/150",
+                                role: Roles.ROLE_INTERPRETE,
+                                status: Status.AUSENTE,
+                                chatId: counter++,
+                              ),
+                            ],
+                            onTapContact: (contact) {
+                              setState(() {
+                                _contacts.add(
+                                  ContactCard(
+                                    name: contact.name,
+                                    profileImageUrl: contact.profileImageURL,
+                                    role: contact.role,
+                                    unreadMessagesCount: 0,
+                                    lastMessage: "Novo contato adicionado!",
+                                    lastMessageDate: DateTime.now(),
+                                    onTap: () {
+                                      widget.onTapContact(contact.chatId.toString());
+                                    },
+                                  ),
+                                );
+                              });
+                            },
+                          ),
+                    );
+                  },
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xFFA84FCE),
                   shape: CircleBorder(),
@@ -192,13 +158,10 @@ class ContactsSideBarPage extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                     child: Column(
                       children: [
-                        ContactsCustomSearchBar(),
+                        MessagesCustomSearchBar(),
                         SizedBox(height: 20.0),
                         RolesCustomFilterChips(),
                       ],
@@ -206,16 +169,33 @@ class ContactsSideBarPage extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: contacts.length,
-                      itemBuilder: (context, index) {
-                        return contacts[index];
-                      },
-                      separatorBuilder: ((context, index) {
-                        return const SizedBox(height: 8.0);
-                      }),
-                    ),
+                    child:
+                        _contacts.isEmpty
+                            ? Padding(
+                              padding: const EdgeInsets.all(40.0),
+                              child: Text(
+                                "Clique em '+' para inciar uma conversa!",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.outline,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            )
+                            : ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: _contacts.length,
+                              itemBuilder: (context, index) {
+                                return _contacts[index];
+                              },
+                              separatorBuilder: ((context, index) {
+                                return const SizedBox(height: 8.0);
+                              }),
+                            ),
                   ),
                 ],
               ),

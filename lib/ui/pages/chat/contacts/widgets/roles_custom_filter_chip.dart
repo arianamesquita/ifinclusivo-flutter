@@ -21,6 +21,10 @@ class _RolesCustomFilterChipsState extends State<RolesCustomFilterChips> {
           final values = getValuesByRole(role, context);
           final isSelected = false;
 
+          if (role == Roles.ROLE_ALUNO) {
+            return const SizedBox.shrink();
+          }
+
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: FilterChip(
