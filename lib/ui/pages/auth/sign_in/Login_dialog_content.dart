@@ -19,8 +19,8 @@ class LoginDialogContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceType = ResponsiveUtils.getDeviceType(context);
     final fontScale = ResponsiveUtils.fontScale(context);
-    return Dialog.fullscreen(
-      child: Container(
+    return Scaffold(
+      body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [color2, color1],
