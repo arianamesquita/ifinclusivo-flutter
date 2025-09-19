@@ -22,8 +22,6 @@ class ChatAppBar extends StatefulWidget {
   State<ChatAppBar> createState() => _ChatAppBarState();
 }
 
-// exemplo: ChatAppBar(profileImageUrl: "url", name: "Florêncio Mares", role: Roles.ROLE_ALUNO, status: Status.ONLINE)
-
 class _ChatAppBarState extends State<ChatAppBar> {
   @override
   Widget build(BuildContext context) {

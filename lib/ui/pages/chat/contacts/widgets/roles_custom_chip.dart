@@ -10,7 +10,7 @@ class ChipValues {
   const ChipValues(this.label, this.textStyle, this.backgroundColor, this.border);
 }
 
-ChipValues getValuesByRole(Roles role, BuildContext context) {
+getValuesByRole(Roles role, BuildContext context) {
   TextStyle? baseStyle = Theme.of(context)
       .textTheme
       .labelMedium
@@ -32,6 +32,7 @@ ChipValues getValuesByRole(Roles role, BuildContext context) {
         StadiumBorder(side: BorderSide(color: Color(0xFFCBD5E0), width: 1)),
       );
     case Roles.ROLE_ALUNO:
+      return SizedBox.shrink();
     case Roles.ROLE_ALUNO_NAPNE:
       return ChipValues(
         "Aluno",

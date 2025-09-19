@@ -21,7 +21,7 @@ class _ChatPageState extends State<ChatPage> {
     return deviceScreenType == DeviceScreenType.mobile
         ? ContactsSideBarPage(
           onTapContact:
-              (id) => MobileConversationRoute(chatId: id).push(context),
+              (id) => MobileConversationRoute(chatId: id.toString()).push(context),
         )
         : Shortcuts(
           shortcuts: {
@@ -47,7 +47,7 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                     child: ContactsSideBarPage(
                       onTapContact:
-                          (id) => ConversationRouter(chatId: id).go(context),
+                          (id) => ConversationRouter(chatId: id.toString()).go(context),
                     ),
                   ),
                   Expanded(
