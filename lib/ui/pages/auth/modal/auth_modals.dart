@@ -1,68 +1,102 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/validators/email_validador.dart';
 import 'package:if_inclusivo/ui/pages/auth/modal/modal_auth_base.dart';
+import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 class AuthModals {
   AuthModals._();
 
-  static Future<void> resetPasswordSuccess({required BuildContext context,void Function()? onButtonPressed}) {
-    return ModalsAuthBase.showLarge(
+  static Future<void> _showModal({
+    required BuildContext context,
+    required Widget builder,
+    VoidCallback? onClose,
+    bool barrierDismissible = true,
+  }) {
+    return showDialog(
       context: context,
-      type: ModalType.success,
-      title: 'Sucesso',
-      child: Row(
-        spacing: 16,
-        children: [
-          ShaderMask(
-            shaderCallback:
-                (bounds) => const LinearGradient(
-                  colors: [Color(0xFF5AA397), Color(0xFF9B74C5)], // rosa → azul
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ).createShader(bounds),
-            child: const Icon(
-              Icons.check_circle_outline_rounded,
-              size: 50,
-              color: Colors.white,
+      barrierColor: Color.fromRGBO(59, 105, 57, 0.5),
+
+      builder: (context) {
+        return builder;
+      },
+    ).whenComplete((){
+      if(onClose != null) onClose;
+    });
+  }
+
+  static Future<void> resetPasswordSuccess({
+    required BuildContext context,
+    void Function()? onButtonPressed,
+  }) {
+    return _showModal(
+      context: context,
+      builder: ModalsAuthBase.large(
+        context: context,
+        type: ModalType.success,
+        title: 'Sucesso',
+        child: Row(
+          spacing: 16,
+          children: [
+            ShaderMask(
+              shaderCallback:
+                  (bounds) => const LinearGradient(
+                    colors: [
+                      Color(0xFF5AA397),
+                      Color(0xFF9B74C5),
+                    ], // rosa → azul
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ).createShader(bounds),
+              child: const Icon(
+                Icons.check_circle_outline_rounded,
+                size: 50,
+                color: Colors.white,
+              ),
             ),
-          ),
-          Flexible(
-            child: Text(
-              'Sua senha foi Alterada com sucesso',
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.bodyMedium,
-              softWrap: true,
-              maxLines: 5,
+            Flexible(
+              child: Text(
+                'Sua senha foi Alterada com sucesso',
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyMedium,
+                softWrap: true,
+                maxLines: 5,
+              ),
             ),
-          ),
-        ],
-      ), buttonLabel: 'Ir para login', onButtonPressed: onButtonPressed,
+          ],
+        ),
+        buttonLabel: 'Ir para login',
+        onButtonPressed: onButtonPressed,
+      ),
     );
   }
 
   static Future<void> resetPasswordError({required BuildContext context}) {
-    return ModalsAuthBase.showSmall(
+    return _showModal(
       context: context,
-      type: ModalType.error,
-      title: 'Error',
-      child: Row(
-        spacing: 16,
-        children: [
-          Icon(
-            Icons.cancel_outlined,
-            color: Theme.of(context).colorScheme.error,
-            size: 50,
-          ),
-          Flexible(
-            child: Text(
-              'Não foi possível atualizar sua senha, tente mais tarde',
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.bodyMedium,
-              softWrap: true,
-              maxLines: 5,
+      builder: ModalsAuthBase.small(
+        context: context,
+        type: ModalType.error,
+        title: 'Error',
+        child: Row(
+          spacing: 16,
+          children: [
+            Icon(
+              Icons.cancel_outlined,
+              color: Theme.of(context).colorScheme.error,
+              size: 50,
             ),
-          ),
-        ],
+            Flexible(
+              child: Text(
+                'Não foi possível atualizar sua senha, tente mais tarde',
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyMedium,
+                softWrap: true,
+                maxLines: 5,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -70,22 +104,49 @@ class AuthModals {
   static Future<void> recoverPassword({
     required BuildContext context,
     void Function(String)? onSendPressed,
+    void Function()? tryAgain,
+    VoidCallback? onClose,
   }) {
-    return showDialog(
+    return _showModal(
       context: context,
-      builder: (context) {
-        return _RecoverPasswordDialog(onSendPressed: onSendPressed);
-      },
+      onClose: onClose,
+      barrierDismissible: true,
+      builder: Consumer<LoginViewModel>(
+        builder: (context, viewModel, _) {
+          return PopScope(
+            canPop: viewModel.emailState != EmailState.loading,
+            onPopInvokedWithResult: (bool c, dynamic){ if(onClose != null) onClose.call();},
+            child: switch (viewModel.emailState) {
+              EmailState.idle => _RecoverPasswordDialog(
+                onSendPressed: onSendPressed,
+                onClose: onClose,
+              ),
+              EmailState.loading => _loading(context: context),
+              EmailState.success => _recoverPasswordSuccess(
+                context: context,
+                onClose: onClose,
+              ),
+              EmailState.error => _emailNotFound(
+                context: context,
+                onButtonPressed: tryAgain,
+                onClose: onClose,
+              ),
+            },
+          );
+        },
+      ),
     );
   }
 
-  static Future<void> emailNotFound({
+  static ModalsAuthBase _emailNotFound({
     required BuildContext context,
     void Function()? onButtonPressed,
+    VoidCallback? onClose,
   }) {
-    return ModalsAuthBase.showLarge(
+    return ModalsAuthBase.large(
       context: context,
       type: ModalType.error,
+      onClose: onClose,
       title: 'Error ao recuperar senha',
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -110,21 +171,25 @@ class AuthModals {
     );
   }
 
-  static Future<void> recoverPasswordSuccess({required BuildContext context}) {
-    return ModalsAuthBase.showSmall(
+  static ModalsAuthBase _recoverPasswordSuccess({
+    required BuildContext context,
+    VoidCallback? onClose,
+  }) {
+    return ModalsAuthBase.small(
       context: context,
       type: ModalType.success,
       title: 'Recuperar senha',
+      onClose: onClose,
       child: Row(
         spacing: 16,
         children: [
           ShaderMask(
             shaderCallback:
                 (bounds) => const LinearGradient(
-              colors: [Color(0xFF5AA397), Color(0xFF9B74C5)], // rosa → azul
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ).createShader(bounds),
+                  colors: [Color(0xFF5AA397), Color(0xFF9B74C5)], // rosa → azul
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ).createShader(bounds),
             child: const Icon(
               Icons.check_circle_outline_rounded,
               size: 50,
@@ -144,12 +209,29 @@ class AuthModals {
       ),
     );
   }
+
+  static ModalsAuthBase _loading({required context}) {
+    return ModalsAuthBase.small(
+      context: context,
+      type: ModalType.info,
+      title: 'Carregando..',
+      onClose: null,
+      child: Center(
+        child: SizedBox(
+          width: 50,
+          height: 50,
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+  }
 }
 
 class _RecoverPasswordDialog extends StatefulWidget {
   final void Function(String email)? onSendPressed;
+  final VoidCallback? onClose;
 
-  const _RecoverPasswordDialog({this.onSendPressed});
+  const _RecoverPasswordDialog({this.onSendPressed, this.onClose});
 
   @override
   State<_RecoverPasswordDialog> createState() => _RecoverPasswordDialogState();
@@ -194,6 +276,7 @@ class _RecoverPasswordDialogState extends State<_RecoverPasswordDialog> {
       size: ModalSize.large,
       title: 'Recuperar senha',
       buttonLabel: 'Enviar link de recuperação',
+      onClose: widget.onClose,
       onButtonPressed:
           _isEmailValid
               ? () {
@@ -225,7 +308,7 @@ class _RecoverPasswordDialogState extends State<_RecoverPasswordDialog> {
               Text(
                 'Recuperar senha com e-mail cadastrado.',
                 textAlign: TextAlign.center,
-                style:Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ),
@@ -240,6 +323,11 @@ class _RecoverPasswordDialogState extends State<_RecoverPasswordDialog> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
+            onSubmitted: (String value) {
+              if (_isEmailValid) {
+                widget.onSendPressed?.call(_emailController.text);
+              }
+            },
           ),
         ],
       ),

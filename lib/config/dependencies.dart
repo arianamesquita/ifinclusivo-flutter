@@ -1,3 +1,5 @@
+import 'package:if_inclusivo/ui/pages/auth/reset_password/viewmodels/reset_password_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/auth/token/viewmodels/validate_token_viewmodel.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +55,18 @@ List<SingleChildWidget> get _viewModelsProviders {
           (context) =>
               ValidateTokenViewModel(repository: context.read<AuthRepository>()),
     ),
+
+    ChangeNotifierProvider<ResetPasswordViewModel>(
+      create:
+          (context) =>
+              ResetPasswordViewModel(authRepository: context.read<AuthRepository>()),
+    ),
+    ChangeNotifierProvider<LoginViewModel>(
+      create:
+          (context) =>
+              LoginViewModel(authRepository: context.read<AuthRepository>()),
+    ),
+
     // ... adicione outros ViewModels aqui
   ];
 }
