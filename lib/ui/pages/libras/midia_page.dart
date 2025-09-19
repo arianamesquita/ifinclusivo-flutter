@@ -84,6 +84,7 @@ class ModalMidiaPageLibras extends StatelessWidget {
         color: const Color.fromRGBO(172,130,186, 1),
         borderRadius: BorderRadius.circular(16),
       ),
+      clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
           Container(
