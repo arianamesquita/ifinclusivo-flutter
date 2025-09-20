@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
-import 'package:if_inclusivo/domain/models/request/gen_requests.dart';
 
-import '../../../guards/roles.dart';
+import '../../../../guards/roles.dart';
+import '../request/gen_requests.dart';
+
 
 part 'gen_simple_models.freezed.dart';
 part 'gen_simple_models.g.dart';

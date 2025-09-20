@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:if_inclusivo/data/repositories/userRepository/auth_repository.dart';
+import 'package:if_inclusivo/data/repositories/auth_repository.dart';
 
 import '../../../../../utils/before_unload_manager.dart';
 enum EmailState{

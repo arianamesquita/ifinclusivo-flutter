@@ -15,14 +15,18 @@ _$AlunoResponseModelImpl _$$AlunoResponseModelImplFromJson(
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
-    json['configAcessibilidadeEntity'] as Map<String, dynamic>,
-  ),
+  configAcessibilidadeEntity:
+      json['configAcessibilidadeEntity'] == null
+          ? null
+          : ConfigAcblResponseModel.fromJson(
+            json['configAcessibilidadeEntity'] as Map<String, dynamic>,
+          ),
   roles:
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   token: json['token'] as String?,
+  firebaseToken: json['firebaseToken'] as String?,
   curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
   $type: json['userType'] as String?,
 );
@@ -39,6 +43,7 @@ Map<String, dynamic> _$$AlunoResponseModelImplToJson(
   'configAcessibilidadeEntity': instance.configAcessibilidadeEntity,
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'token': instance.token,
+  'firebaseToken': instance.firebaseToken,
   'curso': instance.curso,
   'userType': instance.$type,
 };
@@ -60,14 +65,18 @@ _$AlunoNapneResponseModelImpl _$$AlunoNapneResponseModelImplFromJson(
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
-    json['configAcessibilidadeEntity'] as Map<String, dynamic>,
-  ),
+  configAcessibilidadeEntity:
+      json['configAcessibilidadeEntity'] == null
+          ? null
+          : ConfigAcblResponseModel.fromJson(
+            json['configAcessibilidadeEntity'] as Map<String, dynamic>,
+          ),
   roles:
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   token: json['token'] as String?,
+  firebaseToken: json['firebaseToken'] as String?,
   curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
   condicao: json['condicao'] as String,
   laudo: json['laudo'] as String,
@@ -90,6 +99,7 @@ Map<String, dynamic> _$$AlunoNapneResponseModelImplToJson(
   'configAcessibilidadeEntity': instance.configAcessibilidadeEntity,
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'token': instance.token,
+  'firebaseToken': instance.firebaseToken,
   'curso': instance.curso,
   'condicao': instance.condicao,
   'laudo': instance.laudo,
@@ -109,14 +119,18 @@ _$ProfessorResponseModelImpl _$$ProfessorResponseModelImplFromJson(
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
-    json['configAcessibilidadeEntity'] as Map<String, dynamic>,
-  ),
+  configAcessibilidadeEntity:
+      json['configAcessibilidadeEntity'] == null
+          ? null
+          : ConfigAcblResponseModel.fromJson(
+            json['configAcessibilidadeEntity'] as Map<String, dynamic>,
+          ),
   roles:
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   token: json['token'] as String?,
+  firebaseToken: json['firebaseToken'] as String?,
   formacao: json['formacao'] as String,
   topicos:
       (json['topicos'] as List<dynamic>)
@@ -137,6 +151,7 @@ Map<String, dynamic> _$$ProfessorResponseModelImplToJson(
   'configAcessibilidadeEntity': instance.configAcessibilidadeEntity,
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'token': instance.token,
+  'firebaseToken': instance.firebaseToken,
   'formacao': instance.formacao,
   'topicos': instance.topicos,
   'userType': instance.$type,
@@ -151,14 +166,18 @@ _$TutorResponseModelImpl _$$TutorResponseModelImplFromJson(
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
-    json['configAcessibilidadeEntity'] as Map<String, dynamic>,
-  ),
+  configAcessibilidadeEntity:
+      json['configAcessibilidadeEntity'] == null
+          ? null
+          : ConfigAcblResponseModel.fromJson(
+            json['configAcessibilidadeEntity'] as Map<String, dynamic>,
+          ),
   roles:
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   token: json['token'] as String?,
+  firebaseToken: json['firebaseToken'] as String?,
   especialidade: json['especialidade'] as String,
   $type: json['userType'] as String?,
 );
@@ -175,6 +194,7 @@ Map<String, dynamic> _$$TutorResponseModelImplToJson(
   'configAcessibilidadeEntity': instance.configAcessibilidadeEntity,
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'token': instance.token,
+  'firebaseToken': instance.firebaseToken,
   'especialidade': instance.especialidade,
   'userType': instance.$type,
 };
@@ -188,14 +208,18 @@ _$InterpreteResponseModelImpl _$$InterpreteResponseModelImplFromJson(
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  configAcessibilidadeEntity: ConfigAcblResponseModel.fromJson(
-    json['configAcessibilidadeEntity'] as Map<String, dynamic>,
-  ),
+  configAcessibilidadeEntity:
+      json['configAcessibilidadeEntity'] == null
+          ? null
+          : ConfigAcblResponseModel.fromJson(
+            json['configAcessibilidadeEntity'] as Map<String, dynamic>,
+          ),
   roles:
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
   token: json['token'] as String?,
+  firebaseToken: json['firebaseToken'] as String?,
   especialidade: json['especialidade'] as String,
   salary: (json['salary'] as num).toDouble(),
   libras:
@@ -217,6 +241,7 @@ Map<String, dynamic> _$$InterpreteResponseModelImplToJson(
   'configAcessibilidadeEntity': instance.configAcessibilidadeEntity,
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
   'token': instance.token,
+  'firebaseToken': instance.firebaseToken,
   'especialidade': instance.especialidade,
   'salary': instance.salary,
   'libras': instance.libras,

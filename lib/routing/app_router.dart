@@ -51,7 +51,7 @@ part 'pages/exceptions/exceptions_routes.dart';
 
 GoRouter createRouter() =>
     GoRouter(
-        initialLocation: AboutUsRoute().location,
+        initialLocation: ForumRouter().location,
         errorBuilder: (context, state){
             return NotFound404();
         },

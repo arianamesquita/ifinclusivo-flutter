@@ -46,10 +46,11 @@ mixin _$UsuarioResponseModel {
   int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
   DateTime get dataCriacao => throw _privateConstructorUsedError;
-  ConfigAcblResponseModel get configAcessibilidadeEntity =>
+  ConfigAcblResponseModel? get configAcessibilidadeEntity =>
       throw _privateConstructorUsedError;
   List<Roles> get roles => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
+  String? get firebaseToken => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -59,9 +60,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )
     aluno,
@@ -72,9 +74,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -91,9 +94,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )
@@ -105,9 +109,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )
     tutor,
@@ -118,9 +123,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -136,9 +142,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -149,9 +156,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -168,9 +176,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -182,9 +191,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -195,9 +205,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -213,9 +224,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -226,9 +238,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -245,9 +258,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -259,9 +273,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -272,9 +287,10 @@ mixin _$UsuarioResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -332,12 +348,13 @@ abstract class $UsuarioResponseModelCopyWith<$Res> {
     int matricula,
     String? biografia,
     DateTime dataCriacao,
-    ConfigAcblResponseModel configAcessibilidadeEntity,
+    ConfigAcblResponseModel? configAcessibilidadeEntity,
     List<Roles> roles,
     String? token,
+    String? firebaseToken,
   });
 
-  $ConfigAcblResponseModelCopyWith<$Res> get configAcessibilidadeEntity;
+  $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
 }
 
 /// @nodoc
@@ -364,9 +381,10 @@ class _$UsuarioResponseModelCopyWithImpl<
     Object? matricula = null,
     Object? biografia = freezed,
     Object? dataCriacao = null,
-    Object? configAcessibilidadeEntity = null,
+    Object? configAcessibilidadeEntity = freezed,
     Object? roles = null,
     Object? token = freezed,
+    Object? firebaseToken = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -401,10 +419,10 @@ class _$UsuarioResponseModelCopyWithImpl<
                     : dataCriacao // ignore: cast_nullable_to_non_nullable
                         as DateTime,
             configAcessibilidadeEntity:
-                null == configAcessibilidadeEntity
+                freezed == configAcessibilidadeEntity
                     ? _value.configAcessibilidadeEntity
                     : configAcessibilidadeEntity // ignore: cast_nullable_to_non_nullable
-                        as ConfigAcblResponseModel,
+                        as ConfigAcblResponseModel?,
             roles:
                 null == roles
                     ? _value.roles
@@ -415,6 +433,11 @@ class _$UsuarioResponseModelCopyWithImpl<
                     ? _value.token
                     : token // ignore: cast_nullable_to_non_nullable
                         as String?,
+            firebaseToken:
+                freezed == firebaseToken
+                    ? _value.firebaseToken
+                    : firebaseToken // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -424,9 +447,13 @@ class _$UsuarioResponseModelCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ConfigAcblResponseModelCopyWith<$Res> get configAcessibilidadeEntity {
+  $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity {
+    if (_value.configAcessibilidadeEntity == null) {
+      return null;
+    }
+
     return $ConfigAcblResponseModelCopyWith<$Res>(
-      _value.configAcessibilidadeEntity,
+      _value.configAcessibilidadeEntity!,
       (value) {
         return _then(
           _value.copyWith(configAcessibilidadeEntity: value) as $Val,
@@ -452,14 +479,15 @@ abstract class _$$AlunoResponseModelImplCopyWith<$Res>
     int matricula,
     String? biografia,
     DateTime dataCriacao,
-    ConfigAcblResponseModel configAcessibilidadeEntity,
+    ConfigAcblResponseModel? configAcessibilidadeEntity,
     List<Roles> roles,
     String? token,
+    String? firebaseToken,
     CursoRequestModel curso,
   });
 
   @override
-  $ConfigAcblResponseModelCopyWith<$Res> get configAcessibilidadeEntity;
+  $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
   $CursoRequestModelCopyWith<$Res> get curso;
 }
 
@@ -483,9 +511,10 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
     Object? matricula = null,
     Object? biografia = freezed,
     Object? dataCriacao = null,
-    Object? configAcessibilidadeEntity = null,
+    Object? configAcessibilidadeEntity = freezed,
     Object? roles = null,
     Object? token = freezed,
+    Object? firebaseToken = freezed,
     Object? curso = null,
   }) {
     return _then(
@@ -521,10 +550,10 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
                 : dataCriacao // ignore: cast_nullable_to_non_nullable
                     as DateTime,
         configAcessibilidadeEntity:
-            null == configAcessibilidadeEntity
+            freezed == configAcessibilidadeEntity
                 ? _value.configAcessibilidadeEntity
                 : configAcessibilidadeEntity // ignore: cast_nullable_to_non_nullable
-                    as ConfigAcblResponseModel,
+                    as ConfigAcblResponseModel?,
         roles:
             null == roles
                 ? _value._roles
@@ -534,6 +563,11 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
             freezed == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        firebaseToken:
+            freezed == firebaseToken
+                ? _value.firebaseToken
+                : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         curso:
             null == curso
@@ -565,9 +599,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required this.matricula,
     this.biografia,
     required this.dataCriacao,
-    required this.configAcessibilidadeEntity,
+    this.configAcessibilidadeEntity,
     required final List<Roles> roles,
     this.token,
+    this.firebaseToken,
     required this.curso,
     final String? $type,
   }) : _roles = roles,
@@ -589,7 +624,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   @override
   final DateTime dataCriacao;
   @override
-  final ConfigAcblResponseModel configAcessibilidadeEntity;
+  final ConfigAcblResponseModel? configAcessibilidadeEntity;
   final List<Roles> _roles;
   @override
   List<Roles> get roles {
@@ -601,6 +636,8 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   @override
   final String? token;
   @override
+  final String? firebaseToken;
+  @override
   final CursoRequestModel curso;
 
   @JsonKey(name: 'userType')
@@ -608,7 +645,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.aluno(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, curso: $curso)';
+    return 'UsuarioResponseModel.aluno(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, curso: $curso)';
   }
 
   @override
@@ -633,6 +670,8 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
                     configAcessibilidadeEntity) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.firebaseToken, firebaseToken) ||
+                other.firebaseToken == firebaseToken) &&
             (identical(other.curso, curso) || other.curso == curso));
   }
 
@@ -649,6 +688,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     configAcessibilidadeEntity,
     const DeepCollectionEquality().hash(_roles),
     token,
+    firebaseToken,
     curso,
   );
 
@@ -673,9 +713,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )
     aluno,
@@ -686,9 +727,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -705,9 +747,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )
@@ -719,9 +762,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )
     tutor,
@@ -732,9 +776,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -751,6 +796,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       curso,
     );
   }
@@ -765,9 +811,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -778,9 +825,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -797,9 +845,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -811,9 +860,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -824,9 +874,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -843,6 +894,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       curso,
     );
   }
@@ -857,9 +909,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -870,9 +923,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -889,9 +943,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -903,9 +958,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -916,9 +972,10 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -937,6 +994,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
         configAcessibilidadeEntity,
         roles,
         token,
+        firebaseToken,
         curso,
       );
     }
@@ -997,9 +1055,10 @@ abstract class _AlunoResponseModel implements UsuarioResponseModel {
     required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
-    required final ConfigAcblResponseModel configAcessibilidadeEntity,
+    final ConfigAcblResponseModel? configAcessibilidadeEntity,
     required final List<Roles> roles,
     final String? token,
+    final String? firebaseToken,
     required final CursoRequestModel curso,
   }) = _$AlunoResponseModelImpl;
 
@@ -1019,11 +1078,13 @@ abstract class _AlunoResponseModel implements UsuarioResponseModel {
   @override
   DateTime get dataCriacao;
   @override
-  ConfigAcblResponseModel get configAcessibilidadeEntity;
+  ConfigAcblResponseModel? get configAcessibilidadeEntity;
   @override
   List<Roles> get roles;
   @override
   String? get token;
+  @override
+  String? get firebaseToken;
   CursoRequestModel get curso;
 
   /// Create a copy of UsuarioResponseModel
@@ -1050,9 +1111,10 @@ abstract class _$$AlunoNapneResponseModelImplCopyWith<$Res>
     int matricula,
     String? biografia,
     DateTime dataCriacao,
-    ConfigAcblResponseModel configAcessibilidadeEntity,
+    ConfigAcblResponseModel? configAcessibilidadeEntity,
     List<Roles> roles,
     String? token,
+    String? firebaseToken,
     CursoRequestModel curso,
     String condicao,
     String laudo,
@@ -1063,7 +1125,7 @@ abstract class _$$AlunoNapneResponseModelImplCopyWith<$Res>
   });
 
   @override
-  $ConfigAcblResponseModelCopyWith<$Res> get configAcessibilidadeEntity;
+  $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
   $CursoRequestModelCopyWith<$Res> get curso;
 }
 
@@ -1088,9 +1150,10 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
     Object? matricula = null,
     Object? biografia = freezed,
     Object? dataCriacao = null,
-    Object? configAcessibilidadeEntity = null,
+    Object? configAcessibilidadeEntity = freezed,
     Object? roles = null,
     Object? token = freezed,
+    Object? firebaseToken = freezed,
     Object? curso = null,
     Object? condicao = null,
     Object? laudo = null,
@@ -1132,10 +1195,10 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
                 : dataCriacao // ignore: cast_nullable_to_non_nullable
                     as DateTime,
         configAcessibilidadeEntity:
-            null == configAcessibilidadeEntity
+            freezed == configAcessibilidadeEntity
                 ? _value.configAcessibilidadeEntity
                 : configAcessibilidadeEntity // ignore: cast_nullable_to_non_nullable
-                    as ConfigAcblResponseModel,
+                    as ConfigAcblResponseModel?,
         roles:
             null == roles
                 ? _value._roles
@@ -1145,6 +1208,11 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
             freezed == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        firebaseToken:
+            freezed == firebaseToken
+                ? _value.firebaseToken
+                : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         curso:
             null == curso
@@ -1206,9 +1274,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required this.matricula,
     this.biografia,
     required this.dataCriacao,
-    required this.configAcessibilidadeEntity,
+    this.configAcessibilidadeEntity,
     required final List<Roles> roles,
     this.token,
+    this.firebaseToken,
     required this.curso,
     required this.condicao,
     required this.laudo,
@@ -1236,7 +1305,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   @override
   final DateTime dataCriacao;
   @override
-  final ConfigAcblResponseModel configAcessibilidadeEntity;
+  final ConfigAcblResponseModel? configAcessibilidadeEntity;
   final List<Roles> _roles;
   @override
   List<Roles> get roles {
@@ -1247,6 +1316,8 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
 
   @override
   final String? token;
+  @override
+  final String? firebaseToken;
   @override
   final CursoRequestModel curso;
   @override
@@ -1267,7 +1338,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.alunoNapne(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, curso: $curso, condicao: $condicao, laudo: $laudo, necessidadeEspecial: $necessidadeEspecial, necessidadeEscolar: $necessidadeEscolar, acompanhamento: $acompanhamento, situacao: $situacao)';
+    return 'UsuarioResponseModel.alunoNapne(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, curso: $curso, condicao: $condicao, laudo: $laudo, necessidadeEspecial: $necessidadeEspecial, necessidadeEscolar: $necessidadeEscolar, acompanhamento: $acompanhamento, situacao: $situacao)';
   }
 
   @override
@@ -1292,6 +1363,8 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
                     configAcessibilidadeEntity) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.firebaseToken, firebaseToken) ||
+                other.firebaseToken == firebaseToken) &&
             (identical(other.curso, curso) || other.curso == curso) &&
             (identical(other.condicao, condicao) ||
                 other.condicao == condicao) &&
@@ -1319,6 +1392,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     configAcessibilidadeEntity,
     const DeepCollectionEquality().hash(_roles),
     token,
+    firebaseToken,
     curso,
     condicao,
     laudo,
@@ -1348,9 +1422,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )
     aluno,
@@ -1361,9 +1436,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -1380,9 +1456,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )
@@ -1394,9 +1471,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )
     tutor,
@@ -1407,9 +1485,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -1426,6 +1505,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       curso,
       condicao,
       laudo,
@@ -1446,9 +1526,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -1459,9 +1540,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -1478,9 +1560,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -1492,9 +1575,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -1505,9 +1589,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -1524,6 +1609,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       curso,
       condicao,
       laudo,
@@ -1544,9 +1630,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -1557,9 +1644,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -1576,9 +1664,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -1590,9 +1679,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -1603,9 +1693,10 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -1624,6 +1715,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
         configAcessibilidadeEntity,
         roles,
         token,
+        firebaseToken,
         curso,
         condicao,
         laudo,
@@ -1690,9 +1782,10 @@ abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
     required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
-    required final ConfigAcblResponseModel configAcessibilidadeEntity,
+    final ConfigAcblResponseModel? configAcessibilidadeEntity,
     required final List<Roles> roles,
     final String? token,
+    final String? firebaseToken,
     required final CursoRequestModel curso,
     required final String condicao,
     required final String laudo,
@@ -1718,11 +1811,13 @@ abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
   @override
   DateTime get dataCriacao;
   @override
-  ConfigAcblResponseModel get configAcessibilidadeEntity;
+  ConfigAcblResponseModel? get configAcessibilidadeEntity;
   @override
   List<Roles> get roles;
   @override
   String? get token;
+  @override
+  String? get firebaseToken;
   CursoRequestModel get curso;
   String get condicao;
   String get laudo;
@@ -1755,15 +1850,16 @@ abstract class _$$ProfessorResponseModelImplCopyWith<$Res>
     int matricula,
     String? biografia,
     DateTime dataCriacao,
-    ConfigAcblResponseModel configAcessibilidadeEntity,
+    ConfigAcblResponseModel? configAcessibilidadeEntity,
     List<Roles> roles,
     String? token,
+    String? firebaseToken,
     String formacao,
     List<SimpleTopicoModel> topicos,
   });
 
   @override
-  $ConfigAcblResponseModelCopyWith<$Res> get configAcessibilidadeEntity;
+  $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
 }
 
 /// @nodoc
@@ -1787,9 +1883,10 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
     Object? matricula = null,
     Object? biografia = freezed,
     Object? dataCriacao = null,
-    Object? configAcessibilidadeEntity = null,
+    Object? configAcessibilidadeEntity = freezed,
     Object? roles = null,
     Object? token = freezed,
+    Object? firebaseToken = freezed,
     Object? formacao = null,
     Object? topicos = null,
   }) {
@@ -1826,10 +1923,10 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
                 : dataCriacao // ignore: cast_nullable_to_non_nullable
                     as DateTime,
         configAcessibilidadeEntity:
-            null == configAcessibilidadeEntity
+            freezed == configAcessibilidadeEntity
                 ? _value.configAcessibilidadeEntity
                 : configAcessibilidadeEntity // ignore: cast_nullable_to_non_nullable
-                    as ConfigAcblResponseModel,
+                    as ConfigAcblResponseModel?,
         roles:
             null == roles
                 ? _value._roles
@@ -1839,6 +1936,11 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
             freezed == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        firebaseToken:
+            freezed == firebaseToken
+                ? _value.firebaseToken
+                : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         formacao:
             null == formacao
@@ -1865,9 +1967,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required this.matricula,
     this.biografia,
     required this.dataCriacao,
-    required this.configAcessibilidadeEntity,
+    this.configAcessibilidadeEntity,
     required final List<Roles> roles,
     this.token,
+    this.firebaseToken,
     required this.formacao,
     required final List<SimpleTopicoModel> topicos,
     final String? $type,
@@ -1891,7 +1994,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
   @override
   final DateTime dataCriacao;
   @override
-  final ConfigAcblResponseModel configAcessibilidadeEntity;
+  final ConfigAcblResponseModel? configAcessibilidadeEntity;
   final List<Roles> _roles;
   @override
   List<Roles> get roles {
@@ -1902,6 +2005,8 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
 
   @override
   final String? token;
+  @override
+  final String? firebaseToken;
   @override
   final String formacao;
   final List<SimpleTopicoModel> _topicos;
@@ -1917,7 +2022,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.professor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, formacao: $formacao, topicos: $topicos)';
+    return 'UsuarioResponseModel.professor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, formacao: $formacao, topicos: $topicos)';
   }
 
   @override
@@ -1942,6 +2047,8 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
                     configAcessibilidadeEntity) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.firebaseToken, firebaseToken) ||
+                other.firebaseToken == firebaseToken) &&
             (identical(other.formacao, formacao) ||
                 other.formacao == formacao) &&
             const DeepCollectionEquality().equals(other._topicos, _topicos));
@@ -1960,6 +2067,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     configAcessibilidadeEntity,
     const DeepCollectionEquality().hash(_roles),
     token,
+    firebaseToken,
     formacao,
     const DeepCollectionEquality().hash(_topicos),
   );
@@ -1986,9 +2094,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )
     aluno,
@@ -1999,9 +2108,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -2018,9 +2128,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )
@@ -2032,9 +2143,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )
     tutor,
@@ -2045,9 +2157,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -2064,6 +2177,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       formacao,
       topicos,
     );
@@ -2079,9 +2193,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -2092,9 +2207,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -2111,9 +2227,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -2125,9 +2242,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -2138,9 +2256,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -2157,6 +2276,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       formacao,
       topicos,
     );
@@ -2172,9 +2292,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -2185,9 +2306,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -2204,9 +2326,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -2218,9 +2341,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -2231,9 +2355,10 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -2252,6 +2377,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
         configAcessibilidadeEntity,
         roles,
         token,
+        firebaseToken,
         formacao,
         topicos,
       );
@@ -2313,9 +2439,10 @@ abstract class _ProfessorResponseModel implements UsuarioResponseModel {
     required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
-    required final ConfigAcblResponseModel configAcessibilidadeEntity,
+    final ConfigAcblResponseModel? configAcessibilidadeEntity,
     required final List<Roles> roles,
     final String? token,
+    final String? firebaseToken,
     required final String formacao,
     required final List<SimpleTopicoModel> topicos,
   }) = _$ProfessorResponseModelImpl;
@@ -2336,11 +2463,13 @@ abstract class _ProfessorResponseModel implements UsuarioResponseModel {
   @override
   DateTime get dataCriacao;
   @override
-  ConfigAcblResponseModel get configAcessibilidadeEntity;
+  ConfigAcblResponseModel? get configAcessibilidadeEntity;
   @override
   List<Roles> get roles;
   @override
   String? get token;
+  @override
+  String? get firebaseToken;
   String get formacao;
   List<SimpleTopicoModel> get topicos;
 
@@ -2368,14 +2497,15 @@ abstract class _$$TutorResponseModelImplCopyWith<$Res>
     int matricula,
     String? biografia,
     DateTime dataCriacao,
-    ConfigAcblResponseModel configAcessibilidadeEntity,
+    ConfigAcblResponseModel? configAcessibilidadeEntity,
     List<Roles> roles,
     String? token,
+    String? firebaseToken,
     String especialidade,
   });
 
   @override
-  $ConfigAcblResponseModelCopyWith<$Res> get configAcessibilidadeEntity;
+  $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
 }
 
 /// @nodoc
@@ -2398,9 +2528,10 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
     Object? matricula = null,
     Object? biografia = freezed,
     Object? dataCriacao = null,
-    Object? configAcessibilidadeEntity = null,
+    Object? configAcessibilidadeEntity = freezed,
     Object? roles = null,
     Object? token = freezed,
+    Object? firebaseToken = freezed,
     Object? especialidade = null,
   }) {
     return _then(
@@ -2436,10 +2567,10 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
                 : dataCriacao // ignore: cast_nullable_to_non_nullable
                     as DateTime,
         configAcessibilidadeEntity:
-            null == configAcessibilidadeEntity
+            freezed == configAcessibilidadeEntity
                 ? _value.configAcessibilidadeEntity
                 : configAcessibilidadeEntity // ignore: cast_nullable_to_non_nullable
-                    as ConfigAcblResponseModel,
+                    as ConfigAcblResponseModel?,
         roles:
             null == roles
                 ? _value._roles
@@ -2449,6 +2580,11 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
             freezed == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        firebaseToken:
+            freezed == firebaseToken
+                ? _value.firebaseToken
+                : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         especialidade:
             null == especialidade
@@ -2470,9 +2606,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required this.matricula,
     this.biografia,
     required this.dataCriacao,
-    required this.configAcessibilidadeEntity,
+    this.configAcessibilidadeEntity,
     required final List<Roles> roles,
     this.token,
+    this.firebaseToken,
     required this.especialidade,
     final String? $type,
   }) : _roles = roles,
@@ -2494,7 +2631,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @override
   final DateTime dataCriacao;
   @override
-  final ConfigAcblResponseModel configAcessibilidadeEntity;
+  final ConfigAcblResponseModel? configAcessibilidadeEntity;
   final List<Roles> _roles;
   @override
   List<Roles> get roles {
@@ -2506,6 +2643,8 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @override
   final String? token;
   @override
+  final String? firebaseToken;
+  @override
   final String especialidade;
 
   @JsonKey(name: 'userType')
@@ -2513,7 +2652,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.tutor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, especialidade: $especialidade)';
+    return 'UsuarioResponseModel.tutor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade)';
   }
 
   @override
@@ -2538,6 +2677,8 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
                     configAcessibilidadeEntity) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.firebaseToken, firebaseToken) ||
+                other.firebaseToken == firebaseToken) &&
             (identical(other.especialidade, especialidade) ||
                 other.especialidade == especialidade));
   }
@@ -2555,6 +2696,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     configAcessibilidadeEntity,
     const DeepCollectionEquality().hash(_roles),
     token,
+    firebaseToken,
     especialidade,
   );
 
@@ -2579,9 +2721,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )
     aluno,
@@ -2592,9 +2735,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -2611,9 +2755,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )
@@ -2625,9 +2770,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )
     tutor,
@@ -2638,9 +2784,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -2657,6 +2804,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       especialidade,
     );
   }
@@ -2671,9 +2819,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -2684,9 +2833,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -2703,9 +2853,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -2717,9 +2868,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -2730,9 +2882,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -2749,6 +2902,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       especialidade,
     );
   }
@@ -2763,9 +2917,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -2776,9 +2931,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -2795,9 +2951,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -2809,9 +2966,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -2822,9 +2980,10 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -2843,6 +3002,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
         configAcessibilidadeEntity,
         roles,
         token,
+        firebaseToken,
         especialidade,
       );
     }
@@ -2903,9 +3063,10 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
     required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
-    required final ConfigAcblResponseModel configAcessibilidadeEntity,
+    final ConfigAcblResponseModel? configAcessibilidadeEntity,
     required final List<Roles> roles,
     final String? token,
+    final String? firebaseToken,
     required final String especialidade,
   }) = _$TutorResponseModelImpl;
 
@@ -2925,11 +3086,13 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
   @override
   DateTime get dataCriacao;
   @override
-  ConfigAcblResponseModel get configAcessibilidadeEntity;
+  ConfigAcblResponseModel? get configAcessibilidadeEntity;
   @override
   List<Roles> get roles;
   @override
   String? get token;
+  @override
+  String? get firebaseToken;
   String get especialidade;
 
   /// Create a copy of UsuarioResponseModel
@@ -2956,16 +3119,17 @@ abstract class _$$InterpreteResponseModelImplCopyWith<$Res>
     int matricula,
     String? biografia,
     DateTime dataCriacao,
-    ConfigAcblResponseModel configAcessibilidadeEntity,
+    ConfigAcblResponseModel? configAcessibilidadeEntity,
     List<Roles> roles,
     String? token,
+    String? firebaseToken,
     String especialidade,
     double salary,
     List<SimpleLibrasModel> libras,
   });
 
   @override
-  $ConfigAcblResponseModelCopyWith<$Res> get configAcessibilidadeEntity;
+  $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
 }
 
 /// @nodoc
@@ -2989,9 +3153,10 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
     Object? matricula = null,
     Object? biografia = freezed,
     Object? dataCriacao = null,
-    Object? configAcessibilidadeEntity = null,
+    Object? configAcessibilidadeEntity = freezed,
     Object? roles = null,
     Object? token = freezed,
+    Object? firebaseToken = freezed,
     Object? especialidade = null,
     Object? salary = null,
     Object? libras = null,
@@ -3029,10 +3194,10 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
                 : dataCriacao // ignore: cast_nullable_to_non_nullable
                     as DateTime,
         configAcessibilidadeEntity:
-            null == configAcessibilidadeEntity
+            freezed == configAcessibilidadeEntity
                 ? _value.configAcessibilidadeEntity
                 : configAcessibilidadeEntity // ignore: cast_nullable_to_non_nullable
-                    as ConfigAcblResponseModel,
+                    as ConfigAcblResponseModel?,
         roles:
             null == roles
                 ? _value._roles
@@ -3042,6 +3207,11 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
             freezed == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        firebaseToken:
+            freezed == firebaseToken
+                ? _value.firebaseToken
+                : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         especialidade:
             null == especialidade
@@ -3073,9 +3243,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required this.matricula,
     this.biografia,
     required this.dataCriacao,
-    required this.configAcessibilidadeEntity,
+    this.configAcessibilidadeEntity,
     required final List<Roles> roles,
     this.token,
+    this.firebaseToken,
     required this.especialidade,
     required this.salary,
     required final List<SimpleLibrasModel> libras,
@@ -3100,7 +3271,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   @override
   final DateTime dataCriacao;
   @override
-  final ConfigAcblResponseModel configAcessibilidadeEntity;
+  final ConfigAcblResponseModel? configAcessibilidadeEntity;
   final List<Roles> _roles;
   @override
   List<Roles> get roles {
@@ -3111,6 +3282,8 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
 
   @override
   final String? token;
+  @override
+  final String? firebaseToken;
   @override
   final String especialidade;
   @override
@@ -3128,7 +3301,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.interprete(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, especialidade: $especialidade, salary: $salary, libras: $libras)';
+    return 'UsuarioResponseModel.interprete(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade, salary: $salary, libras: $libras)';
   }
 
   @override
@@ -3153,6 +3326,8 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
                     configAcessibilidadeEntity) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.firebaseToken, firebaseToken) ||
+                other.firebaseToken == firebaseToken) &&
             (identical(other.especialidade, especialidade) ||
                 other.especialidade == especialidade) &&
             (identical(other.salary, salary) || other.salary == salary) &&
@@ -3172,6 +3347,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     configAcessibilidadeEntity,
     const DeepCollectionEquality().hash(_roles),
     token,
+    firebaseToken,
     especialidade,
     salary,
     const DeepCollectionEquality().hash(_libras),
@@ -3197,9 +3373,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )
     aluno,
@@ -3210,9 +3387,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -3229,9 +3407,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )
@@ -3243,9 +3422,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )
     tutor,
@@ -3256,9 +3436,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -3275,6 +3456,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       especialidade,
       salary,
       libras,
@@ -3291,9 +3473,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -3304,9 +3487,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -3323,9 +3507,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -3337,9 +3522,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -3350,9 +3536,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -3369,6 +3556,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       configAcessibilidadeEntity,
       roles,
       token,
+      firebaseToken,
       especialidade,
       salary,
       libras,
@@ -3385,9 +3573,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
     )?
     aluno,
@@ -3398,9 +3587,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       CursoRequestModel curso,
       String condicao,
       String laudo,
@@ -3417,9 +3607,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String formacao,
       List<SimpleTopicoModel> topicos,
     )?
@@ -3431,9 +3622,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
     )?
     tutor,
@@ -3444,9 +3636,10 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       int matricula,
       String? biografia,
       DateTime dataCriacao,
-      ConfigAcblResponseModel configAcessibilidadeEntity,
+      ConfigAcblResponseModel? configAcessibilidadeEntity,
       List<Roles> roles,
       String? token,
+      String? firebaseToken,
       String especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
@@ -3465,6 +3658,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
         configAcessibilidadeEntity,
         roles,
         token,
+        firebaseToken,
         especialidade,
         salary,
         libras,
@@ -3527,9 +3721,10 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
     required final int matricula,
     final String? biografia,
     required final DateTime dataCriacao,
-    required final ConfigAcblResponseModel configAcessibilidadeEntity,
+    final ConfigAcblResponseModel? configAcessibilidadeEntity,
     required final List<Roles> roles,
     final String? token,
+    final String? firebaseToken,
     required final String especialidade,
     required final double salary,
     required final List<SimpleLibrasModel> libras,
@@ -3551,11 +3746,13 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
   @override
   DateTime get dataCriacao;
   @override
-  ConfigAcblResponseModel get configAcessibilidadeEntity;
+  ConfigAcblResponseModel? get configAcessibilidadeEntity;
   @override
   List<Roles> get roles;
   @override
   String? get token;
+  @override
+  String? get firebaseToken;
   String get especialidade;
   double get salary;
   List<SimpleLibrasModel> get libras;

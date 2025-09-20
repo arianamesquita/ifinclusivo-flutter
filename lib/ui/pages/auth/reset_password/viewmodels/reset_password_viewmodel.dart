@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:if_inclusivo/data/repositories/userRepository/auth_repository.dart';
+import 'package:if_inclusivo/data/repositories/auth_repository.dart';
 enum ResetPasswordState {
   idle,
   loading,
