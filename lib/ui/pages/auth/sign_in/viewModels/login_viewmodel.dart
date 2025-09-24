@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:if_inclusivo/data/repositories/auth_repository.dart';
+import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
+import 'package:result_dart/result_dart.dart';
 
 import '../../../../../utils/before_unload_manager.dart';
 enum EmailState{
@@ -17,16 +20,15 @@ class LoginViewModel extends ChangeNotifier{
   EmailState _emailState = EmailState.idle;
   EmailState get emailState => _emailState;
 
+  final ValueNotifier<bool> isLogged = ValueNotifier<bool>(false);
+
   sendToken(email) async {
     _setEmailState(EmailState.loading);
     notifyListeners();
     try {
       await _authRepository.forgotPassword(email);
       _setEmailState(EmailState.success);
-
-
     } on DioException catch (e) {
-
       switch (e.response?.statusCode) {
         case 404:
           _setEmailState(EmailState.error);
@@ -41,7 +43,24 @@ class LoginViewModel extends ChangeNotifier{
     }
   }
 
-
+  Future<bool> login(LoginRequestModel credentials) async {
+    try {
+      final UsuarioResponseModel result = await _authRepository
+          .login(credentials.login, credentials.senha);
+      debugPrint("Login realizado com sucesso");
+      isLogged.value = true;
+      return true;
+    } on DioException catch (e){
+      debugPrint("Erro ${e.response?.statusCode ?? ''} : ${e.message}");
+      isLogged.value = false;
+      return false;
+    } catch (e) {
+      debugPrint("Erro inesperado no login");
+      isLogged.value = false;
+      notifyListeners();
+      return false;
+    }
+  }
 
   void resetState() {
     _setEmailState(EmailState.idle);
@@ -53,7 +72,6 @@ class LoginViewModel extends ChangeNotifier{
     } else {
       _unloadManager.disable();
     }
-
     _emailState = newState;
     notifyListeners();
   }

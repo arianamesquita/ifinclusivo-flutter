@@ -144,7 +144,9 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
                 spacing: 4,
                 children: [
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/login');
+                    },
                     style: FilledButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.tertiaryContainer,

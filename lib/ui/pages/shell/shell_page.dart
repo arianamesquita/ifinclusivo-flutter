@@ -32,7 +32,7 @@ class _ShellPageState extends State<ShellPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoggedIn = true;
+    final isLoggedIn = false;
     final userRoles = [...Roles.values];
 
     final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
