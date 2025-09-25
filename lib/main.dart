@@ -13,7 +13,6 @@ import 'config/firebase_options.dart';
 // main.dart
 
 void main() async {
-  // Inicializações que devem ocorrer antes de runApp
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: 'assets/env/.env');
   await Firebase.initializeApp(
@@ -22,12 +21,10 @@ void main() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
 
-  // Agora a main apenas inicia o MyApp, passando as dependências iniciais
   runApp(MyApp(
     sharedPreferences: sharedPreferences,
   ));
 }
-// MyApp.dart
 
 class MyApp extends StatelessWidget {
   final SharedPreferences sharedPreferences;
