@@ -3,11 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:if_inclusivo/domain/validators/email_validador.dart';
+import 'package:if_inclusivo/domain/validators/login_validator.dart';
+import 'package:if_inclusivo/domain/validators/password_validator.dart';
 import 'package:if_inclusivo/ui/core/widgets/custom_text_field.dart';
 import 'package:if_inclusivo/ui/core/widgets/password_text_field.dart';
 import 'package:if_inclusivo/ui/pages/auth/modal/auth_modals.dart';
 import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
+import 'package:lucid_validation/lucid_validation.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../routing/app_router.dart';
@@ -28,10 +33,52 @@ class LoginDialogContent extends StatefulWidget {
 }
 
 class _LoginDialogContentState extends State<LoginDialogContent> {
+  final TextEditingController _loginController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final EmailFieldValidator emailValidator = EmailFieldValidator();
+  final PasswordFieldValidator senhaValidator = PasswordFieldValidator();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final LoginFieldValidator loginValidator = LoginFieldValidator();
+  final LoginModel loginModel = LoginModel();
+
+  bool isEmailError = false;
+  String errorEmail = '';
+  bool isSenhaError = false;
+  String errorSenha = '';
+  bool isValid = false;
+  bool isLoading = false;
+
   @override
   void initState() {
-
     super.initState();
+  }
+  @override
+  void dispose() {
+    _loginController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+  hasListen(){
+    final viewModel = context.watch<LoginViewModel>();
+    if(viewModel.isLogged.value == true) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(
+        const SnackBar(
+          content: Text( 'Usuário logado com sucesso!'),
+          backgroundColor:
+          Colors.green,
+          duration: Duration(
+            seconds: 5,
+          ),
+        ),
+      );
+      context.pushReplacement('/home');
+    }
+  }
+  bool _validateForm() {
+    final ValidationResult result = loginValidator.validate(loginModel);
+    return result.isValid;
   }
   @override
   Widget build(BuildContext context) {
@@ -86,6 +133,8 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                               ),
                               SizedBox(height: 25),
                               Form(
+                                key: _formKey,
+                                onChanged: _validateForm,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -110,7 +159,25 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                     CustomTextField(
                                       labelText: 'Login',
                                       placeholderText: 'Digite seu login',
-                                      onChanged: (String text) {},
+                                      validator: (String? value){
+                                        final email = EmailModel(email: value ?? '');
+                                        final ValidationResult result = emailValidator.validate(email);
+                                        if (result.isValid) {
+                                          isEmailError == false;
+                                          return null;
+                                        }
+                                        isEmailError == true;
+                                        errorEmail =
+                                        'E-mail inválido, '
+                                            'ex: joaosilva@gmail.com';
+                                        return errorEmail;
+                                      },
+                                      onChanged: (String text) {
+                                        setState(() {
+                                          _loginController.text = text;
+                                          isValid = _validateForm();
+                                        });
+                                      },
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(15.0),
@@ -131,7 +198,24 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                       ),
                                     ),
                                     PasswordTextField(
-                                      onValueChange: (String text) {},
+                                      validator: (String? value) {
+                                        final password = PasswordModel(password: value ?? '');
+                                        final ValidationResult result = senhaValidator.validate(password);
+                                        if (result.isValid) {
+                                          isSenhaError == false;
+                                          return null;
+                                        }
+                                        isSenhaError == true;
+                                        errorSenha =
+                                        'Deve conter 6 letras.';
+                                        return errorSenha;
+                                      },
+                                      onValueChange: (String text) {
+                                        setState(() {
+                                          _passwordController.text = text;
+                                          isValid = _validateForm();
+                                        });
+                                      },
                                       title: 'Senha',
                                       placeholder: 'Digite sua Senha',
                                     ),
@@ -139,7 +223,20 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                     SizedBox(
                                       width: double.infinity,
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () async{
+                                          final credentials = LoginRequestModel
+                                            (login: _loginController.text,
+                                              senha: _passwordController.text);
+                                          final success = await viewModel.login(credentials);
+
+                                          if (success) {
+                                            ForumRouter().go(context);
+                                          }else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Usuário ou senha inválidos")),
+                                            );
+                                          }
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Color.fromRGBO(
                                             76,

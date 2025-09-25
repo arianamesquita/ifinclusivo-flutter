@@ -12,6 +12,9 @@ import 'package:if_inclusivo/ui/pages/shell/app_destinations.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../../data/repositories/auth_repository.dart';
+import '../../../domain/models/api/response/gen_responses.dart';
+
 class ShellPage extends StatefulWidget {
   const ShellPage({super.key, required this.child});
   final StatefulNavigationShell child;
@@ -32,24 +35,37 @@ class _ShellPageState extends State<ShellPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoggedIn = true;
-    final userRoles = [...Roles.values];
+    final authRepository = context.read<AuthRepository>();
 
-    final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
-    var deviceType = ResponsiveUtils.getDeviceType(context);
-    return deviceType == DeviceScreenType.mobile
-        ? _buildAppMobile(
-          auth,
-          auth.allowedBranchesMobile(),
-          context,
-          isLoggedIn,
-        )
-        : _buildAppWebAndTablet(
-          auth,
-          auth.allowedBranches(),
-          context,
-          isLoggedIn,
-        );
+    return StreamBuilder<UsuarioResponseModel?>(
+      stream: authRepository.authStateChanges,
+
+      initialData: authRepository.currentUser,
+      builder: (context, snapshot) {
+        final UsuarioResponseModel? currentUser = snapshot.data;
+        final bool isLoggedIn = currentUser != null;
+
+        final List<Roles> userRoles = currentUser?.roles?? [];
+
+        final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
+        var deviceType = ResponsiveUtils.getDeviceType(context);
+        if (deviceType == DeviceScreenType.mobile) {
+          return _buildAppMobile(
+            auth,
+            auth.allowedBranchesMobile(),
+            context,
+            isLoggedIn,
+          );
+        } else {
+          return _buildAppWebAndTablet(
+            auth,
+            auth.allowedBranches(),
+            context,
+            isLoggedIn,
+          );
+        }
+      },
+    );
   }
 
   Scaffold _buildAppWebAndTablet(

@@ -5,6 +5,7 @@ import 'package:if_inclusivo/data/services/impl/auth_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/firestore_chat_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/user_api_service_impl.dart';
 import 'package:if_inclusivo/data/services/user_api_service.dart';
+import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/auth/reset_password/viewmodels/reset_password_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/auth/token/viewmodels/validate_token_viewmodel.dart';
@@ -19,10 +20,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dio_config.dart';
 
-List<SingleChildWidget> providers(SharedPreferences prefs,GoRouter router) {
+List<SingleChildWidget> providers(SharedPreferences prefs) {
   return [
     Provider<SharedPreferences>.value(value: prefs),
-    Provider<GoRouter>.value(value: router),
     ..._servicesData,
     ..._repositoriesData,
     ..._viewModelsProviders,
@@ -35,7 +35,6 @@ List<SingleChildWidget> get _servicesData {
     Provider<Dio>(
       create:
           (context) => DioConfig.createDio(
-            context.read<GoRouter>(),
             context.read<SharedPreferences>(),
           ),
     ),
@@ -43,10 +42,10 @@ List<SingleChildWidget> get _servicesData {
     Provider<AuthService>(
       create: (context) => AuthServiceImpl(context.read<Dio>()),
     ),
-    Provider<FirestoreChatService>(create: (_) => FirestoreChatServiceImpl()),
     Provider<UserApiService>(
       create: (context) => UserApiServiceImpl(dio: context.read<Dio>()),
     ),
+    Provider<FirestoreChatService>(create: (_) => FirestoreChatServiceImpl()),
   ];
 }
 
@@ -63,6 +62,11 @@ List<SingleChildWidget> get _repositoriesData {
         if (repo is AuthRepositoryImpl) {
           repo.dispose();
         }
+      },
+    ),
+    Provider<GoRouter>(
+      create: (context) {
+        return createRouter(authRepository: context.read<AuthRepository>());
       },
     ),
   ];

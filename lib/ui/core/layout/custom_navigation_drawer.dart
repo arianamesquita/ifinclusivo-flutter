@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/data/repositories/auth_repository.dart';
+import 'package:provider/provider.dart';
 
 import '../../../routing/app_router.dart';
 import '../widgets/hoverable_logo.dart';
@@ -118,13 +120,14 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
   }
 
   Widget _buildTrailing(BuildContext context) {
+    final repository = context.read<AuthRepository>();
     return Column(
       children: [
         if (widget.isLoggedIn)
           Padding(
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
             child: FilledButton(
-              onPressed: () {},
+              onPressed: () => repository.logout(),
               style: FilledButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.error,
                 foregroundColor: Theme.of(context).colorScheme.onError,
@@ -148,7 +151,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
             child: FilledButton(
-              onPressed: () {},
+              onPressed: ()=> LoginRoute().push(context),
               style: FilledButton.styleFrom(
                 backgroundColor:
                     Theme.of(context).colorScheme.tertiaryContainer,

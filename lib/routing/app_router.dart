@@ -11,6 +11,7 @@ import 'package:if_inclusivo/ui/pages/forum/publicacao/publicacao_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/midia_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_page.dart';
 
+import '../data/repositories/auth_repository.dart';
 import '../ui/core/layout/custom_container_shell.dart';
 import '../ui/exceptions/internal_server_error_500.dart';
 import '../ui/exceptions/unauthorized_401.dart';
@@ -22,6 +23,7 @@ import '../ui/pages/presentation/about_napne/about_napne_page.dart';
 import '../ui/pages/presentation/presentation_page.dart';
 import '../ui/pages/shell/shell_page.dart';
 import '../utils/dialog_page.dart';
+import '../utils/stream_listenable.dart';
 
 // gerador de rota único
 part 'app_router.g.dart';
@@ -49,11 +51,33 @@ part 'pages/auth/shell_auth_router.dart';
 
 part 'pages/exceptions/exceptions_routes.dart';
 
-GoRouter createRouter() =>
-    GoRouter(
-        initialLocation: ForumRouter().location,
-        errorBuilder: (context, state){
-            return NotFound404();
-        },
-        routes: $appRoutes
-    );
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+
+GoRouter createRouter({required AuthRepository authRepository})  {
+  final authListenable = StreamListenable(authRepository.authStateChanges);
+  return  GoRouter(
+    refreshListenable: authListenable,
+    initialLocation: AppRoutes.forum,
+    errorBuilder: (context, state) {
+      return const NotFound404();
+    },
+    redirect: (BuildContext context, GoRouterState state) {
+      final bool loggedIn = authRepository.currentUser != null;
+      final String location = state.matchedLocation;
+
+      final isAuthRoute = location == AppRoutes.signIn || location == AppRoutes.signUp;
+
+      if (loggedIn && isAuthRoute) {
+        return AppRoutes.forum;
+      }
+
+      if (!loggedIn && !isPublicRoute(location)) {
+        return AppRoutes.signIn;
+      }
+
+      return null;
+    },
+    routes: $appRoutes,
+  );
+}
