@@ -27,6 +27,7 @@ void main() async {
     sharedPreferences: sharedPreferences,
   ));
 }
+
 class MyApp extends StatelessWidget {
   final GoRouter router;
   final SharedPreferences sharedPreferences; // Recebe o SharedPreferences

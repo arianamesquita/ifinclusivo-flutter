@@ -179,15 +179,6 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
     ),
     StatefulShellBranchData.$branch(
       routes: [
-        GoRouteData.$route(
-          path: '/app/topicos',
-
-          factory: _$TopicoRouter._fromState,
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
         StatefulShellRouteData.$route(
           factory: $ChatShellExtension._fromState,
           branches: [
@@ -302,26 +293,6 @@ mixin _$MidiaRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/libras/publicacoes/midia');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-mixin _$TopicoRouter on GoRouteData {
-  static TopicoRouter _fromState(GoRouterState state) => const TopicoRouter();
-
-  @override
-  String get location => GoRouteData.$location('/app/topicos');
 
   @override
   void go(BuildContext context) => context.go(location);

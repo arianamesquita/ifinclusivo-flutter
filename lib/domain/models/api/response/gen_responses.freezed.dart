@@ -3765,429 +3765,253 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
   get copyWith => throw _privateConstructorUsedError;
 }
 
-TopicoResponseModel _$TopicoResponseModelFromJson(Map<String, dynamic> json) {
-  return _TopicoResponseModel.fromJson(json);
+AutorCardModel _$AutorCardModelFromJson(Map<String, dynamic> json) {
+  return _AutorCardModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TopicoResponseModel {
-  String get id => throw _privateConstructorUsedError;
-  String get titulo => throw _privateConstructorUsedError;
-  String get descricao => throw _privateConstructorUsedError;
-  Categorias get categoria => throw _privateConstructorUsedError;
-  DateTime get dataCriacao => throw _privateConstructorUsedError;
-  SimpleUsuarioModel get professor =>
-      throw _privateConstructorUsedError; // Usando a union SimpleUsuarioModel
-  List<SimplePublicacaoModel> get publicacoes =>
-      throw _privateConstructorUsedError;
+mixin _$AutorCardModel {
+  int get id => throw _privateConstructorUsedError;
+  String get nome => throw _privateConstructorUsedError;
 
-  /// Serializes this TopicoResponseModel to a JSON map.
+  /// Serializes this AutorCardModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of TopicoResponseModel
+  /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TopicoResponseModelCopyWith<TopicoResponseModel> get copyWith =>
+  $AutorCardModelCopyWith<AutorCardModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TopicoResponseModelCopyWith<$Res> {
-  factory $TopicoResponseModelCopyWith(
-    TopicoResponseModel value,
-    $Res Function(TopicoResponseModel) then,
-  ) = _$TopicoResponseModelCopyWithImpl<$Res, TopicoResponseModel>;
+abstract class $AutorCardModelCopyWith<$Res> {
+  factory $AutorCardModelCopyWith(
+    AutorCardModel value,
+    $Res Function(AutorCardModel) then,
+  ) = _$AutorCardModelCopyWithImpl<$Res, AutorCardModel>;
   @useResult
-  $Res call({
-    String id,
-    String titulo,
-    String descricao,
-    Categorias categoria,
-    DateTime dataCriacao,
-    SimpleUsuarioModel professor,
-    List<SimplePublicacaoModel> publicacoes,
-  });
-
-  $SimpleUsuarioModelCopyWith<$Res> get professor;
+  $Res call({int id, String nome});
 }
 
 /// @nodoc
-class _$TopicoResponseModelCopyWithImpl<$Res, $Val extends TopicoResponseModel>
-    implements $TopicoResponseModelCopyWith<$Res> {
-  _$TopicoResponseModelCopyWithImpl(this._value, this._then);
+class _$AutorCardModelCopyWithImpl<$Res, $Val extends AutorCardModel>
+    implements $AutorCardModelCopyWith<$Res> {
+  _$AutorCardModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TopicoResponseModel
+  /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? titulo = null,
-    Object? descricao = null,
-    Object? categoria = null,
-    Object? dataCriacao = null,
-    Object? professor = null,
-    Object? publicacoes = null,
-  }) {
+  $Res call({Object? id = null, Object? nome = null}) {
     return _then(
       _value.copyWith(
             id:
                 null == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            nome:
+                null == nome
+                    ? _value.nome
+                    : nome // ignore: cast_nullable_to_non_nullable
                         as String,
-            titulo:
-                null == titulo
-                    ? _value.titulo
-                    : titulo // ignore: cast_nullable_to_non_nullable
-                        as String,
-            descricao:
-                null == descricao
-                    ? _value.descricao
-                    : descricao // ignore: cast_nullable_to_non_nullable
-                        as String,
-            categoria:
-                null == categoria
-                    ? _value.categoria
-                    : categoria // ignore: cast_nullable_to_non_nullable
-                        as Categorias,
-            dataCriacao:
-                null == dataCriacao
-                    ? _value.dataCriacao
-                    : dataCriacao // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            professor:
-                null == professor
-                    ? _value.professor
-                    : professor // ignore: cast_nullable_to_non_nullable
-                        as SimpleUsuarioModel,
-            publicacoes:
-                null == publicacoes
-                    ? _value.publicacoes
-                    : publicacoes // ignore: cast_nullable_to_non_nullable
-                        as List<SimplePublicacaoModel>,
           )
           as $Val,
     );
   }
-
-  /// Create a copy of TopicoResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SimpleUsuarioModelCopyWith<$Res> get professor {
-    return $SimpleUsuarioModelCopyWith<$Res>(_value.professor, (value) {
-      return _then(_value.copyWith(professor: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$TopicoResponseModelImplCopyWith<$Res>
-    implements $TopicoResponseModelCopyWith<$Res> {
-  factory _$$TopicoResponseModelImplCopyWith(
-    _$TopicoResponseModelImpl value,
-    $Res Function(_$TopicoResponseModelImpl) then,
-  ) = __$$TopicoResponseModelImplCopyWithImpl<$Res>;
+abstract class _$$AutorCardModelImplCopyWith<$Res>
+    implements $AutorCardModelCopyWith<$Res> {
+  factory _$$AutorCardModelImplCopyWith(
+    _$AutorCardModelImpl value,
+    $Res Function(_$AutorCardModelImpl) then,
+  ) = __$$AutorCardModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String titulo,
-    String descricao,
-    Categorias categoria,
-    DateTime dataCriacao,
-    SimpleUsuarioModel professor,
-    List<SimplePublicacaoModel> publicacoes,
-  });
-
-  @override
-  $SimpleUsuarioModelCopyWith<$Res> get professor;
+  $Res call({int id, String nome});
 }
 
 /// @nodoc
-class __$$TopicoResponseModelImplCopyWithImpl<$Res>
-    extends _$TopicoResponseModelCopyWithImpl<$Res, _$TopicoResponseModelImpl>
-    implements _$$TopicoResponseModelImplCopyWith<$Res> {
-  __$$TopicoResponseModelImplCopyWithImpl(
-    _$TopicoResponseModelImpl _value,
-    $Res Function(_$TopicoResponseModelImpl) _then,
+class __$$AutorCardModelImplCopyWithImpl<$Res>
+    extends _$AutorCardModelCopyWithImpl<$Res, _$AutorCardModelImpl>
+    implements _$$AutorCardModelImplCopyWith<$Res> {
+  __$$AutorCardModelImplCopyWithImpl(
+    _$AutorCardModelImpl _value,
+    $Res Function(_$AutorCardModelImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of TopicoResponseModel
+  /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? titulo = null,
-    Object? descricao = null,
-    Object? categoria = null,
-    Object? dataCriacao = null,
-    Object? professor = null,
-    Object? publicacoes = null,
-  }) {
+  $Res call({Object? id = null, Object? nome = null}) {
     return _then(
-      _$TopicoResponseModelImpl(
+      _$AutorCardModelImpl(
         id:
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        nome:
+            null == nome
+                ? _value.nome
+                : nome // ignore: cast_nullable_to_non_nullable
                     as String,
-        titulo:
-            null == titulo
-                ? _value.titulo
-                : titulo // ignore: cast_nullable_to_non_nullable
-                    as String,
-        descricao:
-            null == descricao
-                ? _value.descricao
-                : descricao // ignore: cast_nullable_to_non_nullable
-                    as String,
-        categoria:
-            null == categoria
-                ? _value.categoria
-                : categoria // ignore: cast_nullable_to_non_nullable
-                    as Categorias,
-        dataCriacao:
-            null == dataCriacao
-                ? _value.dataCriacao
-                : dataCriacao // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        professor:
-            null == professor
-                ? _value.professor
-                : professor // ignore: cast_nullable_to_non_nullable
-                    as SimpleUsuarioModel,
-        publicacoes:
-            null == publicacoes
-                ? _value._publicacoes
-                : publicacoes // ignore: cast_nullable_to_non_nullable
-                    as List<SimplePublicacaoModel>,
       ),
     );
   }
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$AutorCardModelImpl implements _AutorCardModel {
+  const _$AutorCardModelImpl({required this.id, required this.nome});
 
-@JsonSerializable(explicitToJson: true)
-class _$TopicoResponseModelImpl implements _TopicoResponseModel {
-  const _$TopicoResponseModelImpl({
-    required this.id,
-    required this.titulo,
-    required this.descricao,
-    required this.categoria,
-    required this.dataCriacao,
-    required this.professor,
-    required final List<SimplePublicacaoModel> publicacoes,
-  }) : _publicacoes = publicacoes;
-
-  factory _$TopicoResponseModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TopicoResponseModelImplFromJson(json);
+  factory _$AutorCardModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AutorCardModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
-  final String titulo;
-  @override
-  final String descricao;
-  @override
-  final Categorias categoria;
-  @override
-  final DateTime dataCriacao;
-  @override
-  final SimpleUsuarioModel professor;
-  // Usando a union SimpleUsuarioModel
-  final List<SimplePublicacaoModel> _publicacoes;
-  // Usando a union SimpleUsuarioModel
-  @override
-  List<SimplePublicacaoModel> get publicacoes {
-    if (_publicacoes is EqualUnmodifiableListView) return _publicacoes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_publicacoes);
-  }
+  final String nome;
 
   @override
   String toString() {
-    return 'TopicoResponseModel(id: $id, titulo: $titulo, descricao: $descricao, categoria: $categoria, dataCriacao: $dataCriacao, professor: $professor, publicacoes: $publicacoes)';
+    return 'AutorCardModel(id: $id, nome: $nome)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TopicoResponseModelImpl &&
+            other is _$AutorCardModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.titulo, titulo) || other.titulo == titulo) &&
-            (identical(other.descricao, descricao) ||
-                other.descricao == descricao) &&
-            (identical(other.categoria, categoria) ||
-                other.categoria == categoria) &&
-            (identical(other.dataCriacao, dataCriacao) ||
-                other.dataCriacao == dataCriacao) &&
-            (identical(other.professor, professor) ||
-                other.professor == professor) &&
-            const DeepCollectionEquality().equals(
-              other._publicacoes,
-              _publicacoes,
-            ));
+            (identical(other.nome, nome) || other.nome == nome));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    titulo,
-    descricao,
-    categoria,
-    dataCriacao,
-    professor,
-    const DeepCollectionEquality().hash(_publicacoes),
-  );
+  int get hashCode => Object.hash(runtimeType, id, nome);
 
-  /// Create a copy of TopicoResponseModel
+  /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TopicoResponseModelImplCopyWith<_$TopicoResponseModelImpl> get copyWith =>
-      __$$TopicoResponseModelImplCopyWithImpl<_$TopicoResponseModelImpl>(
+  _$$AutorCardModelImplCopyWith<_$AutorCardModelImpl> get copyWith =>
+      __$$AutorCardModelImplCopyWithImpl<_$AutorCardModelImpl>(
         this,
         _$identity,
       );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TopicoResponseModelImplToJson(this);
+    return _$$AutorCardModelImplToJson(this);
   }
 }
 
-abstract class _TopicoResponseModel implements TopicoResponseModel {
-  const factory _TopicoResponseModel({
-    required final String id,
-    required final String titulo,
-    required final String descricao,
-    required final Categorias categoria,
-    required final DateTime dataCriacao,
-    required final SimpleUsuarioModel professor,
-    required final List<SimplePublicacaoModel> publicacoes,
-  }) = _$TopicoResponseModelImpl;
+abstract class _AutorCardModel implements AutorCardModel {
+  const factory _AutorCardModel({
+    required final int id,
+    required final String nome,
+  }) = _$AutorCardModelImpl;
 
-  factory _TopicoResponseModel.fromJson(Map<String, dynamic> json) =
-      _$TopicoResponseModelImpl.fromJson;
+  factory _AutorCardModel.fromJson(Map<String, dynamic> json) =
+      _$AutorCardModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
-  String get titulo;
-  @override
-  String get descricao;
-  @override
-  Categorias get categoria;
-  @override
-  DateTime get dataCriacao;
-  @override
-  SimpleUsuarioModel get professor; // Usando a union SimpleUsuarioModel
-  @override
-  List<SimplePublicacaoModel> get publicacoes;
+  String get nome;
 
-  /// Create a copy of TopicoResponseModel
+  /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TopicoResponseModelImplCopyWith<_$TopicoResponseModelImpl> get copyWith =>
+  _$$AutorCardModelImplCopyWith<_$AutorCardModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-PublicacaoResponseModel _$PublicacaoResponseModelFromJson(
-  Map<String, dynamic> json,
-) {
-  return _PublicacaoResponseModel.fromJson(json);
+PublicacaoCardModel _$PublicacaoCardModelFromJson(Map<String, dynamic> json) {
+  return _PublicacaoCardModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PublicacaoResponseModel {
-  String get id => throw _privateConstructorUsedError;
+mixin _$PublicacaoCardModel {
+  int get id => throw _privateConstructorUsedError;
   String get titulo => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  String? get urlVideo => throw _privateConstructorUsedError;
-  String? get urlFoto => throw _privateConstructorUsedError;
+  String get texto => throw _privateConstructorUsedError;
   DateTime get dataCriacao => throw _privateConstructorUsedError;
-  SimpleUsuarioModel get usuario => throw _privateConstructorUsedError;
-  SimpleTopicoModel get topico => throw _privateConstructorUsedError;
-  List<SimpleComentarioModel> get comentarios =>
-      throw _privateConstructorUsedError;
-  List<SimpleUsuarioModel> get likeBy => throw _privateConstructorUsedError;
+  AutorCardModel get autor => throw _privateConstructorUsedError;
+  Set<Categorias> get categorias => throw _privateConstructorUsedError;
+  int get likesCount => throw _privateConstructorUsedError;
+  int get comentariosCount => throw _privateConstructorUsedError;
+  bool get isLiked => throw _privateConstructorUsedError;
 
-  /// Serializes this PublicacaoResponseModel to a JSON map.
+  /// Serializes this PublicacaoCardModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of PublicacaoResponseModel
+  /// Create a copy of PublicacaoCardModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PublicacaoResponseModelCopyWith<PublicacaoResponseModel> get copyWith =>
+  $PublicacaoCardModelCopyWith<PublicacaoCardModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PublicacaoResponseModelCopyWith<$Res> {
-  factory $PublicacaoResponseModelCopyWith(
-    PublicacaoResponseModel value,
-    $Res Function(PublicacaoResponseModel) then,
-  ) = _$PublicacaoResponseModelCopyWithImpl<$Res, PublicacaoResponseModel>;
+abstract class $PublicacaoCardModelCopyWith<$Res> {
+  factory $PublicacaoCardModelCopyWith(
+    PublicacaoCardModel value,
+    $Res Function(PublicacaoCardModel) then,
+  ) = _$PublicacaoCardModelCopyWithImpl<$Res, PublicacaoCardModel>;
   @useResult
   $Res call({
-    String id,
+    int id,
     String titulo,
-    String text,
-    String? urlVideo,
-    String? urlFoto,
+    String texto,
     DateTime dataCriacao,
-    SimpleUsuarioModel usuario,
-    SimpleTopicoModel topico,
-    List<SimpleComentarioModel> comentarios,
-    List<SimpleUsuarioModel> likeBy,
+    AutorCardModel autor,
+    Set<Categorias> categorias,
+    int likesCount,
+    int comentariosCount,
+    bool isLiked,
   });
 
-  $SimpleUsuarioModelCopyWith<$Res> get usuario;
-  $SimpleTopicoModelCopyWith<$Res> get topico;
+  $AutorCardModelCopyWith<$Res> get autor;
 }
 
 /// @nodoc
-class _$PublicacaoResponseModelCopyWithImpl<
-  $Res,
-  $Val extends PublicacaoResponseModel
->
-    implements $PublicacaoResponseModelCopyWith<$Res> {
-  _$PublicacaoResponseModelCopyWithImpl(this._value, this._then);
+class _$PublicacaoCardModelCopyWithImpl<$Res, $Val extends PublicacaoCardModel>
+    implements $PublicacaoCardModelCopyWith<$Res> {
+  _$PublicacaoCardModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PublicacaoResponseModel
+  /// Create a copy of PublicacaoCardModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? titulo = null,
-    Object? text = null,
-    Object? urlVideo = freezed,
-    Object? urlFoto = freezed,
+    Object? texto = null,
     Object? dataCriacao = null,
-    Object? usuario = null,
-    Object? topico = null,
-    Object? comentarios = null,
-    Object? likeBy = null,
+    Object? autor = null,
+    Object? categorias = null,
+    Object? likesCount = null,
+    Object? comentariosCount = null,
+    Object? isLiked = null,
   }) {
     return _then(
       _value.copyWith(
@@ -4195,187 +4019,159 @@ class _$PublicacaoResponseModelCopyWithImpl<
                 null == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             titulo:
                 null == titulo
                     ? _value.titulo
                     : titulo // ignore: cast_nullable_to_non_nullable
                         as String,
-            text:
-                null == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
+            texto:
+                null == texto
+                    ? _value.texto
+                    : texto // ignore: cast_nullable_to_non_nullable
                         as String,
-            urlVideo:
-                freezed == urlVideo
-                    ? _value.urlVideo
-                    : urlVideo // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            urlFoto:
-                freezed == urlFoto
-                    ? _value.urlFoto
-                    : urlFoto // ignore: cast_nullable_to_non_nullable
-                        as String?,
             dataCriacao:
                 null == dataCriacao
                     ? _value.dataCriacao
                     : dataCriacao // ignore: cast_nullable_to_non_nullable
                         as DateTime,
-            usuario:
-                null == usuario
-                    ? _value.usuario
-                    : usuario // ignore: cast_nullable_to_non_nullable
-                        as SimpleUsuarioModel,
-            topico:
-                null == topico
-                    ? _value.topico
-                    : topico // ignore: cast_nullable_to_non_nullable
-                        as SimpleTopicoModel,
-            comentarios:
-                null == comentarios
-                    ? _value.comentarios
-                    : comentarios // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleComentarioModel>,
-            likeBy:
-                null == likeBy
-                    ? _value.likeBy
-                    : likeBy // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleUsuarioModel>,
+            autor:
+                null == autor
+                    ? _value.autor
+                    : autor // ignore: cast_nullable_to_non_nullable
+                        as AutorCardModel,
+            categorias:
+                null == categorias
+                    ? _value.categorias
+                    : categorias // ignore: cast_nullable_to_non_nullable
+                        as Set<Categorias>,
+            likesCount:
+                null == likesCount
+                    ? _value.likesCount
+                    : likesCount // ignore: cast_nullable_to_non_nullable
+                        as int,
+            comentariosCount:
+                null == comentariosCount
+                    ? _value.comentariosCount
+                    : comentariosCount // ignore: cast_nullable_to_non_nullable
+                        as int,
+            isLiked:
+                null == isLiked
+                    ? _value.isLiked
+                    : isLiked // ignore: cast_nullable_to_non_nullable
+                        as bool,
           )
           as $Val,
     );
   }
 
-  /// Create a copy of PublicacaoResponseModel
+  /// Create a copy of PublicacaoCardModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $SimpleUsuarioModelCopyWith<$Res> get usuario {
-    return $SimpleUsuarioModelCopyWith<$Res>(_value.usuario, (value) {
-      return _then(_value.copyWith(usuario: value) as $Val);
-    });
-  }
-
-  /// Create a copy of PublicacaoResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SimpleTopicoModelCopyWith<$Res> get topico {
-    return $SimpleTopicoModelCopyWith<$Res>(_value.topico, (value) {
-      return _then(_value.copyWith(topico: value) as $Val);
+  $AutorCardModelCopyWith<$Res> get autor {
+    return $AutorCardModelCopyWith<$Res>(_value.autor, (value) {
+      return _then(_value.copyWith(autor: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$PublicacaoResponseModelImplCopyWith<$Res>
-    implements $PublicacaoResponseModelCopyWith<$Res> {
-  factory _$$PublicacaoResponseModelImplCopyWith(
-    _$PublicacaoResponseModelImpl value,
-    $Res Function(_$PublicacaoResponseModelImpl) then,
-  ) = __$$PublicacaoResponseModelImplCopyWithImpl<$Res>;
+abstract class _$$PublicacaoCardModelImplCopyWith<$Res>
+    implements $PublicacaoCardModelCopyWith<$Res> {
+  factory _$$PublicacaoCardModelImplCopyWith(
+    _$PublicacaoCardModelImpl value,
+    $Res Function(_$PublicacaoCardModelImpl) then,
+  ) = __$$PublicacaoCardModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String titulo,
-    String text,
-    String? urlVideo,
-    String? urlFoto,
+    String texto,
     DateTime dataCriacao,
-    SimpleUsuarioModel usuario,
-    SimpleTopicoModel topico,
-    List<SimpleComentarioModel> comentarios,
-    List<SimpleUsuarioModel> likeBy,
+    AutorCardModel autor,
+    Set<Categorias> categorias,
+    int likesCount,
+    int comentariosCount,
+    bool isLiked,
   });
 
   @override
-  $SimpleUsuarioModelCopyWith<$Res> get usuario;
-  @override
-  $SimpleTopicoModelCopyWith<$Res> get topico;
+  $AutorCardModelCopyWith<$Res> get autor;
 }
 
 /// @nodoc
-class __$$PublicacaoResponseModelImplCopyWithImpl<$Res>
-    extends
-        _$PublicacaoResponseModelCopyWithImpl<
-          $Res,
-          _$PublicacaoResponseModelImpl
-        >
-    implements _$$PublicacaoResponseModelImplCopyWith<$Res> {
-  __$$PublicacaoResponseModelImplCopyWithImpl(
-    _$PublicacaoResponseModelImpl _value,
-    $Res Function(_$PublicacaoResponseModelImpl) _then,
+class __$$PublicacaoCardModelImplCopyWithImpl<$Res>
+    extends _$PublicacaoCardModelCopyWithImpl<$Res, _$PublicacaoCardModelImpl>
+    implements _$$PublicacaoCardModelImplCopyWith<$Res> {
+  __$$PublicacaoCardModelImplCopyWithImpl(
+    _$PublicacaoCardModelImpl _value,
+    $Res Function(_$PublicacaoCardModelImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of PublicacaoResponseModel
+  /// Create a copy of PublicacaoCardModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? titulo = null,
-    Object? text = null,
-    Object? urlVideo = freezed,
-    Object? urlFoto = freezed,
+    Object? texto = null,
     Object? dataCriacao = null,
-    Object? usuario = null,
-    Object? topico = null,
-    Object? comentarios = null,
-    Object? likeBy = null,
+    Object? autor = null,
+    Object? categorias = null,
+    Object? likesCount = null,
+    Object? comentariosCount = null,
+    Object? isLiked = null,
   }) {
     return _then(
-      _$PublicacaoResponseModelImpl(
+      _$PublicacaoCardModelImpl(
         id:
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         titulo:
             null == titulo
                 ? _value.titulo
                 : titulo // ignore: cast_nullable_to_non_nullable
                     as String,
-        text:
-            null == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
+        texto:
+            null == texto
+                ? _value.texto
+                : texto // ignore: cast_nullable_to_non_nullable
                     as String,
-        urlVideo:
-            freezed == urlVideo
-                ? _value.urlVideo
-                : urlVideo // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        urlFoto:
-            freezed == urlFoto
-                ? _value.urlFoto
-                : urlFoto // ignore: cast_nullable_to_non_nullable
-                    as String?,
         dataCriacao:
             null == dataCriacao
                 ? _value.dataCriacao
                 : dataCriacao // ignore: cast_nullable_to_non_nullable
                     as DateTime,
-        usuario:
-            null == usuario
-                ? _value.usuario
-                : usuario // ignore: cast_nullable_to_non_nullable
-                    as SimpleUsuarioModel,
-        topico:
-            null == topico
-                ? _value.topico
-                : topico // ignore: cast_nullable_to_non_nullable
-                    as SimpleTopicoModel,
-        comentarios:
-            null == comentarios
-                ? _value._comentarios
-                : comentarios // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleComentarioModel>,
-        likeBy:
-            null == likeBy
-                ? _value._likeBy
-                : likeBy // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleUsuarioModel>,
+        autor:
+            null == autor
+                ? _value.autor
+                : autor // ignore: cast_nullable_to_non_nullable
+                    as AutorCardModel,
+        categorias:
+            null == categorias
+                ? _value._categorias
+                : categorias // ignore: cast_nullable_to_non_nullable
+                    as Set<Categorias>,
+        likesCount:
+            null == likesCount
+                ? _value.likesCount
+                : likesCount // ignore: cast_nullable_to_non_nullable
+                    as int,
+        comentariosCount:
+            null == comentariosCount
+                ? _value.comentariosCount
+                : comentariosCount // ignore: cast_nullable_to_non_nullable
+                    as int,
+        isLiked:
+            null == isLiked
+                ? _value.isLiked
+                : isLiked // ignore: cast_nullable_to_non_nullable
+                    as bool,
       ),
     );
   }
@@ -4384,81 +4180,72 @@ class __$$PublicacaoResponseModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$PublicacaoResponseModelImpl implements _PublicacaoResponseModel {
-  const _$PublicacaoResponseModelImpl({
+class _$PublicacaoCardModelImpl implements _PublicacaoCardModel {
+  const _$PublicacaoCardModelImpl({
     required this.id,
     required this.titulo,
-    required this.text,
-    this.urlVideo,
-    this.urlFoto,
+    required this.texto,
     required this.dataCriacao,
-    required this.usuario,
-    required this.topico,
-    required final List<SimpleComentarioModel> comentarios,
-    required final List<SimpleUsuarioModel> likeBy,
-  }) : _comentarios = comentarios,
-       _likeBy = likeBy;
+    required this.autor,
+    required final Set<Categorias> categorias,
+    required this.likesCount,
+    required this.comentariosCount,
+    required this.isLiked,
+  }) : _categorias = categorias;
 
-  factory _$PublicacaoResponseModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PublicacaoResponseModelImplFromJson(json);
+  factory _$PublicacaoCardModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicacaoCardModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String titulo;
   @override
-  final String text;
-  @override
-  final String? urlVideo;
-  @override
-  final String? urlFoto;
+  final String texto;
   @override
   final DateTime dataCriacao;
   @override
-  final SimpleUsuarioModel usuario;
+  final AutorCardModel autor;
+  final Set<Categorias> _categorias;
   @override
-  final SimpleTopicoModel topico;
-  final List<SimpleComentarioModel> _comentarios;
-  @override
-  List<SimpleComentarioModel> get comentarios {
-    if (_comentarios is EqualUnmodifiableListView) return _comentarios;
+  Set<Categorias> get categorias {
+    if (_categorias is EqualUnmodifiableSetView) return _categorias;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_comentarios);
+    return EqualUnmodifiableSetView(_categorias);
   }
 
-  final List<SimpleUsuarioModel> _likeBy;
   @override
-  List<SimpleUsuarioModel> get likeBy {
-    if (_likeBy is EqualUnmodifiableListView) return _likeBy;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_likeBy);
-  }
+  final int likesCount;
+  @override
+  final int comentariosCount;
+  @override
+  final bool isLiked;
 
   @override
   String toString() {
-    return 'PublicacaoResponseModel(id: $id, titulo: $titulo, text: $text, urlVideo: $urlVideo, urlFoto: $urlFoto, dataCriacao: $dataCriacao, usuario: $usuario, topico: $topico, comentarios: $comentarios, likeBy: $likeBy)';
+    return 'PublicacaoCardModel(id: $id, titulo: $titulo, texto: $texto, dataCriacao: $dataCriacao, autor: $autor, categorias: $categorias, likesCount: $likesCount, comentariosCount: $comentariosCount, isLiked: $isLiked)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PublicacaoResponseModelImpl &&
+            other is _$PublicacaoCardModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.titulo, titulo) || other.titulo == titulo) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.urlVideo, urlVideo) ||
-                other.urlVideo == urlVideo) &&
-            (identical(other.urlFoto, urlFoto) || other.urlFoto == urlFoto) &&
+            (identical(other.texto, texto) || other.texto == texto) &&
             (identical(other.dataCriacao, dataCriacao) ||
                 other.dataCriacao == dataCriacao) &&
-            (identical(other.usuario, usuario) || other.usuario == usuario) &&
-            (identical(other.topico, topico) || other.topico == topico) &&
+            (identical(other.autor, autor) || other.autor == autor) &&
             const DeepCollectionEquality().equals(
-              other._comentarios,
-              _comentarios,
+              other._categorias,
+              _categorias,
             ) &&
-            const DeepCollectionEquality().equals(other._likeBy, _likeBy));
+            (identical(other.likesCount, likesCount) ||
+                other.likesCount == likesCount) &&
+            (identical(other.comentariosCount, comentariosCount) ||
+                other.comentariosCount == comentariosCount) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -4467,576 +4254,73 @@ class _$PublicacaoResponseModelImpl implements _PublicacaoResponseModel {
     runtimeType,
     id,
     titulo,
-    text,
-    urlVideo,
-    urlFoto,
+    texto,
     dataCriacao,
-    usuario,
-    topico,
-    const DeepCollectionEquality().hash(_comentarios),
-    const DeepCollectionEquality().hash(_likeBy),
+    autor,
+    const DeepCollectionEquality().hash(_categorias),
+    likesCount,
+    comentariosCount,
+    isLiked,
   );
 
-  /// Create a copy of PublicacaoResponseModel
+  /// Create a copy of PublicacaoCardModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PublicacaoResponseModelImplCopyWith<_$PublicacaoResponseModelImpl>
-  get copyWith => __$$PublicacaoResponseModelImplCopyWithImpl<
-    _$PublicacaoResponseModelImpl
-  >(this, _$identity);
+  _$$PublicacaoCardModelImplCopyWith<_$PublicacaoCardModelImpl> get copyWith =>
+      __$$PublicacaoCardModelImplCopyWithImpl<_$PublicacaoCardModelImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PublicacaoResponseModelImplToJson(this);
+    return _$$PublicacaoCardModelImplToJson(this);
   }
 }
 
-abstract class _PublicacaoResponseModel implements PublicacaoResponseModel {
-  const factory _PublicacaoResponseModel({
-    required final String id,
+abstract class _PublicacaoCardModel implements PublicacaoCardModel {
+  const factory _PublicacaoCardModel({
+    required final int id,
     required final String titulo,
-    required final String text,
-    final String? urlVideo,
-    final String? urlFoto,
+    required final String texto,
     required final DateTime dataCriacao,
-    required final SimpleUsuarioModel usuario,
-    required final SimpleTopicoModel topico,
-    required final List<SimpleComentarioModel> comentarios,
-    required final List<SimpleUsuarioModel> likeBy,
-  }) = _$PublicacaoResponseModelImpl;
+    required final AutorCardModel autor,
+    required final Set<Categorias> categorias,
+    required final int likesCount,
+    required final int comentariosCount,
+    required final bool isLiked,
+  }) = _$PublicacaoCardModelImpl;
 
-  factory _PublicacaoResponseModel.fromJson(Map<String, dynamic> json) =
-      _$PublicacaoResponseModelImpl.fromJson;
+  factory _PublicacaoCardModel.fromJson(Map<String, dynamic> json) =
+      _$PublicacaoCardModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get titulo;
   @override
-  String get text;
-  @override
-  String? get urlVideo;
-  @override
-  String? get urlFoto;
+  String get texto;
   @override
   DateTime get dataCriacao;
   @override
-  SimpleUsuarioModel get usuario;
+  AutorCardModel get autor;
   @override
-  SimpleTopicoModel get topico;
+  Set<Categorias> get categorias;
   @override
-  List<SimpleComentarioModel> get comentarios;
+  int get likesCount;
   @override
-  List<SimpleUsuarioModel> get likeBy;
+  int get comentariosCount;
+  @override
+  bool get isLiked;
 
-  /// Create a copy of PublicacaoResponseModel
+  /// Create a copy of PublicacaoCardModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PublicacaoResponseModelImplCopyWith<_$PublicacaoResponseModelImpl>
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-ComentarioResponseModel _$ComentarioResponseModelFromJson(
-  Map<String, dynamic> json,
-) {
-  return _ComentarioResponseModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ComentarioResponseModel {
-  String get id => throw _privateConstructorUsedError;
-  SimpleUsuarioModel get usuario => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
-  DateTime get dataCriacao => throw _privateConstructorUsedError;
-  SimpleComentarioModel? get comentarioPai =>
-      throw _privateConstructorUsedError; // Mapeia o getter `getQuantidadeComentariosfilhos` para um campo
-  @JsonKey(name: 'quantidadeComentariosfilhos')
-  int get quantidadeComentariosFilhos => throw _privateConstructorUsedError; // Mapeia o getter `getQuantidadeUseFulBy` para um campo
-  @JsonKey(name: 'quantidadeUseFulBy')
-  int get quantidadeUseFulBy => throw _privateConstructorUsedError; // Ignora campos que não devem ser parseados do JSON
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  SimplePublicacaoModel? get publicacao => throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<SimpleComentarioModel>? get comentariosFilhos =>
+  _$$PublicacaoCardModelImplCopyWith<_$PublicacaoCardModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<SimpleUsuarioModel>? get usefulBy => throw _privateConstructorUsedError;
-
-  /// Serializes this ComentarioResponseModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ComentarioResponseModelCopyWith<ComentarioResponseModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ComentarioResponseModelCopyWith<$Res> {
-  factory $ComentarioResponseModelCopyWith(
-    ComentarioResponseModel value,
-    $Res Function(ComentarioResponseModel) then,
-  ) = _$ComentarioResponseModelCopyWithImpl<$Res, ComentarioResponseModel>;
-  @useResult
-  $Res call({
-    String id,
-    SimpleUsuarioModel usuario,
-    String content,
-    DateTime dataCriacao,
-    SimpleComentarioModel? comentarioPai,
-    @JsonKey(name: 'quantidadeComentariosfilhos')
-    int quantidadeComentariosFilhos,
-    @JsonKey(name: 'quantidadeUseFulBy') int quantidadeUseFulBy,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    SimplePublicacaoModel? publicacao,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    List<SimpleComentarioModel>? comentariosFilhos,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    List<SimpleUsuarioModel>? usefulBy,
-  });
-
-  $SimpleUsuarioModelCopyWith<$Res> get usuario;
-  $SimpleComentarioModelCopyWith<$Res>? get comentarioPai;
-  $SimplePublicacaoModelCopyWith<$Res>? get publicacao;
-}
-
-/// @nodoc
-class _$ComentarioResponseModelCopyWithImpl<
-  $Res,
-  $Val extends ComentarioResponseModel
->
-    implements $ComentarioResponseModelCopyWith<$Res> {
-  _$ComentarioResponseModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? usuario = null,
-    Object? content = null,
-    Object? dataCriacao = null,
-    Object? comentarioPai = freezed,
-    Object? quantidadeComentariosFilhos = null,
-    Object? quantidadeUseFulBy = null,
-    Object? publicacao = freezed,
-    Object? comentariosFilhos = freezed,
-    Object? usefulBy = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            usuario:
-                null == usuario
-                    ? _value.usuario
-                    : usuario // ignore: cast_nullable_to_non_nullable
-                        as SimpleUsuarioModel,
-            content:
-                null == content
-                    ? _value.content
-                    : content // ignore: cast_nullable_to_non_nullable
-                        as String,
-            dataCriacao:
-                null == dataCriacao
-                    ? _value.dataCriacao
-                    : dataCriacao // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            comentarioPai:
-                freezed == comentarioPai
-                    ? _value.comentarioPai
-                    : comentarioPai // ignore: cast_nullable_to_non_nullable
-                        as SimpleComentarioModel?,
-            quantidadeComentariosFilhos:
-                null == quantidadeComentariosFilhos
-                    ? _value.quantidadeComentariosFilhos
-                    : quantidadeComentariosFilhos // ignore: cast_nullable_to_non_nullable
-                        as int,
-            quantidadeUseFulBy:
-                null == quantidadeUseFulBy
-                    ? _value.quantidadeUseFulBy
-                    : quantidadeUseFulBy // ignore: cast_nullable_to_non_nullable
-                        as int,
-            publicacao:
-                freezed == publicacao
-                    ? _value.publicacao
-                    : publicacao // ignore: cast_nullable_to_non_nullable
-                        as SimplePublicacaoModel?,
-            comentariosFilhos:
-                freezed == comentariosFilhos
-                    ? _value.comentariosFilhos
-                    : comentariosFilhos // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleComentarioModel>?,
-            usefulBy:
-                freezed == usefulBy
-                    ? _value.usefulBy
-                    : usefulBy // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleUsuarioModel>?,
-          )
-          as $Val,
-    );
-  }
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SimpleUsuarioModelCopyWith<$Res> get usuario {
-    return $SimpleUsuarioModelCopyWith<$Res>(_value.usuario, (value) {
-      return _then(_value.copyWith(usuario: value) as $Val);
-    });
-  }
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SimpleComentarioModelCopyWith<$Res>? get comentarioPai {
-    if (_value.comentarioPai == null) {
-      return null;
-    }
-
-    return $SimpleComentarioModelCopyWith<$Res>(_value.comentarioPai!, (value) {
-      return _then(_value.copyWith(comentarioPai: value) as $Val);
-    });
-  }
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SimplePublicacaoModelCopyWith<$Res>? get publicacao {
-    if (_value.publicacao == null) {
-      return null;
-    }
-
-    return $SimplePublicacaoModelCopyWith<$Res>(_value.publicacao!, (value) {
-      return _then(_value.copyWith(publicacao: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$ComentarioResponseModelImplCopyWith<$Res>
-    implements $ComentarioResponseModelCopyWith<$Res> {
-  factory _$$ComentarioResponseModelImplCopyWith(
-    _$ComentarioResponseModelImpl value,
-    $Res Function(_$ComentarioResponseModelImpl) then,
-  ) = __$$ComentarioResponseModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    String id,
-    SimpleUsuarioModel usuario,
-    String content,
-    DateTime dataCriacao,
-    SimpleComentarioModel? comentarioPai,
-    @JsonKey(name: 'quantidadeComentariosfilhos')
-    int quantidadeComentariosFilhos,
-    @JsonKey(name: 'quantidadeUseFulBy') int quantidadeUseFulBy,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    SimplePublicacaoModel? publicacao,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    List<SimpleComentarioModel>? comentariosFilhos,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    List<SimpleUsuarioModel>? usefulBy,
-  });
-
-  @override
-  $SimpleUsuarioModelCopyWith<$Res> get usuario;
-  @override
-  $SimpleComentarioModelCopyWith<$Res>? get comentarioPai;
-  @override
-  $SimplePublicacaoModelCopyWith<$Res>? get publicacao;
-}
-
-/// @nodoc
-class __$$ComentarioResponseModelImplCopyWithImpl<$Res>
-    extends
-        _$ComentarioResponseModelCopyWithImpl<
-          $Res,
-          _$ComentarioResponseModelImpl
-        >
-    implements _$$ComentarioResponseModelImplCopyWith<$Res> {
-  __$$ComentarioResponseModelImplCopyWithImpl(
-    _$ComentarioResponseModelImpl _value,
-    $Res Function(_$ComentarioResponseModelImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? usuario = null,
-    Object? content = null,
-    Object? dataCriacao = null,
-    Object? comentarioPai = freezed,
-    Object? quantidadeComentariosFilhos = null,
-    Object? quantidadeUseFulBy = null,
-    Object? publicacao = freezed,
-    Object? comentariosFilhos = freezed,
-    Object? usefulBy = freezed,
-  }) {
-    return _then(
-      _$ComentarioResponseModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        usuario:
-            null == usuario
-                ? _value.usuario
-                : usuario // ignore: cast_nullable_to_non_nullable
-                    as SimpleUsuarioModel,
-        content:
-            null == content
-                ? _value.content
-                : content // ignore: cast_nullable_to_non_nullable
-                    as String,
-        dataCriacao:
-            null == dataCriacao
-                ? _value.dataCriacao
-                : dataCriacao // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        comentarioPai:
-            freezed == comentarioPai
-                ? _value.comentarioPai
-                : comentarioPai // ignore: cast_nullable_to_non_nullable
-                    as SimpleComentarioModel?,
-        quantidadeComentariosFilhos:
-            null == quantidadeComentariosFilhos
-                ? _value.quantidadeComentariosFilhos
-                : quantidadeComentariosFilhos // ignore: cast_nullable_to_non_nullable
-                    as int,
-        quantidadeUseFulBy:
-            null == quantidadeUseFulBy
-                ? _value.quantidadeUseFulBy
-                : quantidadeUseFulBy // ignore: cast_nullable_to_non_nullable
-                    as int,
-        publicacao:
-            freezed == publicacao
-                ? _value.publicacao
-                : publicacao // ignore: cast_nullable_to_non_nullable
-                    as SimplePublicacaoModel?,
-        comentariosFilhos:
-            freezed == comentariosFilhos
-                ? _value._comentariosFilhos
-                : comentariosFilhos // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleComentarioModel>?,
-        usefulBy:
-            freezed == usefulBy
-                ? _value._usefulBy
-                : usefulBy // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleUsuarioModel>?,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(explicitToJson: true)
-class _$ComentarioResponseModelImpl implements _ComentarioResponseModel {
-  const _$ComentarioResponseModelImpl({
-    required this.id,
-    required this.usuario,
-    required this.content,
-    required this.dataCriacao,
-    this.comentarioPai,
-    @JsonKey(name: 'quantidadeComentariosfilhos')
-    required this.quantidadeComentariosFilhos,
-    @JsonKey(name: 'quantidadeUseFulBy') required this.quantidadeUseFulBy,
-    @JsonKey(includeFromJson: false, includeToJson: false) this.publicacao,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    final List<SimpleComentarioModel>? comentariosFilhos,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    final List<SimpleUsuarioModel>? usefulBy,
-  }) : _comentariosFilhos = comentariosFilhos,
-       _usefulBy = usefulBy;
-
-  factory _$ComentarioResponseModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ComentarioResponseModelImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final SimpleUsuarioModel usuario;
-  @override
-  final String content;
-  @override
-  final DateTime dataCriacao;
-  @override
-  final SimpleComentarioModel? comentarioPai;
-  // Mapeia o getter `getQuantidadeComentariosfilhos` para um campo
-  @override
-  @JsonKey(name: 'quantidadeComentariosfilhos')
-  final int quantidadeComentariosFilhos;
-  // Mapeia o getter `getQuantidadeUseFulBy` para um campo
-  @override
-  @JsonKey(name: 'quantidadeUseFulBy')
-  final int quantidadeUseFulBy;
-  // Ignora campos que não devem ser parseados do JSON
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  final SimplePublicacaoModel? publicacao;
-  final List<SimpleComentarioModel>? _comentariosFilhos;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<SimpleComentarioModel>? get comentariosFilhos {
-    final value = _comentariosFilhos;
-    if (value == null) return null;
-    if (_comentariosFilhos is EqualUnmodifiableListView)
-      return _comentariosFilhos;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<SimpleUsuarioModel>? _usefulBy;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<SimpleUsuarioModel>? get usefulBy {
-    final value = _usefulBy;
-    if (value == null) return null;
-    if (_usefulBy is EqualUnmodifiableListView) return _usefulBy;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'ComentarioResponseModel(id: $id, usuario: $usuario, content: $content, dataCriacao: $dataCriacao, comentarioPai: $comentarioPai, quantidadeComentariosFilhos: $quantidadeComentariosFilhos, quantidadeUseFulBy: $quantidadeUseFulBy, publicacao: $publicacao, comentariosFilhos: $comentariosFilhos, usefulBy: $usefulBy)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ComentarioResponseModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.usuario, usuario) || other.usuario == usuario) &&
-            (identical(other.content, content) || other.content == content) &&
-            (identical(other.dataCriacao, dataCriacao) ||
-                other.dataCriacao == dataCriacao) &&
-            (identical(other.comentarioPai, comentarioPai) ||
-                other.comentarioPai == comentarioPai) &&
-            (identical(
-                  other.quantidadeComentariosFilhos,
-                  quantidadeComentariosFilhos,
-                ) ||
-                other.quantidadeComentariosFilhos ==
-                    quantidadeComentariosFilhos) &&
-            (identical(other.quantidadeUseFulBy, quantidadeUseFulBy) ||
-                other.quantidadeUseFulBy == quantidadeUseFulBy) &&
-            (identical(other.publicacao, publicacao) ||
-                other.publicacao == publicacao) &&
-            const DeepCollectionEquality().equals(
-              other._comentariosFilhos,
-              _comentariosFilhos,
-            ) &&
-            const DeepCollectionEquality().equals(other._usefulBy, _usefulBy));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    usuario,
-    content,
-    dataCriacao,
-    comentarioPai,
-    quantidadeComentariosFilhos,
-    quantidadeUseFulBy,
-    publicacao,
-    const DeepCollectionEquality().hash(_comentariosFilhos),
-    const DeepCollectionEquality().hash(_usefulBy),
-  );
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ComentarioResponseModelImplCopyWith<_$ComentarioResponseModelImpl>
-  get copyWith => __$$ComentarioResponseModelImplCopyWithImpl<
-    _$ComentarioResponseModelImpl
-  >(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ComentarioResponseModelImplToJson(this);
-  }
-}
-
-abstract class _ComentarioResponseModel implements ComentarioResponseModel {
-  const factory _ComentarioResponseModel({
-    required final String id,
-    required final SimpleUsuarioModel usuario,
-    required final String content,
-    required final DateTime dataCriacao,
-    final SimpleComentarioModel? comentarioPai,
-    @JsonKey(name: 'quantidadeComentariosfilhos')
-    required final int quantidadeComentariosFilhos,
-    @JsonKey(name: 'quantidadeUseFulBy') required final int quantidadeUseFulBy,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    final SimplePublicacaoModel? publicacao,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    final List<SimpleComentarioModel>? comentariosFilhos,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    final List<SimpleUsuarioModel>? usefulBy,
-  }) = _$ComentarioResponseModelImpl;
-
-  factory _ComentarioResponseModel.fromJson(Map<String, dynamic> json) =
-      _$ComentarioResponseModelImpl.fromJson;
-
-  @override
-  String get id;
-  @override
-  SimpleUsuarioModel get usuario;
-  @override
-  String get content;
-  @override
-  DateTime get dataCriacao;
-  @override
-  SimpleComentarioModel? get comentarioPai; // Mapeia o getter `getQuantidadeComentariosfilhos` para um campo
-  @override
-  @JsonKey(name: 'quantidadeComentariosfilhos')
-  int get quantidadeComentariosFilhos; // Mapeia o getter `getQuantidadeUseFulBy` para um campo
-  @override
-  @JsonKey(name: 'quantidadeUseFulBy')
-  int get quantidadeUseFulBy; // Ignora campos que não devem ser parseados do JSON
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  SimplePublicacaoModel? get publicacao;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<SimpleComentarioModel>? get comentariosFilhos;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  List<SimpleUsuarioModel>? get usefulBy;
-
-  /// Create a copy of ComentarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ComentarioResponseModelImplCopyWith<_$ComentarioResponseModelImpl>
-  get copyWith => throw _privateConstructorUsedError;
 }
 
 LibrasResponseModel _$LibrasResponseModelFromJson(Map<String, dynamic> json) {

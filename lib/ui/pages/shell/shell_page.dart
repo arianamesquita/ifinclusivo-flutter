@@ -166,74 +166,12 @@ class _BuildMobileAPPState extends State<BuildMobileAPP>
 
   @override
   Widget build(BuildContext context) {
-    final isHomePage =
-        widget.child.currentIndex == 0 || widget.child.currentIndex == 2;
-
-    // garante que o TabController fique alinhado com a branch
-    if (widget.child.currentIndex == 0 && _tabController.index != 0) {
-      _tabController.index = 0;
-    } else if (widget.child.currentIndex == 2 && _tabController.index != 1) {
-      _tabController.index = 1;
-    }
 
     return Scaffold(
-      appBar:
-          isHomePage
-              ? AppBar(
-                toolbarHeight: 76,
-                title: SvgPicture.asset(
-                  'assets/logo/logo_expanded_dark.svg',
-                  height: 60,
-                ),
-                actions: [
-                  IconButton(
-                    onPressed: () => NotificationRouter().push(context),
-                    icon: Icon(
-                      Icons.notifications_outlined,
-                      size: 24,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                ],
-                actionsPadding: EdgeInsets.symmetric(vertical: 16),
-                bottom: TabBar(
-                  controller: _tabController,
-                  tabs: const [
-                    Tab(text: 'Fórum', icon: Icon(Icons.group_work_outlined)),
-                    Tab(
-                      text: 'Tópicos',
-                      icon: Icon(Icons.dashboard_customize_outlined),
-                    ),
-                  ],
-                ),
-              )
-              : null,
-      body: SafeArea(child: widget.child),
+      body: widget.child,
       bottomNavigationBar: NavigationBar(
-        selectedIndex: () {
-          final currentBranch = widget.child.currentIndex;
-          if (currentBranch == 0 || currentBranch == 2) return 0; // Home
-          if (currentBranch == 1) return 1; // Libras
-          if (currentBranch == 3) return 2; // Chat
-          if (currentBranch == 5) return 3; // Profile
-          return 0;
-        }(),
-        onDestinationSelected: (newIndex) {
-          switch (newIndex) {
-            case 0:
-              widget.child.goBranch(lastIndexTabBar); // volta à última tab
-              break;
-            case 1:
-              widget.child.goBranch(1);
-              break;
-            case 2:
-              widget.child.goBranch(3);
-              break;
-            case 3:
-              widget.child.goBranch(5);
-              break;
-          }
-        },
+        selectedIndex: widget.child.currentIndex,
+        onDestinationSelected: widget.child.goBranch,
         destinations: AppDestinations.bottom(context),
         indicatorColor: Theme.of(context).colorScheme.primary,
         backgroundColor: Theme.of(context).colorScheme.tertiary,

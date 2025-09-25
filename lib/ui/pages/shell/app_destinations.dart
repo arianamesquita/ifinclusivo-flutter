@@ -13,11 +13,7 @@ class AppDestinations {
           selectedIcon: Icon(Icons.sign_language),
           label: Text('Libras'),
         ),
-        NavigationRailDestination(
-          icon: Icon(Icons.interests_outlined),
-          selectedIcon: Icon(Icons.interests),
-          label: Text('Tópicos'),
-        ),
+
         NavigationRailDestination(
           icon: Icon(Icons.chat_outlined),
           selectedIcon: Icon(Icons.chat),
@@ -78,22 +74,7 @@ class AppDestinations {
             ),
           ),
         ),
-        NavigationDrawerDestination(
-          icon: Icon(
-            Icons.interests_outlined,
-            color: Theme.of(context).colorScheme.onTertiary,
-          ),
-          selectedIcon: Icon(
-            Icons.interests,
-            color: Theme.of(context).colorScheme.onTertiary,
-          ),
-          label: Text(
-            'Tópicos',
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onTertiary,
-            ),
-          ),
-        ),
+
         NavigationDrawerDestination(
           icon: Icon(
             Icons.chat_outlined,
@@ -150,14 +131,14 @@ class AppDestinations {
       <NavigationDestination>[
         NavigationDestination(
             icon: Icon(
-              Icons.home_outlined,
+              Icons.group_work,
               color: Theme.of(context).colorScheme.onTertiary,
             ),
             selectedIcon: Icon(
-              Icons.home_rounded,
+              Icons.group_work_outlined,
               color: Theme.of(context).colorScheme.onTertiary,
             ),
-            label:'Home'
+            label:'Fórum'
         ),
 
         NavigationDestination(

@@ -7,6 +7,7 @@ import 'package:if_inclusivo/ui/pages/auth/reset_password/reset_password_page.da
 import 'package:if_inclusivo/ui/pages/auth/token/token_page.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/publicacao_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/midia_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_page.dart';
 
@@ -34,7 +35,6 @@ part 'pages/auth/routes/sign_up_route.dart';
 part 'pages/app/routes/chat_router.dart';
 part 'pages/app/routes/libras_routers/libras_router.dart';
 part 'pages/app/routes/more_page_router.dart';
-part 'pages/app/routes/topico_router.dart';
 part 'pages/app/routes/profile_router.dart';
 part 'pages/app/routes/forum_router.dart';
 part 'pages/app/routes/libras_routers/midia_router.dart';

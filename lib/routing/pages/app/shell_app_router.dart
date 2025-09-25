@@ -16,11 +16,6 @@ part of '../../app_router.dart';
     ),
     TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<TopicoRouter>(path: AppRoutes.topico),
-      ],
-    ),
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
         TypedStatefulShellRoute<ChatShell>(
           branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
             // Este shell interno terá uma única branch para gerenciar o conteúdo do chat

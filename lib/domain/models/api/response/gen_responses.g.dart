@@ -248,33 +248,46 @@ Map<String, dynamic> _$$InterpreteResponseModelImplToJson(
   'userType': instance.$type,
 };
 
-_$TopicoResponseModelImpl _$$TopicoResponseModelImplFromJson(
+_$AutorCardModelImpl _$$AutorCardModelImplFromJson(Map<String, dynamic> json) =>
+    _$AutorCardModelImpl(
+      id: (json['id'] as num).toInt(),
+      nome: json['nome'] as String,
+    );
+
+Map<String, dynamic> _$$AutorCardModelImplToJson(
+  _$AutorCardModelImpl instance,
+) => <String, dynamic>{'id': instance.id, 'nome': instance.nome};
+
+_$PublicacaoCardModelImpl _$$PublicacaoCardModelImplFromJson(
   Map<String, dynamic> json,
-) => _$TopicoResponseModelImpl(
-  id: json['id'] as String,
+) => _$PublicacaoCardModelImpl(
+  id: (json['id'] as num).toInt(),
   titulo: json['titulo'] as String,
-  descricao: json['descricao'] as String,
-  categoria: $enumDecode(_$CategoriasEnumMap, json['categoria']),
+  texto: json['texto'] as String,
   dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  professor: SimpleUsuarioModel.fromJson(
-    json['professor'] as Map<String, dynamic>,
-  ),
-  publicacoes:
-      (json['publicacoes'] as List<dynamic>)
-          .map((e) => SimplePublicacaoModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  autor: AutorCardModel.fromJson(json['autor'] as Map<String, dynamic>),
+  categorias:
+      (json['categorias'] as List<dynamic>)
+          .map((e) => $enumDecode(_$CategoriasEnumMap, e))
+          .toSet(),
+  likesCount: (json['likesCount'] as num).toInt(),
+  comentariosCount: (json['comentariosCount'] as num).toInt(),
+  isLiked: json['isLiked'] as bool,
 );
 
-Map<String, dynamic> _$$TopicoResponseModelImplToJson(
-  _$TopicoResponseModelImpl instance,
+Map<String, dynamic> _$$PublicacaoCardModelImplToJson(
+  _$PublicacaoCardModelImpl instance,
 ) => <String, dynamic>{
   'id': instance.id,
   'titulo': instance.titulo,
-  'descricao': instance.descricao,
-  'categoria': _$CategoriasEnumMap[instance.categoria]!,
+  'texto': instance.texto,
   'dataCriacao': instance.dataCriacao.toIso8601String(),
-  'professor': instance.professor.toJson(),
-  'publicacoes': instance.publicacoes.map((e) => e.toJson()).toList(),
+  'autor': instance.autor.toJson(),
+  'categorias':
+      instance.categorias.map((e) => _$CategoriasEnumMap[e]!).toList(),
+  'likesCount': instance.likesCount,
+  'comentariosCount': instance.comentariosCount,
+  'isLiked': instance.isLiked,
 };
 
 const _$CategoriasEnumMap = {
@@ -284,72 +297,6 @@ const _$CategoriasEnumMap = {
   Categorias.WEB: 4,
   Categorias.ESTRUTURA_DE_DADOS: 5,
   Categorias.ARQUITETURA_DE_COMPUTADORES: 6,
-};
-
-_$PublicacaoResponseModelImpl _$$PublicacaoResponseModelImplFromJson(
-  Map<String, dynamic> json,
-) => _$PublicacaoResponseModelImpl(
-  id: json['id'] as String,
-  titulo: json['titulo'] as String,
-  text: json['text'] as String,
-  urlVideo: json['urlVideo'] as String?,
-  urlFoto: json['urlFoto'] as String?,
-  dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  usuario: SimpleUsuarioModel.fromJson(json['usuario'] as Map<String, dynamic>),
-  topico: SimpleTopicoModel.fromJson(json['topico'] as Map<String, dynamic>),
-  comentarios:
-      (json['comentarios'] as List<dynamic>)
-          .map((e) => SimpleComentarioModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  likeBy:
-      (json['likeBy'] as List<dynamic>)
-          .map((e) => SimpleUsuarioModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-);
-
-Map<String, dynamic> _$$PublicacaoResponseModelImplToJson(
-  _$PublicacaoResponseModelImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'titulo': instance.titulo,
-  'text': instance.text,
-  'urlVideo': instance.urlVideo,
-  'urlFoto': instance.urlFoto,
-  'dataCriacao': instance.dataCriacao.toIso8601String(),
-  'usuario': instance.usuario.toJson(),
-  'topico': instance.topico.toJson(),
-  'comentarios': instance.comentarios.map((e) => e.toJson()).toList(),
-  'likeBy': instance.likeBy.map((e) => e.toJson()).toList(),
-};
-
-_$ComentarioResponseModelImpl _$$ComentarioResponseModelImplFromJson(
-  Map<String, dynamic> json,
-) => _$ComentarioResponseModelImpl(
-  id: json['id'] as String,
-  usuario: SimpleUsuarioModel.fromJson(json['usuario'] as Map<String, dynamic>),
-  content: json['content'] as String,
-  dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  comentarioPai:
-      json['comentarioPai'] == null
-          ? null
-          : SimpleComentarioModel.fromJson(
-            json['comentarioPai'] as Map<String, dynamic>,
-          ),
-  quantidadeComentariosFilhos:
-      (json['quantidadeComentariosfilhos'] as num).toInt(),
-  quantidadeUseFulBy: (json['quantidadeUseFulBy'] as num).toInt(),
-);
-
-Map<String, dynamic> _$$ComentarioResponseModelImplToJson(
-  _$ComentarioResponseModelImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'usuario': instance.usuario.toJson(),
-  'content': instance.content,
-  'dataCriacao': instance.dataCriacao.toIso8601String(),
-  'comentarioPai': instance.comentarioPai?.toJson(),
-  'quantidadeComentariosfilhos': instance.quantidadeComentariosFilhos,
-  'quantidadeUseFulBy': instance.quantidadeUseFulBy,
 };
 
 _$LibrasResponseModelImpl _$$LibrasResponseModelImplFromJson(
