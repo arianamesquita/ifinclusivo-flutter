@@ -230,7 +230,7 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                           final success = await viewModel.login(credentials);
 
                                           if (success) {
-                                            context.pushReplacement('/home');
+                                            ForumRouter().go(context);
                                           }else {
                                             ScaffoldMessenger.of(context).showSnackBar(
                                               SnackBar(content: Text("Usuário ou senha inválidos")),

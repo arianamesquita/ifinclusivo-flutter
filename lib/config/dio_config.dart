@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../routing/app_router.dart';
 
 class DioConfig {
-  static Dio createDio(GoRouter router, SharedPreferences prefs) {
+  static Dio createDio(SharedPreferences prefs) {
     final baseUrl = dotenv.env['API_BASE_URL'];
     if (baseUrl == null) {
       throw Exception("A variável BASE_URL não foi encontrada no arquivo .env");
@@ -31,9 +31,9 @@ class DioConfig {
         onError: (e, handler) {
           if (e.response != null) {
             if (e.response!.statusCode == 401) {
-              router.push(UnauthorizedRoute().location);
+              navigatorKey.currentContext?.push(UnauthorizedRoute().location);
             } else if (e.response!.statusCode == 500) {
-              router.push(ServerErrorRoute().location);
+              navigatorKey.currentContext?.push(ServerErrorRoute().location);
             }
           }
           return handler.next(e);
