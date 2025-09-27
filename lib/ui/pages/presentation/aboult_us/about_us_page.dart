@@ -41,7 +41,6 @@ class AboutUsPage extends StatelessWidget {
         label: 'Espaço de diálogo e apoio entre os alunos.',
         color: color1,
         onTap: () {
-          context.go(ChatRouter().location);
         },
       ),
       StackItemInfo(

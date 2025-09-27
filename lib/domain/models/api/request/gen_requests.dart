@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../ui/pages/chat/chat/widgets/status_label.dart';
 import '../../enums/categorias.dart';
+import '../../enums/status.dart';
 import '../../enums/tema_css.dart';
 
 

@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../guards/roles.dart';
-import '../../../../ui/pages/chat/chat/widgets/status_label.dart';
 import '../../enums/categorias.dart';
+import '../../enums/status.dart';
 import '../../enums/tema_css.dart';
 import '../request/gen_requests.dart';
 import '../simple_model/gen_simple_models.dart';

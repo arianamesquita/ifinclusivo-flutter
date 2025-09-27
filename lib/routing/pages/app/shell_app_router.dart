@@ -19,23 +19,7 @@ part of '../../app_router.dart';
         TypedGoRoute<TopicoRouter>(path: AppRoutes.topico),
       ],
     ),
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedStatefulShellRoute<ChatShell>(
-          branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
-            // Este shell interno terá uma única branch para gerenciar o conteúdo do chat
-            TypedStatefulShellBranch<StatefulShellBranchData>(
-              routes: <TypedRoute<RouteData>>[
-                TypedGoRoute<ChatRouter>(
-                  path: '/chat', // O path completo herdado do shell externo
-                  routes: [TypedGoRoute<ConversationRouter>(path: ':chatId')],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    ),
+
     TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<MorePageRouter>(path: AppRoutes.more),

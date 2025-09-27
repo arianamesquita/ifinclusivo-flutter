@@ -253,9 +253,9 @@ Map<String, dynamic> _$$LibrasRequestModelImplToJson(
 };
 
 const _$StatusEnumMap = {
-  Status.ONLINE: 'ONLINE',
-  Status.OFFLINE: 'OFFLINE',
-  Status.AUSENTE: 'AUSENTE',
+  Status.APROVADO: 1,
+  Status.REPROVADO: 2,
+  Status.EMANALISE: 3,
 };
 
 _$AnalisePalavraRequestModelImpl _$$AnalisePalavraRequestModelImplFromJson(

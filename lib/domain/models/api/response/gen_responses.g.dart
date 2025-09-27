@@ -391,9 +391,9 @@ Map<String, dynamic> _$$LibrasResponseModelImplToJson(
 };
 
 const _$StatusEnumMap = {
-  Status.ONLINE: 'ONLINE',
-  Status.OFFLINE: 'OFFLINE',
-  Status.AUSENTE: 'AUSENTE',
+  Status.APROVADO: 1,
+  Status.REPROVADO: 2,
+  Status.EMANALISE: 3,
 };
 
 _$MessageResponseModelImpl _$$MessageResponseModelImplFromJson(

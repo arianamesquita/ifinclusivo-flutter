@@ -19,11 +19,6 @@ class AppDestinations {
           label: Text('Tópicos'),
         ),
         NavigationRailDestination(
-          icon: Icon(Icons.chat_outlined),
-          selectedIcon: Icon(Icons.chat),
-          label: Text('Chat'),
-        ),
-        NavigationRailDestination(
           icon: Icon(Icons.dashboard_customize_outlined),
           selectedIcon: Icon(Icons.dashboard_customize),
           label: Text('Mais'),
@@ -96,22 +91,6 @@ class AppDestinations {
         ),
         NavigationDrawerDestination(
           icon: Icon(
-            Icons.chat_outlined,
-            color: Theme.of(context).colorScheme.onTertiary,
-          ),
-          selectedIcon: Icon(
-            Icons.chat,
-            color: Theme.of(context).colorScheme.onTertiary,
-          ),
-          label: Text(
-            'Chat',
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onTertiary,
-            ),
-          ),
-        ),
-        NavigationDrawerDestination(
-          icon: Icon(
             Icons.dashboard_customize_outlined,
             color: Theme.of(context).colorScheme.onTertiary,
           ),
@@ -172,18 +151,6 @@ class AppDestinations {
           label:'Libras'
         ),
 
-        NavigationDestination(
-          icon: Icon(
-            Icons.chat_outlined,
-            color: Theme.of(context).colorScheme.onTertiary,
-          ),
-          selectedIcon: Icon(
-            Icons.chat,
-            color: Theme.of(context).colorScheme.onTertiary,
-          ),
-          label:'Chat'
-
-        ),
 
         NavigationDestination(
           icon: SizedBox(
