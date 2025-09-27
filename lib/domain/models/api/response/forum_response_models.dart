@@ -1,71 +1,62 @@
 part of 'gen_responses.dart';
 
-
 @freezed
-class TopicoResponseModel with _$TopicoResponseModel {
-  @JsonSerializable(explicitToJson: true)
-  const factory TopicoResponseModel({
-    required String id,
-    required String titulo,
-    required String descricao,
-    required Categorias categoria,
-    required DateTime dataCriacao,
-    required SimpleUsuarioModel professor, // Usando a union SimpleUsuarioModel
-    required List<SimplePublicacaoModel> publicacoes,
-  }) = _TopicoResponseModel;
+class AutorCardModel with _$AutorCardModel {
+  const factory AutorCardModel({
+    required int id,
+    required String nome,
+  }) = _AutorCardModel;
 
-  factory TopicoResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$TopicoResponseModelFromJson(json);
+  factory AutorCardModel.fromJson(Map<String, dynamic> json) =>
+      _$AutorCardModelFromJson(json);
 }
 
 @freezed
-class PublicacaoResponseModel with _$PublicacaoResponseModel {
+class PublicacaoDetalhadaModel with _$PublicacaoDetalhadaModel {
   @JsonSerializable(explicitToJson: true)
-  const factory PublicacaoResponseModel({
-    required String id,
+  const factory PublicacaoDetalhadaModel({
+    required int id,
     required String titulo,
-    required String text,
-    String? urlVideo,
-    String? urlFoto,
+    required String texto,
     required DateTime dataCriacao,
-    required SimpleUsuarioModel usuario,
-    required SimpleTopicoModel topico,
-    required List<SimpleComentarioModel> comentarios,
-    required List<SimpleUsuarioModel> likeBy,
-  }) = _PublicacaoResponseModel;
+    required AutorCardModel usuario,
+    required Set<Categorias> categorias,
+    required int totalLikes,
+    required int totalRespostas,
+    required bool curtidoPeloUsuario,
+    int? respostaEscolhidaId,
+  }) = _PublicacaoDetalhadaModel;
 
-  factory PublicacaoResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$PublicacaoResponseModelFromJson(json);
+  factory PublicacaoDetalhadaModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicacaoDetalhadaModelFromJson(json);
 }
 
 @freezed
-class ComentarioResponseModel with _$ComentarioResponseModel {
+class PublicacaoCardModel with _$PublicacaoCardModel {
   @JsonSerializable(explicitToJson: true)
-  const factory ComentarioResponseModel({
-    required String id,
-    required SimpleUsuarioModel usuario,
-    required String content,
+  const factory PublicacaoCardModel({
+    required int id,
+    String? titulo,
     required DateTime dataCriacao,
-    SimpleComentarioModel? comentarioPai,
+    required AutorCardModel usuario,
+    required int totalLikes,
+    required int totalRespostas,
+    required bool curtidoPeloUsuario,
+  }) = _PublicacaoCardModel;
 
-    // Mapeia o getter `getQuantidadeComentariosfilhos` para um campo
-    @JsonKey(name: 'quantidadeComentariosfilhos')
-    required int quantidadeComentariosFilhos,
+  factory PublicacaoCardModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicacaoCardModelFromJson(json);
+}
 
-    // Mapeia o getter `getQuantidadeUseFulBy` para um campo
-    @JsonKey(name: 'quantidadeUseFulBy')
-    required int quantidadeUseFulBy,
+@freezed
+class PublicacaoCompletaModel with _$PublicacaoCompletaModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory PublicacaoCompletaModel({
+    required List<PublicacaoCardModel> pais,
+    required PublicacaoDetalhadaModel publicacao,
+    required List<PublicacaoDetalhadaModel> respostas,
+  }) = _PublicacaoCompletaModel;
 
-    // Ignora campos que não devem ser parseados do JSON
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    SimplePublicacaoModel? publicacao,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    List<SimpleComentarioModel>? comentariosFilhos,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    List<SimpleUsuarioModel>? usefulBy,
-
-  }) = _ComentarioResponseModel;
-
-  factory ComentarioResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$ComentarioResponseModelFromJson(json);
+  factory PublicacaoCompletaModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicacaoCompletaModelFromJson(json);
 }

@@ -23,12 +23,12 @@ Map<String, dynamic> _$$SimpleLibrasModelImplToJson(
 };
 
 const _$CategoriasEnumMap = {
-  Categorias.REDES: 1,
-  Categorias.BANCO_DE_DADOS: 2,
-  Categorias.PROGRAMACAO: 3,
-  Categorias.WEB: 4,
-  Categorias.ESTRUTURA_DE_DADOS: 5,
-  Categorias.ARQUITETURA_DE_COMPUTADORES: 6,
+  Categorias.REDES: 'REDES',
+  Categorias.BANCO_DE_DADOS: 'BANCO_DE_DADOS',
+  Categorias.PROGRAMACAO: 'PROGRAMACAO',
+  Categorias.WEB: 'WEB',
+  Categorias.ESTRUTURA_DE_DADOS: 'ESTRUTURA_DE_DADOS',
+  Categorias.ARQUITETURA_DE_COMPUTADORES: 'ARQUITETURA_DE_COMPUTADORES',
 };
 
 _$SimpleTopicoModelImpl _$$SimpleTopicoModelImplFromJson(

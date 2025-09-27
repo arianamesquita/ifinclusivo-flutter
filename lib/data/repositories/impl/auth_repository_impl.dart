@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 
 import '../../../domain/models/api/request/gen_requests.dart';
 import '../../../domain/models/api/response/gen_responses.dart';
@@ -29,14 +31,18 @@ class AuthRepositoryImpl implements AuthRepository {
     _init();
   }
 
-  void _init() {
+  void _init() async {
     final userData = _prefs.getString(_userKey);
-    if (userData != null) {
-      if (_firebaseAuth.currentUser != null) {
+    final token = _prefs.getString(_tokenKey);
+
+    if (userData != null && token != null) {
+      final isExpired = JwtDecoder.isExpired(token);
+
+      if (!isExpired && _firebaseAuth.currentUser != null) {
         _currentUser = UsuarioResponseModel.fromJson(jsonDecode(userData));
         _authStateController.add(_currentUser);
       } else {
-        _clearSession();
+        await _clearSession();
       }
     }
   }

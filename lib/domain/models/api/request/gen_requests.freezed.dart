@@ -2349,212 +2349,6 @@ abstract class _UpdatePasswordRequestModel
   get copyWith => throw _privateConstructorUsedError;
 }
 
-TopicoRequestModel _$TopicoRequestModelFromJson(Map<String, dynamic> json) {
-  return _TopicoRequestModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$TopicoRequestModel {
-  String get titulo => throw _privateConstructorUsedError;
-  String get descricao => throw _privateConstructorUsedError;
-  Categorias get categoria => throw _privateConstructorUsedError;
-
-  /// Serializes this TopicoRequestModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of TopicoRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $TopicoRequestModelCopyWith<TopicoRequestModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TopicoRequestModelCopyWith<$Res> {
-  factory $TopicoRequestModelCopyWith(
-    TopicoRequestModel value,
-    $Res Function(TopicoRequestModel) then,
-  ) = _$TopicoRequestModelCopyWithImpl<$Res, TopicoRequestModel>;
-  @useResult
-  $Res call({String titulo, String descricao, Categorias categoria});
-}
-
-/// @nodoc
-class _$TopicoRequestModelCopyWithImpl<$Res, $Val extends TopicoRequestModel>
-    implements $TopicoRequestModelCopyWith<$Res> {
-  _$TopicoRequestModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TopicoRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? titulo = null,
-    Object? descricao = null,
-    Object? categoria = null,
-  }) {
-    return _then(
-      _value.copyWith(
-            titulo:
-                null == titulo
-                    ? _value.titulo
-                    : titulo // ignore: cast_nullable_to_non_nullable
-                        as String,
-            descricao:
-                null == descricao
-                    ? _value.descricao
-                    : descricao // ignore: cast_nullable_to_non_nullable
-                        as String,
-            categoria:
-                null == categoria
-                    ? _value.categoria
-                    : categoria // ignore: cast_nullable_to_non_nullable
-                        as Categorias,
-          )
-          as $Val,
-    );
-  }
-}
-
-/// @nodoc
-abstract class _$$TopicoRequestModelImplCopyWith<$Res>
-    implements $TopicoRequestModelCopyWith<$Res> {
-  factory _$$TopicoRequestModelImplCopyWith(
-    _$TopicoRequestModelImpl value,
-    $Res Function(_$TopicoRequestModelImpl) then,
-  ) = __$$TopicoRequestModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String titulo, String descricao, Categorias categoria});
-}
-
-/// @nodoc
-class __$$TopicoRequestModelImplCopyWithImpl<$Res>
-    extends _$TopicoRequestModelCopyWithImpl<$Res, _$TopicoRequestModelImpl>
-    implements _$$TopicoRequestModelImplCopyWith<$Res> {
-  __$$TopicoRequestModelImplCopyWithImpl(
-    _$TopicoRequestModelImpl _value,
-    $Res Function(_$TopicoRequestModelImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of TopicoRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? titulo = null,
-    Object? descricao = null,
-    Object? categoria = null,
-  }) {
-    return _then(
-      _$TopicoRequestModelImpl(
-        titulo:
-            null == titulo
-                ? _value.titulo
-                : titulo // ignore: cast_nullable_to_non_nullable
-                    as String,
-        descricao:
-            null == descricao
-                ? _value.descricao
-                : descricao // ignore: cast_nullable_to_non_nullable
-                    as String,
-        categoria:
-            null == categoria
-                ? _value.categoria
-                : categoria // ignore: cast_nullable_to_non_nullable
-                    as Categorias,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$TopicoRequestModelImpl implements _TopicoRequestModel {
-  const _$TopicoRequestModelImpl({
-    required this.titulo,
-    required this.descricao,
-    required this.categoria,
-  });
-
-  factory _$TopicoRequestModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TopicoRequestModelImplFromJson(json);
-
-  @override
-  final String titulo;
-  @override
-  final String descricao;
-  @override
-  final Categorias categoria;
-
-  @override
-  String toString() {
-    return 'TopicoRequestModel(titulo: $titulo, descricao: $descricao, categoria: $categoria)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TopicoRequestModelImpl &&
-            (identical(other.titulo, titulo) || other.titulo == titulo) &&
-            (identical(other.descricao, descricao) ||
-                other.descricao == descricao) &&
-            (identical(other.categoria, categoria) ||
-                other.categoria == categoria));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, titulo, descricao, categoria);
-
-  /// Create a copy of TopicoRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TopicoRequestModelImplCopyWith<_$TopicoRequestModelImpl> get copyWith =>
-      __$$TopicoRequestModelImplCopyWithImpl<_$TopicoRequestModelImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TopicoRequestModelImplToJson(this);
-  }
-}
-
-abstract class _TopicoRequestModel implements TopicoRequestModel {
-  const factory _TopicoRequestModel({
-    required final String titulo,
-    required final String descricao,
-    required final Categorias categoria,
-  }) = _$TopicoRequestModelImpl;
-
-  factory _TopicoRequestModel.fromJson(Map<String, dynamic> json) =
-      _$TopicoRequestModelImpl.fromJson;
-
-  @override
-  String get titulo;
-  @override
-  String get descricao;
-  @override
-  Categorias get categoria;
-
-  /// Create a copy of TopicoRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TopicoRequestModelImplCopyWith<_$TopicoRequestModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 PublicacaoRequestModel _$PublicacaoRequestModelFromJson(
   Map<String, dynamic> json,
 ) {
@@ -2564,9 +2358,9 @@ PublicacaoRequestModel _$PublicacaoRequestModelFromJson(
 /// @nodoc
 mixin _$PublicacaoRequestModel {
   String get titulo => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  String? get urlVideo => throw _privateConstructorUsedError;
-  String? get urlFoto => throw _privateConstructorUsedError;
+  String get texto => throw _privateConstructorUsedError;
+  Set<Categorias> get categorias => throw _privateConstructorUsedError;
+  int? get parentId => throw _privateConstructorUsedError;
 
   /// Serializes this PublicacaoRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2585,7 +2379,12 @@ abstract class $PublicacaoRequestModelCopyWith<$Res> {
     $Res Function(PublicacaoRequestModel) then,
   ) = _$PublicacaoRequestModelCopyWithImpl<$Res, PublicacaoRequestModel>;
   @useResult
-  $Res call({String titulo, String text, String? urlVideo, String? urlFoto});
+  $Res call({
+    String titulo,
+    String texto,
+    Set<Categorias> categorias,
+    int? parentId,
+  });
 }
 
 /// @nodoc
@@ -2607,9 +2406,9 @@ class _$PublicacaoRequestModelCopyWithImpl<
   @override
   $Res call({
     Object? titulo = null,
-    Object? text = null,
-    Object? urlVideo = freezed,
-    Object? urlFoto = freezed,
+    Object? texto = null,
+    Object? categorias = null,
+    Object? parentId = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -2618,21 +2417,21 @@ class _$PublicacaoRequestModelCopyWithImpl<
                     ? _value.titulo
                     : titulo // ignore: cast_nullable_to_non_nullable
                         as String,
-            text:
-                null == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
+            texto:
+                null == texto
+                    ? _value.texto
+                    : texto // ignore: cast_nullable_to_non_nullable
                         as String,
-            urlVideo:
-                freezed == urlVideo
-                    ? _value.urlVideo
-                    : urlVideo // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            urlFoto:
-                freezed == urlFoto
-                    ? _value.urlFoto
-                    : urlFoto // ignore: cast_nullable_to_non_nullable
-                        as String?,
+            categorias:
+                null == categorias
+                    ? _value.categorias
+                    : categorias // ignore: cast_nullable_to_non_nullable
+                        as Set<Categorias>,
+            parentId:
+                freezed == parentId
+                    ? _value.parentId
+                    : parentId // ignore: cast_nullable_to_non_nullable
+                        as int?,
           )
           as $Val,
     );
@@ -2648,7 +2447,12 @@ abstract class _$$PublicacaoRequestModelImplCopyWith<$Res>
   ) = __$$PublicacaoRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String titulo, String text, String? urlVideo, String? urlFoto});
+  $Res call({
+    String titulo,
+    String texto,
+    Set<Categorias> categorias,
+    int? parentId,
+  });
 }
 
 /// @nodoc
@@ -2667,9 +2471,9 @@ class __$$PublicacaoRequestModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? titulo = null,
-    Object? text = null,
-    Object? urlVideo = freezed,
-    Object? urlFoto = freezed,
+    Object? texto = null,
+    Object? categorias = null,
+    Object? parentId = freezed,
   }) {
     return _then(
       _$PublicacaoRequestModelImpl(
@@ -2678,35 +2482,36 @@ class __$$PublicacaoRequestModelImplCopyWithImpl<$Res>
                 ? _value.titulo
                 : titulo // ignore: cast_nullable_to_non_nullable
                     as String,
-        text:
-            null == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
+        texto:
+            null == texto
+                ? _value.texto
+                : texto // ignore: cast_nullable_to_non_nullable
                     as String,
-        urlVideo:
-            freezed == urlVideo
-                ? _value.urlVideo
-                : urlVideo // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        urlFoto:
-            freezed == urlFoto
-                ? _value.urlFoto
-                : urlFoto // ignore: cast_nullable_to_non_nullable
-                    as String?,
+        categorias:
+            null == categorias
+                ? _value._categorias
+                : categorias // ignore: cast_nullable_to_non_nullable
+                    as Set<Categorias>,
+        parentId:
+            freezed == parentId
+                ? _value.parentId
+                : parentId // ignore: cast_nullable_to_non_nullable
+                    as int?,
       ),
     );
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
   const _$PublicacaoRequestModelImpl({
     required this.titulo,
-    required this.text,
-    this.urlVideo,
-    this.urlFoto,
-  });
+    required this.texto,
+    required final Set<Categorias> categorias,
+    required this.parentId,
+  }) : _categorias = categorias;
 
   factory _$PublicacaoRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PublicacaoRequestModelImplFromJson(json);
@@ -2714,15 +2519,21 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
   @override
   final String titulo;
   @override
-  final String text;
+  final String texto;
+  final Set<Categorias> _categorias;
   @override
-  final String? urlVideo;
+  Set<Categorias> get categorias {
+    if (_categorias is EqualUnmodifiableSetView) return _categorias;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_categorias);
+  }
+
   @override
-  final String? urlFoto;
+  final int? parentId;
 
   @override
   String toString() {
-    return 'PublicacaoRequestModel(titulo: $titulo, text: $text, urlVideo: $urlVideo, urlFoto: $urlFoto)';
+    return 'PublicacaoRequestModel(titulo: $titulo, texto: $texto, categorias: $categorias, parentId: $parentId)';
   }
 
   @override
@@ -2731,15 +2542,24 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
         (other.runtimeType == runtimeType &&
             other is _$PublicacaoRequestModelImpl &&
             (identical(other.titulo, titulo) || other.titulo == titulo) &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.urlVideo, urlVideo) ||
-                other.urlVideo == urlVideo) &&
-            (identical(other.urlFoto, urlFoto) || other.urlFoto == urlFoto));
+            (identical(other.texto, texto) || other.texto == texto) &&
+            const DeepCollectionEquality().equals(
+              other._categorias,
+              _categorias,
+            ) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, titulo, text, urlVideo, urlFoto);
+  int get hashCode => Object.hash(
+    runtimeType,
+    titulo,
+    texto,
+    const DeepCollectionEquality().hash(_categorias),
+    parentId,
+  );
 
   /// Create a copy of PublicacaoRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -2762,9 +2582,9 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
 abstract class _PublicacaoRequestModel implements PublicacaoRequestModel {
   const factory _PublicacaoRequestModel({
     required final String titulo,
-    required final String text,
-    final String? urlVideo,
-    final String? urlFoto,
+    required final String texto,
+    required final Set<Categorias> categorias,
+    required final int? parentId,
   }) = _$PublicacaoRequestModelImpl;
 
   factory _PublicacaoRequestModel.fromJson(Map<String, dynamic> json) =
@@ -2773,181 +2593,17 @@ abstract class _PublicacaoRequestModel implements PublicacaoRequestModel {
   @override
   String get titulo;
   @override
-  String get text;
+  String get texto;
   @override
-  String? get urlVideo;
+  Set<Categorias> get categorias;
   @override
-  String? get urlFoto;
+  int? get parentId;
 
   /// Create a copy of PublicacaoRequestModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PublicacaoRequestModelImplCopyWith<_$PublicacaoRequestModelImpl>
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-ComentarioRequestModel _$ComentarioRequestModelFromJson(
-  Map<String, dynamic> json,
-) {
-  return _ComentarioRequestModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ComentarioRequestModel {
-  String get content => throw _privateConstructorUsedError;
-
-  /// Serializes this ComentarioRequestModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ComentarioRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ComentarioRequestModelCopyWith<ComentarioRequestModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ComentarioRequestModelCopyWith<$Res> {
-  factory $ComentarioRequestModelCopyWith(
-    ComentarioRequestModel value,
-    $Res Function(ComentarioRequestModel) then,
-  ) = _$ComentarioRequestModelCopyWithImpl<$Res, ComentarioRequestModel>;
-  @useResult
-  $Res call({String content});
-}
-
-/// @nodoc
-class _$ComentarioRequestModelCopyWithImpl<
-  $Res,
-  $Val extends ComentarioRequestModel
->
-    implements $ComentarioRequestModelCopyWith<$Res> {
-  _$ComentarioRequestModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ComentarioRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? content = null}) {
-    return _then(
-      _value.copyWith(
-            content:
-                null == content
-                    ? _value.content
-                    : content // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
-  }
-}
-
-/// @nodoc
-abstract class _$$ComentarioRequestModelImplCopyWith<$Res>
-    implements $ComentarioRequestModelCopyWith<$Res> {
-  factory _$$ComentarioRequestModelImplCopyWith(
-    _$ComentarioRequestModelImpl value,
-    $Res Function(_$ComentarioRequestModelImpl) then,
-  ) = __$$ComentarioRequestModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String content});
-}
-
-/// @nodoc
-class __$$ComentarioRequestModelImplCopyWithImpl<$Res>
-    extends
-        _$ComentarioRequestModelCopyWithImpl<$Res, _$ComentarioRequestModelImpl>
-    implements _$$ComentarioRequestModelImplCopyWith<$Res> {
-  __$$ComentarioRequestModelImplCopyWithImpl(
-    _$ComentarioRequestModelImpl _value,
-    $Res Function(_$ComentarioRequestModelImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ComentarioRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? content = null}) {
-    return _then(
-      _$ComentarioRequestModelImpl(
-        content:
-            null == content
-                ? _value.content
-                : content // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ComentarioRequestModelImpl implements _ComentarioRequestModel {
-  const _$ComentarioRequestModelImpl({required this.content});
-
-  factory _$ComentarioRequestModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ComentarioRequestModelImplFromJson(json);
-
-  @override
-  final String content;
-
-  @override
-  String toString() {
-    return 'ComentarioRequestModel(content: $content)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ComentarioRequestModelImpl &&
-            (identical(other.content, content) || other.content == content));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, content);
-
-  /// Create a copy of ComentarioRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ComentarioRequestModelImplCopyWith<_$ComentarioRequestModelImpl>
-  get copyWith =>
-      __$$ComentarioRequestModelImplCopyWithImpl<_$ComentarioRequestModelImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ComentarioRequestModelImplToJson(this);
-  }
-}
-
-abstract class _ComentarioRequestModel implements ComentarioRequestModel {
-  const factory _ComentarioRequestModel({required final String content}) =
-      _$ComentarioRequestModelImpl;
-
-  factory _ComentarioRequestModel.fromJson(Map<String, dynamic> json) =
-      _$ComentarioRequestModelImpl.fromJson;
-
-  @override
-  String get content;
-
-  /// Create a copy of ComentarioRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ComentarioRequestModelImplCopyWith<_$ComentarioRequestModelImpl>
   get copyWith => throw _privateConstructorUsedError;
 }
 
