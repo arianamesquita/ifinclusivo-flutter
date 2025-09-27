@@ -7,10 +7,18 @@ class AppRoutes {
   // Rotas de autenticação
   static const String signIn = '/login';
   static const String signUp = '/register';
+  static const String unauthorized = '/unauthorized';
+  static const String forbidden = '/forbidden';
+  static const String serverError = '/server-error';
+  static const String notFound = '/not-found';
 
   // Rotas da Aplicação Principal
   static const String _app = '/app';
   static const String forum = '$_app/forum';
+  static const String publication = 'post/:id';
+  static const String newPublication = '$_app/new-post';
+
+
   static const String libras = '$_app/libras';
   static const String midia = 'midia';
   static const String publicacoesPorTopico = 'publicacoes';
@@ -40,6 +48,7 @@ class AppRoutes {
     profile: Roles.values,
     token: Roles.values,
     resetPassword: Roles.values,
+    newPublication: Roles.values
   };
 
   static final Set<String> publicRoutes = {
@@ -52,7 +61,11 @@ class AppRoutes {
     midia,
     publicacoesPorTopico,
     token,
-    resetPassword
+    resetPassword,
+    unauthorized,
+    forbidden,
+    serverError,
+    notFound
   };
 }
 

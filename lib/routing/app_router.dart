@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
 import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
@@ -7,9 +9,12 @@ import 'package:if_inclusivo/ui/pages/auth/reset_password/reset_password_page.da
 import 'package:if_inclusivo/ui/pages/auth/token/token_page.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat/message_area.dart';
 import 'package:if_inclusivo/ui/pages/chat/chat_page.dart';
+import 'package:if_inclusivo/ui/pages/forum/feed/feed_page.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/new%20publication/new_publication.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/publicacao_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/midia_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_page.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 
 import '../data/repositories/auth_repository.dart';
 import '../ui/core/layout/custom_container_shell.dart';
@@ -51,8 +56,6 @@ part 'pages/auth/shell_auth_router.dart';
 
 part 'pages/exceptions/exceptions_routes.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 
 GoRouter createRouter({required AuthRepository authRepository})  {
   final authListenable = StreamListenable(authRepository.authStateChanges);
@@ -65,7 +68,6 @@ GoRouter createRouter({required AuthRepository authRepository})  {
     redirect: (BuildContext context, GoRouterState state) {
       final bool loggedIn = authRepository.currentUser != null;
       final String location = state.matchedLocation;
-
       final isAuthRoute = location == AppRoutes.signIn || location == AppRoutes.signUp;
 
       if (loggedIn && isAuthRoute) {

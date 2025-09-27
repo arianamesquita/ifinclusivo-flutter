@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/data/repositories/forum_repository.dart';
+import 'package:if_inclusivo/data/repositories/impl/forum_repository_impl.dart';
 import 'package:if_inclusivo/data/services/firestore_chat_service.dart';
+import 'package:if_inclusivo/data/services/forum_service.dart';
 import 'package:if_inclusivo/data/services/impl/auth_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/firestore_chat_service_impl.dart';
+import 'package:if_inclusivo/data/services/impl/forum_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/user_api_service_impl.dart';
 import 'package:if_inclusivo/data/services/user_api_service.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
@@ -18,46 +22,26 @@ import '../data/services/auth_service.dart';
 import '../ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../ui/pages/forum/publicacao/new publication/viewmodels/new_poblication_viewmodel.dart';
 import 'dio_config.dart';
 
 List<SingleChildWidget> providers(SharedPreferences prefs) {
   return [
     Provider<SharedPreferences>.value(value: prefs),
+    ..._authServices,
     ..._servicesData,
     ..._repositoriesData,
     ..._viewModelsProviders,
   ];
 }
-
-//services
-List<SingleChildWidget> get _servicesData {
+List<SingleChildWidget> get _authServices {
   return [
-    Provider<Dio>(
-      create:
-          (context) => DioConfig.createDio(
-            context.read<SharedPreferences>(),
-          ),
-    ),
-
-    Provider<AuthService>(
-      create: (context) => AuthServiceImpl(context.read<Dio>()),
-    ),
-    Provider<UserApiService>(
-      create: (context) => UserApiServiceImpl(dio: context.read<Dio>()),
-    ),
-    Provider<FirestoreChatService>(create: (_) => FirestoreChatServiceImpl()),
-  ];
-}
-
-// Lista de providers da camada de dados
-List<SingleChildWidget> get _repositoriesData {
-  return [
+    Provider<AuthService>(create: (_) => AuthServiceImpl()),
     Provider<AuthRepository>(
-      create:
-          (context) => AuthRepositoryImpl(
-            authService: context.read<AuthService>(),
-            sharedPreferences: context.read<SharedPreferences>(),
-          ),
+      create: (context) => AuthRepositoryImpl(
+        authService: context.read<AuthService>(),
+        sharedPreferences: context.read<SharedPreferences>(),
+      ),
       dispose: (_, repo) {
         if (repo is AuthRepositoryImpl) {
           repo.dispose();
@@ -68,6 +52,37 @@ List<SingleChildWidget> get _repositoriesData {
       create: (context) {
         return createRouter(authRepository: context.read<AuthRepository>());
       },
+    ),
+    Provider<Dio>(
+      create: (context) {
+        return DioConfig.createDio(
+          context.read<SharedPreferences>(),
+          context.read<AuthRepository>(),
+          context.read<GoRouter>(), // Passaremos o GoRouter aqui
+        );
+      },
+    ),
+  ];
+}
+List<SingleChildWidget> get _servicesData {
+  return [
+    Provider<UserApiService>(
+      create: (context) => UserApiServiceImpl(dio: context.read<Dio>()),
+    ),
+    Provider<FirestoreChatService>(create: (_) => FirestoreChatServiceImpl()),
+    Provider<ForumService>(
+      create: (context) => ForumServiceImpl(dio: context.read<Dio>()),
+    ),
+  ];
+}
+
+// repositories
+List<SingleChildWidget> get _repositoriesData {
+  return [
+    Provider<ForumRepository>(
+      create:
+          (context) =>
+              ForumRepositoryImpl(service: context.read<ForumService>()),
     ),
   ];
 }
@@ -97,6 +112,14 @@ List<SingleChildWidget> get _viewModelsProviders {
       create:
           (context) =>
               LoginViewModel(authRepository: context.read<AuthRepository>()),
+    ),
+    ChangeNotifierProvider(
+      create:
+          (context) => NewPublicationViewModel(
+            forumRepository: context.read<ForumRepository>(),
+            authRepository:
+                context.read<AuthRepository>(), // <-- Nova dependência
+          ),
     ),
 
     // ... adicione outros ViewModels aqui
