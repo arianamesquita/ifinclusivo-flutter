@@ -22,8 +22,6 @@ class AppRoutes {
   static const String libras = '$_app/libras';
   static const String midia = 'midia';
   static const String publicacoesPorTopico = 'publicacoes';
-  static const String topico = '$_app/topicos';
-  static const String chat = '$_app/chat';
   static const String more = '$_app/more';
   static const String notification = '$_app/notification';
   static const String profile = '$_app/profile';
@@ -39,7 +37,6 @@ class AppRoutes {
     midia: Roles.values,
     publicacoesPorTopico: Roles.values,
     notification: Roles.values,
-    topico: Roles.values,
     more: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR],
     profile: Roles.values,
     token: Roles.values,

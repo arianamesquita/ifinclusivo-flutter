@@ -180,10 +180,7 @@ _$PublicacaoRequestModelImpl _$$PublicacaoRequestModelImplFromJson(
 ) => _$PublicacaoRequestModelImpl(
   titulo: json['titulo'] as String,
   texto: json['texto'] as String,
-  categorias:
-      (json['categorias'] as List<dynamic>)
-          .map((e) => $enumDecode(_$CategoriasEnumMap, e))
-          .toSet(),
+  categorias: _categoriasFromJson(json['categorias'] as List),
   parentId: (json['parentId'] as num?)?.toInt(),
 );
 
@@ -192,18 +189,8 @@ Map<String, dynamic> _$$PublicacaoRequestModelImplToJson(
 ) => <String, dynamic>{
   'titulo': instance.titulo,
   'texto': instance.texto,
-  'categorias':
-      instance.categorias.map((e) => _$CategoriasEnumMap[e]!).toList(),
+  'categorias': _categoriasToJson(instance.categorias),
   'parentId': instance.parentId,
-};
-
-const _$CategoriasEnumMap = {
-  Categorias.REDES: 'REDES',
-  Categorias.BANCO_DE_DADOS: 'BANCO_DE_DADOS',
-  Categorias.PROGRAMACAO: 'PROGRAMACAO',
-  Categorias.WEB: 'WEB',
-  Categorias.ESTRUTURA_DE_DADOS: 'ESTRUTURA_DE_DADOS',
-  Categorias.ARQUITETURA_DE_COMPUTADORES: 'ARQUITETURA_DE_COMPUTADORES',
 };
 
 _$LibrasRequestModelImpl _$$LibrasRequestModelImplFromJson(
@@ -236,6 +223,15 @@ const _$StatusEnumMap = {
   Status.APROVADO: 1,
   Status.REPROVADO: 2,
   Status.EMANALISE: 3,
+};
+
+const _$CategoriasEnumMap = {
+  Categorias.REDES: 'REDES',
+  Categorias.BANCO_DE_DADOS: 'BANCO_DE_DADOS',
+  Categorias.PROGRAMACAO: 'PROGRAMACAO',
+  Categorias.WEB: 'WEB',
+  Categorias.ESTRUTURA_DE_DADOS: 'ESTRUTURA_DE_DADOS',
+  Categorias.ARQUITETURA_DE_COMPUTADORES: 'ARQUITETURA_DE_COMPUTADORES',
 };
 
 _$AnalisePalavraRequestModelImpl _$$AnalisePalavraRequestModelImplFromJson(

@@ -2359,6 +2359,7 @@ PublicacaoRequestModel _$PublicacaoRequestModelFromJson(
 mixin _$PublicacaoRequestModel {
   String get titulo => throw _privateConstructorUsedError;
   String get texto => throw _privateConstructorUsedError;
+  @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
   Set<Categorias> get categorias => throw _privateConstructorUsedError;
   int? get parentId => throw _privateConstructorUsedError;
 
@@ -2382,6 +2383,7 @@ abstract class $PublicacaoRequestModelCopyWith<$Res> {
   $Res call({
     String titulo,
     String texto,
+    @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     Set<Categorias> categorias,
     int? parentId,
   });
@@ -2450,6 +2452,7 @@ abstract class _$$PublicacaoRequestModelImplCopyWith<$Res>
   $Res call({
     String titulo,
     String texto,
+    @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     Set<Categorias> categorias,
     int? parentId,
   });
@@ -2509,6 +2512,7 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
   const _$PublicacaoRequestModelImpl({
     required this.titulo,
     required this.texto,
+    @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     required final Set<Categorias> categorias,
     required this.parentId,
   }) : _categorias = categorias;
@@ -2522,6 +2526,7 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
   final String texto;
   final Set<Categorias> _categorias;
   @override
+  @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
   Set<Categorias> get categorias {
     if (_categorias is EqualUnmodifiableSetView) return _categorias;
     // ignore: implicit_dynamic_type
@@ -2583,6 +2588,7 @@ abstract class _PublicacaoRequestModel implements PublicacaoRequestModel {
   const factory _PublicacaoRequestModel({
     required final String titulo,
     required final String texto,
+    @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     required final Set<Categorias> categorias,
     required final int? parentId,
   }) = _$PublicacaoRequestModelImpl;
@@ -2595,6 +2601,7 @@ abstract class _PublicacaoRequestModel implements PublicacaoRequestModel {
   @override
   String get texto;
   @override
+  @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
   Set<Categorias> get categorias;
   @override
   int? get parentId;

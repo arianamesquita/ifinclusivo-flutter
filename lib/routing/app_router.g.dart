@@ -8,7 +8,6 @@ part of 'app_router.dart';
 
 List<RouteBase> get $appRoutes => [
   $notificationRouter,
-  $mobileConversationRoute,
   $tokenValidateRouter,
   $resetPasswordRoute,
   $shellAppRouter,
@@ -32,37 +31,6 @@ mixin _$NotificationRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/notification');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $mobileConversationRoute => GoRouteData.$route(
-  path: '/app/chat/con/:chatId',
-
-  factory: _$MobileConversationRoute._fromState,
-);
-
-mixin _$MobileConversationRoute on GoRouteData {
-  static MobileConversationRoute _fromState(GoRouterState state) =>
-      MobileConversationRoute(chatId: state.pathParameters['chatId']!);
-
-  MobileConversationRoute get _self => this as MobileConversationRoute;
-
-  @override
-  String get location => GoRouteData.$location(
-    '/app/chat/con/${Uri.encodeComponent(_self.chatId)}',
-  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -177,31 +145,6 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
                   path: 'midia',
 
                   factory: _$MidiaRouter._fromState,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        StatefulShellRouteData.$route(
-          factory: $ChatShellExtension._fromState,
-          branches: [
-            StatefulShellBranchData.$branch(
-              routes: [
-                GoRouteData.$route(
-                  path: '/chat',
-
-                  factory: _$ChatRouter._fromState,
-                  routes: [
-                    GoRouteData.$route(
-                      path: ':chatId',
-
-                      factory: _$ConversationRouter._fromState,
-                    ),
-                  ],
                 ),
               ],
             ),
@@ -333,54 +276,6 @@ mixin _$MidiaRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/libras/publicacoes/midia');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $ChatShellExtension on ChatShell {
-  static ChatShell _fromState(GoRouterState state) => const ChatShell();
-}
-
-mixin _$ChatRouter on GoRouteData {
-  static ChatRouter _fromState(GoRouterState state) => const ChatRouter();
-
-  @override
-  String get location => GoRouteData.$location('/chat');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-mixin _$ConversationRouter on GoRouteData {
-  static ConversationRouter _fromState(GoRouterState state) =>
-      ConversationRouter(chatId: state.pathParameters['chatId']!);
-
-  ConversationRouter get _self => this as ConversationRouter;
-
-  @override
-  String get location =>
-      GoRouteData.$location('/chat/${Uri.encodeComponent(_self.chatId)}');
 
   @override
   void go(BuildContext context) => context.go(location);
