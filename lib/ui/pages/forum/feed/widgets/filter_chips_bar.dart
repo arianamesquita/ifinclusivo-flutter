@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/ui/pages/forum/feed/widgets/sort_dropdown_button.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 
+import '../../../../../domain/models/enums/categorias.dart';
+
 class FilterChipsBar extends StatefulWidget {
-  final void Function(List<String> selected, String order)? onChanged;
+  final void Function(List<Categorias> selected, String order)? onChanged;
 
   const FilterChipsBar({super.key, this.onChanged});
 
@@ -21,15 +24,31 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
   }
 
   String _selectedOrder = 'Relevância';
-  late Set<String> _selectedFilters = {};
+  late Set<Categorias> _selectedFilters = {};
 
   final List<Map<String, dynamic>> _filters = [
-    {'label': 'Redes', 'icon': Icons.wifi},
-    {'label': 'Banco de Dados', 'icon': Icons.storage},
-    {'label': 'Programação', 'icon': Icons.code},
-    {'label': 'Web', 'icon': Icons.web},
-    {'label': 'Estrutura de Dados', 'icon': Icons.account_tree_outlined},
-    {'label': 'Arquitetura de Computadores', 'icon': Icons.hardware_outlined},
+    {'categoria': Categorias.REDES, 'label': 'Redes', 'icon': Icons.wifi},
+    {
+      'categoria': Categorias.BANCO_DE_DADOS,
+      'label': 'Banco de Dados',
+      'icon': Icons.storage,
+    },
+    {
+      'categoria': Categorias.PROGRAMACAO,
+      'label': 'Programação',
+      'icon': Icons.code,
+    },
+    {'categoria': Categorias.WEB, 'label': 'Web', 'icon': Icons.web},
+    {
+      'categoria': Categorias.ESTRUTURA_DE_DADOS,
+      'label': 'Estrutura de Dados',
+      'icon': Icons.account_tree_outlined,
+    },
+    {
+      'categoria': Categorias.ARQUITETURA_DE_COMPUTADORES,
+      'label': 'Arquitetura de Computadores',
+      'icon': Icons.hardware_outlined,
+    },
   ];
 
   @override
@@ -66,51 +85,11 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
               ),
           ],
         ),
+        SortDropdownButton(menuItems: ['Relevância','Mais recente'], selectedItem: _selectedOrder, onSelected: (String value){
+          setState(() => _selectedOrder = value);
+          _notifyChange();
+        })
 
-        PopupMenuButton<String>(
-          onSelected: (String value) {
-            // Callback chamado quando um item do menu é selecionado
-            setState(() => _selectedOrder = value);
-            _notifyChange(); // Chama sua função para notificar a mudança
-                    },
-          itemBuilder:
-              (BuildContext context) => const <PopupMenuEntry<String>>[
-                // Itens do seu menu dropdown
-                PopupMenuItem<String>(
-                  value: 'Relevância',
-                  child: Text('Relevância'),
-                ),
-                PopupMenuItem<String>(
-                  value: 'Mais recente',
-                  child: Text('Mais recente'),
-                ),
-              ],
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(16, 6, 8, 6),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.tertiary,
-              borderRadius: BorderRadius.circular(
-                8.0,
-              ), // Deixa as bordas arredondadas
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 8,
-              children: [
-                Text(
-                  _selectedOrder, // Mostra o valor selecionado
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onTertiary,
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: Theme.of(context).colorScheme.onTertiary,
-                ),
-              ],
-            ),
-          ),
-        ),
       ],
     );
   }
@@ -124,25 +103,27 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
 
 
     // Usa o resultado de showModalBottomSheet ou showDialog
-    final Set<String>? result;
+    final Set<Categorias>? result;
 
     if (ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile) {
       // --- LÓGICA PARA MOBILE: Bottom Sheet ---
-      result = await showModalBottomSheet<Set<String>>(
+      result = await showModalBottomSheet<Set<Categorias>>(
         context: context,
         isScrollControlled: true,
-        builder: (_) => _FilterContent(
+        builder: (_) => ChipsSelectContent(
+          title: 'Filtros:',
           initialSelectedFilters: _selectedFilters,
           allFilters: _filters, // Passe sua lista de filtros aqui
         ),
       );
     } else {
-      result = await showDialog<Set<String>>(
+      result = await showDialog<Set<Categorias>>(
         context: context,
         builder: (_) => Dialog(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 500), // Limita a largura do popup
-            child: _FilterContent(
+            child: ChipsSelectContent(
+              title: 'Filtros:',
               initialSelectedFilters: _selectedFilters,
               allFilters: _filters, // Passe sua lista de filtros aqui
             ),
@@ -162,26 +143,27 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
 
 
 }
-class _FilterContent extends StatefulWidget {
-  final Set<String> initialSelectedFilters;
+class ChipsSelectContent extends StatefulWidget {
+  final String title;
+  final Set<Categorias> initialSelectedFilters;
   final List<Map<String, dynamic>> allFilters; // Passe a lista de todos os filtros
 
-  const _FilterContent({
+  const ChipsSelectContent({super.key,
     required this.initialSelectedFilters,
-    required this.allFilters,
+    required this.allFilters, required this.title,
   });
 
   @override
-  State<_FilterContent> createState() => _FilterContentState();
+  State<ChipsSelectContent> createState() => _ChipsSelectContentState();
 }
 
-class _FilterContentState extends State<_FilterContent> {
-  late Set<String> _tempSelectedFilters;
+class _ChipsSelectContentState extends State<ChipsSelectContent> {
+  late Set<Categorias> _tempSelectedFilters;
 
   @override
   void initState() {
     super.initState();
-    _tempSelectedFilters = Set<String>.from(widget.initialSelectedFilters);
+    _tempSelectedFilters = Set<Categorias>.from(widget.initialSelectedFilters);
   }
 
   @override
@@ -193,7 +175,7 @@ class _FilterContentState extends State<_FilterContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Título
-          Text('Filtros', style: Theme.of(context).textTheme.titleLarge),
+          Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 16),
 
           // Usamos Wrap para que os chips quebrem a linha automaticamente
@@ -203,7 +185,8 @@ class _FilterContentState extends State<_FilterContent> {
             children: widget.allFilters.map((f) {
               final label = f['label'] as String;
               final icon = f['icon'] as IconData;
-              final selected = _tempSelectedFilters.contains(label);
+              final categoria = f['categoria'] as Categorias;
+              final selected = _tempSelectedFilters.contains(categoria);
               return FilterChip(
                 label: Text(label),
                 avatar: selected ? null : Icon(icon),
@@ -211,9 +194,9 @@ class _FilterContentState extends State<_FilterContent> {
                 onSelected: (bool value) {
                   setState(() {
                     if (value) {
-                      _tempSelectedFilters.add(label);
+                      _tempSelectedFilters.add(categoria);
                     } else {
-                      _tempSelectedFilters.remove(label);
+                      _tempSelectedFilters.remove(categoria);
                     }
                   });
                 },

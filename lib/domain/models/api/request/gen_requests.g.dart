@@ -175,56 +175,36 @@ Map<String, dynamic> _$$UpdatePasswordRequestModelImplToJson(
   'novaSenha': instance.novaSenha,
 };
 
-_$TopicoRequestModelImpl _$$TopicoRequestModelImplFromJson(
-  Map<String, dynamic> json,
-) => _$TopicoRequestModelImpl(
-  titulo: json['titulo'] as String,
-  descricao: json['descricao'] as String,
-  categoria: $enumDecode(_$CategoriasEnumMap, json['categoria']),
-);
-
-Map<String, dynamic> _$$TopicoRequestModelImplToJson(
-  _$TopicoRequestModelImpl instance,
-) => <String, dynamic>{
-  'titulo': instance.titulo,
-  'descricao': instance.descricao,
-  'categoria': _$CategoriasEnumMap[instance.categoria]!,
-};
-
-const _$CategoriasEnumMap = {
-  Categorias.REDES: 1,
-  Categorias.BANCO_DE_DADOS: 2,
-  Categorias.PROGRAMACAO: 3,
-  Categorias.WEB: 4,
-  Categorias.ESTRUTURA_DE_DADOS: 5,
-  Categorias.ARQUITETURA_DE_COMPUTADORES: 6,
-};
-
 _$PublicacaoRequestModelImpl _$$PublicacaoRequestModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$PublicacaoRequestModelImpl(
   titulo: json['titulo'] as String,
-  text: json['text'] as String,
-  urlVideo: json['urlVideo'] as String?,
-  urlFoto: json['urlFoto'] as String?,
+  texto: json['texto'] as String,
+  categorias:
+      (json['categorias'] as List<dynamic>)
+          .map((e) => $enumDecode(_$CategoriasEnumMap, e))
+          .toSet(),
+  parentId: (json['parentId'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$$PublicacaoRequestModelImplToJson(
   _$PublicacaoRequestModelImpl instance,
 ) => <String, dynamic>{
   'titulo': instance.titulo,
-  'text': instance.text,
-  'urlVideo': instance.urlVideo,
-  'urlFoto': instance.urlFoto,
+  'texto': instance.texto,
+  'categorias':
+      instance.categorias.map((e) => _$CategoriasEnumMap[e]!).toList(),
+  'parentId': instance.parentId,
 };
 
-_$ComentarioRequestModelImpl _$$ComentarioRequestModelImplFromJson(
-  Map<String, dynamic> json,
-) => _$ComentarioRequestModelImpl(content: json['content'] as String);
-
-Map<String, dynamic> _$$ComentarioRequestModelImplToJson(
-  _$ComentarioRequestModelImpl instance,
-) => <String, dynamic>{'content': instance.content};
+const _$CategoriasEnumMap = {
+  Categorias.REDES: 'REDES',
+  Categorias.BANCO_DE_DADOS: 'BANCO_DE_DADOS',
+  Categorias.PROGRAMACAO: 'PROGRAMACAO',
+  Categorias.WEB: 'WEB',
+  Categorias.ESTRUTURA_DE_DADOS: 'ESTRUTURA_DE_DADOS',
+  Categorias.ARQUITETURA_DE_COMPUTADORES: 'ARQUITETURA_DE_COMPUTADORES',
+};
 
 _$LibrasRequestModelImpl _$$LibrasRequestModelImplFromJson(
   Map<String, dynamic> json,

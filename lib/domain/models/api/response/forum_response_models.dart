@@ -12,21 +12,51 @@ class AutorCardModel with _$AutorCardModel {
 }
 
 @freezed
-class PublicacaoCardModel with _$PublicacaoCardModel {
+class PublicacaoDetalhadaModel with _$PublicacaoDetalhadaModel {
   @JsonSerializable(explicitToJson: true)
-  const factory PublicacaoCardModel({
+  const factory PublicacaoDetalhadaModel({
     required int id,
     required String titulo,
     required String texto,
     required DateTime dataCriacao,
-    required AutorCardModel autor,
+    required AutorCardModel usuario,
     required Set<Categorias> categorias,
-    required int likesCount,
-    required int comentariosCount,
-    required bool isLiked,
+    required int totalLikes,
+    required int totalRespostas,
+    required bool curtidoPeloUsuario,
+    int? respostaEscolhidaId,
+  }) = _PublicacaoDetalhadaModel;
+
+  factory PublicacaoDetalhadaModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicacaoDetalhadaModelFromJson(json);
+}
+
+@freezed
+class PublicacaoCardModel with _$PublicacaoCardModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory PublicacaoCardModel({
+    required int id,
+    String? titulo,
+    required DateTime dataCriacao,
+    required AutorCardModel usuario,
+    required int totalLikes,
+    required int totalRespostas,
+    required bool curtidoPeloUsuario,
   }) = _PublicacaoCardModel;
 
-  // Fábrica para desserializar o JSON
   factory PublicacaoCardModel.fromJson(Map<String, dynamic> json) =>
       _$PublicacaoCardModelFromJson(json);
+}
+
+@freezed
+class PublicacaoCompletaModel with _$PublicacaoCompletaModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory PublicacaoCompletaModel({
+    required List<PublicacaoCardModel> pais,
+    required PublicacaoDetalhadaModel publicacao,
+    required List<PublicacaoDetalhadaModel> respostas,
+  }) = _PublicacaoCompletaModel;
+
+  factory PublicacaoCompletaModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicacaoCompletaModelFromJson(json);
 }

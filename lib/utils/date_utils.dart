@@ -1,4 +1,10 @@
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
+
+String formatTimeAgo(DateTime date) {
+  return timeago.format(date, locale: 'pt_BR');
+}
 
 class DateFormatUtil {
   static String formatToBrazilianDate(DateTime date) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../../utils/date_utils.dart';
+
 class AccountHeader extends StatelessWidget {
   final String nameUser;
   final String? imgPath;
@@ -66,29 +68,44 @@ class AccountHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            spacing: 10,
-            children: [
-              CircleAvatar(
-                backgroundImage:
-                    (imgPath != null && imgPath!.isNotEmpty)
-                        ? NetworkImage(imgPath!)
-                        : null,
-              ),
-              Text(
-                nameUser,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: 10,
+              children: [
+                CircleAvatar(
+                  backgroundImage:
+                      (imgPath != null && imgPath!.isNotEmpty)
+                          ? NetworkImage(imgPath!)
+                          : null,
                 ),
-              ),
-              Text(
-                "16h",
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
+                Expanded(
+                  child: Wrap(
+                    spacing: 5,
+                    runAlignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(
+                        nameUser,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      Text(
+                        formatTimeAgo(dataCriacao),
+                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                        softWrap: true,
+                        maxLines: 2,
+                      ),
+                    ],
+                  ),
+                )
+
+              ],
+            ),
           ),
           Row(
             spacing: 10,

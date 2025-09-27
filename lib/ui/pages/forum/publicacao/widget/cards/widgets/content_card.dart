@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'dart:convert';
+import 'package:flutter_quill/flutter_quill.dart';
+
 class ContentCard extends StatefulWidget {
   final String title;
-  final String content;
-  final bool isCollapsible;
-  final VoidCallback? onToggle;
+  final String contentJson;
 
   const ContentCard({
     super.key,
     required this.title,
-    required this.content,
-    this.isCollapsible = false,
-    this.onToggle,
+    required this.contentJson,
   });
 
   @override
@@ -19,78 +18,115 @@ class ContentCard extends StatefulWidget {
 }
 
 class _ContentCardState extends State<ContentCard> {
-  late bool _isExpanded;
+  late final QuillController _controller;
+  bool _isExpanded = false;
+  final double _collapsedHeight = 150.0;
 
   @override
   void initState() {
-    _isExpanded = !widget.isCollapsible;
     super.initState();
+    _controller = QuillController(
+      document: _loadDocument(),
+      selection: const TextSelection.collapsed(offset: 0),
+      readOnly: true,
+
+    );
+  }
+
+  Document _loadDocument() {
+    try {
+      final List<dynamic> jsonData = jsonDecode(widget.contentJson);
+      return Document.fromJson(jsonData);
+    } catch (e) {
+      print('Erro ao carregar o documento Quill: $e');
+      return Document()..insert(0, 'Erro ao carregar conteúdo.');
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final textStyle = Theme.of(context).textTheme.bodyMedium;
-        final textPainter = TextPainter(
-          text: TextSpan(text: widget.content, style: textStyle),
-          maxLines: 3,
-          textDirection: TextDirection.ltr,
-        )..layout(maxWidth: constraints.maxWidth);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.title,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
 
-        final bool doesTextOverflow = textPainter.didExceedMaxLines;
-
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Stack(
+            alignment: Alignment.bottomCenter,
             children: [
-              Text(
-                widget.title,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                widget.content,
-                style: textStyle,
-                maxLines: _isExpanded ? null : 3,
-                overflow:
-                    _isExpanded ? TextOverflow.clip : TextOverflow.ellipsis,
-              ),
-
-              if (widget.isCollapsible && doesTextOverflow)
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _isExpanded = !_isExpanded;
-                    });
-                    widget.onToggle?.call();
-                  },
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4), // aqui diminui o arredondamento
+              SizedBox(
+                height: _isExpanded ? null : _collapsedHeight,
+                child: ClipRect(
+                  child: QuillEditor.basic(
+                    controller: _controller,
+                    config: QuillEditorConfig(
+                      autoFocus: false,
+                      expands: false, // Não expande infinitamente
+                      padding: EdgeInsets.zero,
+                      showCursor: false,
+                      enableSelectionToolbar: true,
                     ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(_isExpanded ? 'Ver menos' : 'Ver mais'),
-                      const SizedBox(width: 4),
-                      Icon(
-                        _isExpanded ? Icons.unfold_less : Icons.unfold_more,
-                        size: 20,
-                      ),
-                    ],
-                  ),
+                ),
+              ),
+
+              if (!_isExpanded)
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: _buildFadeAndButton(context),
                 ),
             ],
           ),
-        );
-      },
+          if (_isExpanded)
+            _buildToggleButton(),
+        ],
+      ),
+    );
+  }
+
+  // Widget para o degradê e o botão "Ver mais"
+  Widget _buildFadeAndButton(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Theme.of(context).cardColor.withOpacity(0.0),
+            Theme.of(context).cardColor,
+          ],
+        ),
+      ),
+      alignment: Alignment.center,
+      child: _buildToggleButton(),
+    );
+  }
+
+  Widget _buildToggleButton() {
+    return TextButton(
+      onPressed: () => setState(() => _isExpanded = !_isExpanded),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(_isExpanded ? 'Ver menos' : 'Ver mais'),
+          const SizedBox(width: 4),
+          Icon(_isExpanded ? Icons.unfold_less : Icons.unfold_more, size: 20),
+        ],
+      ),
     );
   }
 }
