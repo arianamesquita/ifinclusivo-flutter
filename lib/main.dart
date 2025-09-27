@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
@@ -12,16 +11,13 @@ import 'package:timeago/timeago.dart' as timeago;
 
 
 import 'config/dependencies.dart';
-import 'config/firebase_options.dart';
 
 // main.dart
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: 'assets/env/.env');
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
   timeago.setLocaleMessages('pt_BR', timeago.PtBrMessages());
 
   final sharedPreferences = await SharedPreferences.getInstance();

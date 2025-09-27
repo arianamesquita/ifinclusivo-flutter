@@ -2,10 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/data/repositories/forum_repository.dart';
 import 'package:if_inclusivo/data/repositories/impl/forum_repository_impl.dart';
-import 'package:if_inclusivo/data/services/firestore_chat_service.dart';
 import 'package:if_inclusivo/data/services/forum_service.dart';
 import 'package:if_inclusivo/data/services/impl/auth_service_impl.dart';
-import 'package:if_inclusivo/data/services/impl/firestore_chat_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/forum_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/user_api_service_impl.dart';
 import 'package:if_inclusivo/data/services/user_api_service.dart';
@@ -69,7 +67,6 @@ List<SingleChildWidget> get _servicesData {
     Provider<UserApiService>(
       create: (context) => UserApiServiceImpl(dio: context.read<Dio>()),
     ),
-    Provider<FirestoreChatService>(create: (_) => FirestoreChatServiceImpl()),
     Provider<ForumService>(
       create: (context) => ForumServiceImpl(dio: context.read<Dio>()),
     ),

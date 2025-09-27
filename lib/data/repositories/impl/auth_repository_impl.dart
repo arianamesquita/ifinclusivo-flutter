@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -14,7 +13,6 @@ import '../auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final AuthService _authService;
   final SharedPreferences _prefs;
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   static const String _tokenKey = 'auth_token';
   static const String _userKey = 'auth_user';
@@ -38,7 +36,7 @@ class AuthRepositoryImpl implements AuthRepository {
     if (userData != null && token != null) {
       final isExpired = JwtDecoder.isExpired(token);
 
-      if (!isExpired && _firebaseAuth.currentUser != null) {
+      if (!isExpired) {
         _currentUser = UsuarioResponseModel.fromJson(jsonDecode(userData));
         _authStateController.add(_currentUser);
       } else {
@@ -60,19 +58,6 @@ class AuthRepositoryImpl implements AuthRepository {
     print(userJson);
     final user = UsuarioResponseModel.fromJson(userJson);
 
-    if (user.firebaseToken != null && user.firebaseToken!.isNotEmpty) {
-      try {
-        await _firebaseAuth.signInWithCustomToken(user.firebaseToken!);
-      } on FirebaseAuthException catch (e) {
-        print('Erro ao fazer login no Firebase: ${e.message}');
-        throw Exception('Falha na autenticação secundária. Tente novamente.');
-      }
-    } else {
-      throw Exception(
-        'Credenciais de autenticação incompletas recebidas do servidor.',
-      );
-    }
-
     await _saveSession(user);
     _currentUser = user;
     _authStateController.add(user);
@@ -86,7 +71,6 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e) {
       print("Erro no logout da API, mas continuando com o logout local: $e");
     } finally {
-      await _firebaseAuth.signOut();
       await _clearSession();
       _currentUser = null;
       _authStateController.add(null);
