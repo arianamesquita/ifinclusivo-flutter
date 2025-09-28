@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
@@ -7,18 +9,35 @@ import '../../../core/widgets/custom_text_field.dart';
 import '../../../core/widgets/hoverable_logo.dart';
 import '../../../core/widgets/password_text_field.dart';
 
-class RegisterDialogContent extends StatelessWidget {
+class RegisterDialogContent extends StatefulWidget {
   const RegisterDialogContent({super.key});
+
+  @override
+  State<RegisterDialogContent> createState() => _RegisterDialogContent();
+}
+
+class _RegisterDialogContent extends State<RegisterDialogContent> {
 
   static const Color color1 = Color.fromRGBO(168, 79, 206, 1); // Opacidade 100% é 1, não 100
   static const Color color2 = Color.fromRGBO(233, 246, 242, 1);
 
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+/*
+      context.read<RegisterViewModel>().loadUsers();
+*/
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<RegisterViewModel>();
     final deviceType = ResponsiveUtils.getDeviceType(context);
     final fontScale = ResponsiveUtils.fontScale(context);
-    return Dialog.fullscreen(
-      child: Stack(
+    return Scaffold(
+      body: Stack(
         children: [
           if (deviceType == DeviceScreenType.desktop)
             _buildIntro(context),
@@ -223,7 +242,7 @@ class RegisterDialogContent extends StatelessWidget {
                     child:
                     HoverableLogo(
                       onTap: () => AboutUsRoute().go(context),
-                      imagePath: 'assets/logo/logo_expanded_dark.svg',
+                      imagePath: 'assets/logo/logo_expanded_light.svg',
                       height: 94,
                     ),
                   ),

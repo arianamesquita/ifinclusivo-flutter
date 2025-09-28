@@ -7,8 +7,13 @@ import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_navigation_drawer.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_navigation_rail.dart';
 import 'package:if_inclusivo/ui/core/widgets/hoverable_logo.dart';
+import 'package:if_inclusivo/ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
 import 'package:if_inclusivo/ui/pages/shell/app_destinations.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
+import 'package:provider/provider.dart';
+
+import '../../../data/repositories/auth_repository.dart';
+import '../../../domain/models/api/response/gen_responses.dart';
 
 class ShellPage extends StatefulWidget {
   const ShellPage({super.key, required this.child});
@@ -30,24 +35,37 @@ class _ShellPageState extends State<ShellPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoggedIn = true;
-    final userRoles = [...Roles.values];
+    final authRepository = context.read<AuthRepository>();
 
-    final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
-    var deviceType = ResponsiveUtils.getDeviceType(context);
-    return deviceType == DeviceScreenType.mobile
-        ? _buildAppMobile(
-          auth,
-          auth.allowedBranchesMobile(),
-          context,
-          isLoggedIn,
-        )
-        : _buildAppWebAndTablet(
-          auth,
-          auth.allowedBranches(),
-          context,
-          isLoggedIn,
-        );
+    return StreamBuilder<UsuarioResponseModel?>(
+      stream: authRepository.authStateChanges,
+
+      initialData: authRepository.currentUser,
+      builder: (context, snapshot) {
+        final UsuarioResponseModel? currentUser = snapshot.data;
+        final bool isLoggedIn = currentUser != null;
+
+        final List<Roles> userRoles = currentUser?.roles?? [];
+
+        final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
+        var deviceType = ResponsiveUtils.getDeviceType(context);
+        if (deviceType == DeviceScreenType.mobile) {
+          return _buildAppMobile(
+            auth,
+            auth.allowedBranchesMobile(),
+            context,
+            isLoggedIn,
+          );
+        } else {
+          return _buildAppWebAndTablet(
+            auth,
+            auth.allowedBranches(),
+            context,
+            isLoggedIn,
+          );
+        }
+      },
+    );
   }
 
   Scaffold _buildAppWebAndTablet(
@@ -164,74 +182,12 @@ class _BuildMobileAPPState extends State<BuildMobileAPP>
 
   @override
   Widget build(BuildContext context) {
-    final isHomePage =
-        widget.child.currentIndex == 0 || widget.child.currentIndex == 2;
-
-    // garante que o TabController fique alinhado com a branch
-    if (widget.child.currentIndex == 0 && _tabController.index != 0) {
-      _tabController.index = 0;
-    } else if (widget.child.currentIndex == 2 && _tabController.index != 1) {
-      _tabController.index = 1;
-    }
 
     return Scaffold(
-      appBar:
-          isHomePage
-              ? AppBar(
-                toolbarHeight: 76,
-                title: SvgPicture.asset(
-                  'assets/logo/logo_expanded_dark.svg',
-                  height: 60,
-                ),
-                actions: [
-                  IconButton(
-                    onPressed: () => NotificationRouter().push(context),
-                    icon: Icon(
-                      Icons.notifications_outlined,
-                      size: 24,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                ],
-                actionsPadding: EdgeInsets.symmetric(vertical: 16),
-                bottom: TabBar(
-                  controller: _tabController,
-                  tabs: const [
-                    Tab(text: 'Fórum', icon: Icon(Icons.group_work_outlined)),
-                    Tab(
-                      text: 'Tópicos',
-                      icon: Icon(Icons.dashboard_customize_outlined),
-                    ),
-                  ],
-                ),
-              )
-              : null,
-      body: SafeArea(child: widget.child),
+      body: widget.child,
       bottomNavigationBar: NavigationBar(
-        selectedIndex: () {
-          final currentBranch = widget.child.currentIndex;
-          if (currentBranch == 0 || currentBranch == 2) return 0; // Home
-          if (currentBranch == 1) return 1; // Libras
-          if (currentBranch == 3) return 2; // Chat
-          if (currentBranch == 5) return 3; // Profile
-          return 0;
-        }(),
-        onDestinationSelected: (newIndex) {
-          switch (newIndex) {
-            case 0:
-              widget.child.goBranch(lastIndexTabBar); // volta à última tab
-              break;
-            case 1:
-              widget.child.goBranch(1);
-              break;
-            case 2:
-              widget.child.goBranch(3);
-              break;
-            case 3:
-              widget.child.goBranch(5);
-              break;
-          }
-        },
+        selectedIndex: widget.child.currentIndex,
+        onDestinationSelected: widget.child.goBranch,
         destinations: AppDestinations.bottom(context),
         indicatorColor: Theme.of(context).colorScheme.primary,
         backgroundColor: Theme.of(context).colorScheme.tertiary,

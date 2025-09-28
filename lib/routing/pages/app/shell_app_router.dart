@@ -2,40 +2,21 @@ part of '../../app_router.dart';
 
 @TypedStatefulShellRoute<ShellAppRouter>(
   branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
+    forumBranch,
     TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<ForumRouter>(path: AppRoutes.forum),
-      ],
-    ),
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<LibrasRouter>(path: AppRoutes.libras,
-        routes: [TypedGoRoute<RedesRouter>(path: AppRoutes.publicacoesPorTopico,
-            routes: [TypedGoRoute<MidiaRouter>(path: AppRoutes.midia)])]),
-      ],
-    ),
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<TopicoRouter>(path: AppRoutes.topico),
-      ],
-    ),
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedStatefulShellRoute<ChatShell>(
-          branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
-            // Este shell interno terá uma única branch para gerenciar o conteúdo do chat
-            TypedStatefulShellBranch<StatefulShellBranchData>(
-              routes: <TypedRoute<RouteData>>[
-                TypedGoRoute<ChatRouter>(
-                  path: '/chat', // O path completo herdado do shell externo
-                  routes: [TypedGoRoute<ConversationRouter>(path: ':chatId')],
-                ),
-              ],
+        TypedGoRoute<LibrasRouter>(
+          path: AppRoutes.libras,
+          routes: [
+            TypedGoRoute<RedesRouter>(
+              path: AppRoutes.publicacoesPorTopico,
+              routes: [TypedGoRoute<MidiaRouter>(path: AppRoutes.midia)],
             ),
           ],
         ),
       ],
     ),
+
     TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<MorePageRouter>(path: AppRoutes.more),
@@ -47,6 +28,7 @@ part of '../../app_router.dart';
         TypedGoRoute<ProfileRouter>(path: AppRoutes.profile),
       ],
     ),
+    newPublicationBranch
   ],
 )
 class ShellAppRouter extends StatefulShellRouteData {

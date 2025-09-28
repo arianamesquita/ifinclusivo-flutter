@@ -8,7 +8,8 @@ part of 'app_router.dart';
 
 List<RouteBase> get $appRoutes => [
   $notificationRouter,
-  $mobileConversationRoute,
+  $tokenValidateRouter,
+  $resetPasswordRoute,
   $shellAppRouter,
   $shellAboutRoute,
   $shellAuthRoute,
@@ -45,21 +46,54 @@ mixin _$NotificationRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $mobileConversationRoute => GoRouteData.$route(
-  path: '/app/chat/con/:chatId',
+RouteBase get $tokenValidateRouter => GoRouteData.$route(
+  path: '/auth/verify-email',
 
-  factory: _$MobileConversationRoute._fromState,
+  factory: _$TokenValidateRouter._fromState,
 );
 
-mixin _$MobileConversationRoute on GoRouteData {
-  static MobileConversationRoute _fromState(GoRouterState state) =>
-      MobileConversationRoute(chatId: state.pathParameters['chatId']!);
+mixin _$TokenValidateRouter on GoRouteData {
+  static TokenValidateRouter _fromState(GoRouterState state) =>
+      TokenValidateRouter(token: state.uri.queryParameters['token']);
 
-  MobileConversationRoute get _self => this as MobileConversationRoute;
+  TokenValidateRouter get _self => this as TokenValidateRouter;
 
   @override
   String get location => GoRouteData.$location(
-    '/app/chat/con/${Uri.encodeComponent(_self.chatId)}',
+    '/auth/verify-email',
+    queryParams: {if (_self.token != null) 'token': _self.token},
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $resetPasswordRoute => GoRouteData.$route(
+  path: '/auth/reset_password',
+
+  factory: _$ResetPasswordRoute._fromState,
+);
+
+mixin _$ResetPasswordRoute on GoRouteData {
+  static ResetPasswordRoute _fromState(GoRouterState state) =>
+      ResetPasswordRoute(token: state.uri.queryParameters['token']);
+
+  ResetPasswordRoute get _self => this as ResetPasswordRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/auth/reset_password',
+    queryParams: {if (_self.token != null) 'token': _self.token},
   );
 
   @override
@@ -85,6 +119,13 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           path: '/app/forum',
 
           factory: _$ForumRouter._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'post/:id',
+
+              factory: _$PublicacaoRouter._fromState,
+            ),
+          ],
         ),
       ],
     ),
@@ -114,40 +155,6 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
     StatefulShellBranchData.$branch(
       routes: [
         GoRouteData.$route(
-          path: '/app/topicos',
-
-          factory: _$TopicoRouter._fromState,
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        StatefulShellRouteData.$route(
-          factory: $ChatShellExtension._fromState,
-          branches: [
-            StatefulShellBranchData.$branch(
-              routes: [
-                GoRouteData.$route(
-                  path: '/chat',
-
-                  factory: _$ChatRouter._fromState,
-                  routes: [
-                    GoRouteData.$route(
-                      path: ':chatId',
-
-                      factory: _$ConversationRouter._fromState,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
           path: '/app/more',
 
           factory: _$MorePageRouter._fromState,
@@ -160,6 +167,15 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           path: '/app/profile',
 
           factory: _$ProfileRouter._fromState,
+        ),
+      ],
+    ),
+    StatefulShellBranchData.$branch(
+      routes: [
+        GoRouteData.$route(
+          path: '/app/new-post',
+
+          factory: _$NewPublicacaoRouter._fromState,
         ),
       ],
     ),
@@ -176,6 +192,30 @@ mixin _$ForumRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/forum');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$PublicacaoRouter on GoRouteData {
+  static PublicacaoRouter _fromState(GoRouterState state) =>
+      PublicacaoRouter(state.pathParameters['id']!);
+
+  PublicacaoRouter get _self => this as PublicacaoRouter;
+
+  @override
+  String get location =>
+      GoRouteData.$location('/app/forum/post/${Uri.encodeComponent(_self.id)}');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -251,74 +291,6 @@ mixin _$MidiaRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$TopicoRouter on GoRouteData {
-  static TopicoRouter _fromState(GoRouterState state) => const TopicoRouter();
-
-  @override
-  String get location => GoRouteData.$location('/app/topicos');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $ChatShellExtension on ChatShell {
-  static ChatShell _fromState(GoRouterState state) => const ChatShell();
-}
-
-mixin _$ChatRouter on GoRouteData {
-  static ChatRouter _fromState(GoRouterState state) => const ChatRouter();
-
-  @override
-  String get location => GoRouteData.$location('/chat');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-mixin _$ConversationRouter on GoRouteData {
-  static ConversationRouter _fromState(GoRouterState state) =>
-      ConversationRouter(chatId: state.pathParameters['chatId']!);
-
-  ConversationRouter get _self => this as ConversationRouter;
-
-  @override
-  String get location =>
-      GoRouteData.$location('/chat/${Uri.encodeComponent(_self.chatId)}');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
 mixin _$MorePageRouter on GoRouteData {
   static MorePageRouter _fromState(GoRouterState state) =>
       const MorePageRouter();
@@ -345,6 +317,27 @@ mixin _$ProfileRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/profile');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$NewPublicacaoRouter on GoRouteData {
+  static NewPublicacaoRouter _fromState(GoRouterState state) =>
+      const NewPublicacaoRouter();
+
+  @override
+  String get location => GoRouteData.$location('/app/new-post');
 
   @override
   void go(BuildContext context) => context.go(location);

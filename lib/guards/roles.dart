@@ -5,3 +5,9 @@ enum Roles{
   ROLE_TUTOR,
   ROLE_INTERPRETE
 }
+Roles roleFromString(String role) {
+  return Roles.values.firstWhere(
+        (e) => e.toString().split('.').last == role,
+    orElse: () => Roles.ROLE_ALUNO,
+  );
+}

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/core/widgets/hoverable_logo.dart';
+import 'package:provider/provider.dart';
+
+import '../../../data/repositories/auth_repository.dart';
 
 class CustomNavigationRail extends StatefulWidget {
   final int selectedIndex;
@@ -106,6 +109,8 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
   }
 
   Expanded _buildTrailing(BuildContext context) {
+    final repository = context.read<AuthRepository>();
+
     return Expanded(
       child: Column(
         spacing: 4,
@@ -118,7 +123,7 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
                 spacing: 4,
                 children: [
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () => repository.logout(),
                     style: FilledButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.error,
                       padding: EdgeInsets.symmetric(
@@ -144,7 +149,8 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
                 spacing: 4,
                 children: [
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                      LoginRoute().push(context),
                     style: FilledButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.tertiaryContainer,

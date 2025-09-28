@@ -32,7 +32,6 @@ class AboutUsPage extends StatelessWidget {
         label: 'Sugestões de leitura adaptadas para todos.',
         color: color2,
         onTap: () {
-          context.go(TopicoRouter().location);
         },
       ),
       StackItemInfo(
@@ -41,7 +40,6 @@ class AboutUsPage extends StatelessWidget {
         label: 'Espaço de diálogo e apoio entre os alunos.',
         color: color1,
         onTap: () {
-          context.go(ChatRouter().location);
         },
       ),
       StackItemInfo(
