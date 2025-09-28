@@ -47,7 +47,7 @@ class SpecificTopic extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 14),
                   Text(
                     textAlign: TextAlign.center,
                     description,

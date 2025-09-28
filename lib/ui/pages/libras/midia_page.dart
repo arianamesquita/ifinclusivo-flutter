@@ -67,6 +67,7 @@ class ModalMidiaPageLibras extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         CardInfo(
+          maxWidth: 635,
           textAlign: TextAlign.left,
           title: 'Descrição',
           label: description,
