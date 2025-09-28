@@ -3,20 +3,7 @@ part of '../../app_router.dart';
 @TypedStatefulShellRoute<ShellAppRouter>(
   branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
     forumBranch,
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<LibrasRouter>(
-          path: AppRoutes.libras,
-          routes: [
-            TypedGoRoute<RedesRouter>(
-              path: AppRoutes.publicacoesPorTopico,
-              routes: [TypedGoRoute<MidiaRouter>(path: AppRoutes.midia)],
-            ),
-          ],
-        ),
-      ],
-    ),
-
+    librasBranch,
     TypedStatefulShellBranch<StatefulShellBranchData>(
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<MorePageRouter>(path: AppRoutes.more),

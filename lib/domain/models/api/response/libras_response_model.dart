@@ -3,7 +3,7 @@ part of 'gen_responses.dart';
 class LibrasResponseModel with _$LibrasResponseModel {
   @JsonSerializable(explicitToJson: true)
   const factory LibrasResponseModel({
-    required String id,
+    required int id,
     required String palavra,
     required String descricao,
     String? url,

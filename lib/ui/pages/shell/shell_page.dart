@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/data/repositories/libras_repository.dart';
+import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/guards/auth_guard.dart';
 import 'package:if_inclusivo/guards/roles.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
@@ -32,10 +34,21 @@ class _ShellPageState extends State<ShellPage> {
   void closeDrawer() {
     scaffoldKey.currentState!.closeDrawer();
   }
+  @override
+  void initState() {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final librasRepository = context.read<LibrasRepository>();
+      print(await librasRepository.getLibrasByTopic(categorias: Categorias.REDES));
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final authRepository = context.read<AuthRepository>();
+
 
     return StreamBuilder<UsuarioResponseModel?>(
       stream: authRepository.authStateChanges,

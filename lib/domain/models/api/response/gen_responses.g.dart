@@ -354,7 +354,7 @@ Map<String, dynamic> _$$PublicacaoCompletaModelImplToJson(
 _$LibrasResponseModelImpl _$$LibrasResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$LibrasResponseModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   palavra: json['palavra'] as String,
   descricao: json['descricao'] as String,
   url: json['url'] as String?,
@@ -390,9 +390,9 @@ Map<String, dynamic> _$$LibrasResponseModelImplToJson(
 };
 
 const _$StatusEnumMap = {
-  Status.APROVADO: 1,
-  Status.REPROVADO: 2,
-  Status.EMANALISE: 3,
+  Status.APROVADO: 'APROVADO',
+  Status.REPROVADO: 'REPROVADO',
+  Status.EMANALISE: 'EMANALISE',
 };
 
 _$MessageResponseModelImpl _$$MessageResponseModelImplFromJson(

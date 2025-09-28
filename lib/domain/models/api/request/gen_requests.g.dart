@@ -220,9 +220,9 @@ Map<String, dynamic> _$$LibrasRequestModelImplToJson(
 };
 
 const _$StatusEnumMap = {
-  Status.APROVADO: 1,
-  Status.REPROVADO: 2,
-  Status.EMANALISE: 3,
+  Status.APROVADO: 'APROVADO',
+  Status.REPROVADO: 'REPROVADO',
+  Status.EMANALISE: 'EMANALISE',
 };
 
 const _$CategoriasEnumMap = {

@@ -137,16 +137,14 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           factory: _$LibrasRouter._fromState,
           routes: [
             GoRouteData.$route(
-              path: 'publicacoes',
+              path: 'category/:categoria',
 
-              factory: _$RedesRouter._fromState,
-              routes: [
-                GoRouteData.$route(
-                  path: 'midia',
+              factory: _$LibrasTopicRouter._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'midia',
 
-                  factory: _$MidiaRouter._fromState,
-                ),
-              ],
+              factory: _$MidiaRouter._fromState,
             ),
           ],
         ),
@@ -251,11 +249,16 @@ mixin _$LibrasRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$RedesRouter on GoRouteData {
-  static RedesRouter _fromState(GoRouterState state) => const RedesRouter();
+mixin _$LibrasTopicRouter on GoRouteData {
+  static LibrasTopicRouter _fromState(GoRouterState state) =>
+      LibrasTopicRouter(state.pathParameters['categoria']!);
+
+  LibrasTopicRouter get _self => this as LibrasTopicRouter;
 
   @override
-  String get location => GoRouteData.$location('/app/libras/publicacoes');
+  String get location => GoRouteData.$location(
+    '/app/libras/category/${Uri.encodeComponent(_self.categoria)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -275,7 +278,7 @@ mixin _$MidiaRouter on GoRouteData {
   static MidiaRouter _fromState(GoRouterState state) => const MidiaRouter();
 
   @override
-  String get location => GoRouteData.$location('/app/libras/publicacoes/midia');
+  String get location => GoRouteData.$location('/app/libras/midia');
 
   @override
   void go(BuildContext context) => context.go(location);

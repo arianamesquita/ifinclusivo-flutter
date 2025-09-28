@@ -25,7 +25,7 @@ UsuarioResponseModel _$UsuarioResponseModelFromJson(Map<String, dynamic> json) {
       return _ProfessorResponseModel.fromJson(json);
     case 'tutor':
       return _TutorResponseModel.fromJson(json);
-    case 'interprete':
+    case 'INTERPRETE':
       return _InterpreteResponseModel.fromJson(json);
 
     default:
@@ -131,7 +131,7 @@ mixin _$UsuarioResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    interprete,
+    INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -213,7 +213,7 @@ mixin _$UsuarioResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -295,7 +295,7 @@ mixin _$UsuarioResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -304,7 +304,7 @@ mixin _$UsuarioResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) interprete,
+    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -312,7 +312,7 @@ mixin _$UsuarioResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? interprete,
+    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -320,7 +320,7 @@ mixin _$UsuarioResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? interprete,
+    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 
@@ -784,7 +784,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return aluno(
       id,
@@ -882,7 +882,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return aluno?.call(
       id,
@@ -980,7 +980,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (aluno != null) {
@@ -1008,7 +1008,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) interprete,
+    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
   }) {
     return aluno(this);
   }
@@ -1020,7 +1020,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? interprete,
+    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
   }) {
     return aluno?.call(this);
   }
@@ -1032,7 +1032,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? interprete,
+    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (aluno != null) {
@@ -1493,7 +1493,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return alunoNapne(
       id,
@@ -1597,7 +1597,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return alunoNapne?.call(
       id,
@@ -1701,7 +1701,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (alunoNapne != null) {
@@ -1735,7 +1735,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) interprete,
+    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
   }) {
     return alunoNapne(this);
   }
@@ -1747,7 +1747,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? interprete,
+    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
   }) {
     return alunoNapne?.call(this);
   }
@@ -1759,7 +1759,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? interprete,
+    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (alunoNapne != null) {
@@ -2165,7 +2165,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return professor(
       id,
@@ -2264,7 +2264,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return professor?.call(
       id,
@@ -2363,7 +2363,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (professor != null) {
@@ -2392,7 +2392,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) interprete,
+    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
   }) {
     return professor(this);
   }
@@ -2404,7 +2404,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? interprete,
+    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
   }) {
     return professor?.call(this);
   }
@@ -2416,7 +2416,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? interprete,
+    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (professor != null) {
@@ -2792,7 +2792,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return tutor(
       id,
@@ -2890,7 +2890,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return tutor?.call(
       id,
@@ -2988,7 +2988,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (tutor != null) {
@@ -3016,7 +3016,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) interprete,
+    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
   }) {
     return tutor(this);
   }
@@ -3028,7 +3028,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? interprete,
+    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
   }) {
     return tutor?.call(this);
   }
@@ -3040,7 +3040,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? interprete,
+    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (tutor != null) {
@@ -3253,7 +3253,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     final String? $type,
   }) : _roles = roles,
        _libras = libras,
-       $type = $type ?? 'interprete';
+       $type = $type ?? 'INTERPRETE';
 
   factory _$InterpreteResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$InterpreteResponseModelImplFromJson(json);
@@ -3301,7 +3301,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.interprete(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade, salary: $salary, libras: $libras)';
+    return 'UsuarioResponseModel.INTERPRETE(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade, salary: $salary, libras: $libras)';
   }
 
   @override
@@ -3444,9 +3444,9 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    interprete,
+    INTERPRETE,
   }) {
-    return interprete(
+    return INTERPRETE(
       id,
       nome,
       login,
@@ -3544,9 +3544,9 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
   }) {
-    return interprete?.call(
+    return INTERPRETE?.call(
       id,
       nome,
       login,
@@ -3644,11 +3644,11 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
-    if (interprete != null) {
-      return interprete(
+    if (INTERPRETE != null) {
+      return INTERPRETE(
         id,
         nome,
         login,
@@ -3674,9 +3674,9 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) interprete,
+    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
   }) {
-    return interprete(this);
+    return INTERPRETE(this);
   }
 
   @override
@@ -3686,9 +3686,9 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? interprete,
+    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
   }) {
-    return interprete?.call(this);
+    return INTERPRETE?.call(this);
   }
 
   @override
@@ -3698,11 +3698,11 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? interprete,
+    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
-    if (interprete != null) {
-      return interprete(this);
+    if (INTERPRETE != null) {
+      return INTERPRETE(this);
     }
     return orElse();
   }
@@ -4949,7 +4949,7 @@ LibrasResponseModel _$LibrasResponseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LibrasResponseModel {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get palavra => throw _privateConstructorUsedError;
   String get descricao => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
@@ -4979,7 +4979,7 @@ abstract class $LibrasResponseModelCopyWith<$Res> {
   ) = _$LibrasResponseModelCopyWithImpl<$Res, LibrasResponseModel>;
   @useResult
   $Res call({
-    String id,
+    int id,
     String palavra,
     String descricao,
     String? url,
@@ -5026,7 +5026,7 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
                 null == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             palavra:
                 null == palavra
                     ? _value.palavra
@@ -5093,7 +5093,7 @@ abstract class _$$LibrasResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String palavra,
     String descricao,
     String? url,
@@ -5139,7 +5139,7 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         palavra:
             null == palavra
                 ? _value.palavra
@@ -5218,7 +5218,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
       _$$LibrasResponseModelImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String palavra;
   @override
@@ -5316,7 +5316,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
 
 abstract class _LibrasResponseModel implements LibrasResponseModel {
   const factory _LibrasResponseModel({
-    required final String id,
+    required final int id,
     required final String palavra,
     required final String descricao,
     final String? url,
@@ -5333,7 +5333,7 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
       _$LibrasResponseModelImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get palavra;
   @override

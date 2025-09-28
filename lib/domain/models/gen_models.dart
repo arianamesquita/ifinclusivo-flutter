@@ -9,3 +9,5 @@ part 'gen_models.freezed.dart';
 part 'gen_models.g.dart';
 
 part 'chat_models.dart';
+
+part 'page.dart';
