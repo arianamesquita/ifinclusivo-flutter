@@ -11,6 +11,7 @@ import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/auth/reset_password/viewmodels/reset_password_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/auth/token/viewmodels/validate_token_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -19,8 +20,8 @@ import '../data/repositories/impl/auth_repository_impl.dart';
 import '../data/services/auth_service.dart';
 import '../ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../ui/pages/forum/publicacao/new publication/viewmodels/new_poblication_viewmodel.dart';
+import '../ui/pages/forum/new publication/viewmodels/new_poblication_viewmodel.dart';
+import '../ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import 'dio_config.dart';
 
 List<SingleChildWidget> providers(SharedPreferences prefs) {
@@ -118,6 +119,15 @@ List<SingleChildWidget> get _viewModelsProviders {
                 context.read<AuthRepository>(), // <-- Nova dependência
           ),
     ),
+    ChangeNotifierProvider(
+      create:
+          (context) => FeedViewModel(
+            forumRepository: context.read<ForumRepository>(),
+            authRepository:  context.read<AuthRepository>()
+          ),
+    ),
+
+
 
     // ... adicione outros ViewModels aqui
   ];
