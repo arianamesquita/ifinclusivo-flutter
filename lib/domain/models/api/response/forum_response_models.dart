@@ -31,32 +31,35 @@ class PublicacaoDetalhadaModel with _$PublicacaoDetalhadaModel {
       _$PublicacaoDetalhadaModelFromJson(json);
 }
 
-@freezed
-class PublicacaoCardModel with _$PublicacaoCardModel {
-  @JsonSerializable(explicitToJson: true)
-  const factory PublicacaoCardModel({
-    required int id,
-    String? titulo,
-    required DateTime dataCriacao,
-    required AutorCardModel usuario,
-    required int totalLikes,
-    required int totalRespostas,
-    required bool curtidoPeloUsuario,
-  }) = _PublicacaoCardModel;
-
-  factory PublicacaoCardModel.fromJson(Map<String, dynamic> json) =>
-      _$PublicacaoCardModelFromJson(json);
-}
 
 @freezed
 class PublicacaoCompletaModel with _$PublicacaoCompletaModel {
   @JsonSerializable(explicitToJson: true)
   const factory PublicacaoCompletaModel({
-    required List<PublicacaoCardModel> pais,
-    required PublicacaoDetalhadaModel publicacao,
-    required List<PublicacaoDetalhadaModel> respostas,
+    required PublicacaoDetalhadaModel atual,
+    required List<PublicacaoDetalhadaModel> pais,
   }) = _PublicacaoCompletaModel;
 
   factory PublicacaoCompletaModel.fromJson(Map<String, dynamic> json) =>
       _$PublicacaoCompletaModelFromJson(json);
+}
+
+@Freezed(genericArgumentFactories: true)
+class PaginatedResponse<T> with _$PaginatedResponse<T> {
+  const factory PaginatedResponse({
+    required List<T> content,
+    required int totalPages,
+    required int totalElements,
+    required int size,
+    required int number, // Número da página atual
+    required bool last,
+    required bool first,
+    required bool empty,
+  }) = _PaginatedResponse;
+
+  factory PaginatedResponse.fromJson(
+      Map<String, dynamic> json,
+      T Function(Object?) fromJsonT,
+      ) =>
+      _$PaginatedResponseFromJson(json, fromJsonT);
 }

@@ -5,6 +5,9 @@ const TypedStatefulShellBranch<StatefulShellBranchData> forumBranch =
       routes: <TypedRoute<RouteData>>[feedRouter],
     );
 
+
+
+
 const TypedGoRoute<ForumRouter> feedRouter = TypedGoRoute<ForumRouter>(
   path: AppRoutes.forum,
   routes: [publicationRouter],
@@ -23,22 +26,16 @@ const TypedGoRoute<PublicacaoRouter> publicationRouter =
     TypedGoRoute<PublicacaoRouter>(path: AppRoutes.publication);
 
 class PublicacaoRouter extends GoRouteData with _$PublicacaoRouter {
-  final String id;
+  final int id;
   const PublicacaoRouter(this.id);
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PublicacaoPage();
+    return PublicacaoPage(id: id);
   }
 }
 
-const TypedStatefulShellBranch<StatefulShellBranchData> newPublicationBranch =
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<NewPublicacaoRouter>(path: AppRoutes.newPublication),
-      ],
-    );
-
+@TypedGoRoute<NewPublicacaoRouter>(path: AppRoutes.newPublication)
 class NewPublicacaoRouter extends GoRouteData with _$NewPublicacaoRouter {
   const NewPublicacaoRouter();
 

@@ -1,4 +1,3 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 enum Categorias {
   REDES,
@@ -7,4 +6,9 @@ enum Categorias {
   WEB,
   ESTRUTURA_DE_DADOS,
   ARQUITETURA_DE_COMPUTADORES
+}
+
+enum Ordenacao {
+  MAIS_RECENTE,
+  RELEVANCIA
 }

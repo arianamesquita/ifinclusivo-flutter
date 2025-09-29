@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:if_inclusivo/ui/pages/forum/publicacao/new%20publication/viewmodels/new_poblication_viewmodel.dart';
-import 'package:if_inclusivo/ui/pages/forum/publicacao/new%20publication/widgets/PerguntaForm.dart';
+import 'package:if_inclusivo/routing/app_router.dart';
+import 'package:if_inclusivo/ui/pages/forum/new%20publication/viewmodels/new_poblication_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/forum/new%20publication/widgets/PerguntaForm.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
@@ -25,6 +26,14 @@ class _NewPublicationPageState extends State<NewPublicationPage> {
   late final Set<Categorias> _selectedFilters = {};
   final TextEditingController perguntaController = TextEditingController();
   final QuillController detalheController = QuillController.basic();
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.model !=null){
+      _selectedFilters.addAll(widget.model!.categorias);
+    }
+  }
   @override
   void dispose() {
     perguntaController.dispose();
@@ -38,9 +47,10 @@ class _NewPublicationPageState extends State<NewPublicationPage> {
 
 
     return ElevatedButton.icon(
-      onPressed:(title.isNotEmpty&&content.isNotEmpty&& _selectedFilters.isNotEmpty)? () {
+      onPressed:(title.isNotEmpty&&content.isNotEmpty&& _selectedFilters.isNotEmpty)? () async {
         final model = PublicacaoRequestModel(titulo: title, texto: content, categorias: _selectedFilters, parentId: widget.model?.id);
-        context.read<NewPublicationViewModel>().postPublication(model);
+        final response = await context.read<NewPublicationViewModel>().postPublication(model);
+        if(response != null) PublicacaoRouter(response.id).pushReplacement(context);
       }: null,
       label: Text('Postar'),
       icon: Icon(Icons.send),
@@ -106,7 +116,7 @@ class _NewPublicationPageState extends State<NewPublicationPage> {
   ];
   ConstrainedBox buildBigScreens(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: 800),
+      constraints: BoxConstraints(maxWidth: ResponsiveUtils.spacingColumn(context)),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
