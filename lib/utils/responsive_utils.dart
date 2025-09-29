@@ -58,4 +58,19 @@ class ResponsiveUtils {
         return (35,25);
     }
   }
+
+  static double spacingColumn(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    switch (getDeviceType(context)) {
+      case DeviceScreenType.mobile:
+        return width * 1;
+      case DeviceScreenType.tablet:
+        return width *0.75;
+      case DeviceScreenType.desktop:
+        return width * 0.5;
+    }
+  }
+
+
 }
