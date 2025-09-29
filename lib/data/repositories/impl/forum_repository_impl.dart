@@ -6,6 +6,7 @@ import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:result_dart/result_dart.dart';
 
 import '../../../domain/models/enums/categorias.dart';
+import '../../../domain/models/gen_models.dart';
 import '../../../exceptions/api_exception.dart';
 
 class ForumRepositoryImpl implements ForumRepository {

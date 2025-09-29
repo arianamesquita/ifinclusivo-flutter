@@ -3,6 +3,7 @@ import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:result_dart/result_dart.dart';
 
 import '../../domain/models/enums/categorias.dart';
+import '../../domain/models/gen_models.dart';
 
 abstract class ForumRepository {
   AsyncResult<PublicacaoDetalhadaModel> create(PublicacaoRequestModel request);
