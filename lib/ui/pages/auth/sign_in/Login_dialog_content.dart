@@ -1,14 +1,11 @@
 // lib/ui/pages/auth/login_dialog_content.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/validators/email_validador.dart';
 import 'package:if_inclusivo/domain/validators/login_validator.dart';
 import 'package:if_inclusivo/domain/validators/password_validator.dart';
-import 'package:if_inclusivo/ui/core/widgets/custom_text_field.dart';
-import 'package:if_inclusivo/ui/core/widgets/password_text_field.dart';
 import 'package:if_inclusivo/ui/pages/auth/modal/auth_modals.dart';
 import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
@@ -47,6 +44,7 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
   String errorSenha = '';
   bool isValid = false;
   bool isLoading = false;
+  bool passwordVisible = false;
 
   @override
   void initState() {
@@ -156,28 +154,51 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                         ),
                                       ),
                                     ),
-                                    CustomTextField(
-                                      labelText: 'Login',
-                                      placeholderText: 'Digite seu login',
-                                      validator: (String? value){
-                                        final email = EmailModel(email: value ?? '');
-                                        final ValidationResult result = emailValidator.validate(email);
-                                        if (result.isValid) {
-                                          isEmailError == false;
-                                          return null;
-                                        }
-                                        isEmailError == true;
-                                        errorEmail =
-                                        'E-mail inválido, '
-                                            'ex: joaosilva@gmail.com';
-                                        return errorEmail;
-                                      },
-                                      onChanged: (String text) {
-                                        setState(() {
-                                          _loginController.text = text;
-                                          isValid = _validateForm();
-                                        });
-                                      },
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 6,
+                                                offset: const Offset(0,3)
+                                            )
+                                          ]
+                                      ),
+                                      child: TextFormField(
+                                        controller: _loginController,
+                                        style: const TextStyle(
+                                          color: Color.fromRGBO(22, 29, 27, 1)
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: 'Digite seu login',
+                                          filled: true,
+                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(50),
+                                            borderSide: BorderSide.none,
+                                          ), // dá a borda Material
+                                          errorText: isEmailError ? errorEmail : null, // mostra o erro se existir
+                                        ),
+                                        validator: (String? value) {
+                                          final email = EmailModel(email: value ?? '');
+                                          final ValidationResult result = emailValidator.validate(email);
+                                          if (result.isValid) {
+                                            setState(() => isEmailError = false);
+                                            return null;
+                                          }
+                                          setState(() {
+                                            isEmailError = true;
+                                            errorEmail = 'E-mail inválido, ex: joaosilva@gmail.com';
+                                          });
+                                          return errorEmail;
+                                        },
+                                        onChanged: (String text) {
+                                          setState(() {
+                                            isValid = _validateForm();
+                                          });
+                                        },
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(15.0),
@@ -197,45 +218,84 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                         ),
                                       ),
                                     ),
-                                    PasswordTextField(
-                                      validator: (String? value) {
-                                        final password = PasswordModel(password: value ?? '');
-                                        final ValidationResult result = senhaValidator.validate(password);
-                                        if (result.isValid) {
-                                          isSenhaError == false;
-                                          return null;
-                                        }
-                                        isSenhaError == true;
-                                        errorSenha =
-                                        'Deve conter 6 letras.';
-                                        return errorSenha;
-                                      },
-                                      onValueChange: (String text) {
-                                        setState(() {
-                                          _passwordController.text = text;
-                                          isValid = _validateForm();
-                                        });
-                                      },
-                                      title: 'Senha',
-                                      placeholder: 'Digite sua Senha',
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 6,
+                                                offset: const Offset(0,3)
+                                            )
+                                          ]
+                                      ),
+                                      child: TextFormField(
+                                        controller: _passwordController,
+                                        style: const TextStyle(
+                                            color: Color.fromRGBO(22, 29, 27, 1)
+                                        ),
+                                        obscureText: !passwordVisible,
+                                        decoration: InputDecoration(
+                                          hintText: 'Digite sua senha',
+                                          filled: true,
+                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(50),
+                                            borderSide: BorderSide.none,
+                                          ), // dá a borda Material
+                                          errorText: isSenhaError ? errorSenha : null, // mostra o erro se existir
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              passwordVisible ? Icons.visibility_off : Icons.visibility,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                passwordVisible = !passwordVisible;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                        validator: (String? value) {
+                                          final password = PasswordModel(password: value ?? '');
+                                          final ValidationResult result = senhaValidator.validate(password);
+
+                                          if (result.isValid) {
+                                            setState(() => isSenhaError = false);
+                                            return null;
+                                          }
+
+                                          setState(() {
+                                            isSenhaError = true;
+                                            errorSenha = 'Deve conter 6 letras.';
+                                          });
+                                          return errorSenha;
+                                        },
+                                        onChanged: (String text) {
+                                          setState(() {
+                                            isValid = _validateForm();
+                                          });
+                                        },
+                                      ),
                                     ),
                                     SizedBox(height: 30),
                                     SizedBox(
                                       width: double.infinity,
                                       child: ElevatedButton(
-                                        onPressed: () async{
-                                          final credentials = LoginRequestModel
-                                            (login: _loginController.text,
-                                              senha: _passwordController.text);
+                                        onPressed: isLoading ? null : () async {
+                                          setState(() => isLoading = true);
+                                          final credentials = LoginRequestModel(
+                                            login: _loginController.text,
+                                            senha: _passwordController.text,
+                                          );
                                           final success = await viewModel.login(credentials);
-
+                                          setState(() => isLoading = false);
                                           if (success) {
                                             if(context.canPop()) {
                                               context.pop();
                                             }  else ForumRouter().go(context);
                                           }else {
                                             ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Usuário ou senha inválidos")),
+                                              const SnackBar(content: Text("Usuário ou senha inválidos")),
                                             );
                                           }
                                         },
@@ -255,16 +315,19 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(
+                                          child: isLoading
+                                              ? const SizedBox(
+                                            height: 20,
+                                            width: 20,
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                              strokeWidth: 2,
+                                            ),
+                                          )
+                                              : Text(
                                             'Entrar',
                                             style: TextStyle(
-                                              fontSize:
-                                                  (Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge
-                                                          ?.fontSize ??
-                                                      18) *
-                                                  fontScale,
+                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize ?? 18) * fontScale,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -422,7 +485,7 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               'assets/login_register/login_notebook.png',
-              height: 370,
+              height: 513,
             ),
           ),
         ),
