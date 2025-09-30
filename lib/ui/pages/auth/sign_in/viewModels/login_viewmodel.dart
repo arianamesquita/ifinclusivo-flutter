@@ -55,7 +55,7 @@ class LoginViewModel extends ChangeNotifier{
       isLogged.value = false;
       return false;
     } catch (e) {
-      debugPrint("Erro inesperado no login");
+      debugPrint("Erro inesperado no login ${e.toString()}");
       isLogged.value = false;
       notifyListeners();
       return false;

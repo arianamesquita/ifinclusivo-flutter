@@ -178,7 +178,7 @@ _$TutorResponseModelImpl _$$TutorResponseModelImplFromJson(
           .toList(),
   token: json['token'] as String?,
   firebaseToken: json['firebaseToken'] as String?,
-  especialidade: json['especialidade'] as String,
+  especialidade: json['especialidade'] as String?,
   $type: json['userType'] as String?,
 );
 
@@ -220,7 +220,7 @@ _$InterpreteResponseModelImpl _$$InterpreteResponseModelImplFromJson(
           .toList(),
   token: json['token'] as String?,
   firebaseToken: json['firebaseToken'] as String?,
-  especialidade: json['especialidade'] as String,
+  especialidade: json['especialidade'] as String?,
   salary: (json['salary'] as num).toDouble(),
   libras:
       (json['libras'] as List<dynamic>)
