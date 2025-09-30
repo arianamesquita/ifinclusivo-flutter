@@ -67,7 +67,7 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
     required String especialidade,
   }) = _TutorResponseModel;
 
-  const factory UsuarioResponseModel.INTERPRETE({
+  const factory UsuarioResponseModel.interprete({
     required int id,
     required String nome,
     required String login,

@@ -281,16 +281,19 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                     SizedBox(
                                       width: double.infinity,
                                       child: ElevatedButton(
-                                        onPressed: () async{
-                                          final credentials = LoginRequestModel
-                                            (login: _loginController.text,
-                                              senha: _passwordController.text);
+                                        onPressed: isLoading ? null : () async {
+                                          setState(() => isLoading = true);
+                                          final credentials = LoginRequestModel(
+                                            login: _loginController.text,
+                                            senha: _passwordController.text,
+                                          );
                                           final success = await viewModel.login(credentials);
+                                          setState(() => isLoading = false);
                                           if (success) {
                                             ForumRouter().go(context);
-                                          }else {
+                                          } else {
                                             ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Usuário ou senha inválidos")),
+                                              const SnackBar(content: Text("Usuário ou senha inválidos")),
                                             );
                                           }
                                         },
@@ -310,16 +313,19 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text(
+                                          child: isLoading
+                                              ? const SizedBox(
+                                            height: 20,
+                                            width: 20,
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                              strokeWidth: 2,
+                                            ),
+                                          )
+                                              : Text(
                                             'Entrar',
                                             style: TextStyle(
-                                              fontSize:
-                                                  (Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge
-                                                          ?.fontSize ??
-                                                      18) *
-                                                  fontScale,
+                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize ?? 18) * fontScale,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),

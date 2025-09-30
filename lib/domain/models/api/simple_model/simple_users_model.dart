@@ -57,7 +57,7 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
     required String necessidadeEscolar,
   }) = _SimpleAlunoNapneModel;
 
-  const factory SimpleUsuarioModel.INTERPRETE({
+  const factory SimpleUsuarioModel.interprete({
     required int id,
     required String nome,
     required int matricula,
