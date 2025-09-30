@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/libras/search_result.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/libras_custom_search_bar.dart';
@@ -26,42 +28,47 @@ class _TopicLibrasState extends State<TopicLibras> {
         label: 'Redes',
         imageAsset: "assets/card_libras_icons/redes.png",
         onTap: () {
-          context.push(RedesRouter().location);
+          LibrasTopicRouter(Categorias.REDES.name).go(context);
         },
       ),
       FilterBlockGridParams(
         label: 'Banco de Dados',
         imageAsset: "assets/card_libras_icons/banco_de_dados.png",
         onTap: () {
-          context.push(RedesRouter().location);
+          LibrasTopicRouter(Categorias.BANCO_DE_DADOS.name).go(context);
+
         },
       ),
       FilterBlockGridParams(
         label: 'Programação',
         imageAsset: "assets/card_libras_icons/programacao.png",
         onTap: () {
-          context.push(RedesRouter().location);
+          LibrasTopicRouter(Categorias.PROGRAMACAO.name).go(context);
+
         },
       ),
       FilterBlockGridParams(
         label: 'Web',
         imageAsset: "assets/card_libras_icons/web.png",
         onTap: () {
-          context.push(RedesRouter().location);
+          LibrasTopicRouter(Categorias.WEB.name).go(context);
+
         },
       ),
       FilterBlockGridParams(
         label: 'Estrutura de Dados',
         imageAsset: "assets/card_libras_icons/estrutura_de_dados.png",
         onTap: () {
-          context.push(RedesRouter().location);
+          LibrasTopicRouter(Categorias.ESTRUTURA_DE_DADOS.name).go(context);
+
         },
       ),
       FilterBlockGridParams(
         label: 'Arquitetura de Computadores',
         imageAsset: "assets/card_libras_icons/arquitetura_de_comp.png",
         onTap: () {
-          context.push(RedesRouter().location);
+          LibrasTopicRouter(Categorias.ARQUITETURA_DE_COMPUTADORES.name).go(context);
+
         },
       ),
     ];
@@ -70,46 +77,46 @@ class _TopicLibrasState extends State<TopicLibras> {
 
     return device == DeviceScreenType.mobile
         ? Scaffold(
-          appBar: AppBar(title: Text('Converte libras')),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text("Um dicionário de sinais criado para a comunidade"),
-                  LibrasCustomSearchBar(
-                    onChanged: (findString) {
-                      setState(() {
-                        word = findString;
-                      });
-                    },
-                  ),
-                  SizedBox(height: 90),
-                  word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
-                ],
+      appBar: AppBar(title: Text('Converte libras')),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text("Um dicionário de sinais criado para a comunidade"),
+              LibrasCustomSearchBar(
+                onChanged: (findString) {
+                  setState(() {
+                    word = findString;
+                  });
+                },
               ),
-            ),
+              SizedBox(height: 90),
+              word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
+            ],
           ),
-        )
+        ),
+      ),
+    )
         : CustomContainerShell(
-          child: SingleChildScrollView(
-            child: Column(
-                children: [
-                  TopContentLibras(
-                    title: "CONVERTE LIBRAS",
-                    subtitle: "Um dicionário de sinais criado para a comunidade",
-                    searchBar: LibrasCustomSearchBar(
-                      onChanged: (findString) {
-                        setState(() {
-                          word = findString;
-                        });
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
-                  SizedBox(height: 20),]
-            ),
-          ),
-        );
+      child: SingleChildScrollView(
+        child: Column(
+            children: [
+              TopContentLibras(
+                title: "CONVERTE LIBRAS",
+                subtitle: "Um dicionário de sinais criado para a comunidade",
+                searchBar: LibrasCustomSearchBar(
+                  onChanged: (findString) {
+                    setState(() {
+                      word = findString;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(height: 15),
+              word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
+              SizedBox(height: 20),]
+        ),
+      ),
+    );
   }
 }

@@ -21,7 +21,9 @@ class AppRoutes {
 
   static const String libras = '$_app/libras';
   static const String midia = 'midia';
-  static const String publicacoesPorTopico = 'publicacoes';
+  static const String categoriaLibras = 'category/:categoria';
+
+
   static const String more = '$_app/more';
   static const String notification = '$_app/notification';
   static const String profile = '$_app/profile';
@@ -35,7 +37,7 @@ class AppRoutes {
     forum: Roles.values,
     libras: Roles.values,
     midia: Roles.values,
-    publicacoesPorTopico: Roles.values,
+    categoriaLibras: Roles.values,
     notification: Roles.values,
     more: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR],
     profile: Roles.values,
@@ -52,7 +54,7 @@ class AppRoutes {
     forum,
     libras,
     midia,
-    publicacoesPorTopico,
+    categoriaLibras,
     token,
     resetPassword,
     unauthorized,

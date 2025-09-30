@@ -301,42 +301,14 @@ const _$CategoriasEnumMap = {
   Categorias.ARQUITETURA_DE_COMPUTADORES: 'ARQUITETURA_DE_COMPUTADORES',
 };
 
-_$PublicacaoCardModelImpl _$$PublicacaoCardModelImplFromJson(
-  Map<String, dynamic> json,
-) => _$PublicacaoCardModelImpl(
-  id: (json['id'] as num).toInt(),
-  titulo: json['titulo'] as String?,
-  dataCriacao: DateTime.parse(json['dataCriacao'] as String),
-  usuario: AutorCardModel.fromJson(json['usuario'] as Map<String, dynamic>),
-  totalLikes: (json['totalLikes'] as num).toInt(),
-  totalRespostas: (json['totalRespostas'] as num).toInt(),
-  curtidoPeloUsuario: json['curtidoPeloUsuario'] as bool,
-);
-
-Map<String, dynamic> _$$PublicacaoCardModelImplToJson(
-  _$PublicacaoCardModelImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'titulo': instance.titulo,
-  'dataCriacao': instance.dataCriacao.toIso8601String(),
-  'usuario': instance.usuario.toJson(),
-  'totalLikes': instance.totalLikes,
-  'totalRespostas': instance.totalRespostas,
-  'curtidoPeloUsuario': instance.curtidoPeloUsuario,
-};
-
 _$PublicacaoCompletaModelImpl _$$PublicacaoCompletaModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$PublicacaoCompletaModelImpl(
+  atual: PublicacaoDetalhadaModel.fromJson(
+    json['atual'] as Map<String, dynamic>,
+  ),
   pais:
       (json['pais'] as List<dynamic>)
-          .map((e) => PublicacaoCardModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  publicacao: PublicacaoDetalhadaModel.fromJson(
-    json['publicacao'] as Map<String, dynamic>,
-  ),
-  respostas:
-      (json['respostas'] as List<dynamic>)
           .map(
             (e) => PublicacaoDetalhadaModel.fromJson(e as Map<String, dynamic>),
           )
@@ -346,15 +318,14 @@ _$PublicacaoCompletaModelImpl _$$PublicacaoCompletaModelImplFromJson(
 Map<String, dynamic> _$$PublicacaoCompletaModelImplToJson(
   _$PublicacaoCompletaModelImpl instance,
 ) => <String, dynamic>{
+  'atual': instance.atual.toJson(),
   'pais': instance.pais.map((e) => e.toJson()).toList(),
-  'publicacao': instance.publicacao.toJson(),
-  'respostas': instance.respostas.map((e) => e.toJson()).toList(),
 };
 
 _$LibrasResponseModelImpl _$$LibrasResponseModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$LibrasResponseModelImpl(
-  id: json['id'] as String,
+  id: (json['id'] as num).toInt(),
   palavra: json['palavra'] as String,
   descricao: json['descricao'] as String,
   url: json['url'] as String?,
@@ -390,9 +361,9 @@ Map<String, dynamic> _$$LibrasResponseModelImplToJson(
 };
 
 const _$StatusEnumMap = {
-  Status.APROVADO: 1,
-  Status.REPROVADO: 2,
-  Status.EMANALISE: 3,
+  Status.APROVADO: 'APROVADO',
+  Status.REPROVADO: 'REPROVADO',
+  Status.EMANALISE: 'EMANALISE',
 };
 
 _$MessageResponseModelImpl _$$MessageResponseModelImplFromJson(

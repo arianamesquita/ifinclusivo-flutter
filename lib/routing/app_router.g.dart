@@ -8,6 +8,7 @@ part of 'app_router.dart';
 
 List<RouteBase> get $appRoutes => [
   $notificationRouter,
+  $newPublicacaoRouter,
   $tokenValidateRouter,
   $resetPasswordRoute,
   $shellAppRouter,
@@ -31,6 +32,33 @@ mixin _$NotificationRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/notification');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $newPublicacaoRouter => GoRouteData.$route(
+  path: '/app/new-post',
+
+  factory: _$NewPublicacaoRouter._fromState,
+);
+
+mixin _$NewPublicacaoRouter on GoRouteData {
+  static NewPublicacaoRouter _fromState(GoRouterState state) =>
+      const NewPublicacaoRouter();
+
+  @override
+  String get location => GoRouteData.$location('/app/new-post');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -137,16 +165,14 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           factory: _$LibrasRouter._fromState,
           routes: [
             GoRouteData.$route(
-              path: 'publicacoes',
+              path: 'category/:categoria',
 
-              factory: _$RedesRouter._fromState,
-              routes: [
-                GoRouteData.$route(
-                  path: 'midia',
+              factory: _$LibrasTopicRouter._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'midia',
 
-                  factory: _$MidiaRouter._fromState,
-                ),
-              ],
+              factory: _$MidiaRouter._fromState,
             ),
           ],
         ),
@@ -167,15 +193,6 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           path: '/app/profile',
 
           factory: _$ProfileRouter._fromState,
-        ),
-      ],
-    ),
-    StatefulShellBranchData.$branch(
-      routes: [
-        GoRouteData.$route(
-          path: '/app/new-post',
-
-          factory: _$NewPublicacaoRouter._fromState,
         ),
       ],
     ),
@@ -209,13 +226,14 @@ mixin _$ForumRouter on GoRouteData {
 
 mixin _$PublicacaoRouter on GoRouteData {
   static PublicacaoRouter _fromState(GoRouterState state) =>
-      PublicacaoRouter(state.pathParameters['id']!);
+      PublicacaoRouter(int.parse(state.pathParameters['id']!)!);
 
   PublicacaoRouter get _self => this as PublicacaoRouter;
 
   @override
-  String get location =>
-      GoRouteData.$location('/app/forum/post/${Uri.encodeComponent(_self.id)}');
+  String get location => GoRouteData.$location(
+    '/app/forum/post/${Uri.encodeComponent(_self.id.toString())}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -251,11 +269,16 @@ mixin _$LibrasRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$RedesRouter on GoRouteData {
-  static RedesRouter _fromState(GoRouterState state) => const RedesRouter();
+mixin _$LibrasTopicRouter on GoRouteData {
+  static LibrasTopicRouter _fromState(GoRouterState state) =>
+      LibrasTopicRouter(state.pathParameters['categoria']!);
+
+  LibrasTopicRouter get _self => this as LibrasTopicRouter;
 
   @override
-  String get location => GoRouteData.$location('/app/libras/publicacoes');
+  String get location => GoRouteData.$location(
+    '/app/libras/category/${Uri.encodeComponent(_self.categoria)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -275,7 +298,7 @@ mixin _$MidiaRouter on GoRouteData {
   static MidiaRouter _fromState(GoRouterState state) => const MidiaRouter();
 
   @override
-  String get location => GoRouteData.$location('/app/libras/publicacoes/midia');
+  String get location => GoRouteData.$location('/app/libras/midia');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -317,27 +340,6 @@ mixin _$ProfileRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/profile');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-mixin _$NewPublicacaoRouter on GoRouteData {
-  static NewPublicacaoRouter _fromState(GoRouterState state) =>
-      const NewPublicacaoRouter();
-
-  @override
-  String get location => GoRouteData.$location('/app/new-post');
 
   @override
   void go(BuildContext context) => context.go(location);

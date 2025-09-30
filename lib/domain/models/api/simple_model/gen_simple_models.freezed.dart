@@ -1052,7 +1052,7 @@ SimpleUsuarioModel _$SimpleUsuarioModelFromJson(Map<String, dynamic> json) {
       return _SimpleAlunoModel.fromJson(json);
     case 'alunoNapne':
       return _SimpleAlunoNapneModel.fromJson(json);
-    case 'interprete':
+    case 'INTERPRETE':
       return _SimpleInterpreteModel.fromJson(json);
 
     default:
@@ -1137,7 +1137,7 @@ mixin _$SimpleUsuarioModel {
       String especialidade,
       double salary,
     )
-    interprete,
+    INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -1203,7 +1203,7 @@ mixin _$SimpleUsuarioModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -1269,7 +1269,7 @@ mixin _$SimpleUsuarioModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1279,7 +1279,7 @@ mixin _$SimpleUsuarioModel {
     required TResult Function(_SimpleProfessorModel value) professor,
     required TResult Function(_SimpleAlunoModel value) aluno,
     required TResult Function(_SimpleAlunoNapneModel value) alunoNapne,
-    required TResult Function(_SimpleInterpreteModel value) interprete,
+    required TResult Function(_SimpleInterpreteModel value) INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -1288,7 +1288,7 @@ mixin _$SimpleUsuarioModel {
     TResult? Function(_SimpleProfessorModel value)? professor,
     TResult? Function(_SimpleAlunoModel value)? aluno,
     TResult? Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult? Function(_SimpleInterpreteModel value)? interprete,
+    TResult? Function(_SimpleInterpreteModel value)? INTERPRETE,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -1297,7 +1297,7 @@ mixin _$SimpleUsuarioModel {
     TResult Function(_SimpleProfessorModel value)? professor,
     TResult Function(_SimpleAlunoModel value)? aluno,
     TResult Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult Function(_SimpleInterpreteModel value)? interprete,
+    TResult Function(_SimpleInterpreteModel value)? INTERPRETE,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 
@@ -1612,7 +1612,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String especialidade,
       double salary,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return usuario(id, nome, matricula, biografia, dataCriacao, roles);
   }
@@ -1682,7 +1682,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return usuario?.call(id, nome, matricula, biografia, dataCriacao, roles);
   }
@@ -1752,7 +1752,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (usuario != null) {
@@ -1769,7 +1769,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     required TResult Function(_SimpleProfessorModel value) professor,
     required TResult Function(_SimpleAlunoModel value) aluno,
     required TResult Function(_SimpleAlunoNapneModel value) alunoNapne,
-    required TResult Function(_SimpleInterpreteModel value) interprete,
+    required TResult Function(_SimpleInterpreteModel value) INTERPRETE,
   }) {
     return usuario(this);
   }
@@ -1782,7 +1782,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     TResult? Function(_SimpleProfessorModel value)? professor,
     TResult? Function(_SimpleAlunoModel value)? aluno,
     TResult? Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult? Function(_SimpleInterpreteModel value)? interprete,
+    TResult? Function(_SimpleInterpreteModel value)? INTERPRETE,
   }) {
     return usuario?.call(this);
   }
@@ -1795,7 +1795,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
     TResult Function(_SimpleProfessorModel value)? professor,
     TResult Function(_SimpleAlunoModel value)? aluno,
     TResult Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult Function(_SimpleInterpreteModel value)? interprete,
+    TResult Function(_SimpleInterpreteModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (usuario != null) {
@@ -2082,7 +2082,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String especialidade,
       double salary,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return tutor(
       id,
@@ -2160,7 +2160,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return tutor?.call(
       id,
@@ -2238,7 +2238,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (tutor != null) {
@@ -2263,7 +2263,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     required TResult Function(_SimpleProfessorModel value) professor,
     required TResult Function(_SimpleAlunoModel value) aluno,
     required TResult Function(_SimpleAlunoNapneModel value) alunoNapne,
-    required TResult Function(_SimpleInterpreteModel value) interprete,
+    required TResult Function(_SimpleInterpreteModel value) INTERPRETE,
   }) {
     return tutor(this);
   }
@@ -2276,7 +2276,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     TResult? Function(_SimpleProfessorModel value)? professor,
     TResult? Function(_SimpleAlunoModel value)? aluno,
     TResult? Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult? Function(_SimpleInterpreteModel value)? interprete,
+    TResult? Function(_SimpleInterpreteModel value)? INTERPRETE,
   }) {
     return tutor?.call(this);
   }
@@ -2289,7 +2289,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
     TResult Function(_SimpleProfessorModel value)? professor,
     TResult Function(_SimpleAlunoModel value)? aluno,
     TResult Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult Function(_SimpleInterpreteModel value)? interprete,
+    TResult Function(_SimpleInterpreteModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (tutor != null) {
@@ -2579,7 +2579,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String especialidade,
       double salary,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return professor(
       id,
@@ -2657,7 +2657,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return professor?.call(
       id,
@@ -2735,7 +2735,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (professor != null) {
@@ -2760,7 +2760,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     required TResult Function(_SimpleProfessorModel value) professor,
     required TResult Function(_SimpleAlunoModel value) aluno,
     required TResult Function(_SimpleAlunoNapneModel value) alunoNapne,
-    required TResult Function(_SimpleInterpreteModel value) interprete,
+    required TResult Function(_SimpleInterpreteModel value) INTERPRETE,
   }) {
     return professor(this);
   }
@@ -2773,7 +2773,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     TResult? Function(_SimpleProfessorModel value)? professor,
     TResult? Function(_SimpleAlunoModel value)? aluno,
     TResult? Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult? Function(_SimpleInterpreteModel value)? interprete,
+    TResult? Function(_SimpleInterpreteModel value)? INTERPRETE,
   }) {
     return professor?.call(this);
   }
@@ -2786,7 +2786,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
     TResult Function(_SimpleProfessorModel value)? professor,
     TResult Function(_SimpleAlunoModel value)? aluno,
     TResult Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult Function(_SimpleInterpreteModel value)? interprete,
+    TResult Function(_SimpleInterpreteModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (professor != null) {
@@ -3086,7 +3086,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String especialidade,
       double salary,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return aluno(id, nome, matricula, biografia, dataCriacao, roles, curso);
   }
@@ -3156,7 +3156,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return aluno?.call(
       id,
@@ -3234,7 +3234,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (aluno != null) {
@@ -3251,7 +3251,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     required TResult Function(_SimpleProfessorModel value) professor,
     required TResult Function(_SimpleAlunoModel value) aluno,
     required TResult Function(_SimpleAlunoNapneModel value) alunoNapne,
-    required TResult Function(_SimpleInterpreteModel value) interprete,
+    required TResult Function(_SimpleInterpreteModel value) INTERPRETE,
   }) {
     return aluno(this);
   }
@@ -3264,7 +3264,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     TResult? Function(_SimpleProfessorModel value)? professor,
     TResult? Function(_SimpleAlunoModel value)? aluno,
     TResult? Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult? Function(_SimpleInterpreteModel value)? interprete,
+    TResult? Function(_SimpleInterpreteModel value)? INTERPRETE,
   }) {
     return aluno?.call(this);
   }
@@ -3277,7 +3277,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
     TResult Function(_SimpleProfessorModel value)? professor,
     TResult Function(_SimpleAlunoModel value)? aluno,
     TResult Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult Function(_SimpleInterpreteModel value)? interprete,
+    TResult Function(_SimpleInterpreteModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (aluno != null) {
@@ -3617,7 +3617,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String especialidade,
       double salary,
     )
-    interprete,
+    INTERPRETE,
   }) {
     return alunoNapne(
       id,
@@ -3698,7 +3698,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
   }) {
     return alunoNapne?.call(
       id,
@@ -3779,7 +3779,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
     if (alunoNapne != null) {
@@ -3807,7 +3807,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     required TResult Function(_SimpleProfessorModel value) professor,
     required TResult Function(_SimpleAlunoModel value) aluno,
     required TResult Function(_SimpleAlunoNapneModel value) alunoNapne,
-    required TResult Function(_SimpleInterpreteModel value) interprete,
+    required TResult Function(_SimpleInterpreteModel value) INTERPRETE,
   }) {
     return alunoNapne(this);
   }
@@ -3820,7 +3820,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     TResult? Function(_SimpleProfessorModel value)? professor,
     TResult? Function(_SimpleAlunoModel value)? aluno,
     TResult? Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult? Function(_SimpleInterpreteModel value)? interprete,
+    TResult? Function(_SimpleInterpreteModel value)? INTERPRETE,
   }) {
     return alunoNapne?.call(this);
   }
@@ -3833,7 +3833,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
     TResult Function(_SimpleProfessorModel value)? professor,
     TResult Function(_SimpleAlunoModel value)? aluno,
     TResult Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult Function(_SimpleInterpreteModel value)? interprete,
+    TResult Function(_SimpleInterpreteModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
     if (alunoNapne != null) {
@@ -3995,7 +3995,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     required this.salary,
     final String? $type,
   }) : _roles = roles,
-       $type = $type ?? 'interprete';
+       $type = $type ?? 'INTERPRETE';
 
   factory _$SimpleInterpreteModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SimpleInterpreteModelImplFromJson(json);
@@ -4028,7 +4028,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
 
   @override
   String toString() {
-    return 'SimpleUsuarioModel.interprete(id: $id, nome: $nome, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, roles: $roles, especialidade: $especialidade, salary: $salary)';
+    return 'SimpleUsuarioModel.INTERPRETE(id: $id, nome: $nome, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, roles: $roles, especialidade: $especialidade, salary: $salary)';
   }
 
   @override
@@ -4141,9 +4141,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String especialidade,
       double salary,
     )
-    interprete,
+    INTERPRETE,
   }) {
-    return interprete(
+    return INTERPRETE(
       id,
       nome,
       matricula,
@@ -4220,9 +4220,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
   }) {
-    return interprete?.call(
+    return INTERPRETE?.call(
       id,
       nome,
       matricula,
@@ -4299,11 +4299,11 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String especialidade,
       double salary,
     )?
-    interprete,
+    INTERPRETE,
     required TResult orElse(),
   }) {
-    if (interprete != null) {
-      return interprete(
+    if (INTERPRETE != null) {
+      return INTERPRETE(
         id,
         nome,
         matricula,
@@ -4325,9 +4325,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     required TResult Function(_SimpleProfessorModel value) professor,
     required TResult Function(_SimpleAlunoModel value) aluno,
     required TResult Function(_SimpleAlunoNapneModel value) alunoNapne,
-    required TResult Function(_SimpleInterpreteModel value) interprete,
+    required TResult Function(_SimpleInterpreteModel value) INTERPRETE,
   }) {
-    return interprete(this);
+    return INTERPRETE(this);
   }
 
   @override
@@ -4338,9 +4338,9 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     TResult? Function(_SimpleProfessorModel value)? professor,
     TResult? Function(_SimpleAlunoModel value)? aluno,
     TResult? Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult? Function(_SimpleInterpreteModel value)? interprete,
+    TResult? Function(_SimpleInterpreteModel value)? INTERPRETE,
   }) {
-    return interprete?.call(this);
+    return INTERPRETE?.call(this);
   }
 
   @override
@@ -4351,11 +4351,11 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
     TResult Function(_SimpleProfessorModel value)? professor,
     TResult Function(_SimpleAlunoModel value)? aluno,
     TResult Function(_SimpleAlunoNapneModel value)? alunoNapne,
-    TResult Function(_SimpleInterpreteModel value)? interprete,
+    TResult Function(_SimpleInterpreteModel value)? INTERPRETE,
     required TResult orElse(),
   }) {
-    if (interprete != null) {
-      return interprete(this);
+    if (INTERPRETE != null) {
+      return INTERPRETE(this);
     }
     return orElse();
   }

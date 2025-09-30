@@ -5,7 +5,7 @@ import 'package:if_inclusivo/utils/responsive_utils.dart';
 import '../../../../../domain/models/enums/categorias.dart';
 
 class FilterChipsBar extends StatefulWidget {
-  final void Function(List<Categorias> selected, String order)? onChanged;
+  final void Function(Set<Categorias> selected, String order)? onChanged;
 
   const FilterChipsBar({super.key, this.onChanged});
 
@@ -59,6 +59,7 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
       spacing: 5,
       children: [
         Row(
+          spacing: 5,
           children: [
             IconButton.filled(
               onPressed: () => _openFilters(context),
@@ -70,18 +71,16 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
               ),
             ),
             if (_selectedFilters.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ActionChip(
-                  avatar: Icon(Icons.clear_all_rounded),
-                  label: Text('Limpar (${_selectedFilters.length.toString()})'),
-                  onPressed: () {
-                    setState(() {
-                      _selectedFilters.removeAll(_selectedFilters.toList());
-                    });
-                  },
-                  
-                ),
+              ActionChip(
+                avatar: Icon(Icons.clear_all_rounded),
+                label: Text('Limpar (${_selectedFilters.length.toString()})'),
+                onPressed: () {
+                  setState(() {
+                    _selectedFilters.removeAll(_selectedFilters.toList());
+                    _notifyChange();
+                  });
+                },
+
               ),
           ],
         ),
@@ -95,7 +94,7 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
   }
 
   void _notifyChange() {
-    widget.onChanged?.call(_selectedFilters.toList(), _selectedOrder);
+    widget.onChanged?.call(_selectedFilters, _selectedOrder);
   }
 
   Future<void> _openFilters(BuildContext context) async {

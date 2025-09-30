@@ -6,11 +6,13 @@ import 'package:flutter_quill/flutter_quill.dart';
 class ContentCard extends StatefulWidget {
   final String title;
   final String contentJson;
+  final void Function()? onPressed;
 
   const ContentCard({
     super.key,
     required this.title,
     required this.contentJson,
+    required this.onPressed,
   });
 
   @override
@@ -19,8 +21,8 @@ class ContentCard extends StatefulWidget {
 
 class _ContentCardState extends State<ContentCard> {
   late final QuillController _controller;
-  bool _isExpanded = false;
-  final double _collapsedHeight = 150.0;
+  final GlobalKey _editorKey = GlobalKey();
+  bool _showSeeMore = false;
 
   @override
   void initState() {
@@ -29,8 +31,12 @@ class _ContentCardState extends State<ContentCard> {
       document: _loadDocument(),
       selection: const TextSelection.collapsed(offset: 0),
       readOnly: true,
-
     );
+
+    // Espera o primeiro frame para medir o tamanho
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkIfExceeds();
+    });
   }
 
   Document _loadDocument() {
@@ -43,11 +49,23 @@ class _ContentCardState extends State<ContentCard> {
     }
   }
 
+  void _checkIfExceeds() {
+    final context = _editorKey.currentContext;
+    if (context != null) {
+      final size = context.size;
+      if (size != null && size.height > 195) {
+        setState(() => _showSeeMore = true);
+      }
+    }
+  }
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,47 +76,45 @@ class _ContentCardState extends State<ContentCard> {
         children: [
           Text(
             widget.title,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
-
           Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              SizedBox(
-                height: _isExpanded ? null : _collapsedHeight,
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 200),
                 child: ClipRect(
-                  child: QuillEditor.basic(
-                    controller: _controller,
-                    config: QuillEditorConfig(
-                      autoFocus: false,
-                      expands: false, // Não expande infinitamente
-                      padding: EdgeInsets.zero,
-                      showCursor: false,
-                      enableSelectionToolbar: true,
+                  child: IgnorePointer(
+                    ignoring: false,
+                    child: QuillEditor.basic(
+                      key: _editorKey,
+                      controller: _controller,
+                      config: const QuillEditorConfig(
+                        autoFocus: false,
+                        padding: EdgeInsets.symmetric(vertical: 2),
+                        scrollable: false,
+                        showCursor: false,
+                        enableSelectionToolbar: false,
+                      ),
                     ),
                   ),
                 ),
               ),
-
-              if (!_isExpanded)
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: _buildFadeAndButton(context),
-                ),
+              if (_showSeeMore) _buildFadeAndButton(context, widget.onPressed),
             ],
           ),
-          if (_isExpanded)
-            _buildToggleButton(),
         ],
       ),
     );
   }
+}
+
 
   // Widget para o degradê e o botão "Ver mais"
-  Widget _buildFadeAndButton(BuildContext context) {
+  Widget _buildFadeAndButton(BuildContext context,onPressed) {
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -106,27 +122,27 @@ class _ContentCardState extends State<ContentCard> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Theme.of(context).cardColor.withOpacity(0.0),
-            Theme.of(context).cardColor,
+            Theme.of(context).colorScheme.surfaceContainerLow.withValues(alpha: 0.0),
+            Theme.of(context).colorScheme.surfaceContainerLow,
           ],
         ),
       ),
-      alignment: Alignment.center,
-      child: _buildToggleButton(),
+      alignment: Alignment.bottomCenter,
+      child: _buildToggleButton(onPressed),
     );
   }
 
-  Widget _buildToggleButton() {
-    return TextButton(
-      onPressed: () => setState(() => _isExpanded = !_isExpanded),
+  Widget _buildToggleButton(onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        spacing: 4,
         children: [
-          Text(_isExpanded ? 'Ver menos' : 'Ver mais'),
-          const SizedBox(width: 4),
-          Icon(_isExpanded ? Icons.unfold_less : Icons.unfold_more, size: 20),
+          Text('Ver mais'),
+          Icon(Icons.unfold_more, size: 20),
         ],
       ),
     );
   }
-}
+

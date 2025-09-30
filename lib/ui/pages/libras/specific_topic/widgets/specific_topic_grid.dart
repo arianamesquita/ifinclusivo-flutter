@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic.dart';
+import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_topic.dart';
 
 class SpecificTopicGridParams {
   final String plyaerUrl;
