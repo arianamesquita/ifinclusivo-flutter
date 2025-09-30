@@ -1091,7 +1091,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -1134,7 +1134,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )
     interprete,
@@ -1157,7 +1157,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -1200,7 +1200,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -1223,7 +1223,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -1266,7 +1266,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -1566,7 +1566,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -1609,7 +1609,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )
     interprete,
@@ -1636,7 +1636,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -1679,7 +1679,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -1706,7 +1706,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -1749,7 +1749,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -1860,7 +1860,7 @@ abstract class _$$SimpleTutorModelImplCopyWith<$Res>
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
-    String especialidade,
+    String? especialidade,
   });
 }
 
@@ -1884,7 +1884,7 @@ class __$$SimpleTutorModelImplCopyWithImpl<$Res>
     Object? biografia = freezed,
     Object? dataCriacao = null,
     Object? roles = null,
-    Object? especialidade = null,
+    Object? especialidade = freezed,
   }) {
     return _then(
       _$SimpleTutorModelImpl(
@@ -1919,10 +1919,10 @@ class __$$SimpleTutorModelImplCopyWithImpl<$Res>
                 : roles // ignore: cast_nullable_to_non_nullable
                     as List<Roles>,
         especialidade:
-            null == especialidade
+            freezed == especialidade
                 ? _value.especialidade
                 : especialidade // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
       ),
     );
   }
@@ -1965,7 +1965,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
   }
 
   @override
-  final String especialidade;
+  final String? especialidade;
 
   @JsonKey(name: 'userType')
   final String $type;
@@ -2036,7 +2036,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -2079,7 +2079,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )
     interprete,
@@ -2114,7 +2114,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -2157,7 +2157,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -2192,7 +2192,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -2235,7 +2235,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -2312,7 +2312,7 @@ abstract class _SimpleTutorModel implements SimpleUsuarioModel {
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
-    required final String especialidade,
+    required final String? especialidade,
   }) = _$SimpleTutorModelImpl;
 
   factory _SimpleTutorModel.fromJson(Map<String, dynamic> json) =
@@ -2330,7 +2330,7 @@ abstract class _SimpleTutorModel implements SimpleUsuarioModel {
   DateTime get dataCriacao;
   @override
   List<Roles> get roles;
-  String get especialidade;
+  String? get especialidade;
 
   /// Create a copy of SimpleUsuarioModel
   /// with the given fields replaced by the non-null parameter values.
@@ -2533,7 +2533,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -2576,7 +2576,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )
     interprete,
@@ -2611,7 +2611,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -2654,7 +2654,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -2689,7 +2689,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -2732,7 +2732,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -3040,7 +3040,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -3083,7 +3083,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )
     interprete,
@@ -3110,7 +3110,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -3153,7 +3153,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -3188,7 +3188,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -3231,7 +3231,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -3571,7 +3571,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -3614,7 +3614,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )
     interprete,
@@ -3652,7 +3652,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -3695,7 +3695,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -3733,7 +3733,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -3776,7 +3776,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -3906,7 +3906,7 @@ abstract class _$$SimpleInterpreteModelImplCopyWith<$Res>
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
-    String especialidade,
+    String? especialidade,
     double salary,
   });
 }
@@ -3931,7 +3931,7 @@ class __$$SimpleInterpreteModelImplCopyWithImpl<$Res>
     Object? biografia = freezed,
     Object? dataCriacao = null,
     Object? roles = null,
-    Object? especialidade = null,
+    Object? especialidade = freezed,
     Object? salary = null,
   }) {
     return _then(
@@ -3967,10 +3967,10 @@ class __$$SimpleInterpreteModelImplCopyWithImpl<$Res>
                 : roles // ignore: cast_nullable_to_non_nullable
                     as List<Roles>,
         especialidade:
-            null == especialidade
+            freezed == especialidade
                 ? _value.especialidade
                 : especialidade // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
         salary:
             null == salary
                 ? _value.salary
@@ -4019,7 +4019,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
   }
 
   @override
-  final String especialidade;
+  final String? especialidade;
   @override
   final double salary;
 
@@ -4095,7 +4095,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -4138,7 +4138,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )
     interprete,
@@ -4174,7 +4174,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -4217,7 +4217,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -4253,7 +4253,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -4296,7 +4296,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      String especialidade,
+      String? especialidade,
       double salary,
     )?
     interprete,
@@ -4374,7 +4374,7 @@ abstract class _SimpleInterpreteModel implements SimpleUsuarioModel {
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
-    required final String especialidade,
+    required final String? especialidade,
     required final double salary,
   }) = _$SimpleInterpreteModelImpl;
 
@@ -4393,7 +4393,7 @@ abstract class _SimpleInterpreteModel implements SimpleUsuarioModel {
   DateTime get dataCriacao;
   @override
   List<Roles> get roles;
-  String get especialidade;
+  String? get especialidade;
   double get salary;
 
   /// Create a copy of SimpleUsuarioModel

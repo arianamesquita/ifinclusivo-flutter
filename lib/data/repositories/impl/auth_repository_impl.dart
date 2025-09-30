@@ -54,14 +54,19 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<UsuarioResponseModel> login(String email, String password) async {
-    final userJson = await _authService.login(email, password);
-    print(userJson);
-    final user = UsuarioResponseModel.fromJson(userJson);
+   try {
+      final userJson = await _authService.login(email, password);
+      print(userJson);
+      final user = UsuarioResponseModel.fromJson(userJson);
+      print(user);
 
-    await _saveSession(user);
-    _currentUser = user;
-    _authStateController.add(user);
-    return user;
+      await _saveSession(user);
+      _currentUser = user;
+      _authStateController.add(user);
+      return user;
+    }catch(e){
+     throw Exception('erro ao fazer login ${e.toString()}');
+   }
   }
 
   @override

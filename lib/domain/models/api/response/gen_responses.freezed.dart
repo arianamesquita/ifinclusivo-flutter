@@ -113,7 +113,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -127,7 +127,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
@@ -195,7 +195,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -209,7 +209,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -277,7 +277,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -291,7 +291,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -766,7 +766,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -780,7 +780,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
@@ -864,7 +864,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -878,7 +878,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -962,7 +962,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -976,7 +976,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -1475,7 +1475,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -1489,7 +1489,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
@@ -1579,7 +1579,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -1593,7 +1593,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -1683,7 +1683,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -1697,7 +1697,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -2147,7 +2147,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -2161,7 +2161,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
@@ -2246,7 +2246,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -2260,7 +2260,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -2345,7 +2345,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -2359,7 +2359,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -2501,7 +2501,7 @@ abstract class _$$TutorResponseModelImplCopyWith<$Res>
     List<Roles> roles,
     String? token,
     String? firebaseToken,
-    String especialidade,
+    String? especialidade,
   });
 
   @override
@@ -2532,7 +2532,7 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
     Object? roles = null,
     Object? token = freezed,
     Object? firebaseToken = freezed,
-    Object? especialidade = null,
+    Object? especialidade = freezed,
   }) {
     return _then(
       _$TutorResponseModelImpl(
@@ -2587,10 +2587,10 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
                 : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         especialidade:
-            null == especialidade
+            freezed == especialidade
                 ? _value.especialidade
                 : especialidade // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
       ),
     );
   }
@@ -2645,7 +2645,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @override
   final String? firebaseToken;
   @override
-  final String especialidade;
+  final String? especialidade;
 
   @JsonKey(name: 'userType')
   final String $type;
@@ -2774,7 +2774,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -2788,7 +2788,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
@@ -2872,7 +2872,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -2886,7 +2886,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -2970,7 +2970,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -2984,7 +2984,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -3067,7 +3067,7 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
     required final List<Roles> roles,
     final String? token,
     final String? firebaseToken,
-    required final String especialidade,
+    required final String? especialidade,
   }) = _$TutorResponseModelImpl;
 
   factory _TutorResponseModel.fromJson(Map<String, dynamic> json) =
@@ -3093,7 +3093,7 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
   String? get token;
   @override
   String? get firebaseToken;
-  String get especialidade;
+  String? get especialidade;
 
   /// Create a copy of UsuarioResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -3123,7 +3123,7 @@ abstract class _$$InterpreteResponseModelImplCopyWith<$Res>
     List<Roles> roles,
     String? token,
     String? firebaseToken,
-    String especialidade,
+    String? especialidade,
     double salary,
     List<SimpleLibrasModel> libras,
   });
@@ -3157,7 +3157,7 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
     Object? roles = null,
     Object? token = freezed,
     Object? firebaseToken = freezed,
-    Object? especialidade = null,
+    Object? especialidade = freezed,
     Object? salary = null,
     Object? libras = null,
   }) {
@@ -3214,10 +3214,10 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
                 : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         especialidade:
-            null == especialidade
+            freezed == especialidade
                 ? _value.especialidade
                 : especialidade // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
         salary:
             null == salary
                 ? _value.salary
@@ -3285,7 +3285,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   @override
   final String? firebaseToken;
   @override
-  final String especialidade;
+  final String? especialidade;
   @override
   final double salary;
   final List<SimpleLibrasModel> _libras;
@@ -3426,7 +3426,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -3440,7 +3440,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
@@ -3526,7 +3526,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -3540,7 +3540,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -3626,7 +3626,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -3640,7 +3640,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
@@ -3725,7 +3725,7 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
     required final List<Roles> roles,
     final String? token,
     final String? firebaseToken,
-    required final String especialidade,
+    required final String? especialidade,
     required final double salary,
     required final List<SimpleLibrasModel> libras,
   }) = _$InterpreteResponseModelImpl;
@@ -3753,7 +3753,7 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
   String? get token;
   @override
   String? get firebaseToken;
-  String get especialidade;
+  String? get especialidade;
   double get salary;
   List<SimpleLibrasModel> get libras;
 

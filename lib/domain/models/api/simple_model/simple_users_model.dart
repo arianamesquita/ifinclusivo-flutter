@@ -21,7 +21,7 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
-    required String especialidade,
+    required String? especialidade,
   }) = _SimpleTutorModel;
 
   const factory SimpleUsuarioModel.professor({
@@ -64,7 +64,7 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
-    required String especialidade,
+    required String? especialidade,
     required double salary,
   }) = _SimpleInterpreteModel;
 

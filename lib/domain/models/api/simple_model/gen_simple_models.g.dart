@@ -140,7 +140,7 @@ _$SimpleTutorModelImpl _$$SimpleTutorModelImplFromJson(
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
-  especialidade: json['especialidade'] as String,
+  especialidade: json['especialidade'] as String?,
   $type: json['userType'] as String?,
 );
 
@@ -262,7 +262,7 @@ _$SimpleInterpreteModelImpl _$$SimpleInterpreteModelImplFromJson(
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
-  especialidade: json['especialidade'] as String,
+  especialidade: json['especialidade'] as String?,
   salary: (json['salary'] as num).toDouble(),
   $type: json['userType'] as String?,
 );

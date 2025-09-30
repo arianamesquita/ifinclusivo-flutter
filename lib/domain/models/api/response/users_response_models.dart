@@ -64,7 +64,7 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
     required List<Roles> roles,
     String? token,
     String? firebaseToken,
-    required String especialidade,
+    required String? especialidade,
   }) = _TutorResponseModel;
 
   const factory UsuarioResponseModel.interprete({
@@ -78,7 +78,7 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
     required List<Roles> roles,
     String? token,
     String? firebaseToken,
-    required String especialidade,
+    required String? especialidade,
     required double salary,
     required List<SimpleLibrasModel> libras,
   }) = _InterpreteResponseModel;
