@@ -27,6 +27,7 @@ class AppRoutes {
   static const String more = '$_app/more';
   static const String notification = '$_app/notification';
   static const String profile = '$_app/profile';
+  static const String accountSecurity = 'security';
 
   static const String token = '/auth/verify-email';
   static const String resetPassword = '/auth/reset_password';
@@ -42,6 +43,7 @@ class AppRoutes {
     more: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR],
     profile: Roles.values,
     token: Roles.values,
+    accountSecurity: Roles.values,
     resetPassword: Roles.values,
     newPublication: Roles.values
   };

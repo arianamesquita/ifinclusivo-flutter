@@ -52,3 +52,4 @@ flutter:
     - assets/env/.env
     - assets/logo/
     - assets/exceptions/
+    - assets/profile/

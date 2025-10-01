@@ -9,12 +9,7 @@ part of '../../app_router.dart';
         TypedGoRoute<MorePageRouter>(path: AppRoutes.more),
       ],
     ),
-
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<ProfileRouter>(path: AppRoutes.profile),
-      ],
-    ),
+    profileBranch,
   ],
 )
 class ShellAppRouter extends StatefulShellRouteData {
