@@ -180,7 +180,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                         ),
                                         TextButton(
                                             onPressed: () {
-                                              context.pushReplacement('/login');
+                                              LoginRoute().pushReplacement(context);
                                             },
                                             child: Text(
                                               'Entre!',

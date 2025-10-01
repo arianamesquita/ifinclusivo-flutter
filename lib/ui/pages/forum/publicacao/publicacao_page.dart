@@ -16,7 +16,8 @@ import '../feed/widgets/sort_dropdown_button.dart';
 
 class PublicacaoPage extends StatefulWidget {
   final int id;
-  const PublicacaoPage({super.key, required this.id});
+  final PublicacaoViewModel viewModel;
+  const PublicacaoPage({super.key, required this.id, required this.viewModel});
 
   @override
   State<PublicacaoPage> createState() => _PublicacaoPageState();
@@ -24,23 +25,25 @@ class PublicacaoPage extends StatefulWidget {
 
 class _PublicacaoPageState extends State<PublicacaoPage> {
   String _selectedOrder = 'Relevância';
-  late final PublicacaoViewModel viewModel;
-
-  @override
-  void initState() {
-    super.initState();
-    viewModel = PublicacaoViewModel(forumRepository: context.read());
-
-    Future.microtask(() {
-      viewModel.fetchPublicationCommand.execute(widget.id);
-      viewModel.fetchRespostasCommand.execute(widget.id, Ordenacao.RELEVANCIA);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Post'), centerTitle: true),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: ListenableBuilder(
+          listenable: widget.viewModel.fetchPublicationCommand,
+          builder: (context, _) {
+            final publication = widget.viewModel.publication;
+
+            return AppBar(
+              title: const Text('Post'),
+              centerTitle: true,
+              automaticallyImplyLeading: (publication?.pais.isEmpty ?? true),
+            );
+          },
+        ),
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -53,9 +56,10 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: ListenableBuilder(
-                  listenable: viewModel.fetchPublicationCommand,
+                  listenable: widget.viewModel.fetchPublicationCommand,
                   builder: (context, _) {
-                    final state = viewModel.fetchPublicationCommand.value;
+                    final state =
+                        widget.viewModel.fetchPublicationCommand.value;
 
                     switch (state) {
                       case RunningCommand<PublicacaoCompletaModel>():
@@ -121,7 +125,8 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                                                               .RELEVANCIA;
 
                                                   // Agora dispara o command do ViewModel
-                                                  viewModel
+                                                  widget
+                                                      .viewModel
                                                       .fetchRespostasCommand
                                                       .execute(
                                                         widget.id,
@@ -142,10 +147,13 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                                     ),
                                     ListenableBuilder(
                                       listenable:
-                                          viewModel.fetchRespostasCommand,
+                                          widget
+                                              .viewModel
+                                              .fetchRespostasCommand,
                                       builder: (context, _) {
                                         final respostaState =
-                                            viewModel
+                                            widget
+                                                .viewModel
                                                 .fetchRespostasCommand
                                                 .value;
 
@@ -213,19 +221,30 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                                     width: double.infinity,
                                     height: 56,
                                     child: ElevatedButton(
-                                      child:Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Text('Responder ${state.value.atual.usuario.nome}'),
-                                        ],
-                                      ),
                                       onPressed:
                                           () => context.push(
                                             NewPublicacaoRouter().location,
                                             extra: state.value.atual,
                                           ),
-                                      style:ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
-                                      foregroundColor:Theme.of(context).colorScheme.onSurface ) ,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.surfaceContainerHigh,
+                                        foregroundColor:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.onSurface,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Responder ${state.value.atual.usuario.nome}',
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -254,21 +273,21 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
           value.pais.reversed.map((pai) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
-              child:Card(
+              child: Card(
                 clipBehavior: Clip.antiAlias,
                 margin: EdgeInsets.all(0),
                 elevation: 0,
                 child: InkWell(
                   onTap: () {
-                    if (value.pais.reversed.last.id == pai.id && context.canPop()) {
-                      context.pop();
-                    } else {
-                      PublicacaoRouter(pai.id).push(context);
-                    }
+                    PublicacaoRouter(pai.id).go(context);
                   },
                   mouseCursor: SystemMouseCursors.grab,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0,right: 10.0, top: 2),
+                    padding: const EdgeInsets.only(
+                      left: 10.0,
+                      right: 10.0,
+                      top: 2,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,7 +297,9 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                           children: [
                             CircleAvatar(),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 5.0,
+                              ),
                               child: Container(
                                 color: Theme.of(context).colorScheme.outline,
                                 width: 1,

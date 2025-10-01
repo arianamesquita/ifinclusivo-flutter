@@ -29,7 +29,6 @@ class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    print(categoria);
     return SpecificTopicPage(categoria: categoria,);
   }
 }
@@ -41,7 +40,7 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ModalMidiaPageLibras(
+    return MidiaPageLibras(
       titulo: 'Como Aprender Libras Sozinho do Zero',
       timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
       description:

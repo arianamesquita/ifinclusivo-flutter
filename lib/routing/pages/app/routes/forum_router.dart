@@ -2,7 +2,7 @@ part of '../../../app_router.dart';
 
 const TypedStatefulShellBranch<StatefulShellBranchData> forumBranch =
     TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[feedRouter],
+      routes: <TypedRoute<RouteData>>[feedRouter,],
     );
 
 
@@ -31,7 +31,11 @@ class PublicacaoRouter extends GoRouteData with _$PublicacaoRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PublicacaoPage(id: id);
+    final viewModel = PublicacaoViewModel(forumRepository: context.read());
+      viewModel.fetchPublicationCommand.execute(id);
+      viewModel.fetchRespostasCommand.execute(id, Ordenacao.RELEVANCIA);
+
+    return PublicacaoPage(id: id,viewModel: viewModel,);
   }
 }
 

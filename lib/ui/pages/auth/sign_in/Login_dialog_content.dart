@@ -290,8 +290,10 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                           final success = await viewModel.login(credentials);
                                           setState(() => isLoading = false);
                                           if (success) {
-                                            ForumRouter().go(context);
-                                          } else {
+                                            if(context.canPop()) {
+                                              context.pop();
+                                            }  else ForumRouter().go(context);
+                                          }else {
                                             ScaffoldMessenger.of(context).showSnackBar(
                                               const SnackBar(content: Text("Usuário ou senha inválidos")),
                                             );
@@ -401,9 +403,7 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              context.pushReplacement(
-                                                '/register',
-                                              );
+                                              RegisterRoute().pushReplacement(context);
                                             },
                                             child: Text(
                                               'Cadastre-se',

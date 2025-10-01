@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_topic_grid.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
@@ -19,26 +19,45 @@ class SpecificTopicPage extends StatefulWidget {
 }
 
 class _SpecificTopicPageState extends State<SpecificTopicPage> {
+  String _title = '';
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (widget.categoria != null) {
-        Categorias categorias = Categorias.REDES;
-        if (widget.categoria == Categorias.REDES.name)
-          categorias == Categorias.REDES;
-        if (widget.categoria == Categorias.ARQUITETURA_DE_COMPUTADORES)
-          categorias == Categorias.ARQUITETURA_DE_COMPUTADORES;
-        if (widget.categoria == Categorias.BANCO_DE_DADOS.name)
-          categorias == Categorias.BANCO_DE_DADOS;
-        if (widget.categoria == Categorias.WEB.name)
-          categorias == Categorias.WEB;
-        if (widget.categoria == Categorias.ESTRUTURA_DE_DADOS.name)
-          categorias == Categorias.ESTRUTURA_DE_DADOS;
-        if (widget.categoria == Categorias.PROGRAMACAO.name)
-          categorias == Categorias.PROGRAMACAO;
-        await context.read<SpecificTopicViewModel>().fetchLibras(categorias);
+      Categorias categoriaSelecionada;
+
+      switch (widget.categoria) {
+        case 'REDES':
+          categoriaSelecionada = Categorias.REDES;
+          _title = 'Redes de Computadores';
+          break;
+        case 'ARQUITETURA_DE_COMPUTADORES':
+          categoriaSelecionada = Categorias.ARQUITETURA_DE_COMPUTADORES;
+          _title = 'Arquitetura de Computadores';
+          break;
+        case 'BANCO_DE_DADOS':
+          categoriaSelecionada = Categorias.BANCO_DE_DADOS;
+          _title = 'Banco de Dados';
+          break;
+        case 'ESTRUTURA_DE_DADOS':
+          categoriaSelecionada = Categorias.ESTRUTURA_DE_DADOS;
+          _title = 'Estrutura de Dados';
+          break;
+        case 'PROGRAMACAO':
+          categoriaSelecionada = Categorias.PROGRAMACAO;
+          _title = 'Programação';
+          break;
+        default:
+          categoriaSelecionada = Categorias.WEB;
+          _title = 'Web';
       }
+
+      setState(() {});
+
+      await context.read<SpecificTopicViewModel>().fetchLibras(
+        categoriaSelecionada,
+      );
     });
   }
 
@@ -49,50 +68,63 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
     return Consumer<SpecificTopicViewModel>(
       builder: (context, viewModel, state) {
         if (viewModel.state == SpecificTopicsState.loading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
-        print(viewModel.models);
 
-        List<SpecificTopicGridParams> items = viewModel.models == null || viewModel.models.isEmpty
+        List<SpecificTopicGridParams> items =
+        viewModel.models.isEmpty
             ? []
-            : viewModel.models
-            .map(
-              (model) => SpecificTopicGridParams(
-            plyaerUrl: model.url!,
+            : viewModel.models.map((model) {
+          final videoId = YoutubePlayer.convertUrlToId(model.url!);
+          if (videoId == null) {
+            return SpecificTopicGridParams(
+              playerUrl: model.url!,
+              title: model.palavra,
+              description: model.descricao,
+              onTap: () => MidiaRouter().push(context),
+            );
+          }
+
+          final thumbnail = YoutubePlayer.getThumbnail(videoId: videoId,);
+
+          return SpecificTopicGridParams(
+            playerUrl: model.url!,
             title: model.palavra,
             description: model.descricao,
             onTap: () => MidiaRouter().push(context),
-          ),
-        )
-            .toList();
+          );
+        }).toList();
+
         return device == DeviceScreenType.mobile
             ? Scaffold(
-              appBar: AppBar(title: Text('Redes de Computadores')),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text("Um dicionário de sinais criado para a comunidade"),
-                      SizedBox(height: 90),
-                      SpecificTopicGrid(specificTopicsList: items),
-                    ],
-                  ),
-                ),
-              ),
-            )
-            : CustomContainerShell(
+          appBar: AppBar(title: Text(_title)),
+          body: SafeArea(
+            child: SingleChildScrollView(
               child: Column(
                 children: [
-                  TopContentLibras(
-                    title: "Redes de Computadores",
-                    subtitle:
-                        "Um dicionário de sinais criado para a comunidade",
+                  const Text(
+                    "Explore os principais sinais de Libras sobre este tema.",
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 90),
                   SpecificTopicGrid(specificTopicsList: items),
                 ],
               ),
-            );
+            ),
+          ),
+        )
+            : CustomContainerShell(
+          child: Column(
+            children: [
+              TopContentLibras(
+                title: _title,
+                subtitle:
+                "Explore os principais sinais de Libras sobre este tema.",
+              ),
+              const SizedBox(height: 15),
+              SpecificTopicGrid(specificTopicsList: items),
+            ],
+          ),
+        );
       },
     );
   }

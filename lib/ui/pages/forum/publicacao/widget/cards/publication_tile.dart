@@ -13,7 +13,7 @@ class PublicacaoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:()=> PublicacaoRouter(model.id).push(context),
+      onTap:()=> PublicacaoRouter(model.id).go(context),
       hoverColor: Colors.transparent,
       focusColor: Colors.transparent,
       mouseCursor: SystemMouseCursors.grab,

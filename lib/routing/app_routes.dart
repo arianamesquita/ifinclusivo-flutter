@@ -32,52 +32,53 @@ class AppRoutes {
   static const String token = '/auth/verify-email';
   static const String resetPassword = '/auth/reset_password';
 
+  static final List<AppRoute> routes = [
+    AppRoute(path: aboutUs, isPublic: true),
+    AppRoute(path: aboutNapne, isPublic: true),
+    AppRoute(path: signIn, isPublic: true),
+    AppRoute(path: signUp, isPublic: true),
 
-  // Permissões de acesso por rota
-  static final Map<String, List<Roles>> permissions = {
-    forum: Roles.values,
-    libras: Roles.values,
-    midia: Roles.values,
-    categoriaLibras: Roles.values,
-    notification: Roles.values,
-    more: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR],
-    profile: Roles.values,
-    token: Roles.values,
-    accountSecurity: Roles.values,
-    resetPassword: Roles.values,
-    newPublication: Roles.values
-  };
+    AppRoute(path: forum, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: publication, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: newPublication, allowedRoles: Roles.values),
 
-  static final Set<String> publicRoutes = {
-    aboutUs,
-    aboutNapne,
-    signIn,
-    signUp,
-    forum,
-    libras,
-    midia,
-    categoriaLibras,
-    token,
-    resetPassword,
-    unauthorized,
-    forbidden,
-    serverError,
-    notFound
-  };
+    AppRoute(path: libras, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: midia, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: categoriaLibras, isPublic: true, allowedRoles: Roles.values),
+
+    AppRoute(path: more, allowedRoles: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR]),
+    AppRoute(path: notification, allowedRoles: Roles.values),
+    AppRoute(path: profile, allowedRoles: Roles.values),
+    AppRoute(path: accountSecurity, allowedRoles: Roles.values),
+
+    AppRoute(path: token, isPublic: true),
+    AppRoute(path: resetPassword, isPublic: true),
+    AppRoute(path: unauthorized, isPublic: true),
+    AppRoute(path: forbidden, isPublic: true),
+    AppRoute(path: serverError, isPublic: true),
+    AppRoute(path: notFound, isPublic: true),
+  ];
 }
 
-bool isPublicRoute(String route) {
-  return AppRoutes.publicRoutes.contains(route);
-}
+class AppRoute {
+  final String path;
+  final bool isPublic;
+  final List<Roles> allowedRoles;
 
-bool canAccess(
-  String route,
-  List<Roles> userRoles, {
-  bool isLoggedIn = false,
-}) {
-  if (isPublicRoute(route)) return true;
-  if (!isLoggedIn) return false;
+  const AppRoute({
+    required this.path,
+    this.isPublic = false,
+    this.allowedRoles = const [],
+  });
 
-  final allowedRoles = AppRoutes.permissions[route] ?? [];
-  return userRoles.any((role) => allowedRoles.contains(role));
+  bool matches(String candidate) {
+    final patternStr = path.splitMapJoin(
+      RegExp(r':\w+'),
+      onMatch: (_) => r'([^/]+)',
+      onNonMatch: (s) => RegExp.escape(s),
+    );
+    final pattern = RegExp('(^|/)' + patternStr + r'($|/)');
+
+    return pattern.hasMatch(candidate);
+  }
 }
