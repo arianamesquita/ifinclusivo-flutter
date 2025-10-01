@@ -30,23 +30,24 @@ class NewPublicationViewModel extends ChangeNotifier {
   PublicacaoDetalhadaModel? createdPublication;
   String? errorMessage;
 
-  Future<void> postPublication(PublicacaoRequestModel request) async {
+  Future<PublicacaoDetalhadaModel?> postPublication(PublicacaoRequestModel request) async {
     _state = NewPublicationState.loading;
     notifyListeners();
-
-    try {
       final newPublication = await _forumRepository.create(request);
+      return newPublication.fold(
+          (onSuccess){
+            createdPublication = onSuccess;
+            _state = NewPublicationState.success;
+            notifyListeners();
+            return onSuccess;
+          },
+          (onFailure){
+            errorMessage = onFailure.toString();
+            _state = NewPublicationState.failure;
+            notifyListeners();
 
-      createdPublication = newPublication;
-      _state = NewPublicationState.success;
-      print(createdPublication.toString());
-    } catch (e) {
-      errorMessage = e.toString();
-      _state = NewPublicationState.failure;
-      print(errorMessage);
-    }
-
-    notifyListeners();
+            return null;
+          });
   }
 
   void resetState() {

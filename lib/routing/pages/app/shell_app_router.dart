@@ -15,7 +15,6 @@ part of '../../app_router.dart';
         TypedGoRoute<ProfileRouter>(path: AppRoutes.profile),
       ],
     ),
-    newPublicationBranch
   ],
 )
 class ShellAppRouter extends StatefulShellRouteData {

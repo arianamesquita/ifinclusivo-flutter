@@ -31,30 +31,13 @@ class PublicacaoDetalhadaModel with _$PublicacaoDetalhadaModel {
       _$PublicacaoDetalhadaModelFromJson(json);
 }
 
-@freezed
-class PublicacaoCardModel with _$PublicacaoCardModel {
-  @JsonSerializable(explicitToJson: true)
-  const factory PublicacaoCardModel({
-    required int id,
-    String? titulo,
-    required DateTime dataCriacao,
-    required AutorCardModel usuario,
-    required int totalLikes,
-    required int totalRespostas,
-    required bool curtidoPeloUsuario,
-  }) = _PublicacaoCardModel;
-
-  factory PublicacaoCardModel.fromJson(Map<String, dynamic> json) =>
-      _$PublicacaoCardModelFromJson(json);
-}
 
 @freezed
 class PublicacaoCompletaModel with _$PublicacaoCompletaModel {
   @JsonSerializable(explicitToJson: true)
   const factory PublicacaoCompletaModel({
-    required List<PublicacaoCardModel> pais,
-    required PublicacaoDetalhadaModel publicacao,
-    required List<PublicacaoDetalhadaModel> respostas,
+    required PublicacaoDetalhadaModel atual,
+    required List<PublicacaoDetalhadaModel> pais,
   }) = _PublicacaoCompletaModel;
 
   factory PublicacaoCompletaModel.fromJson(Map<String, dynamic> json) =>

@@ -1,4 +1,5 @@
 import 'package:if_inclusivo/guards/roles.dart';
+import 'package:if_inclusivo/guards/router_guard.dart';
 
 import '../routing/app_routes.dart';
 

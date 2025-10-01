@@ -2,8 +2,11 @@ part of '../../../app_router.dart';
 
 const TypedStatefulShellBranch<StatefulShellBranchData> forumBranch =
     TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[feedRouter],
+      routes: <TypedRoute<RouteData>>[feedRouter,],
     );
+
+
+
 
 const TypedGoRoute<ForumRouter> feedRouter = TypedGoRoute<ForumRouter>(
   path: AppRoutes.forum,
@@ -23,22 +26,20 @@ const TypedGoRoute<PublicacaoRouter> publicationRouter =
     TypedGoRoute<PublicacaoRouter>(path: AppRoutes.publication);
 
 class PublicacaoRouter extends GoRouteData with _$PublicacaoRouter {
-  final String id;
+  final int id;
   const PublicacaoRouter(this.id);
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PublicacaoPage();
+    final viewModel = PublicacaoViewModel(forumRepository: context.read());
+      viewModel.fetchPublicationCommand.execute(id);
+      viewModel.fetchRespostasCommand.execute(id, Ordenacao.RELEVANCIA);
+
+    return PublicacaoPage(id: id,viewModel: viewModel,);
   }
 }
 
-const TypedStatefulShellBranch<StatefulShellBranchData> newPublicationBranch =
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<NewPublicacaoRouter>(path: AppRoutes.newPublication),
-      ],
-    );
-
+@TypedGoRoute<NewPublicacaoRouter>(path: AppRoutes.newPublication)
 class NewPublicacaoRouter extends GoRouteData with _$NewPublicacaoRouter {
   const NewPublicacaoRouter();
 

@@ -25,7 +25,7 @@ UsuarioResponseModel _$UsuarioResponseModelFromJson(Map<String, dynamic> json) {
       return _ProfessorResponseModel.fromJson(json);
     case 'tutor':
       return _TutorResponseModel.fromJson(json);
-    case 'INTERPRETE':
+    case 'interprete':
       return _InterpreteResponseModel.fromJson(json);
 
     default:
@@ -113,7 +113,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -127,11 +127,11 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    INTERPRETE,
+    interprete,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -195,7 +195,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -209,11 +209,11 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -277,7 +277,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -291,11 +291,11 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -304,7 +304,7 @@ mixin _$UsuarioResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
+    required TResult Function(_InterpreteResponseModel value) interprete,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -312,7 +312,7 @@ mixin _$UsuarioResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult? Function(_InterpreteResponseModel value)? interprete,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -320,7 +320,7 @@ mixin _$UsuarioResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult Function(_InterpreteResponseModel value)? interprete,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 
@@ -766,7 +766,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -780,11 +780,11 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    INTERPRETE,
+    interprete,
   }) {
     return aluno(
       id,
@@ -864,7 +864,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -878,11 +878,11 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
   }) {
     return aluno?.call(
       id,
@@ -962,7 +962,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -976,11 +976,11 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
     required TResult orElse(),
   }) {
     if (aluno != null) {
@@ -1008,7 +1008,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
+    required TResult Function(_InterpreteResponseModel value) interprete,
   }) {
     return aluno(this);
   }
@@ -1020,7 +1020,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult? Function(_InterpreteResponseModel value)? interprete,
   }) {
     return aluno?.call(this);
   }
@@ -1032,7 +1032,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult Function(_InterpreteResponseModel value)? interprete,
     required TResult orElse(),
   }) {
     if (aluno != null) {
@@ -1475,7 +1475,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -1489,11 +1489,11 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    INTERPRETE,
+    interprete,
   }) {
     return alunoNapne(
       id,
@@ -1579,7 +1579,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -1593,11 +1593,11 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
   }) {
     return alunoNapne?.call(
       id,
@@ -1683,7 +1683,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -1697,11 +1697,11 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
     required TResult orElse(),
   }) {
     if (alunoNapne != null) {
@@ -1735,7 +1735,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
+    required TResult Function(_InterpreteResponseModel value) interprete,
   }) {
     return alunoNapne(this);
   }
@@ -1747,7 +1747,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult? Function(_InterpreteResponseModel value)? interprete,
   }) {
     return alunoNapne?.call(this);
   }
@@ -1759,7 +1759,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult Function(_InterpreteResponseModel value)? interprete,
     required TResult orElse(),
   }) {
     if (alunoNapne != null) {
@@ -2147,7 +2147,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -2161,11 +2161,11 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    INTERPRETE,
+    interprete,
   }) {
     return professor(
       id,
@@ -2246,7 +2246,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -2260,11 +2260,11 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
   }) {
     return professor?.call(
       id,
@@ -2345,7 +2345,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -2359,11 +2359,11 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
     required TResult orElse(),
   }) {
     if (professor != null) {
@@ -2392,7 +2392,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
+    required TResult Function(_InterpreteResponseModel value) interprete,
   }) {
     return professor(this);
   }
@@ -2404,7 +2404,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult? Function(_InterpreteResponseModel value)? interprete,
   }) {
     return professor?.call(this);
   }
@@ -2416,7 +2416,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult Function(_InterpreteResponseModel value)? interprete,
     required TResult orElse(),
   }) {
     if (professor != null) {
@@ -2501,7 +2501,7 @@ abstract class _$$TutorResponseModelImplCopyWith<$Res>
     List<Roles> roles,
     String? token,
     String? firebaseToken,
-    String especialidade,
+    String? especialidade,
   });
 
   @override
@@ -2532,7 +2532,7 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
     Object? roles = null,
     Object? token = freezed,
     Object? firebaseToken = freezed,
-    Object? especialidade = null,
+    Object? especialidade = freezed,
   }) {
     return _then(
       _$TutorResponseModelImpl(
@@ -2587,10 +2587,10 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
                 : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         especialidade:
-            null == especialidade
+            freezed == especialidade
                 ? _value.especialidade
                 : especialidade // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
       ),
     );
   }
@@ -2645,7 +2645,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   @override
   final String? firebaseToken;
   @override
-  final String especialidade;
+  final String? especialidade;
 
   @JsonKey(name: 'userType')
   final String $type;
@@ -2774,7 +2774,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -2788,11 +2788,11 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    INTERPRETE,
+    interprete,
   }) {
     return tutor(
       id,
@@ -2872,7 +2872,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -2886,11 +2886,11 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
   }) {
     return tutor?.call(
       id,
@@ -2970,7 +2970,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -2984,11 +2984,11 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
     required TResult orElse(),
   }) {
     if (tutor != null) {
@@ -3016,7 +3016,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
+    required TResult Function(_InterpreteResponseModel value) interprete,
   }) {
     return tutor(this);
   }
@@ -3028,7 +3028,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult? Function(_InterpreteResponseModel value)? interprete,
   }) {
     return tutor?.call(this);
   }
@@ -3040,7 +3040,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult Function(_InterpreteResponseModel value)? interprete,
     required TResult orElse(),
   }) {
     if (tutor != null) {
@@ -3067,7 +3067,7 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
     required final List<Roles> roles,
     final String? token,
     final String? firebaseToken,
-    required final String especialidade,
+    required final String? especialidade,
   }) = _$TutorResponseModelImpl;
 
   factory _TutorResponseModel.fromJson(Map<String, dynamic> json) =
@@ -3093,7 +3093,7 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
   String? get token;
   @override
   String? get firebaseToken;
-  String get especialidade;
+  String? get especialidade;
 
   /// Create a copy of UsuarioResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -3123,7 +3123,7 @@ abstract class _$$InterpreteResponseModelImplCopyWith<$Res>
     List<Roles> roles,
     String? token,
     String? firebaseToken,
-    String especialidade,
+    String? especialidade,
     double salary,
     List<SimpleLibrasModel> libras,
   });
@@ -3157,7 +3157,7 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
     Object? roles = null,
     Object? token = freezed,
     Object? firebaseToken = freezed,
-    Object? especialidade = null,
+    Object? especialidade = freezed,
     Object? salary = null,
     Object? libras = null,
   }) {
@@ -3214,10 +3214,10 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
                 : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String?,
         especialidade:
-            null == especialidade
+            freezed == especialidade
                 ? _value.especialidade
                 : especialidade // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
         salary:
             null == salary
                 ? _value.salary
@@ -3253,7 +3253,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     final String? $type,
   }) : _roles = roles,
        _libras = libras,
-       $type = $type ?? 'INTERPRETE';
+       $type = $type ?? 'interprete';
 
   factory _$InterpreteResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$InterpreteResponseModelImplFromJson(json);
@@ -3285,7 +3285,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   @override
   final String? firebaseToken;
   @override
-  final String especialidade;
+  final String? especialidade;
   @override
   final double salary;
   final List<SimpleLibrasModel> _libras;
@@ -3301,7 +3301,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.INTERPRETE(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade, salary: $salary, libras: $libras)';
+    return 'UsuarioResponseModel.interprete(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade, salary: $salary, libras: $libras)';
   }
 
   @override
@@ -3426,7 +3426,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )
     tutor,
     required TResult Function(
@@ -3440,13 +3440,13 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )
-    INTERPRETE,
+    interprete,
   }) {
-    return INTERPRETE(
+    return interprete(
       id,
       nome,
       login,
@@ -3526,7 +3526,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult? Function(
@@ -3540,13 +3540,13 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
   }) {
-    return INTERPRETE?.call(
+    return interprete?.call(
       id,
       nome,
       login,
@@ -3626,7 +3626,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
     )?
     tutor,
     TResult Function(
@@ -3640,15 +3640,15 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      String especialidade,
+      String? especialidade,
       double salary,
       List<SimpleLibrasModel> libras,
     )?
-    INTERPRETE,
+    interprete,
     required TResult orElse(),
   }) {
-    if (INTERPRETE != null) {
-      return INTERPRETE(
+    if (interprete != null) {
+      return interprete(
         id,
         nome,
         login,
@@ -3674,9 +3674,9 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required TResult Function(_AlunoNapneResponseModel value) alunoNapne,
     required TResult Function(_ProfessorResponseModel value) professor,
     required TResult Function(_TutorResponseModel value) tutor,
-    required TResult Function(_InterpreteResponseModel value) INTERPRETE,
+    required TResult Function(_InterpreteResponseModel value) interprete,
   }) {
-    return INTERPRETE(this);
+    return interprete(this);
   }
 
   @override
@@ -3686,9 +3686,9 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult? Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult? Function(_ProfessorResponseModel value)? professor,
     TResult? Function(_TutorResponseModel value)? tutor,
-    TResult? Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult? Function(_InterpreteResponseModel value)? interprete,
   }) {
-    return INTERPRETE?.call(this);
+    return interprete?.call(this);
   }
 
   @override
@@ -3698,11 +3698,11 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult Function(_AlunoNapneResponseModel value)? alunoNapne,
     TResult Function(_ProfessorResponseModel value)? professor,
     TResult Function(_TutorResponseModel value)? tutor,
-    TResult Function(_InterpreteResponseModel value)? INTERPRETE,
+    TResult Function(_InterpreteResponseModel value)? interprete,
     required TResult orElse(),
   }) {
-    if (INTERPRETE != null) {
-      return INTERPRETE(this);
+    if (interprete != null) {
+      return interprete(this);
     }
     return orElse();
   }
@@ -3725,7 +3725,7 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
     required final List<Roles> roles,
     final String? token,
     final String? firebaseToken,
-    required final String especialidade,
+    required final String? especialidade,
     required final double salary,
     required final List<SimpleLibrasModel> libras,
   }) = _$InterpreteResponseModelImpl;
@@ -3753,7 +3753,7 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
   String? get token;
   @override
   String? get firebaseToken;
-  String get especialidade;
+  String? get especialidade;
   double get salary;
   List<SimpleLibrasModel> get libras;
 
@@ -4356,335 +4356,6 @@ abstract class _PublicacaoDetalhadaModel implements PublicacaoDetalhadaModel {
   get copyWith => throw _privateConstructorUsedError;
 }
 
-PublicacaoCardModel _$PublicacaoCardModelFromJson(Map<String, dynamic> json) {
-  return _PublicacaoCardModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$PublicacaoCardModel {
-  int get id => throw _privateConstructorUsedError;
-  String? get titulo => throw _privateConstructorUsedError;
-  DateTime get dataCriacao => throw _privateConstructorUsedError;
-  AutorCardModel get usuario => throw _privateConstructorUsedError;
-  int get totalLikes => throw _privateConstructorUsedError;
-  int get totalRespostas => throw _privateConstructorUsedError;
-  bool get curtidoPeloUsuario => throw _privateConstructorUsedError;
-
-  /// Serializes this PublicacaoCardModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PublicacaoCardModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $PublicacaoCardModelCopyWith<PublicacaoCardModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PublicacaoCardModelCopyWith<$Res> {
-  factory $PublicacaoCardModelCopyWith(
-    PublicacaoCardModel value,
-    $Res Function(PublicacaoCardModel) then,
-  ) = _$PublicacaoCardModelCopyWithImpl<$Res, PublicacaoCardModel>;
-  @useResult
-  $Res call({
-    int id,
-    String? titulo,
-    DateTime dataCriacao,
-    AutorCardModel usuario,
-    int totalLikes,
-    int totalRespostas,
-    bool curtidoPeloUsuario,
-  });
-
-  $AutorCardModelCopyWith<$Res> get usuario;
-}
-
-/// @nodoc
-class _$PublicacaoCardModelCopyWithImpl<$Res, $Val extends PublicacaoCardModel>
-    implements $PublicacaoCardModelCopyWith<$Res> {
-  _$PublicacaoCardModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PublicacaoCardModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? titulo = freezed,
-    Object? dataCriacao = null,
-    Object? usuario = null,
-    Object? totalLikes = null,
-    Object? totalRespostas = null,
-    Object? curtidoPeloUsuario = null,
-  }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            titulo:
-                freezed == titulo
-                    ? _value.titulo
-                    : titulo // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            dataCriacao:
-                null == dataCriacao
-                    ? _value.dataCriacao
-                    : dataCriacao // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            usuario:
-                null == usuario
-                    ? _value.usuario
-                    : usuario // ignore: cast_nullable_to_non_nullable
-                        as AutorCardModel,
-            totalLikes:
-                null == totalLikes
-                    ? _value.totalLikes
-                    : totalLikes // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalRespostas:
-                null == totalRespostas
-                    ? _value.totalRespostas
-                    : totalRespostas // ignore: cast_nullable_to_non_nullable
-                        as int,
-            curtidoPeloUsuario:
-                null == curtidoPeloUsuario
-                    ? _value.curtidoPeloUsuario
-                    : curtidoPeloUsuario // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
-  }
-
-  /// Create a copy of PublicacaoCardModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $AutorCardModelCopyWith<$Res> get usuario {
-    return $AutorCardModelCopyWith<$Res>(_value.usuario, (value) {
-      return _then(_value.copyWith(usuario: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$PublicacaoCardModelImplCopyWith<$Res>
-    implements $PublicacaoCardModelCopyWith<$Res> {
-  factory _$$PublicacaoCardModelImplCopyWith(
-    _$PublicacaoCardModelImpl value,
-    $Res Function(_$PublicacaoCardModelImpl) then,
-  ) = __$$PublicacaoCardModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    int id,
-    String? titulo,
-    DateTime dataCriacao,
-    AutorCardModel usuario,
-    int totalLikes,
-    int totalRespostas,
-    bool curtidoPeloUsuario,
-  });
-
-  @override
-  $AutorCardModelCopyWith<$Res> get usuario;
-}
-
-/// @nodoc
-class __$$PublicacaoCardModelImplCopyWithImpl<$Res>
-    extends _$PublicacaoCardModelCopyWithImpl<$Res, _$PublicacaoCardModelImpl>
-    implements _$$PublicacaoCardModelImplCopyWith<$Res> {
-  __$$PublicacaoCardModelImplCopyWithImpl(
-    _$PublicacaoCardModelImpl _value,
-    $Res Function(_$PublicacaoCardModelImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of PublicacaoCardModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? titulo = freezed,
-    Object? dataCriacao = null,
-    Object? usuario = null,
-    Object? totalLikes = null,
-    Object? totalRespostas = null,
-    Object? curtidoPeloUsuario = null,
-  }) {
-    return _then(
-      _$PublicacaoCardModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        titulo:
-            freezed == titulo
-                ? _value.titulo
-                : titulo // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        dataCriacao:
-            null == dataCriacao
-                ? _value.dataCriacao
-                : dataCriacao // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        usuario:
-            null == usuario
-                ? _value.usuario
-                : usuario // ignore: cast_nullable_to_non_nullable
-                    as AutorCardModel,
-        totalLikes:
-            null == totalLikes
-                ? _value.totalLikes
-                : totalLikes // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalRespostas:
-            null == totalRespostas
-                ? _value.totalRespostas
-                : totalRespostas // ignore: cast_nullable_to_non_nullable
-                    as int,
-        curtidoPeloUsuario:
-            null == curtidoPeloUsuario
-                ? _value.curtidoPeloUsuario
-                : curtidoPeloUsuario // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(explicitToJson: true)
-class _$PublicacaoCardModelImpl implements _PublicacaoCardModel {
-  const _$PublicacaoCardModelImpl({
-    required this.id,
-    this.titulo,
-    required this.dataCriacao,
-    required this.usuario,
-    required this.totalLikes,
-    required this.totalRespostas,
-    required this.curtidoPeloUsuario,
-  });
-
-  factory _$PublicacaoCardModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PublicacaoCardModelImplFromJson(json);
-
-  @override
-  final int id;
-  @override
-  final String? titulo;
-  @override
-  final DateTime dataCriacao;
-  @override
-  final AutorCardModel usuario;
-  @override
-  final int totalLikes;
-  @override
-  final int totalRespostas;
-  @override
-  final bool curtidoPeloUsuario;
-
-  @override
-  String toString() {
-    return 'PublicacaoCardModel(id: $id, titulo: $titulo, dataCriacao: $dataCriacao, usuario: $usuario, totalLikes: $totalLikes, totalRespostas: $totalRespostas, curtidoPeloUsuario: $curtidoPeloUsuario)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PublicacaoCardModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.titulo, titulo) || other.titulo == titulo) &&
-            (identical(other.dataCriacao, dataCriacao) ||
-                other.dataCriacao == dataCriacao) &&
-            (identical(other.usuario, usuario) || other.usuario == usuario) &&
-            (identical(other.totalLikes, totalLikes) ||
-                other.totalLikes == totalLikes) &&
-            (identical(other.totalRespostas, totalRespostas) ||
-                other.totalRespostas == totalRespostas) &&
-            (identical(other.curtidoPeloUsuario, curtidoPeloUsuario) ||
-                other.curtidoPeloUsuario == curtidoPeloUsuario));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    titulo,
-    dataCriacao,
-    usuario,
-    totalLikes,
-    totalRespostas,
-    curtidoPeloUsuario,
-  );
-
-  /// Create a copy of PublicacaoCardModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PublicacaoCardModelImplCopyWith<_$PublicacaoCardModelImpl> get copyWith =>
-      __$$PublicacaoCardModelImplCopyWithImpl<_$PublicacaoCardModelImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PublicacaoCardModelImplToJson(this);
-  }
-}
-
-abstract class _PublicacaoCardModel implements PublicacaoCardModel {
-  const factory _PublicacaoCardModel({
-    required final int id,
-    final String? titulo,
-    required final DateTime dataCriacao,
-    required final AutorCardModel usuario,
-    required final int totalLikes,
-    required final int totalRespostas,
-    required final bool curtidoPeloUsuario,
-  }) = _$PublicacaoCardModelImpl;
-
-  factory _PublicacaoCardModel.fromJson(Map<String, dynamic> json) =
-      _$PublicacaoCardModelImpl.fromJson;
-
-  @override
-  int get id;
-  @override
-  String? get titulo;
-  @override
-  DateTime get dataCriacao;
-  @override
-  AutorCardModel get usuario;
-  @override
-  int get totalLikes;
-  @override
-  int get totalRespostas;
-  @override
-  bool get curtidoPeloUsuario;
-
-  /// Create a copy of PublicacaoCardModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PublicacaoCardModelImplCopyWith<_$PublicacaoCardModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 PublicacaoCompletaModel _$PublicacaoCompletaModelFromJson(
   Map<String, dynamic> json,
 ) {
@@ -4693,10 +4364,8 @@ PublicacaoCompletaModel _$PublicacaoCompletaModelFromJson(
 
 /// @nodoc
 mixin _$PublicacaoCompletaModel {
-  List<PublicacaoCardModel> get pais => throw _privateConstructorUsedError;
-  PublicacaoDetalhadaModel get publicacao => throw _privateConstructorUsedError;
-  List<PublicacaoDetalhadaModel> get respostas =>
-      throw _privateConstructorUsedError;
+  PublicacaoDetalhadaModel get atual => throw _privateConstructorUsedError;
+  List<PublicacaoDetalhadaModel> get pais => throw _privateConstructorUsedError;
 
   /// Serializes this PublicacaoCompletaModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -4716,12 +4385,11 @@ abstract class $PublicacaoCompletaModelCopyWith<$Res> {
   ) = _$PublicacaoCompletaModelCopyWithImpl<$Res, PublicacaoCompletaModel>;
   @useResult
   $Res call({
-    List<PublicacaoCardModel> pais,
-    PublicacaoDetalhadaModel publicacao,
-    List<PublicacaoDetalhadaModel> respostas,
+    PublicacaoDetalhadaModel atual,
+    List<PublicacaoDetalhadaModel> pais,
   });
 
-  $PublicacaoDetalhadaModelCopyWith<$Res> get publicacao;
+  $PublicacaoDetalhadaModelCopyWith<$Res> get atual;
 }
 
 /// @nodoc
@@ -4741,27 +4409,18 @@ class _$PublicacaoCompletaModelCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? pais = null,
-    Object? publicacao = null,
-    Object? respostas = null,
-  }) {
+  $Res call({Object? atual = null, Object? pais = null}) {
     return _then(
       _value.copyWith(
+            atual:
+                null == atual
+                    ? _value.atual
+                    : atual // ignore: cast_nullable_to_non_nullable
+                        as PublicacaoDetalhadaModel,
             pais:
                 null == pais
                     ? _value.pais
                     : pais // ignore: cast_nullable_to_non_nullable
-                        as List<PublicacaoCardModel>,
-            publicacao:
-                null == publicacao
-                    ? _value.publicacao
-                    : publicacao // ignore: cast_nullable_to_non_nullable
-                        as PublicacaoDetalhadaModel,
-            respostas:
-                null == respostas
-                    ? _value.respostas
-                    : respostas // ignore: cast_nullable_to_non_nullable
                         as List<PublicacaoDetalhadaModel>,
           )
           as $Val,
@@ -4772,9 +4431,9 @@ class _$PublicacaoCompletaModelCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PublicacaoDetalhadaModelCopyWith<$Res> get publicacao {
-    return $PublicacaoDetalhadaModelCopyWith<$Res>(_value.publicacao, (value) {
-      return _then(_value.copyWith(publicacao: value) as $Val);
+  $PublicacaoDetalhadaModelCopyWith<$Res> get atual {
+    return $PublicacaoDetalhadaModelCopyWith<$Res>(_value.atual, (value) {
+      return _then(_value.copyWith(atual: value) as $Val);
     });
   }
 }
@@ -4789,13 +4448,12 @@ abstract class _$$PublicacaoCompletaModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    List<PublicacaoCardModel> pais,
-    PublicacaoDetalhadaModel publicacao,
-    List<PublicacaoDetalhadaModel> respostas,
+    PublicacaoDetalhadaModel atual,
+    List<PublicacaoDetalhadaModel> pais,
   });
 
   @override
-  $PublicacaoDetalhadaModelCopyWith<$Res> get publicacao;
+  $PublicacaoDetalhadaModelCopyWith<$Res> get atual;
 }
 
 /// @nodoc
@@ -4815,27 +4473,18 @@ class __$$PublicacaoCompletaModelImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? pais = null,
-    Object? publicacao = null,
-    Object? respostas = null,
-  }) {
+  $Res call({Object? atual = null, Object? pais = null}) {
     return _then(
       _$PublicacaoCompletaModelImpl(
+        atual:
+            null == atual
+                ? _value.atual
+                : atual // ignore: cast_nullable_to_non_nullable
+                    as PublicacaoDetalhadaModel,
         pais:
             null == pais
                 ? _value._pais
                 : pais // ignore: cast_nullable_to_non_nullable
-                    as List<PublicacaoCardModel>,
-        publicacao:
-            null == publicacao
-                ? _value.publicacao
-                : publicacao // ignore: cast_nullable_to_non_nullable
-                    as PublicacaoDetalhadaModel,
-        respostas:
-            null == respostas
-                ? _value._respostas
-                : respostas // ignore: cast_nullable_to_non_nullable
                     as List<PublicacaoDetalhadaModel>,
       ),
     );
@@ -4847,36 +4496,26 @@ class __$$PublicacaoCompletaModelImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$PublicacaoCompletaModelImpl implements _PublicacaoCompletaModel {
   const _$PublicacaoCompletaModelImpl({
-    required final List<PublicacaoCardModel> pais,
-    required this.publicacao,
-    required final List<PublicacaoDetalhadaModel> respostas,
-  }) : _pais = pais,
-       _respostas = respostas;
+    required this.atual,
+    required final List<PublicacaoDetalhadaModel> pais,
+  }) : _pais = pais;
 
   factory _$PublicacaoCompletaModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PublicacaoCompletaModelImplFromJson(json);
 
-  final List<PublicacaoCardModel> _pais;
   @override
-  List<PublicacaoCardModel> get pais {
+  final PublicacaoDetalhadaModel atual;
+  final List<PublicacaoDetalhadaModel> _pais;
+  @override
+  List<PublicacaoDetalhadaModel> get pais {
     if (_pais is EqualUnmodifiableListView) return _pais;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_pais);
   }
 
   @override
-  final PublicacaoDetalhadaModel publicacao;
-  final List<PublicacaoDetalhadaModel> _respostas;
-  @override
-  List<PublicacaoDetalhadaModel> get respostas {
-    if (_respostas is EqualUnmodifiableListView) return _respostas;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_respostas);
-  }
-
-  @override
   String toString() {
-    return 'PublicacaoCompletaModel(pais: $pais, publicacao: $publicacao, respostas: $respostas)';
+    return 'PublicacaoCompletaModel(atual: $atual, pais: $pais)';
   }
 
   @override
@@ -4884,22 +4523,16 @@ class _$PublicacaoCompletaModelImpl implements _PublicacaoCompletaModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PublicacaoCompletaModelImpl &&
-            const DeepCollectionEquality().equals(other._pais, _pais) &&
-            (identical(other.publicacao, publicacao) ||
-                other.publicacao == publicacao) &&
-            const DeepCollectionEquality().equals(
-              other._respostas,
-              _respostas,
-            ));
+            (identical(other.atual, atual) || other.atual == atual) &&
+            const DeepCollectionEquality().equals(other._pais, _pais));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    atual,
     const DeepCollectionEquality().hash(_pais),
-    publicacao,
-    const DeepCollectionEquality().hash(_respostas),
   );
 
   /// Create a copy of PublicacaoCompletaModel
@@ -4920,20 +4553,17 @@ class _$PublicacaoCompletaModelImpl implements _PublicacaoCompletaModel {
 
 abstract class _PublicacaoCompletaModel implements PublicacaoCompletaModel {
   const factory _PublicacaoCompletaModel({
-    required final List<PublicacaoCardModel> pais,
-    required final PublicacaoDetalhadaModel publicacao,
-    required final List<PublicacaoDetalhadaModel> respostas,
+    required final PublicacaoDetalhadaModel atual,
+    required final List<PublicacaoDetalhadaModel> pais,
   }) = _$PublicacaoCompletaModelImpl;
 
   factory _PublicacaoCompletaModel.fromJson(Map<String, dynamic> json) =
       _$PublicacaoCompletaModelImpl.fromJson;
 
   @override
-  List<PublicacaoCardModel> get pais;
+  PublicacaoDetalhadaModel get atual;
   @override
-  PublicacaoDetalhadaModel get publicacao;
-  @override
-  List<PublicacaoDetalhadaModel> get respostas;
+  List<PublicacaoDetalhadaModel> get pais;
 
   /// Create a copy of PublicacaoCompletaModel
   /// with the given fields replaced by the non-null parameter values.
