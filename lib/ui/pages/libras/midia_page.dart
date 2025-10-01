@@ -3,19 +3,19 @@ import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 
-class ModalMidiaPageLibras extends StatelessWidget {
+class MidiaPageLibras extends StatelessWidget {
   final String titulo;
   final String urlVideo;
   final String timestamp;
   final List<String> relacionados;
   final String description;
 
-  const ModalMidiaPageLibras({
+  const MidiaPageLibras({
     super.key,
     required this.titulo,
     required this.timestamp,
     required this.relacionados,
-    this.urlVideo = "assets/player.png",
+    this.urlVideo = "assets/player.png", // mais um asset de imagem pro urlVideo. Deve ser mudado pra video.
     required this.description,
   });
 
@@ -51,7 +51,7 @@ class ModalMidiaPageLibras extends StatelessWidget {
       children: [
         AspectRatio(
           aspectRatio: 16 / 9,
-          child: Image.asset(urlVideo, fit: BoxFit.cover),
+          child: Image.asset(urlVideo, fit: BoxFit.cover), // asset de Imagem para urlVideo. Mudar pra video.
         ),
         const SizedBox(height: 16),
         Text(

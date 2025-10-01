@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:if_inclusivo/data/repositories/libras_repository.dart';
 import 'package:if_inclusivo/data/services/libras_service.dart';
@@ -16,7 +14,7 @@ class LibrasRepositoryImpl implements LibrasRepository{
   @override
   Future<PaginatedResponse<LibrasResponseModel>> getLibrasByTopic({int pages = 0, int size = 10, Categorias? categorias}) async {
     try{
-      final data =await _librasService.getLibrasByTopic(pages: pages,size: size,categorias: categorias);
+      final data = await _librasService.getLibrasByTopic(pages: pages, size: size, categorias: categorias);
       return PaginatedResponse.fromJson(data, (json)=> LibrasResponseModel.fromJson(json as Map<String, dynamic>));
     } on DioException catch (e) {
       if(e.response != null) {
