@@ -162,7 +162,6 @@ Map<String, dynamic> _$$ResetPasswordRequestModelImplToJson(
 _$UpdatePasswordRequestModelImpl _$$UpdatePasswordRequestModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$UpdatePasswordRequestModelImpl(
-  email: json['email'] as String,
   senhaAtual: json['senhaAtual'] as String,
   novaSenha: json['novaSenha'] as String,
 );
@@ -170,7 +169,6 @@ _$UpdatePasswordRequestModelImpl _$$UpdatePasswordRequestModelImplFromJson(
 Map<String, dynamic> _$$UpdatePasswordRequestModelImplToJson(
   _$UpdatePasswordRequestModelImpl instance,
 ) => <String, dynamic>{
-  'email': instance.email,
   'senhaAtual': instance.senhaAtual,
   'novaSenha': instance.novaSenha,
 };

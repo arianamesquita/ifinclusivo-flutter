@@ -1,53 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/data/repositories/account_security_repository.dart';
+import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:result_command/result_command.dart';
+import 'package:result_dart/result_dart.dart';
 import '../../../../../data/repositories/auth_repository.dart';
 
 class AccountSecurityViewModel extends ChangeNotifier {
-  final AuthRepository _authRepository;
+  final AccountSecurityRepository _accountRepository;
 
   bool isLoading = false;
   String? errorMessage;
   bool success = false;
+  late final Command1<bool, UpdatePasswordRequestModel> updatePasswordCommand;
 
-  AccountSecurityViewModel({required AuthRepository authRepository})
-      : _authRepository = authRepository;
+  AccountSecurityViewModel(
+      {required AccountSecurityRepository accountRepository})
+      : _accountRepository = accountRepository{
+    updatePasswordCommand = Command1<bool, UpdatePasswordRequestModel>(changePassword);
+  }
 
-  // Future<void> changePassword({
-  //   required String oldPassword,
-  //   required String newPassword,
-  // }) async {
-  //   isLoading = true;
-  //   errorMessage = null;
-  //   success = false;
-  //   notifyListeners();
-  //
-  //   try {
-  //     await _authRepository.changePassword(
-  //       oldPassword: oldPassword,
-  //       newPassword: newPassword,
-  //     );
-  //     success = true;
-  //   } catch (e) {
-  //     errorMessage = e.toString();
-  //   } finally {
-  //     isLoading = false;
-  //     notifyListeners();
-  //   }
-  // }
-  //
-  // Future<void> deleteAccount() async {
-  //   isLoading = true;
-  //   errorMessage = null;
-  //   success = false;
-  //   notifyListeners();
-  //
-  //   try {
-  //     await _authRepository.deleteAccount();
-  //     success = true;
-  //   } catch (e) {
-  //     errorMessage = e.toString();
-  //   } finally {
-  //     isLoading = false;
-  //     notifyListeners();
-  //   }
-  // }
+  AsyncResult<bool> changePassword(UpdatePasswordRequestModel updateModel) async {
+    final result = await _accountRepository.updatePassword(
+      updateModel,
+    );
+    return result.mapFold(
+        (onSuccess) {
+          return onSuccess;
+        },
+        (onFailure) {
+          return onFailure;
+        });
+  }
+
+  Future<void> deleteAccount() async {
+    isLoading = true;
+    errorMessage = null;
+    success = false;
+    notifyListeners();
+
+    try {
+      await _accountRepository.deleteAccount();
+      success = true;
+    } catch (e) {
+      errorMessage = e.toString();
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
 }

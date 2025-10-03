@@ -25,6 +25,79 @@ class AuthModals {
     });
   }
 
+  static Future<void> changePasswordSuccess({
+    required BuildContext context
+  }) {
+    return _showModal(
+      context: context,
+      builder: ModalsAuthBase.small(
+        context: context,
+        type: ModalType.success,
+        title: 'Sucesso',
+        child: Row(
+          spacing: 16,
+          children: [
+            ShaderMask(
+              shaderCallback:
+                  (bounds) => const LinearGradient(
+                colors: [
+                  Color(0xFF5AA397),
+                  Color(0xFF9B74C5),
+                ], // rosa → azul
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(bounds),
+              child: const Icon(
+                Icons.check_circle_outline_rounded,
+                size: 50,
+                color: Colors.white,
+              ),
+            ),
+            Flexible(
+              child: Text(
+                'Sua senha foi Alterada com sucesso',
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyMedium,
+                softWrap: true,
+                maxLines: 5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Future<void> changePasswordError({required BuildContext context}) {
+    return _showModal(
+      context: context,
+      builder: ModalsAuthBase.small(
+        context: context,
+        type: ModalType.error,
+        title: 'Error',
+        child: Row(
+          spacing: 16,
+          children: [
+            Icon(
+              Icons.cancel_outlined,
+              color: Theme.of(context).colorScheme.error,
+              size: 50,
+            ),
+            Flexible(
+              child: Text(
+                'Senha Atual Incorreta.',
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyMedium,
+                softWrap: true,
+                maxLines: 5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   static Future<void> resetPasswordSuccess({
     required BuildContext context,
     void Function()? onButtonPressed,

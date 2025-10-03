@@ -35,7 +35,6 @@ class ResetPasswordRequestModel with _$ResetPasswordRequestModel {
 @freezed
 class UpdatePasswordRequestModel with _$UpdatePasswordRequestModel {
   const factory UpdatePasswordRequestModel({
-    required String email,
     required String senhaAtual,
     required String novaSenha,
   }) = _UpdatePasswordRequestModel;
