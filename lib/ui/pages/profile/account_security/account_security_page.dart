@@ -1,4 +1,6 @@
 
+import 'dart:js_interop';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
@@ -405,46 +407,55 @@ class _ProfilePageState extends State<AccountSecurityPage> {
                                             // ---------------- Botão Excluir ----------------
                                             SizedBox(
                                               width: double.infinity,
-                                              child: ElevatedButton(
-                                                onPressed: isLoading ? null : () async {
-                                                  setState(() => isLoading = true);
-                                                  // final credentials = LoginRequestModel(
-                                                  //   login: _loginController.text,
-                                                  //   senha: _passwordController.text,
-                                                  // );
-                                                  // final success = await viewModel.login(credentials);
-                                                  setState(() => isLoading = false);
-                                                  // if (success) {
-                                                  //   ForumRouter().go(context);
-                                                  // } else {
-                                                  //   ScaffoldMessenger.of(context).showSnackBar(
-                                                  //     const SnackBar(content: Text("Usuário ou senha inválidos")),
-                                                  //   );
-                                                  // }
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: const Color.fromRGBO(184, 31, 30, 1),
-                                                  foregroundColor: Colors.white,
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(12.0),
-                                                  child: isLoading
-                                                      ? const SizedBox(
-                                                    height: 20,
-                                                    width: 20,
-                                                    child: CircularProgressIndicator(
-                                                      color: Colors.white,
-                                                      strokeWidth: 2,
+                                              child: ListenableBuilder(
+                                                listenable: viewModel.deleteAccountCommand,
+                                                builder: (context, _) {
+                                                final state = viewModel.deleteAccountCommand.value;
+                                                  return ElevatedButton(
+                                                    onPressed: state.isRunning ? null : () async {
+                                                      AuthModals.deleteAccount(
+                                                          context: context,
+                                                          onSendPressed: (senhadigitada, modalContext) async {
+                                                            Navigator.pop(modalContext);
+                                                            await viewModel.deleteAccountCommand.execute(
+                                                                senhadigitada
+                                                            );
+                                                            final result = viewModel.deleteAccountCommand.value;
+                                                            if(result.isSuccess){
+                                                              AboutUsRoute().go(context);
+                                                            } else if (result.isFailure){
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  const SnackBar(content: Text('Senha incorreta.'))
+                                                              );
+                                                            }
+                                                          }
+                                                      );
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                      backgroundColor: const Color.fromRGBO(184, 31, 30, 1),
+                                                      foregroundColor: Colors.white,
                                                     ),
-                                                  )
-                                                      : Text(
-                                                    'Excluir conta',
-                                                    style: TextStyle(
-                                                      fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize ?? 18) * fontScale,
-                                                      fontWeight: FontWeight.w500,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(12.0),
+                                                      child: state.isRunning
+                                                          ? const SizedBox(
+                                                        height: 20,
+                                                        width: 20,
+                                                        child: CircularProgressIndicator(
+                                                          color: Colors.white,
+                                                          strokeWidth: 2,
+                                                        ),
+                                                      )
+                                                          : Text(
+                                                        'Excluir conta',
+                                                        style: TextStyle(
+                                                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize ?? 18) * fontScale,
+                                                          fontWeight: FontWeight.w500,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ),
+                                                  );
+                                                }
                                               ),
                                             ),
                                           ],

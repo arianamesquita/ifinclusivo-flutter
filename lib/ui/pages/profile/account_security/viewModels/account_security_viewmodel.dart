@@ -8,15 +8,17 @@ import '../../../../../data/repositories/auth_repository.dart';
 class AccountSecurityViewModel extends ChangeNotifier {
   final AccountSecurityRepository _accountRepository;
 
-  bool isLoading = false;
-  String? errorMessage;
   bool success = false;
   late final Command1<bool, UpdatePasswordRequestModel> updatePasswordCommand;
+  late final Command1<bool, String> deleteAccountCommand;
 
   AccountSecurityViewModel(
       {required AccountSecurityRepository accountRepository})
       : _accountRepository = accountRepository{
     updatePasswordCommand = Command1<bool, UpdatePasswordRequestModel>(changePassword);
+    deleteAccountCommand = Command1<bool, String>((password) async {
+      return await deleteAccount(password);
+    });
   }
 
   AsyncResult<bool> changePassword(UpdatePasswordRequestModel updateModel) async {
@@ -32,20 +34,14 @@ class AccountSecurityViewModel extends ChangeNotifier {
         });
   }
 
-  Future<void> deleteAccount() async {
-    isLoading = true;
-    errorMessage = null;
-    success = false;
-    notifyListeners();
-
-    try {
-      await _accountRepository.deleteAccount();
-      success = true;
-    } catch (e) {
-      errorMessage = e.toString();
-    } finally {
-      isLoading = false;
-      notifyListeners();
-    }
+  AsyncResult<bool> deleteAccount(String password) async {
+    final result = await _accountRepository.deleteAccount(password);
+    return result.mapFold(
+        (onSuccess) {
+          return onSuccess;
+        }, (onFailure) {
+          return onFailure;
+        }
+    );
   }
 }
