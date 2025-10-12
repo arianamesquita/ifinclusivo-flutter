@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../enums/categorias.dart';
+import '../../enums/forum.dart';
 import '../../enums/status.dart';
 import '../../enums/tema_css.dart';
 import '../response/gen_responses.dart';

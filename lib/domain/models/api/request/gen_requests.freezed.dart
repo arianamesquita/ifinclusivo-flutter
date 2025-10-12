@@ -2349,6 +2349,220 @@ abstract class _UpdatePasswordRequestModel
   get copyWith => throw _privateConstructorUsedError;
 }
 
+ComentarioRequestModel _$ComentarioRequestModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _ComentarioRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ComentarioRequestModel {
+  String get texto => throw _privateConstructorUsedError;
+  int? get parentId => throw _privateConstructorUsedError;
+  int? get usuarioMencionadoId => throw _privateConstructorUsedError;
+
+  /// Serializes this ComentarioRequestModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ComentarioRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ComentarioRequestModelCopyWith<ComentarioRequestModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ComentarioRequestModelCopyWith<$Res> {
+  factory $ComentarioRequestModelCopyWith(
+    ComentarioRequestModel value,
+    $Res Function(ComentarioRequestModel) then,
+  ) = _$ComentarioRequestModelCopyWithImpl<$Res, ComentarioRequestModel>;
+  @useResult
+  $Res call({String texto, int? parentId, int? usuarioMencionadoId});
+}
+
+/// @nodoc
+class _$ComentarioRequestModelCopyWithImpl<
+  $Res,
+  $Val extends ComentarioRequestModel
+>
+    implements $ComentarioRequestModelCopyWith<$Res> {
+  _$ComentarioRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ComentarioRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? texto = null,
+    Object? parentId = freezed,
+    Object? usuarioMencionadoId = freezed,
+  }) {
+    return _then(
+      _value.copyWith(
+            texto:
+                null == texto
+                    ? _value.texto
+                    : texto // ignore: cast_nullable_to_non_nullable
+                        as String,
+            parentId:
+                freezed == parentId
+                    ? _value.parentId
+                    : parentId // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            usuarioMencionadoId:
+                freezed == usuarioMencionadoId
+                    ? _value.usuarioMencionadoId
+                    : usuarioMencionadoId // ignore: cast_nullable_to_non_nullable
+                        as int?,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$ComentarioRequestModelImplCopyWith<$Res>
+    implements $ComentarioRequestModelCopyWith<$Res> {
+  factory _$$ComentarioRequestModelImplCopyWith(
+    _$ComentarioRequestModelImpl value,
+    $Res Function(_$ComentarioRequestModelImpl) then,
+  ) = __$$ComentarioRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String texto, int? parentId, int? usuarioMencionadoId});
+}
+
+/// @nodoc
+class __$$ComentarioRequestModelImplCopyWithImpl<$Res>
+    extends
+        _$ComentarioRequestModelCopyWithImpl<$Res, _$ComentarioRequestModelImpl>
+    implements _$$ComentarioRequestModelImplCopyWith<$Res> {
+  __$$ComentarioRequestModelImplCopyWithImpl(
+    _$ComentarioRequestModelImpl _value,
+    $Res Function(_$ComentarioRequestModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ComentarioRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? texto = null,
+    Object? parentId = freezed,
+    Object? usuarioMencionadoId = freezed,
+  }) {
+    return _then(
+      _$ComentarioRequestModelImpl(
+        texto:
+            null == texto
+                ? _value.texto
+                : texto // ignore: cast_nullable_to_non_nullable
+                    as String,
+        parentId:
+            freezed == parentId
+                ? _value.parentId
+                : parentId // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        usuarioMencionadoId:
+            freezed == usuarioMencionadoId
+                ? _value.usuarioMencionadoId
+                : usuarioMencionadoId // ignore: cast_nullable_to_non_nullable
+                    as int?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ComentarioRequestModelImpl implements _ComentarioRequestModel {
+  const _$ComentarioRequestModelImpl({
+    required this.texto,
+    this.parentId,
+    this.usuarioMencionadoId,
+  });
+
+  factory _$ComentarioRequestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComentarioRequestModelImplFromJson(json);
+
+  @override
+  final String texto;
+  @override
+  final int? parentId;
+  @override
+  final int? usuarioMencionadoId;
+
+  @override
+  String toString() {
+    return 'ComentarioRequestModel(texto: $texto, parentId: $parentId, usuarioMencionadoId: $usuarioMencionadoId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ComentarioRequestModelImpl &&
+            (identical(other.texto, texto) || other.texto == texto) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.usuarioMencionadoId, usuarioMencionadoId) ||
+                other.usuarioMencionadoId == usuarioMencionadoId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, texto, parentId, usuarioMencionadoId);
+
+  /// Create a copy of ComentarioRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ComentarioRequestModelImplCopyWith<_$ComentarioRequestModelImpl>
+  get copyWith =>
+      __$$ComentarioRequestModelImplCopyWithImpl<_$ComentarioRequestModelImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ComentarioRequestModelImplToJson(this);
+  }
+}
+
+abstract class _ComentarioRequestModel implements ComentarioRequestModel {
+  const factory _ComentarioRequestModel({
+    required final String texto,
+    final int? parentId,
+    final int? usuarioMencionadoId,
+  }) = _$ComentarioRequestModelImpl;
+
+  factory _ComentarioRequestModel.fromJson(Map<String, dynamic> json) =
+      _$ComentarioRequestModelImpl.fromJson;
+
+  @override
+  String get texto;
+  @override
+  int? get parentId;
+  @override
+  int? get usuarioMencionadoId;
+
+  /// Create a copy of ComentarioRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ComentarioRequestModelImplCopyWith<_$ComentarioRequestModelImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
 PublicacaoRequestModel _$PublicacaoRequestModelFromJson(
   Map<String, dynamic> json,
 ) {
@@ -2361,7 +2575,8 @@ mixin _$PublicacaoRequestModel {
   String get texto => throw _privateConstructorUsedError;
   @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
   Set<Categorias> get categorias => throw _privateConstructorUsedError;
-  int? get parentId => throw _privateConstructorUsedError;
+  @JsonKey(toJson: _tipoPublicacaoToJson, fromJson: _tipoPublicacaoFromJson)
+  TipoPublicacao get tipo => throw _privateConstructorUsedError;
 
   /// Serializes this PublicacaoRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2385,7 +2600,8 @@ abstract class $PublicacaoRequestModelCopyWith<$Res> {
     String texto,
     @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     Set<Categorias> categorias,
-    int? parentId,
+    @JsonKey(toJson: _tipoPublicacaoToJson, fromJson: _tipoPublicacaoFromJson)
+    TipoPublicacao tipo,
   });
 }
 
@@ -2410,7 +2626,7 @@ class _$PublicacaoRequestModelCopyWithImpl<
     Object? titulo = null,
     Object? texto = null,
     Object? categorias = null,
-    Object? parentId = freezed,
+    Object? tipo = null,
   }) {
     return _then(
       _value.copyWith(
@@ -2429,11 +2645,11 @@ class _$PublicacaoRequestModelCopyWithImpl<
                     ? _value.categorias
                     : categorias // ignore: cast_nullable_to_non_nullable
                         as Set<Categorias>,
-            parentId:
-                freezed == parentId
-                    ? _value.parentId
-                    : parentId // ignore: cast_nullable_to_non_nullable
-                        as int?,
+            tipo:
+                null == tipo
+                    ? _value.tipo
+                    : tipo // ignore: cast_nullable_to_non_nullable
+                        as TipoPublicacao,
           )
           as $Val,
     );
@@ -2454,7 +2670,8 @@ abstract class _$$PublicacaoRequestModelImplCopyWith<$Res>
     String texto,
     @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     Set<Categorias> categorias,
-    int? parentId,
+    @JsonKey(toJson: _tipoPublicacaoToJson, fromJson: _tipoPublicacaoFromJson)
+    TipoPublicacao tipo,
   });
 }
 
@@ -2476,7 +2693,7 @@ class __$$PublicacaoRequestModelImplCopyWithImpl<$Res>
     Object? titulo = null,
     Object? texto = null,
     Object? categorias = null,
-    Object? parentId = freezed,
+    Object? tipo = null,
   }) {
     return _then(
       _$PublicacaoRequestModelImpl(
@@ -2495,11 +2712,11 @@ class __$$PublicacaoRequestModelImplCopyWithImpl<$Res>
                 ? _value._categorias
                 : categorias // ignore: cast_nullable_to_non_nullable
                     as Set<Categorias>,
-        parentId:
-            freezed == parentId
-                ? _value.parentId
-                : parentId // ignore: cast_nullable_to_non_nullable
-                    as int?,
+        tipo:
+            null == tipo
+                ? _value.tipo
+                : tipo // ignore: cast_nullable_to_non_nullable
+                    as TipoPublicacao,
       ),
     );
   }
@@ -2514,7 +2731,8 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
     required this.texto,
     @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     required final Set<Categorias> categorias,
-    required this.parentId,
+    @JsonKey(toJson: _tipoPublicacaoToJson, fromJson: _tipoPublicacaoFromJson)
+    required this.tipo,
   }) : _categorias = categorias;
 
   factory _$PublicacaoRequestModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -2534,11 +2752,12 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
   }
 
   @override
-  final int? parentId;
+  @JsonKey(toJson: _tipoPublicacaoToJson, fromJson: _tipoPublicacaoFromJson)
+  final TipoPublicacao tipo;
 
   @override
   String toString() {
-    return 'PublicacaoRequestModel(titulo: $titulo, texto: $texto, categorias: $categorias, parentId: $parentId)';
+    return 'PublicacaoRequestModel(titulo: $titulo, texto: $texto, categorias: $categorias, tipo: $tipo)';
   }
 
   @override
@@ -2552,8 +2771,7 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
               other._categorias,
               _categorias,
             ) &&
-            (identical(other.parentId, parentId) ||
-                other.parentId == parentId));
+            (identical(other.tipo, tipo) || other.tipo == tipo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2563,7 +2781,7 @@ class _$PublicacaoRequestModelImpl implements _PublicacaoRequestModel {
     titulo,
     texto,
     const DeepCollectionEquality().hash(_categorias),
-    parentId,
+    tipo,
   );
 
   /// Create a copy of PublicacaoRequestModel
@@ -2590,7 +2808,8 @@ abstract class _PublicacaoRequestModel implements PublicacaoRequestModel {
     required final String texto,
     @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
     required final Set<Categorias> categorias,
-    required final int? parentId,
+    @JsonKey(toJson: _tipoPublicacaoToJson, fromJson: _tipoPublicacaoFromJson)
+    required final TipoPublicacao tipo,
   }) = _$PublicacaoRequestModelImpl;
 
   factory _PublicacaoRequestModel.fromJson(Map<String, dynamic> json) =
@@ -2604,7 +2823,8 @@ abstract class _PublicacaoRequestModel implements PublicacaoRequestModel {
   @JsonKey(toJson: _categoriasToJson, fromJson: _categoriasFromJson)
   Set<Categorias> get categorias;
   @override
-  int? get parentId;
+  @JsonKey(toJson: _tipoPublicacaoToJson, fromJson: _tipoPublicacaoFromJson)
+  TipoPublicacao get tipo;
 
   /// Create a copy of PublicacaoRequestModel
   /// with the given fields replaced by the non-null parameter values.
