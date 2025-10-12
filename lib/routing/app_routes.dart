@@ -8,7 +8,7 @@ class AppRoutes {
 
   static const String _app = '/app';
   static const String forum = '$_app/forum';
-  static const String publication = 'post/:id';
+  static const String publication = '/post/:id';
   static const String newPublication = '$_app/new-post';
 
   static const String libras = '$_app/libras';

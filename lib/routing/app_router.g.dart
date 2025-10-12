@@ -194,13 +194,11 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           path: '/app/forum',
 
           factory: _$ForumRouter._fromState,
-          routes: [
-            GoRouteData.$route(
-              path: 'post/:id',
+        ),
+        GoRouteData.$route(
+          path: '/post/:id',
 
-              factory: _$PublicacaoRouter._fromState,
-            ),
-          ],
+          factory: _$PublicacaoRouter._fromState,
         ),
       ],
     ),
@@ -279,7 +277,7 @@ mixin _$PublicacaoRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location(
-    '/app/forum/post/${Uri.encodeComponent(_self.id.toString())}',
+    '/post/${Uri.encodeComponent(_self.id.toString())}',
   );
 
   @override

@@ -53,29 +53,24 @@ part 'pages/about_routes/shell_about_router.dart';
 
 part 'pages/exceptions/exceptions_routes.dart';
 
+
 GoRouter createRouter({required AuthRepository authRepository}) {
   final authListenable = StreamListenable(authRepository.authStateChanges);
   return GoRouter(
     refreshListenable: authListenable,
-    initialLocation: AppRoutes.forum,
+    initialLocation: AppRoutes.aboutUs,
     errorBuilder: (context, state) {
       return const NotFound404();
     },
     redirect: (BuildContext context, GoRouterState state) {
       final bool loggedIn = authRepository.currentUser != null;
       final String location = state.matchedLocation;
-      print(location);
-      print(loggedIn);
-
       final isAuthRoute =
           location == AppRoutes.signIn || location == AppRoutes.signUp;
-
       if (!loggedIn && !isPublicRoute(location)) {
         AuthRedirectHelper.setRedirectLocation(location);
         return AppRoutes.signIn;
       }
-
-
 
       return null;
     },
