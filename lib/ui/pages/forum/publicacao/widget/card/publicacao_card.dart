@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
-import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/cards/widgets/account_header.dart';
-import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/cards/widgets/bottom_bar_publication.dart';
-import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/cards/widgets/content_card.dart';
-import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/cards/widgets/list_chips_card.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/account_header.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/bottom_bar_publication.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/content_card.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/list_chips_card.dart';
+
 
 class PublicacaoCard extends StatelessWidget {
   final PublicacaoDetalhadaModel model;
-  const PublicacaoCard({super.key, required this.model});
+  final void Function()? onTap;
+  final List<PopupMenuEntry<dynamic>> menuItems;
+
+const PublicacaoCard({super.key, required this.model,required this.onTap, required this.menuItems});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,7 @@ class PublicacaoCard extends StatelessWidget {
       child: Card(
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          onTap:()=> PublicacaoRouter(model.id).go(context),
-          hoverColor: Colors.transparent,
+          onTap:onTap,
           focusColor: Colors.transparent,
           mouseCursor: SystemMouseCursors.grab,
           child: Column(
@@ -32,16 +35,7 @@ class PublicacaoCard extends StatelessWidget {
                   imgPath: null,
                   isAnswerAccepted: false,
                   canMarkAsAnswer: false,
-                  menuItems: [
-                    PopupMenuItem(
-                      value: "denuciar",
-                      child: Text("Denuciar"),
-                      onTap: () {
-                        // callback editar
-                        print("Editar publicação");
-                      },
-                    ),
-                  ],
+                  menuItems: menuItems,
                   onUnmarkAnswer: () {}, onMarkAnswer: () {  },
                   dataCriacao: model.dataCriacao,
                 ),

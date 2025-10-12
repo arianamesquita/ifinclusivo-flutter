@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:if_inclusivo/data/repositories/auth_repository.dart';
 
@@ -14,12 +16,18 @@ class FeedViewModel extends ChangeNotifier {
   }) : _forumRepository = forumRepository,
        _authRepository = authRepository {
     currentUser = _authRepository.currentUser;
+    _authSubscription = _authRepository.authStateChanges.listen((user) {
+      currentUser = user;
+      notifyListeners();
+    });
   }
 
   final ForumRepository _forumRepository;
   final AuthRepository _authRepository;
 
   UsuarioResponseModel? currentUser;
+
+  StreamSubscription<UsuarioResponseModel?>? _authSubscription;
 
   FeedState _state = FeedState.initialLoading;
   FeedState get state => _state;
@@ -32,6 +40,12 @@ class FeedViewModel extends ChangeNotifier {
 
   Set<Categorias> _currentCategories = {};
   Ordenacao _currentOrder = Ordenacao.RELEVANCIA;
+
+  @override
+  void dispose() {
+    _authSubscription?.cancel();
+    super.dispose();
+  }
 
   Future<void> fetchPublications({
     Set<Categorias>? categories,
@@ -103,6 +117,5 @@ class FeedViewModel extends ChangeNotifier {
         notifyListeners();
       },
     );
-
   }
 }
