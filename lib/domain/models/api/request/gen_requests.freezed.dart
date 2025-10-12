@@ -2137,7 +2137,6 @@ UpdatePasswordRequestModel _$UpdatePasswordRequestModelFromJson(
 
 /// @nodoc
 mixin _$UpdatePasswordRequestModel {
-  String get email => throw _privateConstructorUsedError;
   String get senhaAtual => throw _privateConstructorUsedError;
   String get novaSenha => throw _privateConstructorUsedError;
 
@@ -2162,7 +2161,7 @@ abstract class $UpdatePasswordRequestModelCopyWith<$Res> {
         UpdatePasswordRequestModel
       >;
   @useResult
-  $Res call({String email, String senhaAtual, String novaSenha});
+  $Res call({String senhaAtual, String novaSenha});
 }
 
 /// @nodoc
@@ -2182,18 +2181,9 @@ class _$UpdatePasswordRequestModelCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? email = null,
-    Object? senhaAtual = null,
-    Object? novaSenha = null,
-  }) {
+  $Res call({Object? senhaAtual = null, Object? novaSenha = null}) {
     return _then(
       _value.copyWith(
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
             senhaAtual:
                 null == senhaAtual
                     ? _value.senhaAtual
@@ -2219,7 +2209,7 @@ abstract class _$$UpdatePasswordRequestModelImplCopyWith<$Res>
   ) = __$$UpdatePasswordRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String senhaAtual, String novaSenha});
+  $Res call({String senhaAtual, String novaSenha});
 }
 
 /// @nodoc
@@ -2239,18 +2229,9 @@ class __$$UpdatePasswordRequestModelImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? email = null,
-    Object? senhaAtual = null,
-    Object? novaSenha = null,
-  }) {
+  $Res call({Object? senhaAtual = null, Object? novaSenha = null}) {
     return _then(
       _$UpdatePasswordRequestModelImpl(
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
         senhaAtual:
             null == senhaAtual
                 ? _value.senhaAtual
@@ -2270,7 +2251,6 @@ class __$$UpdatePasswordRequestModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UpdatePasswordRequestModelImpl implements _UpdatePasswordRequestModel {
   const _$UpdatePasswordRequestModelImpl({
-    required this.email,
     required this.senhaAtual,
     required this.novaSenha,
   });
@@ -2280,15 +2260,13 @@ class _$UpdatePasswordRequestModelImpl implements _UpdatePasswordRequestModel {
   ) => _$$UpdatePasswordRequestModelImplFromJson(json);
 
   @override
-  final String email;
-  @override
   final String senhaAtual;
   @override
   final String novaSenha;
 
   @override
   String toString() {
-    return 'UpdatePasswordRequestModel(email: $email, senhaAtual: $senhaAtual, novaSenha: $novaSenha)';
+    return 'UpdatePasswordRequestModel(senhaAtual: $senhaAtual, novaSenha: $novaSenha)';
   }
 
   @override
@@ -2296,7 +2274,6 @@ class _$UpdatePasswordRequestModelImpl implements _UpdatePasswordRequestModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdatePasswordRequestModelImpl &&
-            (identical(other.email, email) || other.email == email) &&
             (identical(other.senhaAtual, senhaAtual) ||
                 other.senhaAtual == senhaAtual) &&
             (identical(other.novaSenha, novaSenha) ||
@@ -2305,7 +2282,7 @@ class _$UpdatePasswordRequestModelImpl implements _UpdatePasswordRequestModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, email, senhaAtual, novaSenha);
+  int get hashCode => Object.hash(runtimeType, senhaAtual, novaSenha);
 
   /// Create a copy of UpdatePasswordRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -2326,7 +2303,6 @@ class _$UpdatePasswordRequestModelImpl implements _UpdatePasswordRequestModel {
 abstract class _UpdatePasswordRequestModel
     implements UpdatePasswordRequestModel {
   const factory _UpdatePasswordRequestModel({
-    required final String email,
     required final String senhaAtual,
     required final String novaSenha,
   }) = _$UpdatePasswordRequestModelImpl;
@@ -2334,8 +2310,6 @@ abstract class _UpdatePasswordRequestModel
   factory _UpdatePasswordRequestModel.fromJson(Map<String, dynamic> json) =
       _$UpdatePasswordRequestModelImpl.fromJson;
 
-  @override
-  String get email;
   @override
   String get senhaAtual;
   @override

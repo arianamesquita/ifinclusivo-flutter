@@ -8,6 +8,8 @@ import 'package:if_inclusivo/ui/pages/auth/reset_password/reset_password_page.da
 import 'package:if_inclusivo/ui/pages/auth/token/token_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/midia_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_page.dart';
+import 'package:if_inclusivo/ui/pages/profile/account_security/account_security_page.dart';
+import 'package:if_inclusivo/ui/pages/profile/profile_page.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
 

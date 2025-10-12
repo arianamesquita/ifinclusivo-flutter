@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/data/repositories/account_security_repository.dart';
 import 'package:if_inclusivo/data/repositories/forum_repository.dart';
+import 'package:if_inclusivo/data/repositories/impl/account_security_repository_impl.dart';
 import 'package:if_inclusivo/data/repositories/impl/forum_repository_impl.dart';
 import 'package:if_inclusivo/data/repositories/impl/libras_repository_impl.dart';
 import 'package:if_inclusivo/data/repositories/libras_repository.dart';
+import 'package:if_inclusivo/data/services/account_security_service.dart';
 import 'package:if_inclusivo/data/services/forum_service.dart';
+import 'package:if_inclusivo/data/services/impl/account_security_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/auth_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/forum_service_impl.dart';
 import 'package:if_inclusivo/data/services/impl/libras_service_impl.dart';
@@ -16,6 +20,7 @@ import 'package:if_inclusivo/ui/pages/auth/reset_password/viewmodels/reset_passw
 import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/auth/token/viewmodels/validate_token_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/profile/account_security/viewModels/account_security_viewmodel.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -82,6 +87,9 @@ List<SingleChildWidget> get _servicesData {
     Provider<LibrasService>(
       create: (context) => LibrasServiceImpl(dio: context.read<Dio>()),
     ),
+    Provider<AccountSecurityService>(
+      create: (context) => AccountSecurityServiceImpl(dio: context.read<Dio>()),
+    ),
   ];
 }
 
@@ -98,6 +106,12 @@ List<SingleChildWidget> get _repositoriesData {
           (context) => LibrasRepositoryImpl(
             librasService: context.read<LibrasService>(),
           ),
+    ),
+    Provider<AccountSecurityRepository>(
+      create:
+          (context) => AccountSecurityRepositoryImpl(
+        service: context.read<AccountSecurityService>(),
+      ),
     ),
   ];
 }
@@ -148,6 +162,12 @@ List<SingleChildWidget> get _viewModelsProviders {
             forumRepository: context.read<ForumRepository>(),
             authRepository:  context.read<AuthRepository>()
           ),
+    ),
+    ChangeNotifierProvider(
+      create:
+          (context) => AccountSecurityViewModel(
+          accountRepository: context.read<AccountSecurityRepository>(),
+      ),
     ),
 
 
