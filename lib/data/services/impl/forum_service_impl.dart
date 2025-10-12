@@ -26,7 +26,6 @@ class ForumServiceImpl implements ForumService {
   }) async {
     final queryParameters = <String, dynamic>{'page': page, 'size': size};
 
-
     if (ordenarPor != null) {
       queryParameters['ordenarPor'] = ordenarPor.name;
     }
@@ -34,6 +33,7 @@ class ForumServiceImpl implements ForumService {
     if (categorias != null && categorias.isNotEmpty) {
       queryParameters['categorias'] = categorias.map((e) => e.name).toList();
     }
+    print(queryParameters);
 
     final response = await _dio.get(basePath, queryParameters: queryParameters);
 
@@ -41,13 +41,15 @@ class ForumServiceImpl implements ForumService {
   }
 
   /// Busca uma publicação por ID (com árvore de pais, sem filhos)
+  @override
   Future<Map<String, dynamic>> findById(int id) async {
     final response = await _dio.get('$basePath/$id');
     return response.data;
   }
 
   /// Lista as respostas (filhos) de uma publicação
-  Future<Map<String, dynamic>> findRespostas({
+  @override
+  Future<Map<String, dynamic>> findComments({
     required int id,
     Ordenacao ordenarPor = Ordenacao.MAIS_RECENTE,
     int page = 0,
@@ -60,11 +62,58 @@ class ForumServiceImpl implements ForumService {
     };
 
     final response = await _dio.get(
-      '$basePath/$id/respostas',
+      '/comentarios/publicacao/$id',
       queryParameters: queryParameters,
     );
 
     return response.data;
   }
-}
 
+  @override
+  Future<void> deletePublication(int id) async {
+    await _dio.delete('$basePath/$id');
+  }
+
+  @override
+  Future<Map<String, dynamic>> updatePublication({
+    required int id,
+    required Map<String, dynamic> publicacaoRequest,
+  }) async {
+    final response = await _dio.put('$basePath/$id', data: publicacaoRequest);
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> findReplies({
+    required int id,
+    Ordenacao ordenarPor = Ordenacao.MAIS_RECENTE,
+    int page = 0,
+    int size = 10,
+  }) async {
+    final queryParameters = {
+      'ordenarPor': ordenarPor.name,
+      'page': page,
+      'size': size,
+    };
+
+    final response = await _dio.get(
+      '/comentarios/respostas/$id',
+      queryParameters: queryParameters,
+    );
+
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> addComment({
+    required int publicacaoId,
+    required Map<String, dynamic> commentRequest,
+  }) async {
+    final response = await _dio.post(
+      '/comentarios/publicacao/$publicacaoId',
+      data: commentRequest,
+    );
+
+    return response.data;
+  }
+}
