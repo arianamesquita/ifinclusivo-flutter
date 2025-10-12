@@ -14,45 +14,34 @@ class PresentationPage extends StatefulWidget {
 }
 
 class _PresentationPageState extends State<PresentationPage> {
-  Key _scrollViewKey = UniqueKey();
 
-  @override
-  void didUpdateWidget(covariant PresentationPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.child != oldWidget.child) {
-      setState(() {
-        _scrollViewKey = UniqueKey();
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        key: _scrollViewKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomAppBarBlocked(
-
-              onPressedSingIn: () {
-                context.push('/login');
-              },
-              onPressedSingUp: () {
-                context.push('/register');
-              },
-            ),
-            widget.child,
-            Footer(),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAppBarBlocked(
+                onPressedSingIn: () {
+                  context.push('/login');
+                },
+                onPressedSingUp: () {
+                  context.push('/register');
+                },
+              ),
+              widget.child,
+              Footer(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-// MOLDE DE DADOS PARA CADA ITEM DO GRID
 class StackItemInfo {
   final String iconPath;
   final String title;

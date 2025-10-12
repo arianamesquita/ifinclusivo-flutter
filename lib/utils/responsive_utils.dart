@@ -51,7 +51,7 @@ class ResponsiveUtils {
   static (double width, double height) spacing(BuildContext context) {
     switch (getDeviceType(context)) {
       case DeviceScreenType.mobile:
-        return ( 12,20);
+        return ( 16,20);
       case DeviceScreenType.tablet:
         return (20,18);
       case DeviceScreenType.desktop:
