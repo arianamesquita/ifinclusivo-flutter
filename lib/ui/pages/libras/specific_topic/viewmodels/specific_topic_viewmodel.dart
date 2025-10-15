@@ -22,22 +22,21 @@ class SpecificTopicViewModel extends ChangeNotifier{
   SpecificTopicsState get state => _state;
   String get errorMessage => _errorMessage;
 
+  late Categorias _category;
+  Categorias get category => _category;
+
   int _currentPage = 0;
 
-  late Categorias _category;
-
   List<LibrasResponseModel> _models = [];
-
   List<LibrasResponseModel> get models => _models;
 
   fetchLibras(Categorias category) async {
     if(_state != SpecificTopicsState.loading) {
       _state = SpecificTopicsState.loading;
     }
-    _models = [];
-    _currentPage = 0;
     _category = category;
-    notifyListeners();
+    _currentPage = 0;
+    _models = [];
 
     try{
       final response = await _librasRepository.getLibrasByTopic(categorias: category, pages: _currentPage);
@@ -49,5 +48,13 @@ class SpecificTopicViewModel extends ChangeNotifier{
     } finally {
       notifyListeners();
     }
+  }
+
+  int _modelId = 0;
+  int get modelId => _modelId;
+
+  setId(int value) {
+    _modelId = value;
+    notifyListeners();
   }
 }

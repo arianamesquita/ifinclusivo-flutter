@@ -20,7 +20,7 @@ class AppRoutes {
 
 
   static const String libras = '$_app/libras';
-  static const String midia = 'midia';
+  static const String midia = 'midia:id';
   static const String categoriaLibras = 'category/:categoria';
 
 
