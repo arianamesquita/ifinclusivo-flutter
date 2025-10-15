@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
@@ -15,7 +16,7 @@ class MidiaPageLibras extends StatelessWidget {
     required this.titulo,
     required this.timestamp,
     required this.relacionados,
-    this.urlVideo = "assets/player.png", // mais um asset de imagem pro urlVideo. Deve ser mudado pra video.
+    required this.urlVideo,
     required this.description,
   });
 

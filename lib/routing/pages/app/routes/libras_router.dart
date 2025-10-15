@@ -40,12 +40,18 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return MidiaPageLibras(
-      titulo: 'Como Aprender Libras Sozinho do Zero',
-      timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
-      description:
-          'Libras significa Língua Brasileira de Sinais. Através dela, é possível promover mais acessibilidade na comunicação para pessoas deficientes auditivas.',
-      relacionados: ['CSS', 'SCSS', 'JavaScript', 'Angular', 'PHP'],
-    );
+    return Consumer<SpecificTopicViewModel>(builder: (context, viewModel, state) {
+
+      var item = viewModel.models.isEmpty ? null : viewModel.models.firstWhere((u) => u.id == viewModel.modelId);
+
+      return MidiaPageLibras(
+        titulo: item!.palavra,
+        timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
+        description: item.descricao,
+        relacionados: ['CSS', 'SCSS', 'JavaScript', 'Angular', 'PHP'],
+        urlVideo: item.video ?? 'assets/player.png',
+      );
+    });
+
   }
 }

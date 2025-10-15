@@ -39,7 +39,7 @@ class _ShellPageState extends State<ShellPage> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final librasRepository = context.read<LibrasRepository>();
-      print(await librasRepository.getLibrasByTopic(categorias: Categorias.REDES));
+      var response = await librasRepository.getLibrasByTopic(categorias: Categorias.REDES);
     });
 
     super.initState();
