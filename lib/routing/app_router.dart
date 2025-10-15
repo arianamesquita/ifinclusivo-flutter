@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
 import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
