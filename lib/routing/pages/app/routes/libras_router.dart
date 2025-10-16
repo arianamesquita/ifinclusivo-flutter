@@ -43,15 +43,18 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
     return Consumer<SpecificTopicViewModel>(builder: (context, viewModel, state) {
 
       var item = viewModel.models.isEmpty ? null : viewModel.models.firstWhere((u) => u.id == viewModel.modelId);
+      var relateds = item == null ? <String>[] : viewModel.models
+          .where((u) => u.categorias == item.categorias && u != item)
+          .map((u) => u.palavra)
+          .toList();
 
       return MidiaPageLibras(
-        titulo: item!.palavra,
-        timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
-        description: item.descricao,
-        relacionados: ['CSS', 'SCSS', 'JavaScript', 'Angular', 'PHP'],
-        urlVideo: item.video ?? 'assets/player.png',
+          titulo: item!.palavra,
+          timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
+          description: item.descricao,
+          relacionados: relateds,
+          urlVideo: item.video ?? 'https://www.youtube.com/watch?v=F3TiMx-zG-A',
       );
     });
-
   }
 }

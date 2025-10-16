@@ -1,10 +1,14 @@
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:if_inclusivo/domain/models/enums/categorias.dart';
+import 'package:if_inclusivo/utils/text_formater.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
 import 'package:if_inclusivo/ui/core/widgets/card_info.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 
-class MidiaPageLibras extends StatelessWidget {
+class MidiaPageLibras extends StatefulWidget {
   final String titulo;
   final String urlVideo;
   final String timestamp;
@@ -21,6 +25,34 @@ class MidiaPageLibras extends StatelessWidget {
   });
 
   @override
+  State<MidiaPageLibras> createState() => _MidiaPageLibrasState();
+}
+
+class _MidiaPageLibrasState extends State<MidiaPageLibras> {
+  YoutubePlayerController? _controller;
+  late final String? videoId;
+
+  bool get _isMobile => !kIsWeb && (Platform.isAndroid || Platform.isIOS);
+
+  @override
+  void initState() {
+    super.initState();
+    videoId = YoutubePlayerController.convertUrlToId(widget.urlVideo);
+
+    if (_isMobile && videoId != null) {
+      _controller = YoutubePlayerController.fromVideoId(
+        videoId: videoId!,
+        autoPlay: false,
+        params: const YoutubePlayerParams(
+          mute: true,
+          showControls: true,
+          showFullscreenButton: true,
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomContainerShell(
       child: Padding(
@@ -32,10 +64,8 @@ class MidiaPageLibras extends StatelessWidget {
             LayoutBuilder(
               builder: (context, constraints) {
                 if (constraints.maxWidth < 900) {
-                  // Se a tela for menor que 900px, usa o layout vertical
                   return _buildNarrowLayout(context);
                 } else {
-                  // Se for maior ou igual a 900px, usa o layout lado a lado
                   return _buildWideLayout(context);
                 }
               },
@@ -46,22 +76,32 @@ class MidiaPageLibras extends StatelessWidget {
     );
   }
 
-  Widget _buildVideoContent(BuildContext context) {
+  Widget _buildMidiaContent(BuildContext context) {
+    String palavra = formatarTexto(widget.titulo);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AspectRatio(
           aspectRatio: 16 / 9,
-          child: Image.asset(urlVideo, fit: BoxFit.cover), // asset de Imagem para urlVideo. Mudar pra video.
+          child: _isMobile && _controller != null ? MouseRegion(
+            onEnter: (_) => _controller!.playVideo(),
+            onExit: (_) => _controller!.pauseVideo(),
+            child: YoutubePlayer(
+              controller: _controller!,
+              aspectRatio: 16 / 9,
+            ),
+          )
+              : _buildWebFallback(context),
         ),
         const SizedBox(height: 16),
         Text(
-          titulo,
+          palavra,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 14),
         Text(
-          timestamp,
+          widget.timestamp,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
             color: Theme.of(context).colorScheme.secondary,
           ),
@@ -71,11 +111,40 @@ class MidiaPageLibras extends StatelessWidget {
           maxWidth: 635,
           textAlign: TextAlign.left,
           title: 'Descrição',
-          label: description,
+          label: widget.description,
           titleStyle: Theme.of(context).textTheme.titleMedium,
           labelStyle: Theme.of(context).textTheme.bodyMedium,
         ),
-        const SizedBox(height: 50,),
+        const SizedBox(height: 50),
+      ],
+    );
+  }
+
+  Widget _buildWebFallback(BuildContext context) {
+    final thumbnailUrl = videoId != null
+        ? 'https://img.youtube.com/vi/$videoId/0.jpg'
+        : 'https://via.placeholder.com/800x450?text=Video+Indisponível';
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.network(thumbnailUrl, fit: BoxFit.cover, width: double.infinity),
+        Container(
+          color: Colors.transparent,
+          child: IconButton(
+            icon: const Icon(Icons.play_circle, color: Color.fromRGBO(172,130,186, 1),  size: 64),
+            onPressed: () async {
+              final url = Uri.parse(widget.urlVideo);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Abrindo vídeo no navegador...')),
+              );
+              await Future.delayed(const Duration(milliseconds: 500));
+              // abre o link no navegador padrão
+              // ignore: deprecated_member_use
+              launchUrl(url);
+            },
+          ),
+        ),
       ],
     );
   }
@@ -83,7 +152,7 @@ class MidiaPageLibras extends StatelessWidget {
   Widget _buildRelatedCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(172,130,186, 1),
+        color: const Color.fromRGBO(172, 130, 186, 1),
         borderRadius: BorderRadius.circular(16),
       ),
       clipBehavior: Clip.antiAlias,
@@ -95,27 +164,35 @@ class MidiaPageLibras extends StatelessWidget {
             child: Text(
               'Relacionados',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(color: Colors.white),
             ),
           ),
-          ...relacionados.map((item) => _buildRelatedLinkItem(item)),
+          ...widget.relacionados.map((item) => _buildRelatedLinkItem(item)),
         ],
       ),
     );
   }
 
   Widget _buildRelatedLinkItem(String title) {
+    String palavra = formatarTexto(title);
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: const BoxDecoration(
-        color: Color.fromRGBO(172,130,186, 1),
+        color: Color.fromRGBO(172, 130, 186, 1),
         border: Border(top: BorderSide(color: Colors.white, width: 2.5)),
       ),
       child: Text(
-        title,
+        palavra,
         textAlign: TextAlign.center,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -124,15 +201,9 @@ class MidiaPageLibras extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          flex: 2,
-          child: _buildVideoContent(context),
-        ),
+        Expanded(flex: 2, child: _buildMidiaContent(context)),
         const SizedBox(width: 92),
-        Expanded(
-          flex: 1,
-          child: _buildRelatedCard(context),
-        ),
+        Expanded(flex: 1, child: _buildRelatedCard(context)),
       ],
     );
   }
@@ -140,7 +211,7 @@ class MidiaPageLibras extends StatelessWidget {
   Widget _buildNarrowLayout(BuildContext context) {
     return Column(
       children: [
-        _buildVideoContent(context),
+        _buildMidiaContent(context),
         const SizedBox(height: 24),
         _buildRelatedCard(context),
       ],

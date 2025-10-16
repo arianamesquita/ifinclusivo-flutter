@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/core/animations/hover_effect.dart';
 
+import '../../../../../utils/text_formater.dart';
+
 class SpecificTopic extends StatelessWidget {
   final String title;
   final String urlVideo;
@@ -17,6 +19,8 @@ class SpecificTopic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String palavra = formatarTexto(title);
+
     return HoverEffect(
       child: Material(
         color: Colors.transparent,
@@ -40,7 +44,7 @@ class SpecificTopic extends StatelessWidget {
                   SizedBox(height: 21),
                   Text(
                     textAlign: TextAlign.center,
-                    title,
+                    palavra,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 23,
