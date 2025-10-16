@@ -64,11 +64,14 @@ class _PerguntaFormState extends State<PerguntaForm> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 5),
                   child: QuillEditor.basic(
                   controller: widget.detalheController,
+
                   config: const QuillEditorConfig(
                     placeholder:
                     'Explique seu problema ou dúvida com mais detalhes...',
                     minHeight: 200,
                     maxHeight: 500,
+
+
 
                   ),
 

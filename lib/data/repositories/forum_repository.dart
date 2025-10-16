@@ -13,11 +13,33 @@ abstract class ForumRepository {
     int page = 0,
     int size = 10,
   });
-  AsyncResult<PaginatedResponse<PublicacaoDetalhadaModel>> findRespostas({
+  AsyncResult<PaginatedResponse<ComentarioResponseModel>> findComments({
     required int id,
     Ordenacao ordenarPor = Ordenacao.MAIS_RECENTE,
     int page = 0,
     int size = 10,
   });
-  AsyncResult<PublicacaoCompletaModel> findById(int id);
+
+  AsyncResult<PaginatedResponse<ComentarioResponseModel>> findReplies({
+    required int id,
+    Ordenacao ordenarPor = Ordenacao.MAIS_RECENTE,
+    int page = 0,
+    int size = 10,
+  });
+  AsyncResult<PublicacaoDetalhadaModel> findById(int id);
+
+  AsyncResult<PublicacaoDetalhadaModel> update(
+    int id,
+    PublicacaoRequestModel request,
+  );
+  AsyncResult<void> delete(int id);
+
+  AsyncResult<ComentarioResponseModel> addComment({
+    required int publicationId,
+    required ComentarioRequestModel request,
+  });
+  AsyncResult<ComentarioResponseModel> updateComment({
+    required int commentId,
+    required ComentarioRequestModel request,
+  });
 }

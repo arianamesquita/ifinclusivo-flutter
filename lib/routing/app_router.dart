@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
 import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
@@ -26,6 +25,7 @@ import '../ui/pages/forum/new publication/new_publication.dart';
 import '../ui/pages/forum/publicacao/publicacao_page.dart';
 import '../ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import '../ui/pages/libras/page_libras.dart';
+import '../ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import '../ui/pages/presentation/aboult_us/about_us_page.dart';
 import '../ui/pages/presentation/about_napne/about_napne_page.dart';
 import '../ui/pages/presentation/presentation_page.dart';
@@ -55,29 +55,24 @@ part 'pages/about_routes/shell_about_router.dart';
 
 part 'pages/exceptions/exceptions_routes.dart';
 
+
 GoRouter createRouter({required AuthRepository authRepository}) {
   final authListenable = StreamListenable(authRepository.authStateChanges);
   return GoRouter(
     refreshListenable: authListenable,
-    initialLocation: AppRoutes.forum,
+    initialLocation: AppRoutes.aboutUs,
     errorBuilder: (context, state) {
       return const NotFound404();
     },
     redirect: (BuildContext context, GoRouterState state) {
       final bool loggedIn = authRepository.currentUser != null;
       final String location = state.matchedLocation;
-      print(location);
-      print(loggedIn);
-
       final isAuthRoute =
           location == AppRoutes.signIn || location == AppRoutes.signUp;
-
       if (!loggedIn && !isPublicRoute(location)) {
         AuthRedirectHelper.setRedirectLocation(location);
         return AppRoutes.signIn;
       }
-
-
 
       return null;
     },

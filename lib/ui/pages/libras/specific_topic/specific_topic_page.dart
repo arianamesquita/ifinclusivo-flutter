@@ -55,9 +55,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
 
       setState(() {});
 
-      await context.read<SpecificTopicViewModel>().fetchLibras(
-        categoriaSelecionada,
-      );
+      await context.read<SpecificTopicViewModel>().fetchLibras(categoriaSelecionada);
     });
   }
 
@@ -71,27 +69,15 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        List<SpecificTopicGridParams> items =
-        viewModel.models.isEmpty
-            ? []
-            : viewModel.models.map((model) {
-          final videoId = YoutubePlayer.convertUrlToId(model.url!);
-          if (videoId == null) {
-            return SpecificTopicGridParams(
-              playerUrl: model.url!,
-              title: model.palavra,
-              description: model.descricao,
-              onTap: () => MidiaRouter().push(context),
-            );
-          }
-
-          final thumbnail = YoutubePlayer.getThumbnail(videoId: videoId,);
-
+        List<SpecificTopicGridParams> items = viewModel.models.isEmpty ? [] : viewModel.models.map((model) {
           return SpecificTopicGridParams(
             playerUrl: model.url!,
             title: model.palavra,
             description: model.descricao,
-            onTap: () => MidiaRouter().push(context),
+            onTap: () => {
+              viewModel.setId(model.id),
+              MidiaRouter().push(context),
+            },
           );
         }).toList();
 

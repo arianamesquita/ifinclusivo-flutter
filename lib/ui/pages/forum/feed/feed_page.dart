@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../domain/models/enums/categorias.dart';
 import '../../../core/widgets/search_bar.dart';
-import '../publicacao/widget/cards/publicacao_card.dart';
+import '../publicacao/widget/card/publicacao_card.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -35,7 +35,7 @@ class _FeedPageState extends State<FeedPage> {
       if (_scrollController.position.pixels >=
               _scrollController.position.maxScrollExtent - 200 &&
           vm.state != FeedState.loadingMore) {
-       await vm.fetchMorePublications();
+        await vm.fetchMorePublications();
       }
       // Mostrar/ocultar FAB
       if (_scrollController.position.userScrollDirection ==
@@ -92,6 +92,42 @@ class _FeedPageState extends State<FeedPage> {
                             ),
                             child: PublicacaoCard(
                               model: viewModel.publications[index],
+                              onTap:
+                                  () => PublicacaoRouter(
+                                    viewModel.publications[index].id,
+                                  ).push(context),
+                              menuItems:
+                                  (viewModel.currentUser != null &&
+                                          viewModel.currentUser!.id ==
+                                              viewModel
+                                                  .publications[index]
+                                                  .usuario
+                                                  .id)
+                                      ? [
+                                        PopupMenuItem(
+                                          value: "Editar",
+                                          child: Text("Editar"),
+                                          onTap: () {
+                                            print("Editar publicação");
+                                          },
+                                        ),
+                                        PopupMenuItem(
+                                          value: "Excluir",
+                                          child: Text("Excluir"),
+                                          onTap: () {
+                                            print("Exluir publicação");
+                                          },
+                                        ),
+                                      ]
+                                      : [
+                                        PopupMenuItem(
+                                          value: "denunciar",
+                                          child: Text("Denunciar"),
+                                          onTap: () {
+                                            print("Denunciar publicação");
+                                          },
+                                        ),
+                                      ],
                             ),
                           ),
                         );
@@ -117,7 +153,9 @@ class _FeedPageState extends State<FeedPage> {
   _centralized({required Widget child}) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: ResponsiveUtils.spacingColumn(context)),
+        constraints: BoxConstraints(
+          maxWidth: ResponsiveUtils.spacingColumn(context),
+        ),
         child: child,
       ),
     );
@@ -141,12 +179,12 @@ class _FeedPageState extends State<FeedPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: FilterChipsBar(
-                  onChanged: (filters, order) async{
+                  onChanged: (filters, order) async {
                     Ordenacao odern =
                         (order == 'Relevância')
                             ? Ordenacao.RELEVANCIA
                             : Ordenacao.MAIS_RECENTE;
-                   await viewModel.fetchPublications(
+                    await viewModel.fetchPublications(
                       categories: filters,
                       order: odern,
                     );
