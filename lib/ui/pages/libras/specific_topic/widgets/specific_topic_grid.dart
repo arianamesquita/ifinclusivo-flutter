@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_topic.dart';
 
 class SpecificTopicGridParams {
-  final String playerUrl;
   final String title;
   final String description;
   final GestureTapCallback onTap;
 
   SpecificTopicGridParams({
-    required this.playerUrl,
     required this.title,
     required this.description,
     required this.onTap,
@@ -72,7 +70,6 @@ class SpecificTopicGrid extends StatelessWidget {
                     child: SpecificTopic(
                       title: arg.title,
                       description: arg.description,
-                      urlVideo: arg.playerUrl,
                       onTap: arg.onTap,
                     ),
                   );
