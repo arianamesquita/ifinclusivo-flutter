@@ -50,6 +50,10 @@ class SpecificTopicViewModel extends ChangeNotifier{
     }
   }
 
+  relatedsLibrasByTopic(Categorias category){
+
+  }
+
   int _modelId = 0;
   int get modelId => _modelId;
 
