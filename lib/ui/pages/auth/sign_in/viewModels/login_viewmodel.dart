@@ -45,8 +45,7 @@ class LoginViewModel extends ChangeNotifier{
 
   Future<bool> login(LoginRequestModel credentials) async {
     try {
-      final UsuarioResponseModel result = await _authRepository
-          .login(credentials.login, credentials.senha);
+      await _authRepository.login(credentials.login, credentials.senha);
       debugPrint("Login realizado com sucesso");
       isLogged.value = true;
       return true;

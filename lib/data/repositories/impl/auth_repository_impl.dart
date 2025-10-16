@@ -90,6 +90,27 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<SimpleUsuarioModel> registerProfessor(ProfessorRequestModel professor) async {
+    final json = await _authService.registerProfessor(professor.toJson());
+    print(json);
+    return SimpleUsuarioModel.fromJson(json);
+  }
+
+  @override
+  Future<SimpleUsuarioModel> registerInterprete(InterpreteRequestModel interprete) async {
+    final json = await _authService.registerInterprete(interprete.toJson());
+    print(json);
+    return SimpleUsuarioModel.fromJson(json);
+  }
+
+  @override
+  Future<SimpleUsuarioModel> registerAluno(AlunoRequestModel aluno) async {
+    final json = await _authService.registerAluno(aluno.toJson());
+    print(json);
+    return SimpleUsuarioModel.fromJson(json);
+  }
+
+  @override
   Future<String> forgotPassword(String email) {
     return _authService.forgotPassword(email);
   }

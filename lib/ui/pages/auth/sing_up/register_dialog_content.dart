@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:if_inclusivo/domain/validators/email_validador.dart';
+import 'package:if_inclusivo/domain/validators/login_validator.dart';
+import 'package:if_inclusivo/domain/validators/name_validator.dart';
+import 'package:if_inclusivo/domain/validators/password_validator.dart';
 import 'package:if_inclusivo/ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
+import 'package:lucid_validation/lucid_validation.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../routing/app_router.dart';
@@ -17,18 +23,41 @@ class RegisterDialogContent extends StatefulWidget {
 }
 
 class _RegisterDialogContent extends State<RegisterDialogContent> {
+  final TextEditingController _nameController = TextEditingController();
+  final NameFieldValidator nameValidator = NameFieldValidator();
+  final TextEditingController _emailController = TextEditingController();
+  final EmailFieldValidator emailValidator = EmailFieldValidator();
+  final TextEditingController _senhaController = TextEditingController();
+  final PasswordFieldValidator senhaValidator = PasswordFieldValidator();
+  final TextEditingController _confirmController = TextEditingController();
+  final TextEditingController _especialidadeController = TextEditingController();
+  final TextEditingController _especialidade2Controller = TextEditingController();
+  final TextEditingController _formacaoController = TextEditingController();
+  String? _tipoSelecionado;
+  String? _cursoSelecionado;
 
-  static const Color color1 = Color.fromRGBO(168, 79, 206, 1); // Opacidade 100% é 1, não 100
-  static const Color color2 = Color.fromRGBO(233, 246, 242, 1);
+  bool isNameError = false;
+  String errorName = '';
+  bool isEmailError = false;
+  String errorEmail = '';
+  bool isSenhaError = false;
+  String errorSenha = '';
+  bool isConfirmError = false;
+  String errorConfirm = '';
+  bool isValid = false;
+  bool passwordVisible = false;
+
+  final List<String> _cursos = [
+    'Sistemas de Informação',
+    'Educação Física',
+    'Nutrição',
+    'Agronomia',
+    'Química'
+  ];
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-/*
-      context.read<RegisterViewModel>().loadUsers();
-*/
-    });
   }
 
   @override
@@ -58,7 +87,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                           Text(
                               'Cadastre-se',
                             style: TextStyle(
-                                color: Color.fromRGBO(0, 0, 0, 1),
+                                color: Theme.of(context).colorScheme.onSurface,
                                 fontStyle: FontStyle.normal,
                                 fontSize: (Theme.of(context).textTheme.headlineMedium?.fontSize
                                     ?? 20) * fontScale,
@@ -72,9 +101,9 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                   Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Text(
-                                      "Nome:",
+                                      "Nome Completo",
                                       style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          color: Theme.of(context).colorScheme.onSurface,
                                           fontStyle: FontStyle.normal,
                                           fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
                                               ?? 18) * fontScale,
@@ -82,17 +111,53 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                       ),
                                     ),
                                   ),
-                                  CustomTextField(
-                                      labelText: 'Nome',
-                                      placeholderText: 'Digite seu nome',
-                                      onChanged: (String text) {}
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 6,
+                                              offset: const Offset(0,3)
+                                          )
+                                        ]
+                                    ),
+                                    child: TextFormField(
+                                      controller: _nameController,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
+                                      decoration: InputDecoration(
+                                        hintText: 'Digite seu nome',
+                                        filled: true,
+                                        fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(50),
+                                          borderSide: BorderSide.none,
+                                        ), // dá a borda Material
+                                        errorText: isNameError ? errorName : null, // mostra o erro se existir
+                                      ),
+                                      validator: (String? value) {
+                                        final name = NameModel(name: value ?? '');
+                                        final ValidationResult result = nameValidator.validate(name);
+                                        if (result.isValid) {
+                                          setState(() => isNameError = false);
+                                          return null;
+                                        }
+                                        setState(() {
+                                          isNameError = true;
+                                          errorName = 'Nome inválido, ex: João da Silva';
+                                        });
+                                        return errorName;
+                                      },
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Text(
-                                      "Login",
+                                      "E-mail",
                                       style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                          color: Theme.of(context).colorScheme.onSurface,
                                           fontStyle: FontStyle.normal,
                                           fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
                                               ?? 18) * fontScale,
@@ -100,35 +165,125 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                       ),
                                     ),
                                   ),
-                                  CustomTextField(
-                                      labelText: 'Login',
-                                      placeholderText: 'Digite seu login',
-                                      onChanged: (String text) {}
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      "Matrícula:",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
-                                          fontStyle: FontStyle.normal,
-                                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                              ?? 18) * fontScale,
-                                          fontWeight: FontWeight.w400
-                                      ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 6,
+                                              offset: const Offset(0,3)
+                                          )
+                                        ]
                                     ),
-                                  ),
-                                  CustomTextField(
-                                      labelText: 'Matrícula',
-                                      placeholderText: 'Digite sua matrícula',
-                                      onChanged: (String text) {}
+                                    child: TextFormField(
+                                      controller: _emailController,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
+                                      decoration: InputDecoration(
+                                        hintText: 'Digite seu e-mail',
+                                        filled: true,
+                                        fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(50),
+                                          borderSide: BorderSide.none,
+                                        ), // dá a borda Material
+                                        errorText: isEmailError ? errorEmail : null, // mostra o erro se existir
+                                      ),
+                                      validator: (String? value) {
+                                        final email = EmailModel(email: value ?? '');
+                                        final ValidationResult result = emailValidator.validate(email);
+                                        if (result.isValid) {
+                                          setState(() => isEmailError = false);
+                                          return null;
+                                        }
+                                        setState(() {
+                                          isEmailError = true;
+                                          errorEmail = 'E-mail inválido, ex: joao.silva@estudante.ifgoiano.edu.br';
+                                        });
+                                        return errorEmail;
+                                      },
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Text(
                                       "Senha",
                                       style: TextStyle(
-                                          color: Color.fromRGBO(0, 0, 0, 1),
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                        fontStyle: FontStyle.normal,
+                                        fontSize:
+                                        (Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.fontSize ??
+                                            18) *
+                                            fontScale,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 6,
+                                              offset: const Offset(0,3)
+                                          )
+                                        ]
+                                    ),
+                                    child: TextFormField(
+                                      controller: _senhaController,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
+                                      obscureText: !passwordVisible,
+                                      decoration: InputDecoration(
+                                        hintText: 'Digite sua senha',
+                                        filled: true,
+                                        fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(50),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        errorText: isSenhaError ? errorSenha : null, // mostra o erro se existir
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            passwordVisible ? Icons.visibility_off : Icons.visibility,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              passwordVisible = !passwordVisible;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      validator: (String? value) {
+                                        final password = PasswordModel(password: value ?? '');
+                                        final ValidationResult result = senhaValidator.validate(password);
+
+                                        if (result.isValid) {
+                                          setState(() => isSenhaError = false);
+                                          return null;
+                                        }
+
+                                        setState(() {
+                                          isSenhaError = true;
+                                          errorSenha = 'Deve conter 6 letras.';
+                                        });
+                                        return errorSenha;
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      "Confirmar senha",
+                                      style: TextStyle(
+                                          color: Theme.of(context).colorScheme.onSurface,
                                           fontStyle: FontStyle.normal,
                                           fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
                                               ?? 18) * fontScale,
@@ -136,16 +291,332 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                       ),
                                     ),
                                   ),
-                                  PasswordTextField(
-                                      onValueChange: (String text) { },
-                                      title: 'Senha',
-                                      placeholder: 'Digite sua Senha'
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 6,
+                                              offset: const Offset(0,3)
+                                          )
+                                        ]
+                                    ),
+                                    child: TextFormField(
+                                      controller: _confirmController,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
+                                      decoration: InputDecoration(
+                                        hintText: 'Digite a mesma senha do campo anterior.',
+                                        filled: true,
+                                        fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(50),
+                                          borderSide: BorderSide.none,
+                                        ), // dá a borda Material
+                                        errorText: isConfirmError ? errorConfirm : null, // mostra o erro se existir
+                                      ),
+                                      validator: (String? value) {
+                                        final isEqual = value == _senhaController.text;
+                                        if (isEqual) {
+                                          setState(() => isConfirmError = false);
+                                          return null;
+                                        }
+                                        setState(() {
+                                          isConfirmError = true;
+                                          errorConfirm = 'Senha inválida, a senha deve ter no mínimo 6 caracteres.';
+                                        });
+                                        return errorConfirm;
+                                      },
+                                    ),
                                   ),
+                                  SizedBox(height: 20,),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      "Quem é você?",
+                                      style: TextStyle(
+                                          color: Theme.of(context).colorScheme.onSurface,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                              ?? 18) * fontScale,
+                                          fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                  ),
+                                  RadioGroup<String>(
+                                    groupValue: _tipoSelecionado,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _tipoSelecionado = value;
+                                        print('O tipo selecionado $_tipoSelecionado');
+                                      });
+                                    },
+                                    child: Column(
+                                      children: [
+                                        RadioListTile<String>(
+                                          title: Text(
+                                              'Professor',
+                                              style: TextStyle(
+                                                color: Theme.of(context).colorScheme.onSurface,
+                                              )
+                                          ),
+                                          value: 'professor',
+                                        ),
+                                        RadioListTile<String>(
+                                          title: Text(
+                                              'Tutor',
+                                              style: TextStyle(
+                                                color: Theme.of(context).colorScheme.onSurface,
+                                              )
+                                          ),
+                                          value: 'tutor',
+                                        ),
+                                        RadioListTile<String>(
+                                          title: Text(
+                                              'Intérprete',
+                                              style: TextStyle(
+                                                color: Theme.of(context).colorScheme.onSurface,
+                                              )
+                                          ),
+                                          value: 'interprete',
+                                        ),
+                                        RadioListTile<String>(
+                                          title: Text(
+                                              'Aluno',
+                                              style: TextStyle(
+                                                color: Theme.of(context).colorScheme.onSurface,
+                                              )
+                                          ),
+                                          value: 'aluno',
+                                        ),
+                                      ],
+                                    )
+                                  ),
+                                  if(_tipoSelecionado == 'professor') ...[
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        "Formação (Opcional)",
+                                        style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                ?? 18) * fontScale,
+                                            fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 6,
+                                                offset: const Offset(0,3)
+                                            )
+                                          ]
+                                      ),
+                                      child: TextFormField(
+                                        controller: _formacaoController,
+                                        style: TextStyle(
+                                          color: Theme.of(context).colorScheme.onSurface,
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: 'Digite qual sua formação.',
+                                          filled: true,
+                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(50),
+                                            borderSide: BorderSide.none,
+                                          ), // dá a borda Material
+                                        ),
+                                      ),
+                                    ),
+                                  ] else if (_tipoSelecionado == 'tutor') ...[
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        "Especialidade",
+                                        style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                ?? 18) * fontScale,
+                                            fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 6,
+                                                offset: const Offset(0,3)
+                                            )
+                                          ]
+                                      ),
+                                      child: TextFormField(
+                                        controller: _especialidadeController,
+                                        style: TextStyle(
+                                          color: Theme.of(context).colorScheme.onSurface,
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: 'Digite qual sua especialidade.',
+                                          filled: true,
+                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(50),
+                                            borderSide: BorderSide.none,
+                                          ), // dá a borda Material
+                                        ),
+                                      ),
+                                    ),
+                                  ] else if (_tipoSelecionado == 'interprete') ...[
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        "Especialidade",
+                                        style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                ?? 18) * fontScale,
+                                            fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 6,
+                                                offset: const Offset(0,3)
+                                            )
+                                          ]
+                                      ),
+                                      child: TextFormField(
+                                        controller: _especialidade2Controller,
+                                        style: const TextStyle(
+                                            color: Color.fromRGBO(22, 29, 27, 1)
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: 'Digite qual sua especialidade.',
+                                          filled: true,
+                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(50),
+                                            borderSide: BorderSide.none,
+                                          ), // dá a borda Material
+                                        ),
+                                      ),
+                                    ),
+                                  ] else if (_tipoSelecionado == 'aluno') ...[
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        "Curso",
+                                        style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                ?? 18) * fontScale,
+                                            fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                    ),
+                                    DropdownButtonFormField<String>(
+                                      items: _cursos.map((curso) {
+                                        return DropdownMenuItem<String>(
+                                          value: curso,
+                                          child: Text(
+                                            curso,
+                                            style: TextStyle(
+                                              color: Theme.of(context).colorScheme.onSurface
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
+                                      value: _cursoSelecionado,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _cursoSelecionado = value;
+                                        });
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(50),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(50),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                      ),
+                                      dropdownColor: Colors.white,
+                                      isDense: true,
+                                    ),
+                                  ],
                                   SizedBox(height: 30),
                                   SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                        onPressed: (){},
+                                        onPressed: () async {
+                                          if(_tipoSelecionado == 'professor') {
+                                            final professorData = ProfessorRequestModel(
+                                              nome: _nameController.text,
+                                              login: _emailController.text,
+                                              senha: _senhaController.text,
+                                              formacao: _formacaoController.text,
+                                              matricula:0,
+                                            );
+                                            final success = await viewModel.registerNewProfessor(professorData);
+                                            print('Salvo com sucesso $success');
+                                            //_showFeedback(success, 'Tutor');
+                                          }else if(_tipoSelecionado == 'tutor') {
+                                            final tutorData = TutorRequestModel(
+                                              nome: _nameController.text,
+                                              login: _emailController.text,
+                                              senha: _senhaController.text,
+                                              especialidade: _especialidadeController.text,
+                                              matricula:0,
+                                            );
+                                            final success = await viewModel.registerNewTutor(tutorData);
+                                            print('Salvo com sucesso $success');
+                                            //_showFeedback(success, 'Tutor');
+                                          }else if(_tipoSelecionado == 'interprete') {
+                                            final interpreteData = InterpreteRequestModel(
+                                              nome: _nameController.text,
+                                              login: _emailController.text,
+                                              senha: _senhaController.text,
+                                              salary: 0,
+                                              especialidade: _especialidadeController.text,
+                                              matricula:0,
+                                            );
+                                            final success = await viewModel.registerNewInterprete(interpreteData);
+                                            print('Salvo com sucesso $success');
+                                            //_showFeedback(success, 'Tutor');
+                                          }else if(_tipoSelecionado == 'aluno') {
+                                            final alunoData = AlunoRequestModel(
+                                              nome: _nameController.text,
+                                              login: _emailController.text,
+                                              senha: _senhaController.text,
+                                              matricula:0,
+                                            );
+                                            final success = await viewModel.registerNewAluno(alunoData);
+                                            print('Salvo com sucesso $success');
+                                            //_showFeedback(success, 'Tutor');
+                                          }
+                                        },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Color.fromRGBO(76, 159, 132, 1),
                                             foregroundColor: Color.fromRGBO(255, 255, 255, 1)
@@ -153,7 +624,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            'Entrar',
+                                            'Cadastrar',
                                             style: TextStyle(
                                                 fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
                                                     ?? 18) * fontScale,
@@ -172,7 +643,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                         Text(
                                           'Já possui conta?',
                                           style: TextStyle(
-                                            color: Color.fromRGBO(22, 29, 27, 1),
+                                            color: Theme.of(context).colorScheme.onSurface,
                                             fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
                                                 ?? 16) * fontScale,
                                             fontWeight: FontWeight.w400,
@@ -183,9 +654,9 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                               LoginRoute().pushReplacement(context);
                                             },
                                             child: Text(
-                                              'Entre!',
+                                              'Entre',
                                               style: TextStyle(
-                                                  color: Color.fromRGBO(22, 29, 27, 1),
+                                                  color: Theme.of(context).colorScheme.onSurface,
                                                   fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
                                                       ?? 16) * fontScale,
                                                   fontWeight: FontWeight.w700

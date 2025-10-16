@@ -54,6 +54,39 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
+  Future<Map<String, dynamic>> registerProfessor(
+      Map<String, dynamic> professorData,
+      ) async {
+    final response = await _dio.post(
+      '$basePath/register/professor',
+      data: professorData,
+    );
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> registerInterprete(
+      Map<String, dynamic> interpreteData,
+      ) async {
+    final response = await _dio.post(
+      '$basePath/register/interprete',
+      data: interpreteData,
+    );
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> registerAluno(
+      Map<String, dynamic> alunoData,
+      ) async {
+    final response = await _dio.post(
+      '$basePath/register/aluno',
+      data: alunoData,
+    );
+    return response.data;
+  }
+
+  @override
   Future<String> verifyEmail(String token) async {
     final response = await _dio.get(
       '$basePath/verify-email',

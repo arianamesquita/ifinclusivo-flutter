@@ -22,34 +22,81 @@ class RegisterViewModel extends ChangeNotifier {
 
   SimpleUsuarioModel? _registeredUser;
 
-  Future<bool> registerNewTutor() async {
+  Future<bool> registerNewTutor(TutorRequestModel tutor) async {
     _isLoading = true;
     _errorMessage = null;
     _registeredUser = null;
     notifyListeners();
-
     try {
-      final tutorData = TutorRequestModel(
-        nome: 'nome',
-        login: 'pedrojferreiradev@gmail.com',
-        senha: "1236d458",
-        matricula: 123,
-        especialidade: 'especialidade',
-      );
-
-      // 2. Chama o método do repositório
-      final result = await _repository.registerTutor(tutorData);
+      final result = await _repository.registerTutor(tutor);
       _registeredUser = result;
-
       print('✅ Registro de Tutor bem-sucedido! Resposta: $result');
       return true;
     } catch (e) {
-      // 3. Captura e armazena qualquer erro que ocorra
       _errorMessage = e.toString();
       print('❌ Erro ao registrar tutor: $_errorMessage');
       return false;
     } finally {
-      // 4. Garante que o estado de loading seja desativado
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> registerNewProfessor(ProfessorRequestModel professor) async {
+    _isLoading = true;
+    _errorMessage = null;
+    _registeredUser = null;
+    notifyListeners();
+    try {
+      final result = await _repository.registerProfessor(professor);
+      _registeredUser = result;
+      print('✅ Registro de Tutor bem-sucedido! Resposta: $result');
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString();
+      print('❌ Erro ao registrar tutor: $_errorMessage');
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> registerNewInterprete(InterpreteRequestModel interprete) async {
+    _isLoading = true;
+    _errorMessage = null;
+    _registeredUser = null;
+    notifyListeners();
+    try {
+      final result = await _repository.registerInterprete(interprete);
+      _registeredUser = result;
+      print('✅ Registro de Tutor bem-sucedido! Resposta: $result');
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString();
+      print('❌ Erro ao registrar tutor: $_errorMessage');
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> registerNewAluno(AlunoRequestModel aluno) async {
+    _isLoading = true;
+    _errorMessage = null;
+    _registeredUser = null;
+    notifyListeners();
+    try {
+      final result = await _repository.registerAluno(aluno);
+      _registeredUser = result;
+      print('✅ Registro de Tutor bem-sucedido! Resposta: $result');
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString();
+      print('❌ Erro ao registrar tutor: $_errorMessage');
+      return false;
+    } finally {
       _isLoading = false;
       notifyListeners();
     }
