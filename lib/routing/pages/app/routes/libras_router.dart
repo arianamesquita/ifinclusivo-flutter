@@ -53,7 +53,7 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
           timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
           description: item.descricao,
           relacionados: relateds,
-          urlVideo: item.video ?? 'https://www.youtube.com/watch?v=F3TiMx-zG-A',
+          urlVideo: item.url!,
       );
     });
   }

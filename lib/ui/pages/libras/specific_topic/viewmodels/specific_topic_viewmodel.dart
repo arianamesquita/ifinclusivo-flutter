@@ -50,15 +50,21 @@ class SpecificTopicViewModel extends ChangeNotifier{
     }
   }
 
-  relatedsLibrasByTopic(Categorias category){
-
-  }
 
   int _modelId = 0;
   int get modelId => _modelId;
 
   setId(int value) {
     _modelId = value;
+    notifyListeners();
+  }
+
+
+  String _videoUrl = '';
+  String get videoUrl => _videoUrl;
+
+  setVideoUrl(String url){
+    _videoUrl = url;
     notifyListeners();
   }
 }
