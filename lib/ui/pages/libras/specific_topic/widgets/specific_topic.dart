@@ -6,12 +6,14 @@ import '../../../../../utils/text_formater.dart';
 
 class SpecificTopic extends StatefulWidget {
   final String title;
+  final String url;
   final String description;
   final GestureTapCallback onTap;
 
   const SpecificTopic({
     super.key,
     required this.title,
+    required this.url,
     required this.description,
     required this.onTap,
   });
@@ -22,7 +24,7 @@ class SpecificTopic extends StatefulWidget {
 
 class _SpecificTopicState extends State<SpecificTopic> {
   late YoutubePlayerController _controller;
-  String videoId = YoutubePlayerController.convertUrlToId("https://www.youtube.com/watch?v=F3TiMx-zG-A")!;
+  String videoId = '';
 
   @override
   void initState() {
@@ -40,6 +42,7 @@ class _SpecificTopicState extends State<SpecificTopic> {
 
   @override
   Widget build(BuildContext context) {
+    videoId = YoutubePlayerController.convertUrlToId(widget.url)!;
     String palavra = formatarTexto(widget.title);
 
     return HoverEffect(
@@ -68,7 +71,7 @@ class _SpecificTopicState extends State<SpecificTopic> {
                       webp: false,
                     ), fit: BoxFit.cover,
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 21),
                   Text(
                     textAlign: TextAlign.center,
                     palavra,
@@ -78,7 +81,7 @@ class _SpecificTopicState extends State<SpecificTopic> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 14),
                   Text(
                     textAlign: TextAlign.center,
                     widget.description,
