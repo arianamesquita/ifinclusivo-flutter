@@ -115,9 +115,10 @@ class _TopicLibrasState extends State<TopicLibras> {
                     },
                   ),
                 ),
-                SizedBox(height: 15),
-                word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
-                SizedBox(height: 20),]
+                word.isEmpty ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 37),
+                  child: FilterBlockGrid(filterBlockList: items),
+                ) : SearchResult(),]
           ),
         ),
       );
