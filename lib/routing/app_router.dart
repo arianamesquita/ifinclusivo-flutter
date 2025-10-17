@@ -22,7 +22,7 @@ import '../ui/exceptions/unauthorized_401.dart';
 import '../ui/pages/auth/sign_in/Login_dialog_content.dart';
 import '../ui/pages/auth/sing_up/register_dialog_content.dart';
 import '../ui/pages/forum/feed/feed_page.dart';
-import '../ui/pages/forum/new publication/new_publication.dart';
+import '../ui/pages/forum/new publication/publication_editor.dart';
 import '../ui/pages/forum/publicacao/publicacao_page.dart';
 import '../ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import '../ui/pages/libras/page_libras.dart';
