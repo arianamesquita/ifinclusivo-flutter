@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:if_inclusivo/data/repositories/auth_repository.dart';
+import 'package:result_command/result_command.dart';
+import 'package:result_dart/result_dart.dart';
 
 import '../../../../../data/repositories/forum_repository.dart';
 import '../../../../../domain/models/api/response/gen_responses.dart';
@@ -20,6 +22,7 @@ class FeedViewModel extends ChangeNotifier {
       currentUser = user;
       notifyListeners();
     });
+    deleteCommentsCommand = Command1(_deletePublication);
   }
 
   final ForumRepository _forumRepository;
@@ -62,7 +65,7 @@ class FeedViewModel extends ChangeNotifier {
     _state = FeedState.initialLoading;
     notifyListeners();
 
-    final response = await _forumRepository.findAll(
+    final response = await _forumRepository.fetchFeedPublication(
       categorias: _currentCategories,
       ordenarPor: _currentOrder,
       page: 0,
@@ -97,7 +100,7 @@ class FeedViewModel extends ChangeNotifier {
     _state = FeedState.loadingMore;
     notifyListeners();
 
-    final response = await _forumRepository.findAll(
+    final response = await _forumRepository.fetchFeedPublication(
       categorias: _currentCategories,
       ordenarPor: _currentOrder,
       page: _currentPage,
@@ -118,4 +121,36 @@ class FeedViewModel extends ChangeNotifier {
       },
     );
   }
-}
+  late final Command1<bool, int> deleteCommentsCommand;
+
+  AsyncResult<bool> _deletePublication(int id) async {
+    final result = await _forumRepository.deletePublication(id);
+
+   return result.mapFold((onSuccess){
+     int index=  publications.indexWhere((p)=> p.id == id);
+     if(index != -1){
+       publications.removeAt(index);
+       notifyListeners();
+     }
+     return true;
+   }, (onFailure){
+     return onFailure;
+   });
+
+  }
+
+  Future<void> updatePubication(int id) async {
+    final result = await _forumRepository.findById(id);
+
+    result.fold(
+            (onSuccess){
+          int index=  publications.indexWhere((p)=> p.id == id);
+          if(index != -1){
+            publications[index] = onSuccess;
+            notifyListeners();
+          }
+        },
+            (onFailure){});
+  }
+  }
+
