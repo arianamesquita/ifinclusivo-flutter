@@ -39,8 +39,7 @@ class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
 const midiaRouter = TypedGoRoute<MidiaRouter>(path: AppRoutes.midia);
 
 class MidiaRouter extends GoRouteData with _$MidiaRouter {
-  final int id;
-  const MidiaRouter(this.id);
+  const MidiaRouter();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

@@ -76,7 +76,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
             onTap: () => {
               viewModel.setId(model.id),
               viewModel.setVideoUrl(model.url!),
-              MidiaRouter(model.id).push(context),
+              MidiaRouter().push(context),
             },
           );
         }).toList();

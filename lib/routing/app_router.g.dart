@@ -193,7 +193,6 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
         GoRouteData.$route(
           path: '/app/forum',
 
-
           factory: _$ForumRouter._fromState,
           routes: [
             GoRouteData.$route(
@@ -218,7 +217,7 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
               factory: _$LibrasTopicRouter._fromState,
             ),
             GoRouteData.$route(
-              path: 'midia:id',
+              path: 'midia',
 
               factory: _$MidiaRouter._fromState,
             ),
@@ -355,14 +354,10 @@ mixin _$LibrasTopicRouter on GoRouteData {
 }
 
 mixin _$MidiaRouter on GoRouteData {
-  static MidiaRouter _fromState(GoRouterState state) =>
-      MidiaRouter(int.parse(state.pathParameters['id']!)!);
-
-  MidiaRouter get _self => this as MidiaRouter;
+  static MidiaRouter _fromState(GoRouterState state) => const MidiaRouter();
 
   @override
-  String get location =>
-      GoRouteData.$location('midia${Uri.encodeComponent(_self.id.toString())}');
+  String get location => GoRouteData.$location('/app/libras/midia');
 
   @override
   void go(BuildContext context) => context.go(location);
