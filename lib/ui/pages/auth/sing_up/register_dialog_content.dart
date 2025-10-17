@@ -48,6 +48,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   String errorConfirm = '';
   bool isValid = false;
   bool passwordVisible = false;
+  bool password2Visible = false;
 
   @override
   void initState() {
@@ -301,6 +302,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                       style: TextStyle(
                                         color: Theme.of(context).colorScheme.onSurface,
                                       ),
+                                      obscureText: !password2Visible,
                                       decoration: InputDecoration(
                                         hintText: 'Digite a mesma senha do campo anterior.',
                                         filled: true,
@@ -310,6 +312,16 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                           borderSide: BorderSide.none,
                                         ), // dá a borda Material
                                         errorText: isConfirmError ? errorConfirm : null, // mostra o erro se existir
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            password2Visible ? Icons.visibility_off : Icons.visibility,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              password2Visible = !passwordVisible;
+                                            });
+                                          },
+                                        ),
                                       ),
                                       validator: (String? value) {
                                         final isEqual = value == _senhaController.text;
