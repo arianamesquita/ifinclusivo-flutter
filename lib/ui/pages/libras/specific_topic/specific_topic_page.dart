@@ -4,7 +4,6 @@ import 'package:if_inclusivo/ui/pages/libras/specific_topic/viewmodels/specific_
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_topic_grid.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
@@ -71,7 +70,6 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
 
         List<SpecificTopicGridParams> items = viewModel.models.isEmpty ? [] : viewModel.models.map((model) {
           return SpecificTopicGridParams(
-            playerUrl: model.url!,
             title: model.palavra,
             description: model.descricao,
             onTap: () => {
