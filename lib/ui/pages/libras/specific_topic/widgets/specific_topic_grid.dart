@@ -3,11 +3,13 @@ import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_top
 
 class SpecificTopicGridParams {
   final String title;
+  final String url;
   final String description;
   final GestureTapCallback onTap;
 
   SpecificTopicGridParams({
     required this.title,
+    required this.url,
     required this.description,
     required this.onTap,
   });
@@ -71,6 +73,7 @@ class SpecificTopicGrid extends StatelessWidget {
                       title: arg.title,
                       description: arg.description,
                       onTap: arg.onTap,
+                      url: arg.url,
                     ),
                   );
                 }).toList(),

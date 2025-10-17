@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
 import 'package:if_inclusivo/ui/pages/libras/search_not_found.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/search_result_block.dart';
@@ -84,7 +85,7 @@ class SearchResult extends StatelessWidget {
                         child: SearchNotFound(
                           errorIcon: Icons.error,
                           onPressed: () {
-                            print('resultados nao encontrados.');
+                            WordSuggestionRouter().push(context);
                           },
                         ),
                       ),

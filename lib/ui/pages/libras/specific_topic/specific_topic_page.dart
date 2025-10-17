@@ -72,9 +72,11 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
           return SpecificTopicGridParams(
             title: model.palavra,
             description: model.descricao,
+            url: model.url!,
             onTap: () => {
               viewModel.setId(model.id),
-              MidiaRouter(model.id).push(context),
+              viewModel.setVideoUrl(model.url!),
+              MidiaRouter().push(context),
             },
           );
         }).toList();

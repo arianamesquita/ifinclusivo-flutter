@@ -217,9 +217,14 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
               factory: _$LibrasTopicRouter._fromState,
             ),
             GoRouteData.$route(
-              path: 'midia:id',
+              path: 'midia',
 
               factory: _$MidiaRouter._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'word-suggestion',
+
+              factory: _$WordSuggestionRouter._fromState,
             ),
           ],
         ),
@@ -349,14 +354,31 @@ mixin _$LibrasTopicRouter on GoRouteData {
 }
 
 mixin _$MidiaRouter on GoRouteData {
-  static MidiaRouter _fromState(GoRouterState state) =>
-      MidiaRouter(int.parse(state.pathParameters['id']!)!);
-
-  MidiaRouter get _self => this as MidiaRouter;
+  static MidiaRouter _fromState(GoRouterState state) => const MidiaRouter();
 
   @override
-  String get location =>
-      GoRouteData.$location('midia${Uri.encodeComponent(_self.id.toString())}');
+  String get location => GoRouteData.$location('/app/libras/midia');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$WordSuggestionRouter on GoRouteData {
+  static WordSuggestionRouter _fromState(GoRouterState state) =>
+      const WordSuggestionRouter();
+
+  @override
+  String get location => GoRouteData.$location('/app/libras/word-suggestion');
 
   @override
   void go(BuildContext context) => context.go(location);

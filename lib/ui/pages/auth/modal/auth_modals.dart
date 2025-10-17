@@ -206,6 +206,36 @@ class AuthModals {
     );
   }
 
+  static Future<void> userRegisterError({required BuildContext context}) {
+    return _showModal(
+      context: context,
+      builder: ModalsAuthBase.small(
+        context: context,
+        type: ModalType.error,
+        title: 'Erro',
+        child: Row(
+          spacing: 16,
+          children: [
+            Icon(
+              Icons.cancel_outlined,
+              color: Colors.white,
+              size: 50,
+            ),
+            Flexible(
+              child: Text(
+                'Usuário já existe no sistema!',
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyMedium,
+                softWrap: true,
+                maxLines: 5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   static Future<void> recoverPassword({
     required BuildContext context,
     void Function(String)? onSendPressed,
