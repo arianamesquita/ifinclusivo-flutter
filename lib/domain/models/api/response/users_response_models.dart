@@ -50,7 +50,6 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
     String? token,
     String? firebaseToken,
     required String formacao,
-    required List<SimpleTopicoModel> topicos,
   }) = _ProfessorResponseModel;
 
   const factory UsuarioResponseModel.tutor({

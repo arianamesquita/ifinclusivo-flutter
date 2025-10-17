@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:if_inclusivo/data/services/forum_service.dart';
+import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 
 import '../../../domain/models/enums/categorias.dart';
 
@@ -18,7 +19,7 @@ class ForumServiceImpl implements ForumService {
   }
 
   @override
-  Future<Map<String, dynamic>> findAll({
+  Future<Map<String, dynamic>> fetchFeedPublication({
     Set<Categorias>? categorias,
     Ordenacao? ordenarPor,
     int page = 0,
@@ -33,16 +34,13 @@ class ForumServiceImpl implements ForumService {
     if (categorias != null && categorias.isNotEmpty) {
       queryParameters['categorias'] = categorias.map((e) => e.name).toList();
     }
-    print(queryParameters);
-
     final response = await _dio.get(basePath, queryParameters: queryParameters);
-
     return response.data;
   }
 
   /// Busca uma publicação por ID (com árvore de pais, sem filhos)
   @override
-  Future<Map<String, dynamic>> findById(int id) async {
+  Future<Map<String, dynamic>> findPublicationById(int id) async {
     final response = await _dio.get('$basePath/$id');
     return response.data;
   }
@@ -116,4 +114,21 @@ class ForumServiceImpl implements ForumService {
 
     return response.data;
   }
+
+  @override
+  Future<Map<String, dynamic>> updateComment({
+    required int commentId,
+    required Map<String, dynamic> commentRequest,
+  }) async {
+    final response = await _dio.put(
+      '/comentarios/$commentId',
+      data: commentRequest,
+    );
+
+    return response.data;
+  }
+
+  @override
+  Future<void> deleteComment(int commentId) async =>
+      await _dio.delete('/comentarios/$commentId');
 }
