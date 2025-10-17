@@ -21,6 +21,7 @@ class PublicacaoDetalhadaModel with _$PublicacaoDetalhadaModel {
     required DateTime dataCriacao,
     required AutorCardModel usuario,
     required Set<Categorias> categorias,
+    required TipoPublicacao tipo,
     required int totalLikes,
     required int totalRespostas,
     required bool curtidoPeloUsuario,

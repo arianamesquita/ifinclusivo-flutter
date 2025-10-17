@@ -193,12 +193,15 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
         GoRouteData.$route(
           path: '/app/forum',
 
-          factory: _$ForumRouter._fromState,
-        ),
-        GoRouteData.$route(
-          path: '/post/:id',
 
-          factory: _$PublicacaoRouter._fromState,
+          factory: _$ForumRouter._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'post/:id',
+
+              factory: _$PublicacaoRouter._fromState,
+            ),
+          ],
         ),
       ],
     ),
@@ -218,6 +221,11 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
               path: 'midia:id',
 
               factory: _$MidiaRouter._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'word-suggestion',
+
+              factory: _$WordSuggestionRouter._fromState,
             ),
           ],
         ),
@@ -284,7 +292,7 @@ mixin _$PublicacaoRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location(
-    '/post/${Uri.encodeComponent(_self.id.toString())}',
+    '/app/forum/post/${Uri.encodeComponent(_self.id.toString())}',
   );
 
   @override
@@ -355,6 +363,27 @@ mixin _$MidiaRouter on GoRouteData {
   @override
   String get location =>
       GoRouteData.$location('midia${Uri.encodeComponent(_self.id.toString())}');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$WordSuggestionRouter on GoRouteData {
+  static WordSuggestionRouter _fromState(GoRouterState state) =>
+      const WordSuggestionRouter();
+
+  @override
+  String get location => GoRouteData.$location('/app/libras/word-suggestion');
 
   @override
   void go(BuildContext context) => context.go(location);

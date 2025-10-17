@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/widgets/user_info_comment.dart';
 
-import '../viewmodels/comment_viewmodel.dart';
 import 'actions_bar_comment.dart';
 
 class CommentContent extends StatelessWidget {
@@ -10,7 +10,7 @@ class CommentContent extends StatelessWidget {
   final String? taggedUser;
   final DateTime dateCreation;
   final List<PopupMenuEntry<dynamic>> menuItems;
-  final CommentViewModel viewModel;
+  final PublicacaoViewModel viewModel;
   final void Function()? onReply;
   final void Function()? onLike;
   final void Function()? openReplies;
@@ -18,6 +18,7 @@ class CommentContent extends StatelessWidget {
   final int replyCount;
   final QuillController controller;
   final bool showReplyWidget;
+  final bool showReplies;
 
   const CommentContent({
     super.key,
@@ -33,6 +34,7 @@ class CommentContent extends StatelessWidget {
     required this.replyCount,
     required this.controller,
     required this.showReplyWidget,
+    required this.showReplies,
   });
 
   @override
@@ -86,7 +88,7 @@ class CommentContent extends StatelessWidget {
                   ),
                 ),
                 ActionsBarComment(
-                  viewModel: viewModel,
+                  showReplies: showReplies,
                   onReply: onReply,
                   onLike: onLike,
                   replyCount: replyCount,

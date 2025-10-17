@@ -56,9 +56,16 @@ class _PublicationContentState extends State<PublicationContent> {
                 PopupMenuItem(
                   value: "Editar",
                   child: Text("Editar"),
-                  onTap: () {
-                    print("Editar publicação");
-                  },
+                  onTap: () async {
+                   final bool? result = await context.push(
+                      NewPublicacaoRouter().location,
+                      extra: widget.model, 
+                    );
+                   if (result == true && context.mounted) {
+                     // Chame o método do seu ViewModel para recarregar os dados.
+                     // O nome do método pode variar (ex: refresh, fetchPublication, etc.)
+                     vm.fetchPublicationCommand.execute(widget.model.id); // <--- Crie ou use seu método de refresh aqui
+                   }},
                 ),
                 PopupMenuItem(
                   value: "Excluir",
@@ -81,8 +88,8 @@ class _PublicationContentState extends State<PublicationContent> {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
-                              ),
+                                  backgroundColor: Theme.of(context).colorScheme.error,
+                                  foregroundColor:  Theme.of(context).colorScheme.onError                              ),
                               onPressed: () async {
                                 Navigator.of(context).pop();
                                 await vm.deletePublication(widget.model.id);
@@ -112,7 +119,7 @@ class _PublicationContentState extends State<PublicationContent> {
           }
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 10,

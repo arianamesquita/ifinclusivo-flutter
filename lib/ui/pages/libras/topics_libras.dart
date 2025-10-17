@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/libras/search_result.dart';
+import 'package:if_inclusivo/ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/libras_custom_search_bar.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/layout/custom_container_shell.dart';
 import 'filter_block/filter_block_grid.dart';
@@ -75,48 +77,50 @@ class _TopicLibrasState extends State<TopicLibras> {
 
     DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
 
-    return device == DeviceScreenType.mobile
-        ? Scaffold(
-      appBar: AppBar(title: Text('Converte libras')),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text("Um dicionário de sinais criado para a comunidade"),
-              LibrasCustomSearchBar(
-                onChanged: (findString) {
-                  setState(() {
-                    word = findString;
-                  });
-                },
-              ),
-              SizedBox(height: 90),
-              word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
-            ],
-          ),
-        ),
-      ),
-    )
-        : CustomContainerShell(
-      child: SingleChildScrollView(
-        child: Column(
-            children: [
-              TopContentLibras(
-                title: "CONVERTE LIBRAS",
-                subtitle: "Um dicionário de sinais criado para a comunidade",
-                searchBar: LibrasCustomSearchBar(
+    return Consumer<SpecificTopicViewModel>(builder: (context, viewModel, state) {
+      return device == DeviceScreenType.mobile
+          ? Scaffold(
+        appBar: AppBar(title: Text('Converte libras')),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text("Um dicionário de sinais criado para a comunidade"),
+                LibrasCustomSearchBar(
                   onChanged: (findString) {
                     setState(() {
                       word = findString;
                     });
                   },
                 ),
-              ),
-              SizedBox(height: 15),
-              word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
-              SizedBox(height: 20),]
+                SizedBox(height: 90),
+                word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
+              ],
+            ),
+          ),
         ),
-      ),
-    );
+      )
+          : CustomContainerShell(
+        child: SingleChildScrollView(
+          child: Column(
+              children: [
+                TopContentLibras(
+                  title: "CONVERTE LIBRAS",
+                  subtitle: "Um dicionário de sinais criado para a comunidade",
+                  searchBar: LibrasCustomSearchBar(
+                    onChanged: (findString) {
+                      setState(() {
+                        word = findString;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(height: 15),
+                word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
+                SizedBox(height: 20),]
+          ),
+        ),
+      );
+    });
   }
 }

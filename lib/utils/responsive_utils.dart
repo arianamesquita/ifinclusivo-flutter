@@ -68,7 +68,7 @@ class ResponsiveUtils {
       case DeviceScreenType.tablet:
         return width *0.75;
       case DeviceScreenType.desktop:
-        return width * 0.5;
+        return 800;
     }
   }
 

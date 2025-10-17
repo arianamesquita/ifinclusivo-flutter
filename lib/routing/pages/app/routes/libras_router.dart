@@ -6,8 +6,11 @@ const librasBranch = TypedStatefulShellBranch<StatefulShellBranchData>(
 
 const librasRouter = TypedGoRoute<LibrasRouter>(
   path: AppRoutes.libras,
-  routes: [librasTopicsRoute,
-    midiaRouter],
+  routes: [
+    librasTopicsRoute,
+    midiaRouter,
+    wordSuggestionRouter
+  ],
 );
 
 class LibrasRouter extends GoRouteData with _$LibrasRouter {
@@ -20,7 +23,7 @@ class LibrasRouter extends GoRouteData with _$LibrasRouter {
 }
 
 const librasTopicsRoute = TypedGoRoute<LibrasTopicRouter>(
-  path: AppRoutes.categoriaLibras,
+  path: AppRoutes.librasCategory,
 );
 
 class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
@@ -54,8 +57,21 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
           timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
           description: item.descricao,
           relacionados: relateds,
-          urlVideo: item.video ?? 'https://www.youtube.com/watch?v=F3TiMx-zG-A',
+          urlVideo: item.url!,
       );
     });
+  }
+}
+
+const wordSuggestionRouter = TypedGoRoute<WordSuggestionRouter>(
+  path: AppRoutes.wordSuggestion,
+);
+
+class WordSuggestionRouter extends GoRouteData with _$WordSuggestionRouter {
+  const WordSuggestionRouter();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return WordSuggestionPage();
   }
 }

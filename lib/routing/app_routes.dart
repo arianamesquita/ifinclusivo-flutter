@@ -15,13 +15,15 @@ class AppRoutes {
   // Rotas da Aplicação Principal
   static const String _app = '/app';
   static const String forum = '$_app/forum';
-  static const String publication = '/post/:id';
+  static const String publication = 'post/:id';
   static const String newPublication = '$_app/new-post';
 
 
   static const String libras = '$_app/libras';
   static const String midia = 'midia:id';
   static const String categoriaLibras = 'category/:categoria';
+  static const String librasCategory = 'category/:categoria';
+  static const String wordSuggestion = 'word-suggestion';
 
 
   static const String more = '$_app/more';
@@ -44,7 +46,8 @@ class AppRoutes {
 
     AppRoute(path: libras, isPublic: true, allowedRoles: Roles.values),
     AppRoute(path: midia, isPublic: true, allowedRoles: Roles.values),
-    AppRoute(path: categoriaLibras, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: librasCategory, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: wordSuggestion, isPublic: false, allowedRoles: Roles.values),
 
     AppRoute(path: more, allowedRoles: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR]),
     AppRoute(path: notification, allowedRoles: Roles.values),
