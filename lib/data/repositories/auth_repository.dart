@@ -16,6 +16,12 @@ abstract class AuthRepository{
 
   Future<SimpleUsuarioModel> registerTutor(TutorRequestModel tutorData);
 
+  Future<SimpleUsuarioModel> registerProfessor(ProfessorRequestModel professorData);
+
+  Future<SimpleUsuarioModel> registerInterprete(InterpreteRequestModel interpreteData);
+
+  Future<SimpleUsuarioModel> registerAluno(AlunoRequestModel alunoData);
+
   Future<String> verifyEmail(String token);
 
   Future<String> forgotPassword(String email);

@@ -29,7 +29,7 @@ class SearchResult extends StatelessWidget {
     SearchResultBlock(
       topicName: 'Html',
       description:
-          'HTML é uma linguagem de marcação utilizada na construção de páginas na Web...',
+          'HTML é uma linguagem de marcação ustilizada na construção de páginas na Web...',
     ),
     SearchResultBlock(
       topicName: 'Html',
@@ -37,7 +37,9 @@ class SearchResult extends StatelessWidget {
           'HTML é uma linguagem de marcação utilizada na construção de páginas na Web...',
     ),
   ];
+
   final items2 = [];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,13 +64,13 @@ class SearchResult extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 100),
               child:
-                  items.isNotEmpty
+                  items2.isNotEmpty
                       ? CustomContainerShell(
                         child: SafeArea(
                           child: ListView.builder(
-                            itemCount: items.length,
+                            itemCount: items2.length,
                             itemBuilder: (context, index) {
-                              final item = items[index];
+                              final item = items2[index];
                               return SearchResultBlock(
                                 topicName: item.topicName,
                                 description: item.description,

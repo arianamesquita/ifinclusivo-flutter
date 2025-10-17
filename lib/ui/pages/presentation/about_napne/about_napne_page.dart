@@ -112,10 +112,7 @@ class AboltNapnePage extends StatelessWidget {
   }
 
   _buildMoreInfo(context, textScale) {
-    final style = ResponsiveUtils.scaleFontStyle(
-      context,
-      Theme.of(context).textTheme.headlineSmall!,
-    ).copyWith(
+    final style = Theme.of(context).textTheme.headlineSmall?.copyWith(
       fontWeight: FontWeight.w500,
       color: Theme.of(context).colorScheme.onSurfaceVariant,
     );
@@ -127,10 +124,8 @@ class AboltNapnePage extends StatelessWidget {
         children: [
           Text(
             'Para mais informações:',
-            style: ResponsiveUtils.scaleFontStyle(
-              context,
-              Theme.of(context).textTheme.headlineSmall!,
-            ).copyWith(
+            style:
+              Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
@@ -157,7 +152,7 @@ class AboltNapnePage extends StatelessWidget {
               Text('Email:', style: style),
               ClickableLink(
                 label: 'monica.canuto@ifgoiano.edu.br',
-                style: style.copyWith(decoration: TextDecoration.underline),
+                style: style?.copyWith(decoration: TextDecoration.underline),
                 value: 'monica.canuto@ifgoiano.edu.br',
                 type: LinkType.email,
               ),
@@ -183,10 +178,7 @@ class AboltNapnePage extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
             'Conceitos e Diferenças. Saiba um pouco mais...',
-            style: ResponsiveUtils.scaleFontStyle(
-              context,
-              Theme.of(context).textTheme.headlineSmall!,
-            ).copyWith(
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.onSurface,
             ),
@@ -195,7 +187,6 @@ class AboltNapnePage extends StatelessWidget {
         ...items.map<Widget>((StackItemInfo itemInfo) {
           return buildStackItem(
             itemInfo,
-            textScale,
             deviceType,
             context,
             padding,
@@ -219,10 +210,7 @@ class AboltNapnePage extends StatelessWidget {
           spacing: 29,
           maxWidth: 470,
           title: '     O QUE É O NAPNE?',
-          titleStyle: ResponsiveUtils.scaleFontStyle(
-            context,
-            Theme.of(context).textTheme.headlineSmall!,
-          ).copyWith(
+          titleStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -231,14 +219,16 @@ class AboltNapnePage extends StatelessWidget {
               "O NAPNE é o Núcleo de Apoio às Pessoas com Necessidades Educacionais Específicas."
               "\n\nSua proposta é promover ações de inclusão e garantir a participação de todos no campus.",
         ),
-        SvgPicture.asset('assets/icons/amico.svg'),
+        FittedBox(child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: SvgPicture.asset('assets/icons/amico.svg'),
+        )),
       ],
     );
   }
 
   buildStackItem(
     StackItemInfo itemInfo, // Recebe o objeto com todos os dados
-    double fontScale,
     deviceType,
     context,
     padding,
@@ -280,20 +270,14 @@ class AboltNapnePage extends StatelessWidget {
                   children: [
                     Text(
                       itemInfo.title,
-                      style: ResponsiveUtils.scaleFontStyle(
-                        context,
-                        Theme.of(context).textTheme.headlineSmall!,
-                      ).copyWith(
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                     Text(
                       itemInfo.label,
-                      style: ResponsiveUtils.scaleFontStyle(
-                        context,
-                        Theme.of(context).textTheme.titleLarge!,
-                      ).copyWith(
+                      style:  Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w500,
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),

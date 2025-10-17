@@ -13,6 +13,7 @@ _$AlunoRequestModelImpl _$$AlunoRequestModelImplFromJson(
   login: json['login'] as String,
   senha: json['senha'] as String,
   matricula: (json['matricula'] as num).toInt(),
+  curso: $enumDecode(_$CursosEnumMap, json['curso']),
   biografia: json['biografia'] as String?,
 );
 
@@ -23,7 +24,13 @@ Map<String, dynamic> _$$AlunoRequestModelImplToJson(
   'login': instance.login,
   'senha': instance.senha,
   'matricula': instance.matricula,
+  'curso': cursoToJson(instance.curso),
   'biografia': instance.biografia,
+};
+
+const _$CursosEnumMap = {
+  Cursos.SISTEMAS_INFORMACAO: 'SISTEMAS_INFORMACAO',
+  Cursos.MEDIO_TECNICO_TI: 'MEDIO_TECNICO_TI',
 };
 
 _$AlunoNapneRequestModelImpl _$$AlunoNapneRequestModelImplFromJson(
@@ -173,13 +180,29 @@ Map<String, dynamic> _$$UpdatePasswordRequestModelImplToJson(
   'novaSenha': instance.novaSenha,
 };
 
+_$ComentarioRequestModelImpl _$$ComentarioRequestModelImplFromJson(
+  Map<String, dynamic> json,
+) => _$ComentarioRequestModelImpl(
+  texto: json['texto'] as String,
+  parentId: (json['parentId'] as num?)?.toInt(),
+  usuarioMencionadoId: (json['usuarioMencionadoId'] as num?)?.toInt(),
+);
+
+Map<String, dynamic> _$$ComentarioRequestModelImplToJson(
+  _$ComentarioRequestModelImpl instance,
+) => <String, dynamic>{
+  'texto': instance.texto,
+  'parentId': instance.parentId,
+  'usuarioMencionadoId': instance.usuarioMencionadoId,
+};
+
 _$PublicacaoRequestModelImpl _$$PublicacaoRequestModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$PublicacaoRequestModelImpl(
   titulo: json['titulo'] as String,
   texto: json['texto'] as String,
   categorias: _categoriasFromJson(json['categorias'] as List),
-  parentId: (json['parentId'] as num?)?.toInt(),
+  tipo: _tipoPublicacaoFromJson(json['tipo']),
 );
 
 Map<String, dynamic> _$$PublicacaoRequestModelImplToJson(
@@ -188,7 +211,7 @@ Map<String, dynamic> _$$PublicacaoRequestModelImplToJson(
   'titulo': instance.titulo,
   'texto': instance.texto,
   'categorias': _categoriasToJson(instance.categorias),
-  'parentId': instance.parentId,
+  'tipo': _tipoPublicacaoToJson(instance.tipo),
 };
 
 _$LibrasRequestModelImpl _$$LibrasRequestModelImplFromJson(

@@ -6,5 +6,5 @@ abstract class AccountSecurityRepository {
   AsyncResult<bool> updatePassword(
       UpdatePasswordRequestModel updatePassword);
 
-  Future<void> deleteAccount();
+  AsyncResult<bool> deleteAccount( String password );
 }

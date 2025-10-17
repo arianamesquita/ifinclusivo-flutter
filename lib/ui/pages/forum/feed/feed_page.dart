@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/widgets/filter_chips_bar.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
+import 'package:result_command/src/command.dart';
 
 import '../../../../domain/models/enums/categorias.dart';
 import '../../../core/widgets/search_bar.dart';
-import '../publicacao/widget/cards/publicacao_card.dart';
+import '../publicacao/widget/card/publicacao_card.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -35,7 +37,7 @@ class _FeedPageState extends State<FeedPage> {
       if (_scrollController.position.pixels >=
               _scrollController.position.maxScrollExtent - 200 &&
           vm.state != FeedState.loadingMore) {
-       await vm.fetchMorePublications();
+        await vm.fetchMorePublications();
       }
       // Mostrar/ocultar FAB
       if (_scrollController.position.userScrollDirection ==
@@ -46,6 +48,38 @@ class _FeedPageState extends State<FeedPage> {
         if (!_showFab) setState(() => _showFab = true);
       }
     });
+    context.read<FeedViewModel>().deleteCommentsCommand.addListener(_handlerDelete);
+  }
+
+
+  _handlerDelete(){
+   final cmd = context.read<FeedViewModel>().deleteCommentsCommand;
+   switch(cmd.value){
+
+     case IdleCommand<bool>():
+     case CancelledCommand<bool>():
+     case RunningCommand<bool>():
+     return;
+     case FailureCommand<bool>():
+       ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+           content: Text('Error ao apagar Publicação!'),
+           backgroundColor: Colors.green,
+         ),
+       );
+       cmd.reset();
+       break;
+     case SuccessCommand<bool>():
+       ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+           content: Text('Publicação apagada com sucesso!'),
+           backgroundColor: Colors.green,
+         ),
+       );
+       cmd.reset();
+       break;
+   }
+
   }
 
   @override
@@ -58,57 +92,175 @@ class _FeedPageState extends State<FeedPage> {
   Widget build(BuildContext context) {
     return Consumer<FeedViewModel>(
       builder: (context, viewModel, state) {
-        return Scaffold(
-          floatingActionButton:
-              (viewModel.currentUser != null)
-                  ? FloatingActionButton(
-                    onPressed: () => NewPublicacaoRouter().push(context),
-                    child: Icon(Icons.add),
-                  )
-                  : null,
-          body: CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              buildSliverToBoxAdapter(context),
-              buildSliverPersistentHeader(viewModel, context),
-
-              if (viewModel.state == FeedState.initialLoading)
-                const SliverFillRemaining(
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (viewModel.state == FeedState.empty)
-                const SliverFillRemaining(
-                  child: Center(child: Text("Nenhuma publicação encontrada")),
-                )
-              else
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      if (index < viewModel.publications.length) {
-                        return _centralized(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: PublicacaoCard(
-                              model: viewModel.publications[index],
-                            ),
-                          ),
-                        );
-                      } else {
-                        return const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16.0),
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-                    },
-                    childCount:
-                        viewModel.publications.length +
-                        (viewModel.state == FeedState.loadingMore ? 1 : 0),
+        return Row(
+          children: [
+            if (ResponsiveUtils.getDeviceType(context) ==
+                DeviceScreenType.desktop)
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/figuras decorativas.svg",
+                    fit: BoxFit.contain,
                   ),
+                  SizedBox(height: 200),
+                ],
+              ),
+            Expanded(
+              child: Scaffold(
+                floatingActionButton:
+                    (viewModel.currentUser != null)
+                        ? FloatingActionButton(
+                          onPressed: () => NewPublicacaoRouter().push(context),
+                          child: Icon(Icons.add),
+                        )
+                        : null,
+                body: CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    buildSliverToBoxAdapter(context),
+                    buildSliverPersistentHeader(viewModel, context),
+
+                    if (viewModel.state == FeedState.initialLoading)
+                      const SliverFillRemaining(
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    else if (viewModel.state == FeedState.empty)
+                      const SliverFillRemaining(
+                        child: Center(
+                          child: Text("Nenhuma publicação encontrada"),
+                        ),
+                      )
+                    else
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            if (index < viewModel.publications.length) {
+                              return _centralized(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                  ),
+                                  child: PublicacaoCard(
+                                    key: ValueKey(
+                                      viewModel.publications[index].id,
+                                    ),
+                                    model: viewModel.publications[index],
+                                    onTap:
+                                        () => PublicacaoRouter(
+                                          viewModel.publications[index].id,
+                                        ).go(context),
+                                    menuItems:
+                                        (viewModel.currentUser != null &&
+                                                viewModel.currentUser!.id ==
+                                                    viewModel
+                                                        .publications[index]
+                                                        .usuario
+                                                        .id)
+                                            ? [
+                                              PopupMenuItem(
+                                                value: "Editar",
+                                                child: Text("Editar"),
+                                                onTap: () async {
+                                                  final bool?
+                                                  result = await context.push(
+                                                    NewPublicacaoRouter()
+                                                        .location,
+                                                    extra:
+                                                        viewModel
+                                                            .publications[index],
+                                                  );
+
+                                                  if(result == true){
+                                                    await viewModel.updatePubication(viewModel.publications[index].id,);
+
+                                                  }
+                                                },
+                                              ),
+                                              PopupMenuItem(
+                                                value: "Excluir",
+                                                child: Text("Excluir"),
+                                                onTap: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        title: const Text("Confirmar exclusão"),
+                                                        content: const Text(
+                                                          "Tem certeza que deseja excluir esta publicação? Essa ação não poderá ser desfeita.",
+                                                        ),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(context).pop();
+                                                            },
+                                                            child: const Text("Cancelar"),
+                                                          ),
+                                                          ElevatedButton(
+                                                            style: ElevatedButton.styleFrom(
+                                                              backgroundColor: Theme.of(context).colorScheme.error,
+                                                              foregroundColor:  Theme.of(context).colorScheme.onError
+
+                                                            ),
+                                                            onPressed: () async {
+                                                              Navigator.of(context).pop();
+                                                           viewModel.deleteCommentsCommand.execute(viewModel.publications[index].id,);
+
+                                                            },
+                                                            child: const Text("Excluir"),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ]
+                                            : [
+                                              PopupMenuItem(
+                                                value: "denunciar",
+                                                child: Text("Denunciar"),
+                                                onTap: () {
+                                                  print("Denunciar publicação");
+                                                },
+                                              ),
+                                            ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            }
+                          },
+                          childCount:
+                              viewModel.publications.length +
+                              (viewModel.state == FeedState.loadingMore
+                                  ? 1
+                                  : 0),
+                        ),
+                      ),
+                  ],
                 ),
-            ],
-          ),
+              ),
+            ),
+            if (ResponsiveUtils.getDeviceType(context) ==
+                DeviceScreenType.desktop)
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 200),
+                  SvgPicture.asset(
+                    "assets/icons/figuras decorativas-1.svg",
+                    fit: BoxFit.contain,
+                  ),
+                ],
+              ),
+          ],
         );
       },
     );
@@ -117,7 +269,9 @@ class _FeedPageState extends State<FeedPage> {
   _centralized({required Widget child}) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: ResponsiveUtils.spacingColumn(context)),
+        constraints: BoxConstraints(
+          maxWidth: ResponsiveUtils.spacingColumn(context),
+        ),
         child: child,
       ),
     );
@@ -141,12 +295,12 @@ class _FeedPageState extends State<FeedPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: FilterChipsBar(
-                  onChanged: (filters, order) async{
+                  onChanged: (filters, order) async {
                     Ordenacao odern =
                         (order == 'Relevância')
                             ? Ordenacao.RELEVANCIA
                             : Ordenacao.MAIS_RECENTE;
-                   await viewModel.fetchPublications(
+                    await viewModel.fetchPublications(
                       categories: filters,
                       order: odern,
                     );

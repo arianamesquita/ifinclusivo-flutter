@@ -3,9 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:if_inclusivo/data/repositories/auth_repository.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
-import 'package:result_dart/result_dart.dart';
 
-import '../../../../../utils/before_unload_manager.dart';
 enum EmailState{
   idle,
   loading,
@@ -16,7 +14,6 @@ class LoginViewModel extends ChangeNotifier{
   final AuthRepository _authRepository;
   LoginViewModel({required AuthRepository authRepository}) : _authRepository = authRepository;
 
-  final BeforeUnloadManager _unloadManager = BeforeUnloadManager();
   EmailState _emailState = EmailState.idle;
   EmailState get emailState => _emailState;
 
@@ -45,8 +42,7 @@ class LoginViewModel extends ChangeNotifier{
 
   Future<bool> login(LoginRequestModel credentials) async {
     try {
-      final UsuarioResponseModel result = await _authRepository
-          .login(credentials.login, credentials.senha);
+      await _authRepository.login(credentials.login, credentials.senha);
       debugPrint("Login realizado com sucesso");
       isLogged.value = true;
       return true;
@@ -67,11 +63,6 @@ class LoginViewModel extends ChangeNotifier{
   }
 
   void _setEmailState(EmailState newState) {
-    if (newState == EmailState.loading) {
-      _unloadManager.enable( 'Enviando e-mail... Deseja sair agora?');
-    } else {
-      _unloadManager.disable();
-    }
     _emailState = newState;
     notifyListeners();
   }

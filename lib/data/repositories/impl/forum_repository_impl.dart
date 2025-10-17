@@ -15,7 +15,7 @@ class ForumRepositoryImpl implements ForumRepository {
   ForumRepositoryImpl({required ForumService service}) : _service = service;
 
   @override
-  AsyncResult<PublicacaoDetalhadaModel> create(
+  AsyncResult<PublicacaoDetalhadaModel> savePublication(
     PublicacaoRequestModel request,
   ) async {
     try {
@@ -30,14 +30,14 @@ class ForumRepositoryImpl implements ForumRepository {
   }
 
   @override
-  AsyncResult<PaginatedResponse<PublicacaoDetalhadaModel>> findAll({
+  AsyncResult<PaginatedResponse<PublicacaoDetalhadaModel>> fetchFeedPublication({
     Set<Categorias>? categorias,
     Ordenacao? ordenarPor,
     int page = 0,
     int size = 10,
   }) async {
     try {
-      final responseMap = await _service.findAll(
+      final responseMap = await _service.fetchFeedPublication(
         categorias: categorias,
         ordenarPor: ordenarPor,
         page: page,
@@ -59,10 +59,10 @@ class ForumRepositoryImpl implements ForumRepository {
   }
 
   @override
-  AsyncResult<PublicacaoCompletaModel> findById(int id) async {
+  AsyncResult<PublicacaoDetalhadaModel> findById(int id) async {
     try {
-      final response = await _service.findById(id);
-      return Success(PublicacaoCompletaModel.fromJson(response));
+      final response = await _service.findPublicationById(id);
+      return Success(PublicacaoDetalhadaModel.fromJson(response));
     } on DioException catch (e) {
       return Failure(_handleDioError(e));
     } catch (e) {
@@ -71,24 +71,24 @@ class ForumRepositoryImpl implements ForumRepository {
   }
 
   @override
-  AsyncResult<PaginatedResponse<PublicacaoDetalhadaModel>> findRespostas({
+  AsyncResult<PaginatedResponse<ComentarioResponseModel>> fetchComments({
     required int id,
     Ordenacao ordenarPor = Ordenacao.MAIS_RECENTE,
     int page = 0,
     int size = 10,
   }) async {
     try {
-      final response = await _service.findRespostas(
+      final response = await _service.findComments(
         id: id,
         ordenarPor: ordenarPor,
         page: page,
         size: size,
       );
       return Success(
-        PaginatedResponse<PublicacaoDetalhadaModel>.fromJson(
+        PaginatedResponse<ComentarioResponseModel>.fromJson(
           response,
           (json) =>
-              PublicacaoDetalhadaModel.fromJson(json as Map<String, dynamic>),
+              ComentarioResponseModel.fromJson(json as Map<String, dynamic>),
         ),
       );
     } on DioException catch (e) {
@@ -99,8 +99,78 @@ class ForumRepositoryImpl implements ForumRepository {
       );
     }
   }
+  @override
+  AsyncResult<void> deletePublication(int id) async {
+    try {
+      await _service.deletePublication(id);
+      return Success(Null);
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado ao excluir a publicação. $e'));
+    }
+  }
 
-  // 🔹 Handler para exceções centralizado
+  @override
+  AsyncResult<PublicacaoDetalhadaModel> updatePublication(
+      int id,
+      PublicacaoRequestModel request,
+      ) async {
+    try {
+      final response = await _service.updatePublication(
+        id: id,
+        publicacaoRequest: request.toJson(),
+      );
+
+      return Success(PublicacaoDetalhadaModel.fromJson(response));
+    } on DioException catch (e) {
+
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado ao atualizar a publicação.'));
+    }
+  }
+  @override
+  AsyncResult<ComentarioResponseModel> addComment({required int publicationId, required ComentarioRequestModel request}) async {
+    try {
+      final response = await _service.addComment(
+        publicacaoId: publicationId,
+        commentRequest: request.toJson(),
+      );
+
+      return Success(ComentarioResponseModel.fromJson(response));
+    } on DioException catch (e) {
+
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado ao atualizar a publicação.'));
+    }
+  }
+
+  @override
+  AsyncResult<PaginatedResponse<ComentarioResponseModel>> fetchReplies({required int id, Ordenacao ordenarPor = Ordenacao.MAIS_RECENTE, int page = 0, int size = 10})async {
+    try {
+      final response = await _service.findReplies(
+        id: id,
+        ordenarPor: ordenarPor,
+        page: page,
+        size: size,
+      );
+      return Success(
+        PaginatedResponse<ComentarioResponseModel>.fromJson(
+          response,
+              (json) =>
+              ComentarioResponseModel.fromJson(json as Map<String, dynamic>),
+        ),
+      );
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(
+        Exception('Erro inesperado ao buscar respostas da publicação.'),
+      );
+    }
+  }
   Never _handleDioError(DioException e) {
     if (e.response != null) {
       final statusCode = e.response!.statusCode;
@@ -117,12 +187,45 @@ class ForumRepositoryImpl implements ForumRepository {
           );
         case 401:
           throw UnauthorizedException(message: errorMessage);
+        case 403:
+          throw ForbiddenException(message: errorMessage);
+        case 404:
+          throw NotFoundException(message: errorMessage);
+        case 409:
+          throw ApiException(message: errorMessage, statusCode: statusCode);
+        case 500:
+          throw InternalServerException();
         default:
           throw ApiException(message: errorMessage, statusCode: statusCode);
       }
     }
     throw Exception(
-      'Falha de conexão. Verifique sua internet e tente novamente.',
+      'Falha de conexão. Verifique sua internet e tente novamente. $e',
     );
   }
+
+  @override
+  AsyncResult<ComentarioResponseModel> updateComment({required int commentId, required ComentarioRequestModel request}) async {
+    try {
+      final response = await _service.updateComment(commentId: commentId, commentRequest: request.toJson());
+      return Success(ComentarioResponseModel.fromJson(response));
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado ao atualizar a comentário.'));
+    }
+  }
+
+  @override
+  AsyncResult<void> deleteComment(int commentId) async {
+    try {
+      await _service.deleteComment(commentId);
+      return Success(Null);
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado ao excluir a comentário. $e'));
+    }
+  }
+
 }

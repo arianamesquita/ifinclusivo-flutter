@@ -68,11 +68,13 @@ class _CustomContainerState extends State<CustomContainer> {
                   ),
                 ),
               ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // figura 1
+                if(deviceType != DeviceScreenType.mobile)
                 Column(
                   children: [
                     SizedBox(height: 264),
@@ -96,7 +98,7 @@ class _CustomContainerState extends State<CustomContainer> {
                   ),
                 ),
 
-
+                if(deviceType != DeviceScreenType.mobile)
                 Column(
                   children: [
                     SizedBox(height: figura2Top ),

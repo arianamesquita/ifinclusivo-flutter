@@ -56,7 +56,6 @@ class _ListChipsCardState extends State<ListChipsCard> {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           controller: _scrollController,
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           itemCount: chipsToShow.length,
           itemBuilder: (context, index) {
             final chipData = chipsToShow[index];

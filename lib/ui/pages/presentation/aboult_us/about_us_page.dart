@@ -31,16 +31,14 @@ class AboutUsPage extends StatelessWidget {
         title: 'Tópicos',
         label: 'Sugestões de leitura adaptadas para todos.',
         color: color2,
-        onTap: () {
-        },
+        onTap: () {},
       ),
       StackItemInfo(
         iconPath: 'assets/icons/Chat.png',
         title: 'Fórum',
         label: 'Espaço de diálogo e apoio entre os alunos.',
         color: color1,
-        onTap: () {
-        },
+        onTap: () {},
       ),
       StackItemInfo(
         iconPath: 'assets/icons/napne.png',
@@ -48,7 +46,7 @@ class AboutUsPage extends StatelessWidget {
         label: 'Orientação e Sensibilização',
         color: color2,
         onTap: () {
-          context.go(AboutNapneRoute().location);
+          AboutNapneRoute().push(context);
         },
       ),
     ];
@@ -64,9 +62,9 @@ class AboutUsPage extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical:
-                    deviceType == DeviceScreenType.desktop ? 164 : spacing.$2,
+              padding: EdgeInsets.only(
+                top: deviceType == DeviceScreenType.desktop ? 164 : spacing.$2,
+                bottom: deviceType == DeviceScreenType.desktop ? 164 : 60,
               ),
               child: _buildIntro(fontScale, deviceType, spacing, context),
             ),
@@ -74,7 +72,7 @@ class AboutUsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal:
-                    deviceType == DeviceScreenType.desktop ? 50 : spacing.$1,
+                    deviceType == DeviceScreenType.desktop ? 50 : 0,
                 vertical:
                     deviceType == DeviceScreenType.desktop ? 142 : spacing.$2,
               ),
@@ -106,10 +104,9 @@ class AboutUsPage extends StatelessWidget {
             constraints: BoxConstraints(maxWidth: 426),
             child: Text(
               'Um espaço seguro para Interação e troca de Conhecimentos.',
-              style: ResponsiveUtils.scaleFontStyle(
+              style: Theme.of(
                 context,
-                Theme.of(context).textTheme.headlineLarge!,
-              ).copyWith(fontWeight: FontWeight.w600),
+              ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w600),
               softWrap: true,
               textAlign: TextAlign.center,
             ),
@@ -119,7 +116,7 @@ class AboutUsPage extends StatelessWidget {
               horizontal:
                   deviceType == DeviceScreenType.desktop ? 20 : spacing.$1,
             ),
-            child: SvgPicture.asset('assets/pana.svg'),
+            child: FittedBox(child: SvgPicture.asset('assets/pana.svg')),
           ),
         ],
       ),
@@ -150,10 +147,9 @@ class AboutUsPage extends StatelessWidget {
               constraints: BoxConstraints(maxWidth: 757),
               child: Text(
                 'Conheça as principais áreas do sistema e explore o que ele pode oferecer para você.',
-                style: ResponsiveUtils.scaleFontStyle(
-                  context,
-                  Theme.of(context).textTheme.headlineMedium!,
-                ).copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -169,7 +165,6 @@ class AboutUsPage extends StatelessWidget {
                   items.map<Widget>((StackItemInfo itemInfo) {
                     return buildStackItem(
                       itemInfo, // Passa o objeto inteiro
-                      fontScale,
                       deviceType,
                       context,
                     );
@@ -183,12 +178,11 @@ class AboutUsPage extends StatelessWidget {
 
   buildStackItem(
     StackItemInfo itemInfo, // Recebe o objeto com todos os dados
-    double fontScale,
     deviceType,
     context,
   ) {
-    double w = deviceType == DeviceScreenType.mobile ? 200 : 399;
-    double h = deviceType == DeviceScreenType.mobile ? 167 : 180;
+    double w = deviceType == DeviceScreenType.mobile ? double.infinity : 399;
+    double h = deviceType == DeviceScreenType.mobile ? 150 : 180;
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -227,10 +221,8 @@ class AboutUsPage extends StatelessWidget {
                     Expanded(
                       child: Text(
                         itemInfo.title,
-                        style: ResponsiveUtils.scaleFontStyle(
-                          context,
-                          Theme.of(context).textTheme.headlineMedium!,
-                        ).copyWith(fontWeight: FontWeight.w600),
+                        style: Theme.of(context).textTheme.headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                         softWrap: true,
                       ),
                     ),
@@ -243,10 +235,9 @@ class AboutUsPage extends StatelessWidget {
                     children: [
                       Text(
                         itemInfo.label,
-                        style: ResponsiveUtils.scaleFontStyle(
-                          context,
-                          Theme.of(context).textTheme.titleLarge!,
-                        ).copyWith(fontWeight: FontWeight.w500),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                         textAlign: TextAlign.start,
                       ),
                     ],

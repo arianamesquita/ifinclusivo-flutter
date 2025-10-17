@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:if_inclusivo/data/services/account_security_service.dart';
 
 class AccountSecurityServiceImpl implements AccountSecurityService {
@@ -9,15 +10,11 @@ class AccountSecurityServiceImpl implements AccountSecurityService {
   final basePath = '/auth/update-password';
 
   @override
-  Future<String> deleteAccount() async {
+  Future<bool> deleteAccount(String password) async{
     try {
-      final response = await _dio.delete("/auth/account");
-
-      if (response.statusCode == 200) {
-        return response.data["message"] ?? "Conta excluída com sucesso";
-      } else {
-        throw Exception("Erro ao excluir conta: ${response.statusCode}");
-      }
+      final response = await _dio.delete("/auth",
+          queryParameters: {"password": password});
+      return (response.statusCode == 200);
     } on DioException catch (e) {
       if (e.response != null) {
         throw Exception("Erro: ${e.response?.data["message"] ?? e.message}");

@@ -21,6 +21,7 @@ class PublicacaoDetalhadaModel with _$PublicacaoDetalhadaModel {
     required DateTime dataCriacao,
     required AutorCardModel usuario,
     required Set<Categorias> categorias,
+    required TipoPublicacao tipo,
     required int totalLikes,
     required int totalRespostas,
     required bool curtidoPeloUsuario,
@@ -31,15 +32,22 @@ class PublicacaoDetalhadaModel with _$PublicacaoDetalhadaModel {
       _$PublicacaoDetalhadaModelFromJson(json);
 }
 
-
 @freezed
-class PublicacaoCompletaModel with _$PublicacaoCompletaModel {
-  @JsonSerializable(explicitToJson: true)
-  const factory PublicacaoCompletaModel({
-    required PublicacaoDetalhadaModel atual,
-    required List<PublicacaoDetalhadaModel> pais,
-  }) = _PublicacaoCompletaModel;
+class ComentarioResponseModel with _$ComentarioResponseModel {
+  const factory ComentarioResponseModel({
+    required int id,
+    required String texto,
+    required DateTime dataCriacao,
+    required AutorCardModel usuario,
+    required int publicacaoId,
+    required int totalLikes,
+    required int totalRespostas,
+    required bool curtidoPeloUsuario,
+    AutorCardModel? usuarioMencionado,
+    int? parentId,
+  }) = _ComentarioResponseModel;
 
-  factory PublicacaoCompletaModel.fromJson(Map<String, dynamic> json) =>
-      _$PublicacaoCompletaModelFromJson(json);
+  factory ComentarioResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$ComentarioResponseModelFromJson(json);
 }
+

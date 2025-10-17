@@ -9,6 +9,12 @@ abstract class AuthService {
 
   Future<Map<String, dynamic>> registerTutor(Map<String, dynamic> tutorData);
 
+  Future<Map<String, dynamic>> registerProfessor(Map<String, dynamic> professorData);
+
+  Future<Map<String, dynamic>> registerInterprete(Map<String, dynamic> interpreteData);
+
+  Future<Map<String, dynamic>> registerAluno(Map<String, dynamic> registerData);
+
   Future<String> verifyEmail(String token);
 
   Future<String> forgotPassword(String email);

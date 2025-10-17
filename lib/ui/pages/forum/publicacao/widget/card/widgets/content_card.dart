@@ -44,7 +44,6 @@ class _ContentCardState extends State<ContentCard> {
       final List<dynamic> jsonData = jsonDecode(widget.contentJson);
       return Document.fromJson(jsonData);
     } catch (e) {
-      print('Erro ao carregar o documento Quill: $e');
       return Document()..insert(0, 'Erro ao carregar conteúdo.');
     }
   }
@@ -70,7 +69,7 @@ class _ContentCardState extends State<ContentCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric( vertical: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

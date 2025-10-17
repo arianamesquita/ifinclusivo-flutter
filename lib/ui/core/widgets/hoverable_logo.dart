@@ -85,10 +85,13 @@ class _HoverableLogoState extends State<HoverableLogo> {
         onTapCancel: _onTapCancel,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
-          transform: Matrix4.identity()..translate(0, translateY, 0),
-          child: child,
+          child: Transform.translate(
+            offset: Offset(0, translateY),
+            child: child,
+          ),
         ),
       ),
     );
+
   }
 }

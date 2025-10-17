@@ -13,9 +13,15 @@ class AccountSecurityRepositoryImpl implements AccountSecurityRepository{
   AccountSecurityRepositoryImpl({required AccountSecurityService service}) : _service = service;
 
   @override
-  Future<void> deleteAccount() {
-    // TODO: implement deleteAccount
-    throw UnimplementedError();
+  AsyncResult<bool> deleteAccount(String password) async{
+    try {
+      final state = await _service.deleteAccount(password);
+      return Success(state);
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado'));
+    }
   }
 
   @override
