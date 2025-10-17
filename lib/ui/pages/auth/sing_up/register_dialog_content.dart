@@ -55,6 +55,21 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
     super.initState();
   }
 
+  void _resetForm() {
+    _nameController.clear();
+    _emailController.clear();
+    _senhaController.clear();
+    _especialidadeController.clear();
+    _especialidade2Controller.clear();
+    _formacaoController.clear();
+
+    setState(() {
+      _cursoSelecionado = null;
+      _tipoSelecionado = null;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<RegisterViewModel>();
@@ -586,8 +601,15 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                               matricula:0,
                                             );
                                             final success = await viewModel.registerNewProfessor(professorData);
-                                            AuthModals.userCreatedSuccess(context: context);
-                                          }else if(_tipoSelecionado == 'tutor') {
+                                            if(success && viewModel.errorMessage == null){
+                                              AuthModals.userCreatedSuccess(context: context);
+                                              LoginRoute().pushReplacement(context);
+                                              _resetForm();
+                                            } else {
+                                              viewModel.errorMessage ?? 'Usuário Duplicado';
+                                              AuthModals.userRegisterError(context: context);
+                                              _resetForm();
+                                            }                                          }else if(_tipoSelecionado == 'tutor') {
                                             final tutorData = TutorRequestModel(
                                               nome: _nameController.text,
                                               login: _emailController.text,
@@ -597,8 +619,15 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                             );
                                             final success = await viewModel.registerNewTutor(tutorData);
                                             print('Salvo com sucesso $success');
-                                            AuthModals.userCreatedSuccess(context: context);
-                                          }else if(_tipoSelecionado == 'interprete') {
+                                            if(success && viewModel.errorMessage == null){
+                                              AuthModals.userCreatedSuccess(context: context);
+                                              LoginRoute().pushReplacement(context);
+                                              _resetForm();
+                                            } else {
+                                              viewModel.errorMessage ?? 'Usuário Duplicado';
+                                              AuthModals.userRegisterError(context: context);
+                                              _resetForm();
+                                            }                                          }else if(_tipoSelecionado == 'interprete') {
                                             final interpreteData = InterpreteRequestModel(
                                               nome: _nameController.text,
                                               login: _emailController.text,
@@ -609,7 +638,15 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                             );
                                             final success = await viewModel.registerNewInterprete(interpreteData);
                                             print('Salvo com sucesso $success');
-                                            AuthModals.userCreatedSuccess(context: context);
+                                            if(success && viewModel.errorMessage == null){
+                                              AuthModals.userCreatedSuccess(context: context);
+                                              LoginRoute().pushReplacement(context);
+                                              _resetForm();
+                                            } else {
+                                              viewModel.errorMessage ?? 'Usuário Duplicado';
+                                              AuthModals.userRegisterError(context: context);
+                                              _resetForm();
+                                            }
                                           }else if(_tipoSelecionado == 'aluno') {
                                             final alunoData = AlunoRequestModel(
                                               nome: _nameController.text,
@@ -620,7 +657,15 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                             );
                                             final success = await viewModel.registerNewAluno(alunoData);
                                             print('Salvo com sucesso $success');
-                                            AuthModals.userCreatedSuccess(context: context);
+                                            if(success && viewModel.errorMessage == null){
+                                              AuthModals.userCreatedSuccess(context: context);
+                                              LoginRoute().pushReplacement(context);
+                                              _resetForm();
+                                            } else {
+                                              viewModel.errorMessage ?? 'Usuário Duplicado';
+                                              AuthModals.userRegisterError(context: context);
+                                              _resetForm();
+                                            }
                                           }
                                         },
                                         style: ElevatedButton.styleFrom(
