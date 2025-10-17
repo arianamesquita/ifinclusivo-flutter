@@ -13,6 +13,7 @@ import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../data/repositories/auth_repository.dart';
+import '../domain/models/api/response/gen_responses.dart';
 import '../domain/models/enums/categorias.dart';
 import '../guards/router_guard.dart';
 import '../ui/core/layout/custom_container_shell.dart';
