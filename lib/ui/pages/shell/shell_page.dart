@@ -75,6 +75,7 @@ class _ShellPageState extends State<ShellPage> {
             auth.allowedBranches(),
             context,
             isLoggedIn,
+            authRepository.currentUser
           );
         }
       },
@@ -86,6 +87,8 @@ class _ShellPageState extends State<ShellPage> {
     List<int> allowedBranches,
     BuildContext context,
     bool isLoggedIn,
+  UsuarioResponseModel? user
+
   ) {
     return Scaffold(
       key: scaffoldKey,
@@ -102,7 +105,7 @@ class _ShellPageState extends State<ShellPage> {
             },
             destinations:
                 allowedBranches
-                    .map((i) => AppDestinations.rail(context)[i])
+                    .map((i) => AppDestinations.rail(context, user?.imgPerfil)[i])
                     .toList(),
             isLoggedIn: isLoggedIn,
             onPressedMenu: openDrawer,
@@ -116,6 +119,7 @@ class _ShellPageState extends State<ShellPage> {
         context,
         isLoggedIn,
         closeDrawer,
+        user
       ),
     );
   }
@@ -126,7 +130,9 @@ class _ShellPageState extends State<ShellPage> {
     BuildContext context,
     bool isLoggedIn,
     void Function() onPressedMenu,
-  ) {
+      UsuarioResponseModel? user
+
+      ) {
     return CustomNavigationDrawer(
       selectedIndex: auth.mapSelectedIndex(
         allowedBranches,
@@ -138,7 +144,7 @@ class _ShellPageState extends State<ShellPage> {
       },
       destinations:
           allowedBranches
-              .map((i) => AppDestinations.drawer(context)[i])
+              .map((i) => AppDestinations.drawer(context,user?.imgPerfil)[i])
               .toList(),
       isLoggedIn: isLoggedIn,
       onPressedMenu: onPressedMenu,
@@ -195,21 +201,30 @@ class _BuildMobileAPPState extends State<BuildMobileAPP>
 
   @override
   Widget build(BuildContext context) {
+    final authRepository = context.read<AuthRepository>();
 
-    return Scaffold(
-      body: widget.child,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: widget.child.currentIndex,
-        onDestinationSelected: widget.child.goBranch,
-        destinations: AppDestinations.bottom(context),
-        indicatorColor: Theme.of(context).colorScheme.primary,
-        backgroundColor: Theme.of(context).colorScheme.tertiary,
-        labelTextStyle: WidgetStatePropertyAll(
-          Theme.of(context).textTheme.labelMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onTertiary,
+
+    return StreamBuilder<UsuarioResponseModel?>(
+        stream: authRepository.authStateChanges,
+
+        initialData: authRepository.currentUser,
+        builder: (context, snapshot) {
+        return Scaffold(
+          body: widget.child,
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: widget.child.currentIndex,
+            onDestinationSelected: widget.child.goBranch,
+            destinations: AppDestinations.bottom(context,authRepository.currentUser?.imgPerfil),
+            indicatorColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context).colorScheme.tertiary,
+            labelTextStyle: WidgetStatePropertyAll(
+              Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onTertiary,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      }
     );
   }
 }

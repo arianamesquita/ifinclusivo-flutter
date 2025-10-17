@@ -102,7 +102,7 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar:AppBar(
+      appBar: AppBar(
         title: Text(
           "Conecta IF",
           style: Theme.of(
@@ -142,60 +142,60 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
     );
   }
 
-   buildBody(BuildContext context, PublicacaoDetalhadaModel value) {
-
+  buildBody(BuildContext context, PublicacaoDetalhadaModel value) {
     return SingleChildScrollView(
       child: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: ResponsiveUtils.spacingColumn(context),
           ),
-          child:ResponsiveUtils.getDeviceType(context)==DeviceScreenType.mobile?
-          buildContantPage(value, context)
-          :Card(
-            color: Theme.of(context).colorScheme.surfaceContainerLowest,
-            elevation: 4,
-            clipBehavior: Clip.antiAlias,
-            margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 5),
-            child: buildContantPage(value, context),
-          ),
+          child:
+              ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile
+                  ? buildContantPage(value, context)
+                  : Card(
+                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                    elevation: 4,
+                    clipBehavior: Clip.antiAlias,
+                    margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 5),
+                    child: buildContantPage(value, context),
+                  ),
         ),
       ),
     );
   }
 
-   Padding buildContantPage(PublicacaoDetalhadaModel value, BuildContext context) {
-     return Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: PublicationContent(model: value),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12.0,
-                    vertical: 8,
-                  ),
-                  child: ListenableBuilder(
-                    listenable: _viewModel.addCommentsCommand,
-                    builder: (context, _) {
-                      return CommentEditor.add(
-                        onSubmit: _sendReply,
-                        isLoading:
-                            _viewModel.addCommentsCommand.value.isRunning,
-                        clearNotifier: _clearEditorNotifier,
-                      );
-                    },
-                  ),
-                ),
-                buildOrderBar(context),
-                buildChildrenPublication(publicationId: value.id),
-              ],
+  Padding buildContantPage(
+    PublicacaoDetalhadaModel value,
+    BuildContext context,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: PublicationContent(model: value),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+            child: ListenableBuilder(
+              listenable: _viewModel.addCommentsCommand,
+              builder: (context, _) {
+                return CommentEditor.add(
+                  imgPath: _viewModel.currentUser?.imgPerfil,
+                  onSubmit: _sendReply,
+                  isLoading: _viewModel.addCommentsCommand.value.isRunning,
+                  clearNotifier: _clearEditorNotifier,
+                );
+              },
             ),
-          );
-   }
+          ),
+          buildOrderBar(context),
+          buildChildrenPublication(publicationId: value.id),
+        ],
+      ),
+    );
+  }
 
   Future<void> _sendReply(String text) async {
     _viewModel.addCommentsCommand.execute(
@@ -233,16 +233,18 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
             !_viewModel.fetchRespostasCommand.value.isFailure) {
           return Consumer<PublicacaoViewModel>(
             builder: (context, vm, state) {
-              if(_viewModel.comments.isEmpty){
+              if (_viewModel.comments.isEmpty) {
                 return Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 100.0),
-                    child: Text('Sem Comentários',style: Theme.of(context).textTheme.titleMedium,),
+                    child: Text(
+                      'Sem Comentários',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                   ),
                 );
               }
-              
-              
+
               return Column(
                 children:
                     _viewModel.comments.map((model) {
@@ -250,7 +252,9 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                              left: 12.0,right: 12, top: 8
+                              left: 12.0,
+                              right: 12,
+                              top: 8,
                             ),
                             child: CommentTile(
                               key: ValueKey(model.comment.id),
@@ -264,6 +268,7 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                               publicationText: model.comment.texto,
                               commentId: model.comment.id,
                               publicationId: model.comment.publicacaoId,
+                              imgPath: model.comment.usuario.imgPerfil,
                             ),
                           ),
                           if (_viewModel.comments.last.comment.id !=

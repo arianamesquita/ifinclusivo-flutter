@@ -6,6 +6,7 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   const factory UsuarioResponseModel.aluno({
     required int id,
     required String nome,
+    required String imgPerfil,
     required String login,
     required int matricula,
     String? biografia,
@@ -20,6 +21,7 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   const factory UsuarioResponseModel.alunoNapne({
     required int id,
     required String nome,
+    required String imgPerfil,
     required String login,
     required int matricula,
     String? biografia,
@@ -41,6 +43,8 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   const factory UsuarioResponseModel.professor({
     required int id,
     required String nome,
+    required String imgPerfil,
+
     required String login,
     required int matricula,
     String? biografia,
@@ -55,6 +59,8 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   const factory UsuarioResponseModel.tutor({
     required int id,
     required String nome,
+    required String imgPerfil,
+
     required String login,
     required int matricula,
     String? biografia,
@@ -69,6 +75,8 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
   const factory UsuarioResponseModel.interprete({
     required int id,
     required String nome,
+    required String imgPerfil,
+
     required String login,
     required int matricula,
     String? biografia,

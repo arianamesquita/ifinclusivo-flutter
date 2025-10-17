@@ -10,9 +10,10 @@ import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/list_
 class PublicacaoCard extends StatelessWidget {
   final PublicacaoDetalhadaModel model;
   final void Function()? onTap;
+  final void Function()? onLike;
   final List<PopupMenuEntry<dynamic>> menuItems;
 
-const PublicacaoCard({super.key, required this.model,required this.onTap, required this.menuItems});
+const PublicacaoCard({super.key, required this.model,required this.onTap, required this.menuItems, this.onLike});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ const PublicacaoCard({super.key, required this.model,required this.onTap, requir
                   padding: const EdgeInsets.only(top: 15),
                   child: AccountHeader.mine(
                     nameUser: model.usuario.nome,
-                    imgPath: null,
+                    imgPath: model.usuario.imgPerfil,
                     isAnswerAccepted: false,
                     canMarkAsAnswer: false,
                     menuItems: menuItems,
@@ -55,10 +56,7 @@ const PublicacaoCard({super.key, required this.model,required this.onTap, requir
                   likes: model.totalLikes,
                   comments: model.totalRespostas,
                   isLiked: model.curtidoPeloUsuario, // já curtido pelo usuário
-                  onLike: () {
-                    // chamada ao backend (async, mas UI já mudou)
-                    print("like/unlike API");
-                  },
+                  onLike: onLike,
                   onComment: () {
                     PublicacaoRouter(model.id).go(context);
                   },

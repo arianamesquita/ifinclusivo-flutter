@@ -42,6 +42,7 @@ UsuarioResponseModel _$UsuarioResponseModelFromJson(Map<String, dynamic> json) {
 mixin _$UsuarioResponseModel {
   int get id => throw _privateConstructorUsedError;
   String get nome => throw _privateConstructorUsedError;
+  String get imgPerfil => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ mixin _$UsuarioResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -70,6 +72,7 @@ mixin _$UsuarioResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -90,6 +93,7 @@ mixin _$UsuarioResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -104,6 +108,7 @@ mixin _$UsuarioResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -118,6 +123,7 @@ mixin _$UsuarioResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -137,6 +143,7 @@ mixin _$UsuarioResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -151,6 +158,7 @@ mixin _$UsuarioResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -171,6 +179,7 @@ mixin _$UsuarioResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -185,6 +194,7 @@ mixin _$UsuarioResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -199,6 +209,7 @@ mixin _$UsuarioResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -218,6 +229,7 @@ mixin _$UsuarioResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -232,6 +244,7 @@ mixin _$UsuarioResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -252,6 +265,7 @@ mixin _$UsuarioResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -266,6 +280,7 @@ mixin _$UsuarioResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -280,6 +295,7 @@ mixin _$UsuarioResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -341,6 +357,7 @@ abstract class $UsuarioResponseModelCopyWith<$Res> {
   $Res call({
     int id,
     String nome,
+    String imgPerfil,
     String login,
     int matricula,
     String? biografia,
@@ -374,6 +391,7 @@ class _$UsuarioResponseModelCopyWithImpl<
   $Res call({
     Object? id = null,
     Object? nome = null,
+    Object? imgPerfil = null,
     Object? login = null,
     Object? matricula = null,
     Object? biografia = freezed,
@@ -394,6 +412,11 @@ class _$UsuarioResponseModelCopyWithImpl<
                 null == nome
                     ? _value.nome
                     : nome // ignore: cast_nullable_to_non_nullable
+                        as String,
+            imgPerfil:
+                null == imgPerfil
+                    ? _value.imgPerfil
+                    : imgPerfil // ignore: cast_nullable_to_non_nullable
                         as String,
             login:
                 null == login
@@ -472,6 +495,7 @@ abstract class _$$AlunoResponseModelImplCopyWith<$Res>
   $Res call({
     int id,
     String nome,
+    String imgPerfil,
     String login,
     int matricula,
     String? biografia,
@@ -504,6 +528,7 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nome = null,
+    Object? imgPerfil = null,
     Object? login = null,
     Object? matricula = null,
     Object? biografia = freezed,
@@ -525,6 +550,11 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
             null == nome
                 ? _value.nome
                 : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        imgPerfil:
+            null == imgPerfil
+                ? _value.imgPerfil
+                : imgPerfil // ignore: cast_nullable_to_non_nullable
                     as String,
         login:
             null == login
@@ -592,6 +622,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   const _$AlunoResponseModelImpl({
     required this.id,
     required this.nome,
+    required this.imgPerfil,
     required this.login,
     required this.matricula,
     this.biografia,
@@ -612,6 +643,8 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   final int id;
   @override
   final String nome;
+  @override
+  final String imgPerfil;
   @override
   final String login;
   @override
@@ -642,7 +675,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.aluno(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, curso: $curso)';
+    return 'UsuarioResponseModel.aluno(id: $id, nome: $nome, imgPerfil: $imgPerfil, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, curso: $curso)';
   }
 
   @override
@@ -652,6 +685,8 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
             other is _$AlunoResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.imgPerfil, imgPerfil) ||
+                other.imgPerfil == imgPerfil) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.matricula, matricula) ||
                 other.matricula == matricula) &&
@@ -678,6 +713,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     runtimeType,
     id,
     nome,
+    imgPerfil,
     login,
     matricula,
     biografia,
@@ -706,6 +742,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -720,6 +757,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -740,6 +778,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -754,6 +793,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -768,6 +808,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -785,6 +826,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     return aluno(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -803,6 +845,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -817,6 +860,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -837,6 +881,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -851,6 +896,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -865,6 +911,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -882,6 +929,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     return aluno?.call(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -900,6 +948,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -914,6 +963,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -934,6 +984,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -948,6 +999,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -962,6 +1014,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -981,6 +1034,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       return aluno(
         id,
         nome,
+        imgPerfil,
         login,
         matricula,
         biografia,
@@ -1045,6 +1099,7 @@ abstract class _AlunoResponseModel implements UsuarioResponseModel {
   const factory _AlunoResponseModel({
     required final int id,
     required final String nome,
+    required final String imgPerfil,
     required final String login,
     required final int matricula,
     final String? biografia,
@@ -1063,6 +1118,8 @@ abstract class _AlunoResponseModel implements UsuarioResponseModel {
   int get id;
   @override
   String get nome;
+  @override
+  String get imgPerfil;
   @override
   String get login;
   @override
@@ -1101,6 +1158,7 @@ abstract class _$$AlunoNapneResponseModelImplCopyWith<$Res>
   $Res call({
     int id,
     String nome,
+    String imgPerfil,
     String login,
     int matricula,
     String? biografia,
@@ -1140,6 +1198,7 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nome = null,
+    Object? imgPerfil = null,
     Object? login = null,
     Object? matricula = null,
     Object? biografia = freezed,
@@ -1167,6 +1226,11 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
             null == nome
                 ? _value.nome
                 : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        imgPerfil:
+            null == imgPerfil
+                ? _value.imgPerfil
+                : imgPerfil // ignore: cast_nullable_to_non_nullable
                     as String,
         login:
             null == login
@@ -1264,6 +1328,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   const _$AlunoNapneResponseModelImpl({
     required this.id,
     required this.nome,
+    required this.imgPerfil,
     required this.login,
     required this.matricula,
     this.biografia,
@@ -1290,6 +1355,8 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   final int id;
   @override
   final String nome;
+  @override
+  final String imgPerfil;
   @override
   final String login;
   @override
@@ -1332,7 +1399,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.alunoNapne(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, curso: $curso, condicao: $condicao, laudo: $laudo, necessidadeEspecial: $necessidadeEspecial, necessidadeEscolar: $necessidadeEscolar, acompanhamento: $acompanhamento, situacao: $situacao)';
+    return 'UsuarioResponseModel.alunoNapne(id: $id, nome: $nome, imgPerfil: $imgPerfil, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, curso: $curso, condicao: $condicao, laudo: $laudo, necessidadeEspecial: $necessidadeEspecial, necessidadeEscolar: $necessidadeEscolar, acompanhamento: $acompanhamento, situacao: $situacao)';
   }
 
   @override
@@ -1342,6 +1409,8 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
             other is _$AlunoNapneResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.imgPerfil, imgPerfil) ||
+                other.imgPerfil == imgPerfil) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.matricula, matricula) ||
                 other.matricula == matricula) &&
@@ -1379,6 +1448,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     runtimeType,
     id,
     nome,
+    imgPerfil,
     login,
     matricula,
     biografia,
@@ -1412,6 +1482,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1426,6 +1497,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1446,6 +1518,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1460,6 +1533,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1474,6 +1548,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1491,6 +1566,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     return alunoNapne(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -1515,6 +1591,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1529,6 +1606,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1549,6 +1627,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1563,6 +1642,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1577,6 +1657,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1594,6 +1675,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     return alunoNapne?.call(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -1618,6 +1700,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1632,6 +1715,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1652,6 +1736,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1666,6 +1751,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1680,6 +1766,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -1699,6 +1786,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       return alunoNapne(
         id,
         nome,
+        imgPerfil,
         login,
         matricula,
         biografia,
@@ -1769,6 +1857,7 @@ abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
   const factory _AlunoNapneResponseModel({
     required final int id,
     required final String nome,
+    required final String imgPerfil,
     required final String login,
     required final int matricula,
     final String? biografia,
@@ -1793,6 +1882,8 @@ abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
   int get id;
   @override
   String get nome;
+  @override
+  String get imgPerfil;
   @override
   String get login;
   @override
@@ -1837,6 +1928,7 @@ abstract class _$$ProfessorResponseModelImplCopyWith<$Res>
   $Res call({
     int id,
     String nome,
+    String imgPerfil,
     String login,
     int matricula,
     String? biografia,
@@ -1869,6 +1961,7 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nome = null,
+    Object? imgPerfil = null,
     Object? login = null,
     Object? matricula = null,
     Object? biografia = freezed,
@@ -1890,6 +1983,11 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
             null == nome
                 ? _value.nome
                 : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        imgPerfil:
+            null == imgPerfil
+                ? _value.imgPerfil
+                : imgPerfil // ignore: cast_nullable_to_non_nullable
                     as String,
         login:
             null == login
@@ -1947,6 +2045,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
   const _$ProfessorResponseModelImpl({
     required this.id,
     required this.nome,
+    required this.imgPerfil,
     required this.login,
     required this.matricula,
     this.biografia,
@@ -1967,6 +2066,8 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
   final int id;
   @override
   final String nome;
+  @override
+  final String imgPerfil;
   @override
   final String login;
   @override
@@ -1997,7 +2098,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.professor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, formacao: $formacao)';
+    return 'UsuarioResponseModel.professor(id: $id, nome: $nome, imgPerfil: $imgPerfil, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, formacao: $formacao)';
   }
 
   @override
@@ -2007,6 +2108,8 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
             other is _$ProfessorResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.imgPerfil, imgPerfil) ||
+                other.imgPerfil == imgPerfil) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.matricula, matricula) ||
                 other.matricula == matricula) &&
@@ -2034,6 +2137,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     runtimeType,
     id,
     nome,
+    imgPerfil,
     login,
     matricula,
     biografia,
@@ -2063,6 +2167,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2077,6 +2182,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2097,6 +2203,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2111,6 +2218,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2125,6 +2233,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2142,6 +2251,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     return professor(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -2160,6 +2270,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2174,6 +2285,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2194,6 +2306,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2208,6 +2321,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2222,6 +2336,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2239,6 +2354,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     return professor?.call(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -2257,6 +2373,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2271,6 +2388,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2291,6 +2409,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2305,6 +2424,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2319,6 +2439,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2338,6 +2459,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       return professor(
         id,
         nome,
+        imgPerfil,
         login,
         matricula,
         biografia,
@@ -2402,6 +2524,7 @@ abstract class _ProfessorResponseModel implements UsuarioResponseModel {
   const factory _ProfessorResponseModel({
     required final int id,
     required final String nome,
+    required final String imgPerfil,
     required final String login,
     required final int matricula,
     final String? biografia,
@@ -2420,6 +2543,8 @@ abstract class _ProfessorResponseModel implements UsuarioResponseModel {
   int get id;
   @override
   String get nome;
+  @override
+  String get imgPerfil;
   @override
   String get login;
   @override
@@ -2458,6 +2583,7 @@ abstract class _$$TutorResponseModelImplCopyWith<$Res>
   $Res call({
     int id,
     String nome,
+    String imgPerfil,
     String login,
     int matricula,
     String? biografia,
@@ -2489,6 +2615,7 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nome = null,
+    Object? imgPerfil = null,
     Object? login = null,
     Object? matricula = null,
     Object? biografia = freezed,
@@ -2510,6 +2637,11 @@ class __$$TutorResponseModelImplCopyWithImpl<$Res>
             null == nome
                 ? _value.nome
                 : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        imgPerfil:
+            null == imgPerfil
+                ? _value.imgPerfil
+                : imgPerfil // ignore: cast_nullable_to_non_nullable
                     as String,
         login:
             null == login
@@ -2567,6 +2699,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   const _$TutorResponseModelImpl({
     required this.id,
     required this.nome,
+    required this.imgPerfil,
     required this.login,
     required this.matricula,
     this.biografia,
@@ -2587,6 +2720,8 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
   final int id;
   @override
   final String nome;
+  @override
+  final String imgPerfil;
   @override
   final String login;
   @override
@@ -2617,7 +2752,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.tutor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade)';
+    return 'UsuarioResponseModel.tutor(id: $id, nome: $nome, imgPerfil: $imgPerfil, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade)';
   }
 
   @override
@@ -2627,6 +2762,8 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
             other is _$TutorResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.imgPerfil, imgPerfil) ||
+                other.imgPerfil == imgPerfil) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.matricula, matricula) ||
                 other.matricula == matricula) &&
@@ -2654,6 +2791,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     runtimeType,
     id,
     nome,
+    imgPerfil,
     login,
     matricula,
     biografia,
@@ -2682,6 +2820,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2696,6 +2835,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2716,6 +2856,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2730,6 +2871,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2744,6 +2886,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2761,6 +2904,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     return tutor(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -2779,6 +2923,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2793,6 +2938,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2813,6 +2959,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2827,6 +2974,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2841,6 +2989,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2858,6 +3007,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     return tutor?.call(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -2876,6 +3026,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2890,6 +3041,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2910,6 +3062,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2924,6 +3077,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2938,6 +3092,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -2957,6 +3112,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       return tutor(
         id,
         nome,
+        imgPerfil,
         login,
         matricula,
         biografia,
@@ -3021,6 +3177,7 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
   const factory _TutorResponseModel({
     required final int id,
     required final String nome,
+    required final String imgPerfil,
     required final String login,
     required final int matricula,
     final String? biografia,
@@ -3039,6 +3196,8 @@ abstract class _TutorResponseModel implements UsuarioResponseModel {
   int get id;
   @override
   String get nome;
+  @override
+  String get imgPerfil;
   @override
   String get login;
   @override
@@ -3077,6 +3236,7 @@ abstract class _$$InterpreteResponseModelImplCopyWith<$Res>
   $Res call({
     int id,
     String nome,
+    String imgPerfil,
     String login,
     int matricula,
     String? biografia,
@@ -3111,6 +3271,7 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nome = null,
+    Object? imgPerfil = null,
     Object? login = null,
     Object? matricula = null,
     Object? biografia = freezed,
@@ -3134,6 +3295,11 @@ class __$$InterpreteResponseModelImplCopyWithImpl<$Res>
             null == nome
                 ? _value.nome
                 : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        imgPerfil:
+            null == imgPerfil
+                ? _value.imgPerfil
+                : imgPerfil // ignore: cast_nullable_to_non_nullable
                     as String,
         login:
             null == login
@@ -3201,6 +3367,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   const _$InterpreteResponseModelImpl({
     required this.id,
     required this.nome,
+    required this.imgPerfil,
     required this.login,
     required this.matricula,
     this.biografia,
@@ -3224,6 +3391,8 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
   final int id;
   @override
   final String nome;
+  @override
+  final String imgPerfil;
   @override
   final String login;
   @override
@@ -3263,7 +3432,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.interprete(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade, salary: $salary, libras: $libras)';
+    return 'UsuarioResponseModel.interprete(id: $id, nome: $nome, imgPerfil: $imgPerfil, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, especialidade: $especialidade, salary: $salary, libras: $libras)';
   }
 
   @override
@@ -3273,6 +3442,8 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
             other is _$InterpreteResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.imgPerfil, imgPerfil) ||
+                other.imgPerfil == imgPerfil) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.matricula, matricula) ||
                 other.matricula == matricula) &&
@@ -3302,6 +3473,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     runtimeType,
     id,
     nome,
+    imgPerfil,
     login,
     matricula,
     biografia,
@@ -3331,6 +3503,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3345,6 +3518,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3365,6 +3539,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3379,6 +3554,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3393,6 +3569,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     required TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3410,6 +3587,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     return interprete(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -3430,6 +3608,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3444,6 +3623,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3464,6 +3644,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3478,6 +3659,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3492,6 +3674,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult? Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3509,6 +3692,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     return interprete?.call(
       id,
       nome,
+      imgPerfil,
       login,
       matricula,
       biografia,
@@ -3529,6 +3713,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3543,6 +3728,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3563,6 +3749,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3577,6 +3764,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3591,6 +3779,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
     TResult Function(
       int id,
       String nome,
+      String imgPerfil,
       String login,
       int matricula,
       String? biografia,
@@ -3610,6 +3799,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       return interprete(
         id,
         nome,
+        imgPerfil,
         login,
         matricula,
         biografia,
@@ -3676,6 +3866,7 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
   const factory _InterpreteResponseModel({
     required final int id,
     required final String nome,
+    required final String imgPerfil,
     required final String login,
     required final int matricula,
     final String? biografia,
@@ -3696,6 +3887,8 @@ abstract class _InterpreteResponseModel implements UsuarioResponseModel {
   int get id;
   @override
   String get nome;
+  @override
+  String get imgPerfil;
   @override
   String get login;
   @override
@@ -3732,6 +3925,7 @@ AutorCardModel _$AutorCardModelFromJson(Map<String, dynamic> json) {
 mixin _$AutorCardModel {
   int get id => throw _privateConstructorUsedError;
   String get nome => throw _privateConstructorUsedError;
+  String get imgPerfil => throw _privateConstructorUsedError;
 
   /// Serializes this AutorCardModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -3750,7 +3944,7 @@ abstract class $AutorCardModelCopyWith<$Res> {
     $Res Function(AutorCardModel) then,
   ) = _$AutorCardModelCopyWithImpl<$Res, AutorCardModel>;
   @useResult
-  $Res call({int id, String nome});
+  $Res call({int id, String nome, String imgPerfil});
 }
 
 /// @nodoc
@@ -3767,7 +3961,11 @@ class _$AutorCardModelCopyWithImpl<$Res, $Val extends AutorCardModel>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? nome = null}) {
+  $Res call({
+    Object? id = null,
+    Object? nome = null,
+    Object? imgPerfil = null,
+  }) {
     return _then(
       _value.copyWith(
             id:
@@ -3779,6 +3977,11 @@ class _$AutorCardModelCopyWithImpl<$Res, $Val extends AutorCardModel>
                 null == nome
                     ? _value.nome
                     : nome // ignore: cast_nullable_to_non_nullable
+                        as String,
+            imgPerfil:
+                null == imgPerfil
+                    ? _value.imgPerfil
+                    : imgPerfil // ignore: cast_nullable_to_non_nullable
                         as String,
           )
           as $Val,
@@ -3795,7 +3998,7 @@ abstract class _$$AutorCardModelImplCopyWith<$Res>
   ) = __$$AutorCardModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String nome});
+  $Res call({int id, String nome, String imgPerfil});
 }
 
 /// @nodoc
@@ -3811,7 +4014,11 @@ class __$$AutorCardModelImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? nome = null}) {
+  $Res call({
+    Object? id = null,
+    Object? nome = null,
+    Object? imgPerfil = null,
+  }) {
     return _then(
       _$AutorCardModelImpl(
         id:
@@ -3824,6 +4031,11 @@ class __$$AutorCardModelImplCopyWithImpl<$Res>
                 ? _value.nome
                 : nome // ignore: cast_nullable_to_non_nullable
                     as String,
+        imgPerfil:
+            null == imgPerfil
+                ? _value.imgPerfil
+                : imgPerfil // ignore: cast_nullable_to_non_nullable
+                    as String,
       ),
     );
   }
@@ -3832,7 +4044,11 @@ class __$$AutorCardModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AutorCardModelImpl implements _AutorCardModel {
-  const _$AutorCardModelImpl({required this.id, required this.nome});
+  const _$AutorCardModelImpl({
+    required this.id,
+    required this.nome,
+    required this.imgPerfil,
+  });
 
   factory _$AutorCardModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AutorCardModelImplFromJson(json);
@@ -3841,10 +4057,12 @@ class _$AutorCardModelImpl implements _AutorCardModel {
   final int id;
   @override
   final String nome;
+  @override
+  final String imgPerfil;
 
   @override
   String toString() {
-    return 'AutorCardModel(id: $id, nome: $nome)';
+    return 'AutorCardModel(id: $id, nome: $nome, imgPerfil: $imgPerfil)';
   }
 
   @override
@@ -3853,12 +4071,14 @@ class _$AutorCardModelImpl implements _AutorCardModel {
         (other.runtimeType == runtimeType &&
             other is _$AutorCardModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.nome, nome) || other.nome == nome));
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.imgPerfil, imgPerfil) ||
+                other.imgPerfil == imgPerfil));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nome);
+  int get hashCode => Object.hash(runtimeType, id, nome, imgPerfil);
 
   /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.
@@ -3881,6 +4101,7 @@ abstract class _AutorCardModel implements AutorCardModel {
   const factory _AutorCardModel({
     required final int id,
     required final String nome,
+    required final String imgPerfil,
   }) = _$AutorCardModelImpl;
 
   factory _AutorCardModel.fromJson(Map<String, dynamic> json) =
@@ -3890,6 +4111,8 @@ abstract class _AutorCardModel implements AutorCardModel {
   int get id;
   @override
   String get nome;
+  @override
+  String get imgPerfil;
 
   /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.
@@ -4778,8 +5001,6 @@ mixin _$LibrasResponseModel {
   String? get justificativa => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
   Categorias get categorias => throw _privateConstructorUsedError;
-  List<SimpleUsuarioModel> get sugeriu => throw _privateConstructorUsedError;
-  List<SimpleUsuarioModel> get interprete => throw _privateConstructorUsedError;
 
   /// Serializes this LibrasResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -4808,8 +5029,6 @@ abstract class $LibrasResponseModelCopyWith<$Res> {
     String? justificativa,
     Status status,
     Categorias categorias,
-    List<SimpleUsuarioModel> sugeriu,
-    List<SimpleUsuarioModel> interprete,
   });
 }
 
@@ -4837,8 +5056,6 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
     Object? justificativa = freezed,
     Object? status = null,
     Object? categorias = null,
-    Object? sugeriu = null,
-    Object? interprete = null,
   }) {
     return _then(
       _value.copyWith(
@@ -4887,16 +5104,6 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
                     ? _value.categorias
                     : categorias // ignore: cast_nullable_to_non_nullable
                         as Categorias,
-            sugeriu:
-                null == sugeriu
-                    ? _value.sugeriu
-                    : sugeriu // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleUsuarioModel>,
-            interprete:
-                null == interprete
-                    ? _value.interprete
-                    : interprete // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleUsuarioModel>,
           )
           as $Val,
     );
@@ -4922,8 +5129,6 @@ abstract class _$$LibrasResponseModelImplCopyWith<$Res>
     String? justificativa,
     Status status,
     Categorias categorias,
-    List<SimpleUsuarioModel> sugeriu,
-    List<SimpleUsuarioModel> interprete,
   });
 }
 
@@ -4950,8 +5155,6 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
     Object? justificativa = freezed,
     Object? status = null,
     Object? categorias = null,
-    Object? sugeriu = null,
-    Object? interprete = null,
   }) {
     return _then(
       _$LibrasResponseModelImpl(
@@ -5000,16 +5203,6 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
                 ? _value.categorias
                 : categorias // ignore: cast_nullable_to_non_nullable
                     as Categorias,
-        sugeriu:
-            null == sugeriu
-                ? _value._sugeriu
-                : sugeriu // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleUsuarioModel>,
-        interprete:
-            null == interprete
-                ? _value._interprete
-                : interprete // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleUsuarioModel>,
       ),
     );
   }
@@ -5029,10 +5222,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     this.justificativa,
     required this.status,
     required this.categorias,
-    required final List<SimpleUsuarioModel> sugeriu,
-    required final List<SimpleUsuarioModel> interprete,
-  }) : _sugeriu = sugeriu,
-       _interprete = interprete;
+  });
 
   factory _$LibrasResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LibrasResponseModelImplFromJson(json);
@@ -5055,25 +5245,10 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
   final Status status;
   @override
   final Categorias categorias;
-  final List<SimpleUsuarioModel> _sugeriu;
-  @override
-  List<SimpleUsuarioModel> get sugeriu {
-    if (_sugeriu is EqualUnmodifiableListView) return _sugeriu;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sugeriu);
-  }
-
-  final List<SimpleUsuarioModel> _interprete;
-  @override
-  List<SimpleUsuarioModel> get interprete {
-    if (_interprete is EqualUnmodifiableListView) return _interprete;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_interprete);
-  }
 
   @override
   String toString() {
-    return 'LibrasResponseModel(id: $id, palavra: $palavra, descricao: $descricao, url: $url, video: $video, foto: $foto, justificativa: $justificativa, status: $status, categorias: $categorias, sugeriu: $sugeriu, interprete: $interprete)';
+    return 'LibrasResponseModel(id: $id, palavra: $palavra, descricao: $descricao, url: $url, video: $video, foto: $foto, justificativa: $justificativa, status: $status, categorias: $categorias)';
   }
 
   @override
@@ -5092,12 +5267,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
                 other.justificativa == justificativa) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.categorias, categorias) ||
-                other.categorias == categorias) &&
-            const DeepCollectionEquality().equals(other._sugeriu, _sugeriu) &&
-            const DeepCollectionEquality().equals(
-              other._interprete,
-              _interprete,
-            ));
+                other.categorias == categorias));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5113,8 +5283,6 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     justificativa,
     status,
     categorias,
-    const DeepCollectionEquality().hash(_sugeriu),
-    const DeepCollectionEquality().hash(_interprete),
   );
 
   /// Create a copy of LibrasResponseModel
@@ -5145,8 +5313,6 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
     final String? justificativa,
     required final Status status,
     required final Categorias categorias,
-    required final List<SimpleUsuarioModel> sugeriu,
-    required final List<SimpleUsuarioModel> interprete,
   }) = _$LibrasResponseModelImpl;
 
   factory _LibrasResponseModel.fromJson(Map<String, dynamic> json) =
@@ -5170,10 +5336,6 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
   Status get status;
   @override
   Categorias get categorias;
-  @override
-  List<SimpleUsuarioModel> get sugeriu;
-  @override
-  List<SimpleUsuarioModel> get interprete;
 
   /// Create a copy of LibrasResponseModel
   /// with the given fields replaced by the non-null parameter values.

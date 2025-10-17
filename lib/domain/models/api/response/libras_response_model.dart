@@ -12,8 +12,6 @@ class LibrasResponseModel with _$LibrasResponseModel {
     String? justificativa,
     required Status status,
     required Categorias categorias,
-    required List<SimpleUsuarioModel> sugeriu,
-    required List<SimpleUsuarioModel> interprete, // Union garantirá que sejam Intérpretes
   }) = _LibrasResponseModel;
 
   factory LibrasResponseModel.fromJson(Map<String, dynamic> json) =>

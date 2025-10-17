@@ -5,6 +5,7 @@ class AutorCardModel with _$AutorCardModel {
   const factory AutorCardModel({
     required int id,
     required String nome,
+    required String imgPerfil
   }) = _AutorCardModel;
 
   factory AutorCardModel.fromJson(Map<String, dynamic> json) =>

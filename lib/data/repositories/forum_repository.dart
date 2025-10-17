@@ -16,6 +16,7 @@ abstract class ForumRepository {
   });
 
   AsyncResult<PublicacaoDetalhadaModel> findById(int id);
+  AsyncResult<bool> toggleLikePublication(int publicationId);
 
   AsyncResult<PublicacaoDetalhadaModel> updatePublication(
     int id,

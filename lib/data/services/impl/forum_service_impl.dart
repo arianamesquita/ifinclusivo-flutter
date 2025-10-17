@@ -80,7 +80,11 @@ class ForumServiceImpl implements ForumService {
     final response = await _dio.put('$basePath/$id', data: publicacaoRequest);
     return response.data;
   }
-
+  @override
+  Future<Map<String, dynamic>> toggleLikePublication(int publicationID) async {
+    final response = await _dio.put('/publicacoes/$publicationID/like');
+    return response.data;
+  }
   @override
   Future<Map<String, dynamic>> findReplies({
     required int id,
@@ -131,4 +135,6 @@ class ForumServiceImpl implements ForumService {
   @override
   Future<void> deleteComment(int commentId) async =>
       await _dio.delete('/comentarios/$commentId');
+
+
 }

@@ -14,6 +14,7 @@ abstract class ForumService {
   Future<Map<String, dynamic>> findPublicationById(int id);
 
   Future<void> deletePublication(int id);
+  Future<Map<String, dynamic>> toggleLikePublication(int publicationID);
 
   Future<Map<String, dynamic>> updatePublication({
     required int id,
@@ -45,6 +46,7 @@ abstract class ForumService {
     int size = 10,
   });
   Future<void> deleteComment(int commentId);
+
 
 
 }

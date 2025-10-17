@@ -51,7 +51,7 @@ class RepliesListComment extends StatelessWidget {
                                 publicationText: m.comment.texto,
                                 publicationId: m.comment.publicacaoId,
                                 autorId: m.comment.usuario.id,
-                                userMark: userMark,
+                                userMark: userMark, imgPath: m.comment.usuario.imgPerfil,
                               ),
                               Divider()
                             ],

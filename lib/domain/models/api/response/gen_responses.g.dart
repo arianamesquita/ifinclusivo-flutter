@@ -11,6 +11,7 @@ _$AlunoResponseModelImpl _$$AlunoResponseModelImplFromJson(
 ) => _$AlunoResponseModelImpl(
   id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
+  imgPerfil: json['imgPerfil'] as String,
   login: json['login'] as String,
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$AlunoResponseModelImplToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'nome': instance.nome,
+  'imgPerfil': instance.imgPerfil,
   'login': instance.login,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
@@ -61,6 +63,7 @@ _$AlunoNapneResponseModelImpl _$$AlunoNapneResponseModelImplFromJson(
 ) => _$AlunoNapneResponseModelImpl(
   id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
+  imgPerfil: json['imgPerfil'] as String,
   login: json['login'] as String,
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
@@ -92,6 +95,7 @@ Map<String, dynamic> _$$AlunoNapneResponseModelImplToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'nome': instance.nome,
+  'imgPerfil': instance.imgPerfil,
   'login': instance.login,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
@@ -115,6 +119,7 @@ _$ProfessorResponseModelImpl _$$ProfessorResponseModelImplFromJson(
 ) => _$ProfessorResponseModelImpl(
   id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
+  imgPerfil: json['imgPerfil'] as String,
   login: json['login'] as String,
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
@@ -140,6 +145,7 @@ Map<String, dynamic> _$$ProfessorResponseModelImplToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'nome': instance.nome,
+  'imgPerfil': instance.imgPerfil,
   'login': instance.login,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
@@ -157,6 +163,7 @@ _$TutorResponseModelImpl _$$TutorResponseModelImplFromJson(
 ) => _$TutorResponseModelImpl(
   id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
+  imgPerfil: json['imgPerfil'] as String,
   login: json['login'] as String,
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
@@ -182,6 +189,7 @@ Map<String, dynamic> _$$TutorResponseModelImplToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'nome': instance.nome,
+  'imgPerfil': instance.imgPerfil,
   'login': instance.login,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
@@ -199,6 +207,7 @@ _$InterpreteResponseModelImpl _$$InterpreteResponseModelImplFromJson(
 ) => _$InterpreteResponseModelImpl(
   id: (json['id'] as num).toInt(),
   nome: json['nome'] as String,
+  imgPerfil: json['imgPerfil'] as String,
   login: json['login'] as String,
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
@@ -229,6 +238,7 @@ Map<String, dynamic> _$$InterpreteResponseModelImplToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'nome': instance.nome,
+  'imgPerfil': instance.imgPerfil,
   'login': instance.login,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
@@ -247,11 +257,16 @@ _$AutorCardModelImpl _$$AutorCardModelImplFromJson(Map<String, dynamic> json) =>
     _$AutorCardModelImpl(
       id: (json['id'] as num).toInt(),
       nome: json['nome'] as String,
+      imgPerfil: json['imgPerfil'] as String,
     );
 
 Map<String, dynamic> _$$AutorCardModelImplToJson(
   _$AutorCardModelImpl instance,
-) => <String, dynamic>{'id': instance.id, 'nome': instance.nome};
+) => <String, dynamic>{
+  'id': instance.id,
+  'nome': instance.nome,
+  'imgPerfil': instance.imgPerfil,
+};
 
 _$PublicacaoDetalhadaModelImpl _$$PublicacaoDetalhadaModelImplFromJson(
   Map<String, dynamic> json,
@@ -352,14 +367,6 @@ _$LibrasResponseModelImpl _$$LibrasResponseModelImplFromJson(
   justificativa: json['justificativa'] as String?,
   status: $enumDecode(_$StatusEnumMap, json['status']),
   categorias: $enumDecode(_$CategoriasEnumMap, json['categorias']),
-  sugeriu:
-      (json['sugeriu'] as List<dynamic>)
-          .map((e) => SimpleUsuarioModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  interprete:
-      (json['interprete'] as List<dynamic>)
-          .map((e) => SimpleUsuarioModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
 );
 
 Map<String, dynamic> _$$LibrasResponseModelImplToJson(
@@ -374,8 +381,6 @@ Map<String, dynamic> _$$LibrasResponseModelImplToJson(
   'justificativa': instance.justificativa,
   'status': _$StatusEnumMap[instance.status]!,
   'categorias': _$CategoriasEnumMap[instance.categorias]!,
-  'sugeriu': instance.sugeriu.map((e) => e.toJson()).toList(),
-  'interprete': instance.interprete.map((e) => e.toJson()).toList(),
 };
 
 const _$StatusEnumMap = {

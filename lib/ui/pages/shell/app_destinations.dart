@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppDestinations {
-  static List<NavigationRailDestination> rail(BuildContext context) =>
+  static List<NavigationRailDestination> rail(BuildContext context, String? imgPath) =>
       <NavigationRailDestination>[
         NavigationRailDestination(
           icon: Icon(Icons.group_work_outlined),
@@ -24,18 +24,22 @@ class AppDestinations {
             height: 24,
             width: 24,
             child: CircleAvatar(
+              backgroundImage:
+              (imgPath != null && imgPath.isNotEmpty)
+                  ? NetworkImage(imgPath)
+                  : null,
               backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-              child: Icon(
+              child:imgPath == null ? Icon(
                 Icons.person,
                 color: Theme.of(context).colorScheme.onTertiaryContainer,
                 size: 20,
-              ),
+              ):null,
             ),
           ),
           label: Text('Perfil'),
         ),
       ];
-  static List<NavigationDrawerDestination> drawer(BuildContext context) =>
+  static List<NavigationDrawerDestination> drawer(BuildContext context,String? imgPath) =>
       <NavigationDrawerDestination>[
         NavigationDrawerDestination(
           icon: Icon(
@@ -91,12 +95,16 @@ class AppDestinations {
             height: 24,
             width: 24,
             child: CircleAvatar(
+              backgroundImage:
+              (imgPath != null && imgPath.isNotEmpty)
+                  ? NetworkImage(imgPath)
+                  : null,
               backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-              child: Icon(
+              child:imgPath == null ? Icon(
                 Icons.person,
                 color: Theme.of(context).colorScheme.onTertiaryContainer,
                 size: 20,
-              ),
+              ):null,
             ),
           ),
           label: Text(
@@ -106,7 +114,7 @@ class AppDestinations {
             ),
           ),
         ),
-      ];  static List<NavigationDestination> bottom(BuildContext context) =>
+      ];  static List<NavigationDestination> bottom(BuildContext context, String? imgPath) =>
       <NavigationDestination>[
         NavigationDestination(
             icon: Icon(
@@ -138,12 +146,16 @@ class AppDestinations {
             height: 24,
             width: 24,
             child: CircleAvatar(
+              backgroundImage:
+              (imgPath != null && imgPath.isNotEmpty)
+                  ? NetworkImage(imgPath)
+                  : null,
               backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-              child: Icon(
+              child:imgPath == null ?Icon(
                 Icons.person,
                 color: Theme.of(context).colorScheme.onTertiaryContainer,
                 size: 20,
-              ),
+              ):null,
             ),
           ),
           label:

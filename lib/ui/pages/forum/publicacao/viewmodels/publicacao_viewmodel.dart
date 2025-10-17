@@ -78,6 +78,17 @@ class PublicacaoViewModel extends ChangeNotifier {
     }, (onFailure) => onFailure);
   }
 
+  toggleLikePublication(int id) async {
+    final response = await _forumRepository.toggleLikePublication(id);
+    response.fold((onSuccess){
+      if(_publication!=null){
+        _publication = _publication!.copyWith(curtidoPeloUsuario: onSuccess);
+        notifyListeners();
+      }
+    }, (onFailure){});
+
+  }
+
   // 🔹 Deletar resposta da lista
   AsyncResult<void> deleteResposta(int id) async {
     final result = await _forumRepository.deletePublication(id);

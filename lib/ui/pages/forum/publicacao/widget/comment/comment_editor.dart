@@ -13,6 +13,7 @@ class CommentEditor extends StatefulWidget {
   final bool isLoading;
   final String? initialText;
   final bool isEditing;
+  final String? imgPath;
 
   const CommentEditor.add({
     super.key,
@@ -20,6 +21,7 @@ class CommentEditor extends StatefulWidget {
     this.onCancel,
     this.isLoading = false,
     this.clearNotifier,
+    this.imgPath,
   }) : initialText = null,
        isEditing = false;
 
@@ -31,6 +33,7 @@ class CommentEditor extends StatefulWidget {
     this.isLoading = false,
     required this.initialText,
     this.clearNotifier,
+    this.imgPath,
   }) : isEditing = true;
 
   @override
@@ -141,7 +144,12 @@ class _CommentEditorState extends State<CommentEditor> {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 10,
       children: [
-        CircleAvatar(),
+        CircleAvatar(
+          backgroundImage:
+              (widget.imgPath != null && widget.imgPath!.isNotEmpty)
+                  ? NetworkImage(widget.imgPath!)
+                  : null,
+        ),
         Expanded(
           child: Column(
             children: [
@@ -191,11 +199,11 @@ class _CommentEditorState extends State<CommentEditor> {
                                                 onPressed: () {
                                                   setState(() {
                                                     _pinToolbar = !_pinToolbar;
-
                                                   });
                                                 },
                                                 icon: FaIcon(
-                                                  FontAwesomeIcons.thumbtackSlash,
+                                                  FontAwesomeIcons
+                                                      .thumbtackSlash,
                                                   size: 18,
                                                 ),
                                               )
@@ -206,8 +214,7 @@ class _CommentEditorState extends State<CommentEditor> {
                                                   });
                                                 },
                                                 icon: FaIcon(
-                                                  FontAwesomeIcons
-                                                      .thumbtack,
+                                                  FontAwesomeIcons.thumbtack,
                                                   size: 18,
                                                 ),
                                               ),

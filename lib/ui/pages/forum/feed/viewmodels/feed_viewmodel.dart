@@ -73,7 +73,7 @@ class FeedViewModel extends ChangeNotifier {
 
     response.fold(
       (onSuccess) {
-        publications.addAll(onSuccess.content);
+        publications.addAll(onSuccess.content.toList());
         _hasMorePages = !onSuccess.last; // agora funciona
         _currentPage = 1;
 
@@ -134,8 +134,20 @@ class FeedViewModel extends ChangeNotifier {
      }
      return true;
    }, (onFailure){
+     print(onFailure);
      return onFailure;
    });
+
+  }
+  toggleLikePublication(int id) async {
+    final response = await _forumRepository.toggleLikePublication(id);
+    response.fold((onSuccess){
+      final index = publications.indexWhere((p)=> p.id ==id);
+      if(index !=-1){
+        publications[index] = publications[index].copyWith(curtidoPeloUsuario: onSuccess);
+        notifyListeners();
+      }
+    }, (onFailure){});
 
   }
 

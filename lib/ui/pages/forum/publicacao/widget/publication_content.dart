@@ -44,7 +44,7 @@ class _PublicationContentState extends State<PublicationContent> {
           builder: (context,vm, state) {
             return AccountHeader.mine(
               nameUser: widget.model.usuario.nome,
-              imgPath: null,
+              imgPath: widget.model.usuario.imgPerfil,
               isAnswerAccepted: false,
               canMarkAsAnswer: false,
               menuItems: (vm.currentUser != null &&
@@ -145,21 +145,46 @@ class _PublicationContentState extends State<PublicationContent> {
         ),
         ListChipsCard(categorias: widget.model.categorias),
 
-        BottomBarPublication(
-          likes: widget.model.totalLikes,
-          comments: widget.model.totalRespostas,
-          isLiked: widget.model.curtidoPeloUsuario, // já curtido pelo usuário
-          onLike: () {
+        Consumer<PublicacaoViewModel>(
+          builder: (context, mv, _) {
+            final publi = mv.publication;
+            final user = mv.currentUser;
 
-          },
-          onComment: () {
-            context.push(
-              NewPublicacaoRouter().location,
-              extra: widget.model,
+            if(publi != null && user!=null){
+              return BottomBarPublication(
+                likes: publi.totalLikes,
+                comments: publi.totalRespostas,
+                isLiked: publi.curtidoPeloUsuario, // já curtido pelo usuário
+                onLike: () {
+                  mv.toggleLikePublication(publi.id);
+                },
+                onComment: () {
+                  context.push(
+                    NewPublicacaoRouter().location,
+                    extra: widget.model,
+                  );
+                },
+                onShare: () {
+                },
+              );
+            }
+            return BottomBarPublication(
+              likes: widget.model.totalLikes,
+              comments: widget.model.totalRespostas,
+              isLiked: widget.model.curtidoPeloUsuario, // já curtido pelo usuário
+              onLike: () {
+
+              },
+              onComment: () {
+                context.push(
+                  NewPublicacaoRouter().location,
+                  extra: widget.model,
+                );
+              },
+              onShare: () {
+              },
             );
-          },
-          onShare: () {
-          },
+          }
         ),
 
       ],

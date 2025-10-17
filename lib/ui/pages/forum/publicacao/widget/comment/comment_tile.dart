@@ -15,6 +15,7 @@ class CommentTile extends StatefulWidget {
   final int? parentId;
   final int? userMark;
   final String userName;
+  final String imgPath;
   final int autorId;
   final String? taggedUser;
   final int? taggedId;
@@ -37,7 +38,7 @@ class CommentTile extends StatefulWidget {
     required this.autorId,
     this.userMark,
     this.parentId,
-    this.taggedId,
+    this.taggedId, required this.imgPath,
   }) : showChildrenTree = true;
 
   const CommentTile.noTree({
@@ -53,7 +54,7 @@ class CommentTile extends StatefulWidget {
     required this.autorId,
     this.userMark,
     this.parentId,
-    this.taggedId,
+    this.taggedId, required this.imgPath,
   }) : showChildrenTree = false;
   @override
   State<CommentTile> createState() => _CommentTileState();
@@ -198,6 +199,7 @@ class _CommentTileState extends State<CommentTile> {
                             .updateCommand,
                     builder: (context, _) {
                       return CommentEditor.edit(
+                        imgPath: widget.imgPath,
                         onSubmit: _sendEdite,
                         isLoading:
                             _viewModel
@@ -262,7 +264,7 @@ class _CommentTileState extends State<CommentTile> {
                                   );
                                 }
                                 : null,
-                        showReplies: commentNode.showReplies,
+                        showReplies: commentNode.showReplies, imgPath: widget.imgPath,
                       ),
                       ListenableBuilder(
                         listenable: commentNode.addCommand,
@@ -277,6 +279,7 @@ class _CommentTileState extends State<CommentTile> {
                                         bottom: 8.0,
                                       ),
                                       child: CommentEditor.add(
+                                        imgPath: widget.imgPath,
                                         onSubmit: _sendReply,
                                         clearNotifier: _clearEditorNotifier,
                                         isLoading:

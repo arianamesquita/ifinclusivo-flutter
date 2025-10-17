@@ -131,6 +131,21 @@ class ForumRepositoryImpl implements ForumRepository {
     }
   }
   @override
+  AsyncResult<bool> toggleLikePublication(int publicationId)async {
+    try {
+      final response = await _service.toggleLikePublication(publicationId);
+      print(response);
+      return Success(response['liked']);
+    } on DioException catch (e) {
+
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado ao curtir a publicação.'));
+    }
+  }
+  
+  
+  @override
   AsyncResult<ComentarioResponseModel> addComment({required int publicationId, required ComentarioRequestModel request}) async {
     try {
       final response = await _service.addComment(
@@ -227,5 +242,7 @@ class ForumRepositoryImpl implements ForumRepository {
       return Failure(Exception('Erro inesperado ao excluir a comentário. $e'));
     }
   }
+
+
 
 }

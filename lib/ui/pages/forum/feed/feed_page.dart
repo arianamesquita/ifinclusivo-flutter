@@ -48,38 +48,37 @@ class _FeedPageState extends State<FeedPage> {
         if (!_showFab) setState(() => _showFab = true);
       }
     });
-    context.read<FeedViewModel>().deleteCommentsCommand.addListener(_handlerDelete);
+    context.read<FeedViewModel>().deleteCommentsCommand.addListener(
+      _handlerDelete,
+    );
   }
 
-
-  _handlerDelete(){
-   final cmd = context.read<FeedViewModel>().deleteCommentsCommand;
-   switch(cmd.value){
-
-     case IdleCommand<bool>():
-     case CancelledCommand<bool>():
-     case RunningCommand<bool>():
-     return;
-     case FailureCommand<bool>():
-       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-           content: Text('Error ao apagar Publicação!'),
-           backgroundColor: Colors.green,
-         ),
-       );
-       cmd.reset();
-       break;
-     case SuccessCommand<bool>():
-       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-           content: Text('Publicação apagada com sucesso!'),
-           backgroundColor: Colors.green,
-         ),
-       );
-       cmd.reset();
-       break;
-   }
-
+  _handlerDelete() {
+    final cmd = context.read<FeedViewModel>().deleteCommentsCommand;
+    switch (cmd.value) {
+      case IdleCommand<bool>():
+      case CancelledCommand<bool>():
+      case RunningCommand<bool>():
+        return;
+      case FailureCommand<bool>():
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error ao apagar Publicação!'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        cmd.reset();
+        break;
+      case SuccessCommand<bool>():
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Publicação apagada com sucesso!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        cmd.reset();
+        break;
+    }
   }
 
   @override
@@ -145,6 +144,11 @@ class _FeedPageState extends State<FeedPage> {
                                     key: ValueKey(
                                       viewModel.publications[index].id,
                                     ),
+                                    onLike: () {
+                                      viewModel.toggleLikePublication(
+                                        viewModel.publications[index].id,
+                                      );
+                                    },
                                     model: viewModel.publications[index],
                                     onTap:
                                         () => PublicacaoRouter(
@@ -171,9 +175,13 @@ class _FeedPageState extends State<FeedPage> {
                                                             .publications[index],
                                                   );
 
-                                                  if(result == true){
-                                                    await viewModel.updatePubication(viewModel.publications[index].id,);
-
+                                                  if (result == true) {
+                                                    await viewModel
+                                                        .updatePubication(
+                                                          viewModel
+                                                              .publications[index]
+                                                              .id,
+                                                        );
                                                   }
                                                 },
                                               ),
@@ -185,29 +193,53 @@ class _FeedPageState extends State<FeedPage> {
                                                     context: context,
                                                     builder: (context) {
                                                       return AlertDialog(
-                                                        title: const Text("Confirmar exclusão"),
+                                                        title: const Text(
+                                                          "Confirmar exclusão",
+                                                        ),
                                                         content: const Text(
                                                           "Tem certeza que deseja excluir esta publicação? Essa ação não poderá ser desfeita.",
                                                         ),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () {
-                                                              Navigator.of(context).pop();
+                                                              Navigator.of(
+                                                                context,
+                                                              ).pop();
                                                             },
-                                                            child: const Text("Cancelar"),
+                                                            child: const Text(
+                                                              "Cancelar",
+                                                            ),
                                                           ),
                                                           ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
-                                                              backgroundColor: Theme.of(context).colorScheme.error,
-                                                              foregroundColor:  Theme.of(context).colorScheme.onError
-
+                                                              backgroundColor:
+                                                                  Theme.of(
+                                                                        context,
+                                                                      )
+                                                                      .colorScheme
+                                                                      .error,
+                                                              foregroundColor:
+                                                                  Theme.of(
+                                                                        context,
+                                                                      )
+                                                                      .colorScheme
+                                                                      .onError,
                                                             ),
                                                             onPressed: () async {
-                                                              Navigator.of(context).pop();
-                                                           viewModel.deleteCommentsCommand.execute(viewModel.publications[index].id,);
-
+                                                              Navigator.of(
+                                                                context,
+                                                              ).pop();
+                                                              viewModel
+                                                                  .deleteCommentsCommand
+                                                                  .execute(
+                                                                    viewModel
+                                                                        .publications[index]
+                                                                        .id,
+                                                                  );
                                                             },
-                                                            child: const Text("Excluir"),
+                                                            child: const Text(
+                                                              "Excluir",
+                                                            ),
                                                           ),
                                                         ],
                                                       );

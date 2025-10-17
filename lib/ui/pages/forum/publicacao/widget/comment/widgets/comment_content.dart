@@ -8,6 +8,7 @@ import 'actions_bar_comment.dart';
 class CommentContent extends StatelessWidget {
   final String userName;
   final String? taggedUser;
+  final String imgPath;
   final DateTime dateCreation;
   final List<PopupMenuEntry<dynamic>> menuItems;
   final PublicacaoViewModel viewModel;
@@ -34,7 +35,7 @@ class CommentContent extends StatelessWidget {
     required this.replyCount,
     required this.controller,
     required this.showReplyWidget,
-    required this.showReplies,
+    required this.showReplies, required this.imgPath,
   });
 
   @override
@@ -45,7 +46,10 @@ class CommentContent extends StatelessWidget {
         children: [
           Column(
             children: [
-              CircleAvatar(),
+              CircleAvatar(   backgroundImage:
+              (imgPath != null && imgPath!.isNotEmpty)
+                  ? NetworkImage(imgPath!)
+                  : null,),
               Expanded(
                 child: AnimatedSize(
                   duration: const Duration(milliseconds: 1000),
