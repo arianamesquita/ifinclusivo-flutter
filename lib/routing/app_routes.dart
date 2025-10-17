@@ -20,8 +20,9 @@ class AppRoutes {
 
 
   static const String libras = '$_app/libras';
-  static const String midia = 'midia';
-  static const String categoriaLibras = 'category/:categoria';
+  static const String media = 'midia';
+  static const String librasCategory = 'category/:categoria';
+  static const String wordSuggestion = 'word-suggestion';
 
 
   static const String more = '$_app/more';
@@ -43,8 +44,9 @@ class AppRoutes {
     AppRoute(path: newPublication, allowedRoles: Roles.values),
 
     AppRoute(path: libras, isPublic: true, allowedRoles: Roles.values),
-    AppRoute(path: midia, isPublic: true, allowedRoles: Roles.values),
-    AppRoute(path: categoriaLibras, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: media, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: librasCategory, isPublic: true, allowedRoles: Roles.values),
+    AppRoute(path: wordSuggestion, isPublic: false, allowedRoles: Roles.values),
 
     AppRoute(path: more, allowedRoles: [Roles.ROLE_INTERPRETE, Roles.ROLE_TUTOR]),
     AppRoute(path: notification, allowedRoles: Roles.values),

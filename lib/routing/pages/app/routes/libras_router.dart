@@ -6,8 +6,11 @@ const librasBranch = TypedStatefulShellBranch<StatefulShellBranchData>(
 
 const librasRouter = TypedGoRoute<LibrasRouter>(
   path: AppRoutes.libras,
-  routes: [librasTopicsRoute,
-    midiaRouter],
+  routes: [
+    librasTopicsRoute,
+    midiaRouter,
+    wordSuggestionRouter
+  ],
 );
 
 class LibrasRouter extends GoRouteData with _$LibrasRouter {
@@ -20,7 +23,7 @@ class LibrasRouter extends GoRouteData with _$LibrasRouter {
 }
 
 const librasTopicsRoute = TypedGoRoute<LibrasTopicRouter>(
-  path: AppRoutes.categoriaLibras,
+  path: AppRoutes.librasCategory,
 );
 
 class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
@@ -33,7 +36,7 @@ class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
   }
 }
 
-const midiaRouter = TypedGoRoute<MidiaRouter>(path: AppRoutes.midia);
+const midiaRouter = TypedGoRoute<MidiaRouter>(path: AppRoutes.media);
 
 class MidiaRouter extends GoRouteData with _$MidiaRouter {
   const MidiaRouter();
@@ -47,5 +50,18 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
           'Libras significa Língua Brasileira de Sinais. Através dela, é possível promover mais acessibilidade na comunicação para pessoas deficientes auditivas.',
       relacionados: ['CSS', 'SCSS', 'JavaScript', 'Angular', 'PHP'],
     );
+  }
+}
+
+const wordSuggestionRouter = TypedGoRoute<WordSuggestionRouter>(
+  path: AppRoutes.wordSuggestion,
+);
+
+class WordSuggestionRouter extends GoRouteData with _$WordSuggestionRouter {
+  const WordSuggestionRouter();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return WordSuggestionPage();
   }
 }
