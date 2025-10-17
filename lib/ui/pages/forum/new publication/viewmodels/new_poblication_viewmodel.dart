@@ -3,57 +3,31 @@ import 'package:if_inclusivo/data/repositories/forum_repository.dart';
 
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:result_command/result_command.dart';
+import 'package:result_dart/result_dart.dart';
 
-import '../../../../../../data/repositories/auth_repository.dart';
 import '../../../../../../domain/models/api/response/gen_responses.dart';
 
-enum NewPublicationState { idle, loading, success, failure }
-
-class NewPublicationViewModel extends ChangeNotifier {
-  NewPublicationViewModel({
-    required ForumRepository forumRepository,
-    required AuthRepository authRepository,
-  }) : _forumRepository = forumRepository,
-       _authRepository = authRepository{
-    currentUser = _authRepository.currentUser;
+class PublicationEditorViewModel extends ChangeNotifier {
+  PublicationEditorViewModel({required ForumRepository forumRepository})
+    : _forumRepository = forumRepository {
+    addPublicationCommand = Command1(_postPublication);
+    updatePublicationCommand = Command2(_updatePublication);
   }
 
   final ForumRepository _forumRepository;
-  final AuthRepository _authRepository;
+  late final Command1<PublicacaoDetalhadaModel, PublicacaoRequestModel>
+  addPublicationCommand;
 
-  UsuarioResponseModel? currentUser;
+  late final Command2<PublicacaoDetalhadaModel, int, PublicacaoRequestModel>
+  updatePublicationCommand;
 
+  AsyncResult<PublicacaoDetalhadaModel> _postPublication(
+    PublicacaoRequestModel request,
+  ) async => await _forumRepository.savePublication(request);
 
-  NewPublicationState _state = NewPublicationState.idle;
-  NewPublicationState get state => _state;
-
-  PublicacaoDetalhadaModel? createdPublication;
-  String? errorMessage;
-
-  Future<PublicacaoDetalhadaModel?> postPublication(PublicacaoRequestModel request) async {
-    _state = NewPublicationState.loading;
-    notifyListeners();
-      final newPublication = await _forumRepository.create(request);
-      return newPublication.fold(
-          (onSuccess){
-            createdPublication = onSuccess;
-            _state = NewPublicationState.success;
-            notifyListeners();
-            return onSuccess;
-          },
-          (onFailure){
-            errorMessage = onFailure.toString();
-            _state = NewPublicationState.failure;
-            notifyListeners();
-
-            return null;
-          });
-  }
-
-  void resetState() {
-    _state = NewPublicationState.idle;
-    errorMessage = null;
-    createdPublication = null;
-    notifyListeners();
-  }
+  AsyncResult<PublicacaoDetalhadaModel> _updatePublication(
+    int publicationId,
+    PublicacaoRequestModel request,
+  ) async => await _forumRepository.updatePublication(publicationId, request);
 }
