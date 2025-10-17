@@ -50,11 +50,11 @@ class RegisterViewModel extends ChangeNotifier {
     try {
       final result = await _repository.registerProfessor(professor);
       _registeredUser = result;
-      print('✅ Registro de Tutor bem-sucedido! Resposta: $result');
+      print('✅ Registro de Professor bem-sucedido! Resposta: $result');
       return true;
     } catch (e) {
       _errorMessage = e.toString();
-      print('❌ Erro ao registrar tutor: $_errorMessage');
+      print('❌ Erro ao registrar professor: $_errorMessage');
       return false;
     } finally {
       _isLoading = false;
@@ -70,11 +70,11 @@ class RegisterViewModel extends ChangeNotifier {
     try {
       final result = await _repository.registerInterprete(interprete);
       _registeredUser = result;
-      print('✅ Registro de Tutor bem-sucedido! Resposta: $result');
+      print('✅ Registro de Interprete bem-sucedido! Resposta: $result');
       return true;
     } catch (e) {
       _errorMessage = e.toString();
-      print('❌ Erro ao registrar tutor: $_errorMessage');
+      print('❌ Erro ao registrar Interprete: $_errorMessage');
       return false;
     } finally {
       _isLoading = false;
@@ -90,11 +90,11 @@ class RegisterViewModel extends ChangeNotifier {
     try {
       final result = await _repository.registerAluno(aluno);
       _registeredUser = result;
-      print('✅ Registro de Tutor bem-sucedido! Resposta: $result');
+      print('✅ Registro de Aluno bem-sucedido! Resposta: $result');
       return true;
     } catch (e) {
       _errorMessage = e.toString();
-      print('❌ Erro ao registrar tutor: $_errorMessage');
+      print('❌ Erro ao registrar Aluno: $_errorMessage');
       return false;
     } finally {
       _isLoading = false;

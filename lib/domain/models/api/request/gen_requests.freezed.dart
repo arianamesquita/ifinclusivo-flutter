@@ -25,6 +25,8 @@ mixin _$AlunoRequestModel {
   String get login => throw _privateConstructorUsedError;
   String get senha => throw _privateConstructorUsedError;
   int get matricula => throw _privateConstructorUsedError; // Long -> String
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
 
   /// Serializes this AlunoRequestModel to a JSON map.
@@ -49,6 +51,7 @@ abstract class $AlunoRequestModelCopyWith<$Res> {
     String login,
     String senha,
     int matricula,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
     String? biografia,
   });
 }
@@ -72,6 +75,7 @@ class _$AlunoRequestModelCopyWithImpl<$Res, $Val extends AlunoRequestModel>
     Object? login = null,
     Object? senha = null,
     Object? matricula = null,
+    Object? curso = null,
     Object? biografia = freezed,
   }) {
     return _then(
@@ -96,6 +100,11 @@ class _$AlunoRequestModelCopyWithImpl<$Res, $Val extends AlunoRequestModel>
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
                         as int,
+            curso:
+                null == curso
+                    ? _value.curso
+                    : curso // ignore: cast_nullable_to_non_nullable
+                        as Cursos,
             biografia:
                 freezed == biografia
                     ? _value.biografia
@@ -121,6 +130,7 @@ abstract class _$$AlunoRequestModelImplCopyWith<$Res>
     String login,
     String senha,
     int matricula,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
     String? biografia,
   });
 }
@@ -143,6 +153,7 @@ class __$$AlunoRequestModelImplCopyWithImpl<$Res>
     Object? login = null,
     Object? senha = null,
     Object? matricula = null,
+    Object? curso = null,
     Object? biografia = freezed,
   }) {
     return _then(
@@ -167,6 +178,11 @@ class __$$AlunoRequestModelImplCopyWithImpl<$Res>
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
                     as int,
+        curso:
+            null == curso
+                ? _value.curso
+                : curso // ignore: cast_nullable_to_non_nullable
+                    as Cursos,
         biografia:
             freezed == biografia
                 ? _value.biografia
@@ -185,6 +201,7 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
     required this.login,
     required this.senha,
     required this.matricula,
+    @JsonKey(toJson: cursoToJson) required this.curso,
     this.biografia,
   });
 
@@ -201,11 +218,14 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
   final int matricula;
   // Long -> String
   @override
+  @JsonKey(toJson: cursoToJson)
+  final Cursos curso;
+  @override
   final String? biografia;
 
   @override
   String toString() {
-    return 'AlunoRequestModel(nome: $nome, login: $login, senha: $senha, matricula: $matricula, biografia: $biografia)';
+    return 'AlunoRequestModel(nome: $nome, login: $login, senha: $senha, matricula: $matricula, curso: $curso, biografia: $biografia)';
   }
 
   @override
@@ -218,6 +238,7 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
             (identical(other.senha, senha) || other.senha == senha) &&
             (identical(other.matricula, matricula) ||
                 other.matricula == matricula) &&
+            (identical(other.curso, curso) || other.curso == curso) &&
             (identical(other.biografia, biografia) ||
                 other.biografia == biografia));
   }
@@ -225,7 +246,7 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, nome, login, senha, matricula, biografia);
+      Object.hash(runtimeType, nome, login, senha, matricula, curso, biografia);
 
   /// Create a copy of AlunoRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -250,6 +271,7 @@ abstract class _AlunoRequestModel implements AlunoRequestModel {
     required final String login,
     required final String senha,
     required final int matricula,
+    @JsonKey(toJson: cursoToJson) required final Cursos curso,
     final String? biografia,
   }) = _$AlunoRequestModelImpl;
 
@@ -264,6 +286,9 @@ abstract class _AlunoRequestModel implements AlunoRequestModel {
   String get senha;
   @override
   int get matricula; // Long -> String
+  @override
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso;
   @override
   String? get biografia;
 

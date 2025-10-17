@@ -176,6 +176,36 @@ class AuthModals {
     );
   }
 
+  static Future<void> userCreatedSuccess({required BuildContext context}) {
+    return _showModal(
+      context: context,
+      builder: ModalsAuthBase.small(
+        context: context,
+        type: ModalType.success,
+        title: 'Sucesso',
+        child: Row(
+          spacing: 16,
+          children: [
+            Icon(
+              Icons.check_circle_outline_rounded,
+              color: Colors.white,
+              size: 50,
+            ),
+            Flexible(
+              child: Text(
+                'Usuário criado com sucesso!',
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyMedium,
+                softWrap: true,
+                maxLines: 5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   static Future<void> recoverPassword({
     required BuildContext context,
     void Function(String)? onSendPressed,

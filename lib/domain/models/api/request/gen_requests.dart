@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:if_inclusivo/domain/models/enums/cursos.dart';
 
 import '../../enums/categorias.dart';
 import '../../enums/forum.dart';

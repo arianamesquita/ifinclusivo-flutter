@@ -76,7 +76,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
             description: model.descricao,
             onTap: () => {
               viewModel.setId(model.id),
-              MidiaRouter().push(context),
+              MidiaRouter(model.id).push(context),
             },
           );
         }).toList();

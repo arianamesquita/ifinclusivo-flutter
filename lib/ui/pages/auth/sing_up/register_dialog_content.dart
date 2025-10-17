@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:if_inclusivo/domain/models/enums/cursos.dart';
 import 'package:if_inclusivo/domain/validators/email_validador.dart';
 import 'package:if_inclusivo/domain/validators/login_validator.dart';
 import 'package:if_inclusivo/domain/validators/name_validator.dart';
 import 'package:if_inclusivo/domain/validators/password_validator.dart';
+import 'package:if_inclusivo/ui/pages/auth/modal/auth_modals.dart';
 import 'package:if_inclusivo/ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
 import 'package:lucid_validation/lucid_validation.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +36,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   final TextEditingController _especialidade2Controller = TextEditingController();
   final TextEditingController _formacaoController = TextEditingController();
   String? _tipoSelecionado;
-  String? _cursoSelecionado;
+  Cursos? _cursoSelecionado;
 
   bool isNameError = false;
   String errorName = '';
@@ -46,14 +48,6 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   String errorConfirm = '';
   bool isValid = false;
   bool passwordVisible = false;
-
-  final List<String> _cursos = [
-    'Sistemas de Informação',
-    'Educação Física',
-    'Nutrição',
-    'Agronomia',
-    'Química'
-  ];
 
   @override
   void initState() {
@@ -531,19 +525,19 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                         ),
                                       ),
                                     ),
-                                    DropdownButtonFormField<String>(
-                                      items: _cursos.map((curso) {
-                                        return DropdownMenuItem<String>(
+                                    DropdownButtonFormField<Cursos>(
+                                      value: _cursoSelecionado,
+                                      items: Cursos.values.map((curso) {
+                                        return DropdownMenuItem<Cursos>(
                                           value: curso,
                                           child: Text(
-                                            curso,
-                                            style: TextStyle(
-                                              color: Theme.of(context).colorScheme.onSurface
-                                            ),
+                                            curso == Cursos.SISTEMAS_INFORMACAO
+                                                ? 'Sistemas de Informação'
+                                                : 'Ensino Médio - Técnico de TI',
+                                            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                                           ),
                                         );
                                       }).toList(),
-                                      value: _cursoSelecionado,
                                       onChanged: (value) {
                                         setState(() {
                                           _cursoSelecionado = value;
@@ -580,8 +574,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                               matricula:0,
                                             );
                                             final success = await viewModel.registerNewProfessor(professorData);
-                                            print('Salvo com sucesso $success');
-                                            //_showFeedback(success, 'Tutor');
+                                            AuthModals.userCreatedSuccess(context: context);
                                           }else if(_tipoSelecionado == 'tutor') {
                                             final tutorData = TutorRequestModel(
                                               nome: _nameController.text,
@@ -592,7 +585,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                             );
                                             final success = await viewModel.registerNewTutor(tutorData);
                                             print('Salvo com sucesso $success');
-                                            //_showFeedback(success, 'Tutor');
+                                            AuthModals.userCreatedSuccess(context: context);
                                           }else if(_tipoSelecionado == 'interprete') {
                                             final interpreteData = InterpreteRequestModel(
                                               nome: _nameController.text,
@@ -604,17 +597,18 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                             );
                                             final success = await viewModel.registerNewInterprete(interpreteData);
                                             print('Salvo com sucesso $success');
-                                            //_showFeedback(success, 'Tutor');
+                                            AuthModals.userCreatedSuccess(context: context);
                                           }else if(_tipoSelecionado == 'aluno') {
                                             final alunoData = AlunoRequestModel(
                                               nome: _nameController.text,
                                               login: _emailController.text,
                                               senha: _senhaController.text,
+                                              curso: _cursoSelecionado!,
                                               matricula:0,
                                             );
                                             final success = await viewModel.registerNewAluno(alunoData);
                                             print('Salvo com sucesso $success');
-                                            //_showFeedback(success, 'Tutor');
+                                            AuthModals.userCreatedSuccess(context: context);
                                           }
                                         },
                                         style: ElevatedButton.styleFrom(

@@ -13,6 +13,7 @@ _$AlunoRequestModelImpl _$$AlunoRequestModelImplFromJson(
   login: json['login'] as String,
   senha: json['senha'] as String,
   matricula: (json['matricula'] as num).toInt(),
+  curso: $enumDecode(_$CursosEnumMap, json['curso']),
   biografia: json['biografia'] as String?,
 );
 
@@ -23,7 +24,13 @@ Map<String, dynamic> _$$AlunoRequestModelImplToJson(
   'login': instance.login,
   'senha': instance.senha,
   'matricula': instance.matricula,
+  'curso': cursoToJson(instance.curso),
   'biografia': instance.biografia,
+};
+
+const _$CursosEnumMap = {
+  Cursos.SISTEMAS_INFORMACAO: 'SISTEMAS_INFORMACAO',
+  Cursos.MEDIO_TECNICO_TI: 'MEDIO_TECNICO_TI',
 };
 
 _$AlunoNapneRequestModelImpl _$$AlunoNapneRequestModelImplFromJson(

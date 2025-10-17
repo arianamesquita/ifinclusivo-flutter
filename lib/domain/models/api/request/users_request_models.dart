@@ -7,6 +7,7 @@ class AlunoRequestModel with _$AlunoRequestModel {
     required String login,
     required String senha,
     required int matricula, // Long -> String
+    @JsonKey(toJson: cursoToJson) required Cursos curso,
     String? biografia,
   }) = _AlunoRequestModel;
 
@@ -14,6 +15,14 @@ class AlunoRequestModel with _$AlunoRequestModel {
       _$AlunoRequestModelFromJson(json);
 }
 
+String cursoToJson(Cursos curso) {
+  switch (curso) {
+    case Cursos.SISTEMAS_INFORMACAO:
+      return 'SI';
+    case Cursos.MEDIO_TECNICO_TI:
+      return 'MEDIO_TECNICO_TI';
+  }
+}
 @freezed
 class AlunoNapneRequestModel with _$AlunoNapneRequestModel {
   const factory AlunoNapneRequestModel({
