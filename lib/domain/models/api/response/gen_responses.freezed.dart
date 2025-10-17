@@ -99,7 +99,6 @@ mixin _$UsuarioResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )
     professor,
     required TResult Function(
@@ -181,7 +180,6 @@ mixin _$UsuarioResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult? Function(
@@ -263,7 +261,6 @@ mixin _$UsuarioResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult Function(
@@ -752,7 +749,6 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )
     professor,
     required TResult Function(
@@ -850,7 +846,6 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult? Function(
@@ -948,7 +943,6 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult Function(
@@ -1461,7 +1455,6 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )
     professor,
     required TResult Function(
@@ -1565,7 +1558,6 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult? Function(
@@ -1669,7 +1661,6 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult Function(
@@ -1855,7 +1846,6 @@ abstract class _$$ProfessorResponseModelImplCopyWith<$Res>
     String? token,
     String? firebaseToken,
     String formacao,
-    List<SimpleTopicoModel> topicos,
   });
 
   @override
@@ -1888,7 +1878,6 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
     Object? token = freezed,
     Object? firebaseToken = freezed,
     Object? formacao = null,
-    Object? topicos = null,
   }) {
     return _then(
       _$ProfessorResponseModelImpl(
@@ -1947,11 +1936,6 @@ class __$$ProfessorResponseModelImplCopyWithImpl<$Res>
                 ? _value.formacao
                 : formacao // ignore: cast_nullable_to_non_nullable
                     as String,
-        topicos:
-            null == topicos
-                ? _value._topicos
-                : topicos // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleTopicoModel>,
       ),
     );
   }
@@ -1972,10 +1956,8 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     this.token,
     this.firebaseToken,
     required this.formacao,
-    required final List<SimpleTopicoModel> topicos,
     final String? $type,
   }) : _roles = roles,
-       _topicos = topicos,
        $type = $type ?? 'professor';
 
   factory _$ProfessorResponseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -2009,20 +1991,13 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
   final String? firebaseToken;
   @override
   final String formacao;
-  final List<SimpleTopicoModel> _topicos;
-  @override
-  List<SimpleTopicoModel> get topicos {
-    if (_topicos is EqualUnmodifiableListView) return _topicos;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_topicos);
-  }
 
   @JsonKey(name: 'userType')
   final String $type;
 
   @override
   String toString() {
-    return 'UsuarioResponseModel.professor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, formacao: $formacao, topicos: $topicos)';
+    return 'UsuarioResponseModel.professor(id: $id, nome: $nome, login: $login, matricula: $matricula, biografia: $biografia, dataCriacao: $dataCriacao, configAcessibilidadeEntity: $configAcessibilidadeEntity, roles: $roles, token: $token, firebaseToken: $firebaseToken, formacao: $formacao)';
   }
 
   @override
@@ -2050,8 +2025,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
             (identical(other.firebaseToken, firebaseToken) ||
                 other.firebaseToken == firebaseToken) &&
             (identical(other.formacao, formacao) ||
-                other.formacao == formacao) &&
-            const DeepCollectionEquality().equals(other._topicos, _topicos));
+                other.formacao == formacao));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2069,7 +2043,6 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
     token,
     firebaseToken,
     formacao,
-    const DeepCollectionEquality().hash(_topicos),
   );
 
   /// Create a copy of UsuarioResponseModel
@@ -2133,7 +2106,6 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )
     professor,
     required TResult Function(
@@ -2179,7 +2151,6 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       token,
       firebaseToken,
       formacao,
-      topicos,
     );
   }
 
@@ -2232,7 +2203,6 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult? Function(
@@ -2278,7 +2248,6 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       token,
       firebaseToken,
       formacao,
-      topicos,
     );
   }
 
@@ -2331,7 +2300,6 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult Function(
@@ -2379,7 +2347,6 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
         token,
         firebaseToken,
         formacao,
-        topicos,
       );
     }
     return orElse();
@@ -2444,7 +2411,6 @@ abstract class _ProfessorResponseModel implements UsuarioResponseModel {
     final String? token,
     final String? firebaseToken,
     required final String formacao,
-    required final List<SimpleTopicoModel> topicos,
   }) = _$ProfessorResponseModelImpl;
 
   factory _ProfessorResponseModel.fromJson(Map<String, dynamic> json) =
@@ -2471,7 +2437,6 @@ abstract class _ProfessorResponseModel implements UsuarioResponseModel {
   @override
   String? get firebaseToken;
   String get formacao;
-  List<SimpleTopicoModel> get topicos;
 
   /// Create a copy of UsuarioResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -2760,7 +2725,6 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )
     professor,
     required TResult Function(
@@ -2858,7 +2822,6 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult? Function(
@@ -2956,7 +2919,6 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult Function(
@@ -3412,7 +3374,6 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )
     professor,
     required TResult Function(
@@ -3512,7 +3473,6 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult? Function(
@@ -3612,7 +3572,6 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       String? token,
       String? firebaseToken,
       String formacao,
-      List<SimpleTopicoModel> topicos,
     )?
     professor,
     TResult Function(
@@ -3954,6 +3913,7 @@ mixin _$PublicacaoDetalhadaModel {
   DateTime get dataCriacao => throw _privateConstructorUsedError;
   AutorCardModel get usuario => throw _privateConstructorUsedError;
   Set<Categorias> get categorias => throw _privateConstructorUsedError;
+  TipoPublicacao get tipo => throw _privateConstructorUsedError;
   int get totalLikes => throw _privateConstructorUsedError;
   int get totalRespostas => throw _privateConstructorUsedError;
   bool get curtidoPeloUsuario => throw _privateConstructorUsedError;
@@ -3983,6 +3943,7 @@ abstract class $PublicacaoDetalhadaModelCopyWith<$Res> {
     DateTime dataCriacao,
     AutorCardModel usuario,
     Set<Categorias> categorias,
+    TipoPublicacao tipo,
     int totalLikes,
     int totalRespostas,
     bool curtidoPeloUsuario,
@@ -4016,6 +3977,7 @@ class _$PublicacaoDetalhadaModelCopyWithImpl<
     Object? dataCriacao = null,
     Object? usuario = null,
     Object? categorias = null,
+    Object? tipo = null,
     Object? totalLikes = null,
     Object? totalRespostas = null,
     Object? curtidoPeloUsuario = null,
@@ -4053,6 +4015,11 @@ class _$PublicacaoDetalhadaModelCopyWithImpl<
                     ? _value.categorias
                     : categorias // ignore: cast_nullable_to_non_nullable
                         as Set<Categorias>,
+            tipo:
+                null == tipo
+                    ? _value.tipo
+                    : tipo // ignore: cast_nullable_to_non_nullable
+                        as TipoPublicacao,
             totalLikes:
                 null == totalLikes
                     ? _value.totalLikes
@@ -4105,6 +4072,7 @@ abstract class _$$PublicacaoDetalhadaModelImplCopyWith<$Res>
     DateTime dataCriacao,
     AutorCardModel usuario,
     Set<Categorias> categorias,
+    TipoPublicacao tipo,
     int totalLikes,
     int totalRespostas,
     bool curtidoPeloUsuario,
@@ -4139,6 +4107,7 @@ class __$$PublicacaoDetalhadaModelImplCopyWithImpl<$Res>
     Object? dataCriacao = null,
     Object? usuario = null,
     Object? categorias = null,
+    Object? tipo = null,
     Object? totalLikes = null,
     Object? totalRespostas = null,
     Object? curtidoPeloUsuario = null,
@@ -4176,6 +4145,11 @@ class __$$PublicacaoDetalhadaModelImplCopyWithImpl<$Res>
                 ? _value._categorias
                 : categorias // ignore: cast_nullable_to_non_nullable
                     as Set<Categorias>,
+        tipo:
+            null == tipo
+                ? _value.tipo
+                : tipo // ignore: cast_nullable_to_non_nullable
+                    as TipoPublicacao,
         totalLikes:
             null == totalLikes
                 ? _value.totalLikes
@@ -4212,6 +4186,7 @@ class _$PublicacaoDetalhadaModelImpl implements _PublicacaoDetalhadaModel {
     required this.dataCriacao,
     required this.usuario,
     required final Set<Categorias> categorias,
+    required this.tipo,
     required this.totalLikes,
     required this.totalRespostas,
     required this.curtidoPeloUsuario,
@@ -4240,6 +4215,8 @@ class _$PublicacaoDetalhadaModelImpl implements _PublicacaoDetalhadaModel {
   }
 
   @override
+  final TipoPublicacao tipo;
+  @override
   final int totalLikes;
   @override
   final int totalRespostas;
@@ -4250,7 +4227,7 @@ class _$PublicacaoDetalhadaModelImpl implements _PublicacaoDetalhadaModel {
 
   @override
   String toString() {
-    return 'PublicacaoDetalhadaModel(id: $id, titulo: $titulo, texto: $texto, dataCriacao: $dataCriacao, usuario: $usuario, categorias: $categorias, totalLikes: $totalLikes, totalRespostas: $totalRespostas, curtidoPeloUsuario: $curtidoPeloUsuario, respostaEscolhidaId: $respostaEscolhidaId)';
+    return 'PublicacaoDetalhadaModel(id: $id, titulo: $titulo, texto: $texto, dataCriacao: $dataCriacao, usuario: $usuario, categorias: $categorias, tipo: $tipo, totalLikes: $totalLikes, totalRespostas: $totalRespostas, curtidoPeloUsuario: $curtidoPeloUsuario, respostaEscolhidaId: $respostaEscolhidaId)';
   }
 
   @override
@@ -4268,6 +4245,7 @@ class _$PublicacaoDetalhadaModelImpl implements _PublicacaoDetalhadaModel {
               other._categorias,
               _categorias,
             ) &&
+            (identical(other.tipo, tipo) || other.tipo == tipo) &&
             (identical(other.totalLikes, totalLikes) ||
                 other.totalLikes == totalLikes) &&
             (identical(other.totalRespostas, totalRespostas) ||
@@ -4288,6 +4266,7 @@ class _$PublicacaoDetalhadaModelImpl implements _PublicacaoDetalhadaModel {
     dataCriacao,
     usuario,
     const DeepCollectionEquality().hash(_categorias),
+    tipo,
     totalLikes,
     totalRespostas,
     curtidoPeloUsuario,
@@ -4318,6 +4297,7 @@ abstract class _PublicacaoDetalhadaModel implements PublicacaoDetalhadaModel {
     required final DateTime dataCriacao,
     required final AutorCardModel usuario,
     required final Set<Categorias> categorias,
+    required final TipoPublicacao tipo,
     required final int totalLikes,
     required final int totalRespostas,
     required final bool curtidoPeloUsuario,
@@ -4339,6 +4319,8 @@ abstract class _PublicacaoDetalhadaModel implements PublicacaoDetalhadaModel {
   AutorCardModel get usuario;
   @override
   Set<Categorias> get categorias;
+  @override
+  TipoPublicacao get tipo;
   @override
   int get totalLikes;
   @override

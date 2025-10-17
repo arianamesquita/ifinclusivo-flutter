@@ -1,10 +1,10 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 import '../../../../../../utils/forum_utils.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CommentEditor extends StatefulWidget {
   final Future<void> Function(String text) onSubmit;
@@ -18,9 +18,10 @@ class CommentEditor extends StatefulWidget {
     super.key,
     required this.onSubmit,
     this.onCancel,
-    this.isLoading = false, this.clearNotifier,
-  })  : initialText = null,
-        isEditing = false;
+    this.isLoading = false,
+    this.clearNotifier,
+  }) : initialText = null,
+       isEditing = false;
 
   /// Construtor para **edição** de comentário existente
   const CommentEditor.edit({
@@ -28,7 +29,8 @@ class CommentEditor extends StatefulWidget {
     required this.onSubmit,
     this.onCancel,
     this.isLoading = false,
-    required this.initialText, this.clearNotifier,
+    required this.initialText,
+    this.clearNotifier,
   }) : isEditing = true;
 
   @override
@@ -41,6 +43,7 @@ class _CommentEditorState extends State<CommentEditor> {
   final ScrollController _scrollController = ScrollController();
 
   bool _showToolbar = false;
+  bool _pinToolbar = false;
   bool _showActionsButtons = false;
   bool _isTextValid = false;
   bool _isTooLong = false;
@@ -130,8 +133,6 @@ class _CommentEditorState extends State<CommentEditor> {
       _showActionsButtons = false;
       _showToolbar = false;
     });
-    print('cancelado');
-
   }
 
   @override
@@ -146,9 +147,20 @@ class _CommentEditorState extends State<CommentEditor> {
             children: [
               Container(
                 decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          _isTooLong
+                              ? Theme.of(context).colorScheme.error
+                              : Theme.of(context).colorScheme.outline,
+                      spreadRadius: 0.1,
+                      blurRadius: 1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(16),
                   border: BoxBorder.all(
-                    width: 2,
+                    width: 1,
                     color:
                         _isTooLong
                             ? Theme.of(context).colorScheme.error
@@ -162,33 +174,70 @@ class _CommentEditorState extends State<CommentEditor> {
                       duration: const Duration(milliseconds: 600),
                       curve: Curves.easeInOut,
                       child:
-                          _showToolbar
+                          (_showToolbar || _pinToolbar)
                               ? SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 controller: _scrollController,
-                                child: QuillSimpleToolbar(
-                                  controller: _quillController,
-                                  config: QuillSimpleToolbarConfig(
-                                    showFontFamily: false,
-                                    showUndo: false,
-                                    showRedo: false,
-                                    showSubscript: false,
-                                    showSuperscript: false,
-                                    showFontSize: false,
-                                    showSearchButton: false,
-                                    showAlignmentButtons: false,
-                                    showListCheck: false,
-                                    showHeaderStyle: false,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color:
-                                            Theme.of(
-                                              context,
-                                            ).colorScheme.outline,
+                                child: Row(
+                                  children: [
+                                    AnimatedSize(
+                                      duration: const Duration(
+                                        milliseconds: 600,
                                       ),
-                                      borderRadius: BorderRadius.circular(12),
+                                      curve: Curves.easeInOut,
+                                      child:
+                                          _pinToolbar
+                                              ? IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _pinToolbar = !_pinToolbar;
+
+                                                  });
+                                                },
+                                                icon: FaIcon(
+                                                  FontAwesomeIcons.thumbtackSlash,
+                                                  size: 18,
+                                                ),
+                                              )
+                                              : IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _pinToolbar = !_pinToolbar;
+                                                  });
+                                                },
+                                                icon: FaIcon(
+                                                  FontAwesomeIcons
+                                                      .thumbtack,
+                                                  size: 18,
+                                                ),
+                                              ),
                                     ),
-                                  ),
+
+                                    QuillSimpleToolbar(
+                                      controller: _quillController,
+                                      config: QuillSimpleToolbarConfig(
+                                        showFontFamily: false,
+                                        showUndo: false,
+                                        showRedo: false,
+                                        showSubscript: false,
+                                        showSuperscript: false,
+                                        showSearchButton: false,
+                                        showAlignmentButtons: false,
+                                        showListCheck: false,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color:
+                                                Theme.of(
+                                                  context,
+                                                ).colorScheme.outline,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               )
                               : SizedBox.shrink(),
@@ -223,7 +272,7 @@ class _CommentEditorState extends State<CommentEditor> {
                     ),
                     if (_isTooLong)
                       Padding(
-                        padding: const EdgeInsets.only(left:  16.0,bottom:10 ),
+                        padding: const EdgeInsets.only(left: 16.0, bottom: 10),
                         child: Text(
                           'Limite de caracteres excedido',
                           style: TextStyle(
@@ -242,7 +291,7 @@ class _CommentEditorState extends State<CommentEditor> {
                 child:
                     _showActionsButtons
                         ? Padding(
-                          padding: const EdgeInsets.only(top: 15.0,bottom: 5),
+                          padding: const EdgeInsets.only(top: 15.0, bottom: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             spacing: 15,
@@ -275,7 +324,11 @@ class _CommentEditorState extends State<CommentEditor> {
                                           height: 16,
                                           child: CircularProgressIndicator(),
                                         )
-                                        :  Text(widget.isEditing ? "Salvar" : "Comentar"),
+                                        : Text(
+                                          widget.isEditing
+                                              ? "Salvar"
+                                              : "Comentar",
+                                        ),
                               ),
                             ],
                           ),

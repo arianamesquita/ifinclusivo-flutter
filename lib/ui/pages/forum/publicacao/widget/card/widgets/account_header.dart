@@ -63,99 +63,96 @@ class AccountHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 20, right: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 10,
-              children: [
-                CircleAvatar(
-                  backgroundImage:
-                      (imgPath != null && imgPath!.isNotEmpty)
-                          ? NetworkImage(imgPath!)
-                          : null,
-                ),
-                Expanded(
-                  child: Wrap(
-                    spacing: 5,
-                    runAlignment: WrapAlignment.center,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Text(
-                        nameUser,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                      Text(
-                        formatTimeAgo(dataCriacao),
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                        softWrap: true,
-                        maxLines: 2,
-                      ),
-                    ],
-                  ),
-                )
-
-              ],
-            ),
-          ),
-          Row(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 10,
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              if (canMarkAsAnswer && isAnswerAccepted)
-                Tooltip(
-                  message: 'Desmarcar como resposta aceita',
-                  child: IconButton.filled(
-                    onPressed: onUnmarkAnswer,
-                    icon: const Icon(Icons.undo),
-                  ),
-                ),
-
-              if (canMarkAsAnswer && !isAnswerAccepted)
-                Tooltip(
-                  message: 'Marcar como resposta aceita',
-                  child: IconButton.filled(
-                    onPressed: onMarkAnswer,
-                    icon: const Icon(Icons.add_task),
-                  ),
-                ),
-              if (!canMarkAsAnswer && isAnswerAccepted)
-                Tooltip(
-                  message: 'Esta publicação foi marcada como resposta',
-                  child: Row(
-                    spacing: 8,
-                    children: [
-                      Icon(
-                        Icons.check_circle_outline_rounded,
-                        color: Theme.of(context).colorScheme.secondary,
-                        size: 22,
-                      ),
-                      Text(
-                        'Resposta aceita',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              PopupMenuButton(
-                icon: const Icon(Icons.more_horiz),
-                itemBuilder: (context) => menuItems, // <<< menus do pai
+              CircleAvatar(
+                backgroundImage:
+                    (imgPath != null && imgPath!.isNotEmpty)
+                        ? NetworkImage(imgPath!)
+                        : null,
               ),
+              Expanded(
+                child: Wrap(
+                  spacing: 5,
+                  runAlignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      nameUser,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    Text(
+                      formatTimeAgo(dataCriacao),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                      softWrap: true,
+                      maxLines: 2,
+                    ),
+                  ],
+                ),
+              )
+
             ],
           ),
-        ],
-      ),
+        ),
+        Row(
+          spacing: 10,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (canMarkAsAnswer && isAnswerAccepted)
+              Tooltip(
+                message: 'Desmarcar como resposta aceita',
+                child: IconButton.filled(
+                  onPressed: onUnmarkAnswer,
+                  icon: const Icon(Icons.undo),
+                ),
+              ),
+
+            if (canMarkAsAnswer && !isAnswerAccepted)
+              Tooltip(
+                message: 'Marcar como resposta aceita',
+                child: IconButton.filled(
+                  onPressed: onMarkAnswer,
+                  icon: const Icon(Icons.add_task),
+                ),
+              ),
+            if (!canMarkAsAnswer && isAnswerAccepted)
+              Tooltip(
+                message: 'Esta publicação foi marcada como resposta',
+                child: Row(
+                  spacing: 8,
+                  children: [
+                    Icon(
+                      Icons.check_circle_outline_rounded,
+                      color: Theme.of(context).colorScheme.secondary,
+                      size: 22,
+                    ),
+                    Text(
+                      'Resposta aceita',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            PopupMenuButton(
+              icon: const Icon(Icons.more_horiz),
+              itemBuilder: (context) => menuItems, // <<< menus do pai
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

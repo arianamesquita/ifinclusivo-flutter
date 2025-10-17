@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
+import 'package:if_inclusivo/ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/comment_editor.dart';
-import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/viewmodels/comment_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/widgets/comment_content.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/widgets/replies_list_comment.dart';
-import 'package:provider/provider.dart';
-
+import 'package:result_command/result_command.dart';
 import '../../../../../../utils/forum_utils.dart';
 
 class CommentTile extends StatefulWidget {
   final int commentId;
   final int publicationId;
+  final int? parentId;
   final int? userMark;
   final String userName;
   final int autorId;
   final String? taggedUser;
+  final int? taggedId;
   final DateTime dateCreation;
   final int replyCount;
   final String publicationText;
-  final CommentViewModel? viewModel;
+  final PublicacaoViewModel viewModel;
   final bool showChildrenTree;
+
   const CommentTile({
     super.key,
-    this.viewModel,
+    required this.viewModel,
     required this.userName,
     required this.taggedUser,
     required this.dateCreation,
@@ -33,11 +36,13 @@ class CommentTile extends StatefulWidget {
     required this.publicationId,
     required this.autorId,
     this.userMark,
+    this.parentId,
+    this.taggedId,
   }) : showChildrenTree = true;
 
   const CommentTile.noTree({
     super.key,
-    this.viewModel,
+    required this.viewModel,
     required this.userName,
     required this.taggedUser,
     required this.dateCreation,
@@ -47,6 +52,8 @@ class CommentTile extends StatefulWidget {
     required this.publicationId,
     required this.autorId,
     this.userMark,
+    this.parentId,
+    this.taggedId,
   }) : showChildrenTree = false;
   @override
   State<CommentTile> createState() => _CommentTileState();
@@ -55,21 +62,15 @@ class CommentTile extends StatefulWidget {
 class _CommentTileState extends State<CommentTile> {
   late final QuillController _controller;
   bool _showReply = false;
-  late CommentViewModel _viewModel;
+  late PublicacaoViewModel _viewModel;
   bool _editTile = false;
   final ValueNotifier<bool> _clearEditorNotifier = ValueNotifier(false);
+  final ValueNotifier<bool> _clearEditorUpdateNotifier = ValueNotifier(false);
 
   @override
   void initState() {
     super.initState();
-    if (widget.viewModel != null) {
-      _viewModel = widget.viewModel!;
-    } else {
-      _viewModel = CommentViewModel(
-        forumRepository: context.read(),
-        authRepository: context.read(),
-      );
-    }
+    _viewModel = widget.viewModel;
 
     _controller = QuillController(
       document: loadDocument(text: widget.publicationText),
@@ -77,37 +78,95 @@ class _CommentTileState extends State<CommentTile> {
       readOnly: true,
     );
 
-    _viewModel.addCommentCommand.addListener(_onAddCommentChanged);
+    final commentNode = _viewModel.findCommentById(widget.commentId);
+    if (commentNode != null) {
+      commentNode.addCommand.addListener(_onAddCommentChanged);
+      commentNode.updateCommand.addListener(_onUpdatedCommentChanged);
+    }
   }
 
   void _onAddCommentChanged() {
-    final cmd = _viewModel.addCommentCommand;
-    if (cmd.value.isSuccess) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Comentário adicionado com sucesso!'),
-          backgroundColor: Colors.green,
-        ),
-      );
-      _clearEditorNotifier.value = true;
-      _viewModel.addCommentCommand.reset();
-      setState(() {
-        _showReply = false;
-      });
-    } else if (cmd.value.isFailure) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Erro ao adicionar comentário.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      _viewModel.addCommentCommand.reset();
+    final commentNode = _viewModel.findCommentById(widget.commentId);
+    if (commentNode == null) return;
+
+    final cmd = commentNode.addCommand;
+
+    switch (cmd.value) {
+      case FailureCommand<ComentarioResponseModel>():
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao adicionar comentário.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        commentNode.addCommand.reset();
+        break;
+      case SuccessCommand<ComentarioResponseModel>():
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Comentário adicionado com sucesso!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        _clearEditorNotifier.value = true;
+
+        setState(() {
+          _showReply = false;
+        });
+        commentNode.addCommand.reset();
+        break;
+      case IdleCommand<ComentarioResponseModel>():
+      case CancelledCommand<ComentarioResponseModel>():
+      case RunningCommand<ComentarioResponseModel>():
+        return;
+    }
+  }
+
+  void _onUpdatedCommentChanged() {
+    final commentNode = _viewModel.findCommentById(widget.commentId);
+    if (commentNode == null) return;
+
+    final cmd = commentNode.updateCommand;
+    switch (cmd.value) {
+      case IdleCommand<ComentarioResponseModel>():
+      case CancelledCommand<ComentarioResponseModel>():
+      case RunningCommand<ComentarioResponseModel>():
+        return;
+      case FailureCommand<ComentarioResponseModel>():
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao adicionar comentário.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        commentNode.updateCommand.reset();
+        break;
+      case SuccessCommand<ComentarioResponseModel>(:final value):
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Comentário adicionado com sucesso!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        _clearEditorUpdateNotifier.value = true;
+
+        setState(() {
+          _controller.document = loadDocument(text: value.texto);
+          _editTile = false;
+        });
+        commentNode.updateCommand.reset();
+        break;
     }
   }
 
   @override
   void dispose() {
-    _viewModel.addCommentCommand.removeListener(_onAddCommentChanged);
+    final commentNode = _viewModel.findCommentById(widget.commentId);
+    if (commentNode != null) {
+      commentNode.addCommand.removeListener(_onAddCommentChanged);
+      commentNode.updateCommand.removeListener(_onUpdatedCommentChanged);
+    }
+
     _controller.dispose();
     super.dispose();
   }
@@ -131,23 +190,53 @@ class _CommentTileState extends State<CommentTile> {
       },
       child:
           _editTile
-              ? CommentEditor.edit(
-                onSubmit: _sendEdite,
-                onCancel: () {
-                  setState(() {
-                    _editTile = false;
-                  });
-                },
-                initialText: widget.publicationText,
-              )
-              : Column(
-                children: [
-                  ListenableBuilder(
-                    listenable: _viewModel,
+              ? (_viewModel.findCommentById(widget.commentId) != null)
+                  ? ListenableBuilder(
+                    listenable:
+                        _viewModel
+                            .findCommentById(widget.commentId)!
+                            .updateCommand,
                     builder: (context, _) {
-                      final menuItems = _getMenuItems();
-
-                      return CommentContent(
+                      return CommentEditor.edit(
+                        onSubmit: _sendEdite,
+                        isLoading:
+                            _viewModel
+                                .findCommentById(widget.commentId)!
+                                .updateCommand
+                                .value
+                                .isRunning,
+                        onCancel: () {
+                          setState(() {
+                            _editTile = false;
+                          });
+                        },
+                        clearNotifier: _clearEditorUpdateNotifier,
+                        initialText: widget.publicationText,
+                      );
+                    },
+                  )
+                  : Center(
+                    child: Text(
+                      'Error Inesperado, Tente Atualizar a Pagina Caso o error persista entre em contato com o suporte',
+                    ),
+                  )
+              : ListenableBuilder(
+                listenable: _viewModel,
+                builder: (context, _) {
+                  final commentNode = _viewModel.findCommentById(
+                    widget.commentId,
+                  );
+                  if (commentNode == null) {
+                    return Center(
+                      child: Text(
+                        'Error Inesperado, Tente Atualizar a Pagina Caso o error persista entre em contato com o suporte',
+                      ),
+                    );
+                  }
+                  final menuItems = _getMenuItems();
+                  return Column(
+                    children: [
+                      CommentContent(
                         controller: _controller,
                         showReplyWidget: _showReply,
                         userName: widget.userName,
@@ -161,84 +250,92 @@ class _CommentTileState extends State<CommentTile> {
                           });
                         },
                         onLike: () {},
-                        replyCount: widget.replyCount,
-                        openReplies: () {
-                          _viewModel.fetchReplies(commentId: widget.commentId);
-                          _viewModel.toggleReplies();
+                        replyCount: commentNode.comment.totalRespostas,
+                        openReplies: () async {
+                          await _viewModel.toggleReplies(widget.commentId);
                         },
                         closeReplies:
                             widget.showChildrenTree
-                                ? () {
-                                  _viewModel.cleanReplies();
+                                ? () async {
+                                  await _viewModel.toggleReplies(
+                                    widget.commentId,
+                                  );
                                 }
                                 : null,
-                      );
-                    },
-                  ),
+                        showReplies: commentNode.showReplies,
+                      ),
+                      ListenableBuilder(
+                        listenable: commentNode.addCommand,
+                        builder: (context, _) {
+                          return AnimatedSize(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.easeInOut,
+                            child:
+                                _showReply
+                                    ? Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 8.0,
+                                      ),
+                                      child: CommentEditor.add(
+                                        onSubmit: _sendReply,
+                                        clearNotifier: _clearEditorNotifier,
+                                        isLoading:
+                                            commentNode
+                                                .addCommand
+                                                .value
+                                                .isRunning,
+                                        onCancel: () {
+                                          setState(() {
+                                            _showReply = false;
+                                          });
+                                        },
+                                      ),
+                                    )
+                                    : SizedBox.shrink(),
+                          );
+                        },
+                      ),
 
-                  ListenableBuilder(
-                    listenable: _viewModel.addCommentCommand,
-                    builder: (context, _) {
-                      return AnimatedSize(
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.easeInOut,
-                        child:
-                            _showReply
-                                ? Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: CommentEditor.add(
-                                    onSubmit: _sendReply,
-                                    clearNotifier: _clearEditorNotifier,
-                                    isLoading:
-                                        _viewModel
-                                            .addCommentCommand
-                                            .value
-                                            .isRunning,
-                                    onCancel: () {
-                                      setState(() {
-                                        _showReply = false;
-                                      });
-                                    },
-                                  ),
-                                )
-                                : SizedBox.shrink(),
-                      );
-                    },
-                  ),
-
-                  if (widget.showChildrenTree)
-                    ListenableBuilder(
-                      listenable: _viewModel,
-                      builder: (context, _) {
-                        return RepliesListComment(
-                          viewModel: _viewModel,
-                          commentId: widget.commentId,
-                          userMark: widget.autorId,
-                        );
-                      },
-                    ),
-                ],
+                      if (widget.showChildrenTree)
+                        ListenableBuilder(
+                          listenable: _viewModel,
+                          builder: (context, _) {
+                            return RepliesListComment(
+                              viewModel: _viewModel,
+                              commentId: widget.commentId,
+                              userMark: widget.autorId,
+                            );
+                          },
+                        ),
+                    ],
+                  );
+                },
               ),
     );
   }
 
   Future<void> _sendReply(String text) async {
-    _viewModel.addCommentCommand.execute(
+    final commentNode = _viewModel.findCommentById(widget.commentId);
+    if (commentNode == null) return;
+    commentNode.addCommand.execute(
       widget.publicationId,
       ComentarioRequestModel(
-        parentId: widget.commentId,
+        parentId: widget.parentId,
         texto: text,
         usuarioMencionadoId: widget.userMark,
       ),
     );
   }
+
   Future<void> _sendEdite(String text) async {
-    _viewModel.addCommentCommand.execute(
-      widget.publicationId,
+    final commentNode = _viewModel.findCommentById(widget.commentId);
+    if (commentNode == null) return;
+    await commentNode.updateCommand.execute(
+      widget.commentId,
       ComentarioRequestModel(
-        parentId: widget.commentId,
+        parentId: widget.parentId,
         texto: text,
-        usuarioMencionadoId: widget.userMark,
+        usuarioMencionadoId: widget.taggedId,
       ),
     );
   }
@@ -256,7 +353,13 @@ class _CommentTileState extends State<CommentTile> {
               });
             },
           ),
-          PopupMenuItem(value: "Excluir", child: Text("Excluir"), onTap: () {}),
+          PopupMenuItem(
+            value: "Excluir",
+            child: Text("Excluir"),
+            onTap: () {
+              _viewModel.deleteCommentsCommand.execute(widget.commentId);
+            },
+          ),
         ]
         : [
           PopupMenuItem(

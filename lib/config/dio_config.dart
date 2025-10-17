@@ -38,11 +38,11 @@ class DioConfig {
             final statusCode = e.response!.statusCode;
             if (statusCode == 401) {
               await authRepository.logout();
-              router.push(UnauthorizedRoute().location);
+              router.go(UnauthorizedRoute().location);
             } else if (statusCode == 403) {
               router.push(ForbiddenRoute().location);
             }else if (statusCode == 404) {
-              router.push(NotFoundRoute().location);
+              router.go(NotFoundRoute().location);
             } else if (statusCode == 500) {
               router.push(ServerErrorRoute().location);
             }

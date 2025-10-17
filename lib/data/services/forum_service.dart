@@ -5,13 +5,13 @@ abstract class ForumService {
     Map<String, dynamic> publicacaoRequest,
   );
 
-  Future<Map<String, dynamic>> findAll({
+  Future<Map<String, dynamic>> fetchFeedPublication({
     Set<Categorias>? categorias,
     Ordenacao? ordenarPor,
     int page = 0,
     int size = 10,
   });
-  Future<Map<String, dynamic>> findById(int id);
+  Future<Map<String, dynamic>> findPublicationById(int id);
 
   Future<void> deletePublication(int id);
 
@@ -24,6 +24,10 @@ abstract class ForumService {
 
   Future<Map<String, dynamic>> addComment({
     required int publicacaoId,
+    required Map<String, dynamic> commentRequest,
+  });
+  Future<Map<String, dynamic>> updateComment({
+    required int commentId,
     required Map<String, dynamic> commentRequest,
   });
 
@@ -40,4 +44,7 @@ abstract class ForumService {
     int page = 0,
     int size = 10,
   });
+  Future<void> deleteComment(int commentId);
+
+
 }

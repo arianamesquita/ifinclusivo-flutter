@@ -15,7 +15,7 @@ class AppRoutes {
   // Rotas da Aplicação Principal
   static const String _app = '/app';
   static const String forum = '$_app/forum';
-  static const String publication = '/post/:id';
+  static const String publication = 'post/:id';
   static const String newPublication = '$_app/new-post';
 
 

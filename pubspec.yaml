@@ -32,6 +32,7 @@ dependencies:
   timeago: ^3.7.1
   flutter_quill: ^11.4.2
   jwt_decoder: ^2.0.1
+  font_awesome_flutter: ^10.10.0
   youtube_player_iframe: ^5.2.2
 
 dev_dependencies:
