@@ -12,10 +12,11 @@ class LibrasRepositoryImpl implements LibrasRepository{
   LibrasRepositoryImpl({required LibrasService librasService}) : _librasService = librasService;
 
   @override
-  Future<PaginatedResponse<LibrasResponseModel>> getLibrasByTopic({int pages = 0, int size = 10, Categorias? categorias}) async {
-    try{
+  Future<PaginatedResponse<LibrasResponseModel>> getLibrasByTopic({int pages = 2, int size = 10, Categorias? categorias}) async {
+   try{
       final data = await _librasService.getLibrasByTopic(pages: pages, size: size, categorias: categorias);
-      return PaginatedResponse.fromJson(data, (json)=> LibrasResponseModel.fromJson(json as Map<String, dynamic>));
+      var response = PaginatedResponse.fromJson(data, (json)=> LibrasResponseModel.fromJson(json as Map<String, dynamic>));
+      return response;
     } on DioException catch (e) {
       if(e.response != null) {
         final statusCode = e.response!.statusCode;

@@ -352,14 +352,6 @@ _$LibrasResponseModelImpl _$$LibrasResponseModelImplFromJson(
   justificativa: json['justificativa'] as String?,
   status: $enumDecode(_$StatusEnumMap, json['status']),
   categorias: $enumDecode(_$CategoriasEnumMap, json['categorias']),
-  sugeriu:
-      (json['sugeriu'] as List<dynamic>)
-          .map((e) => SimpleUsuarioModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  interprete:
-      (json['interprete'] as List<dynamic>)
-          .map((e) => SimpleUsuarioModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
 );
 
 Map<String, dynamic> _$$LibrasResponseModelImplToJson(
@@ -374,8 +366,6 @@ Map<String, dynamic> _$$LibrasResponseModelImplToJson(
   'justificativa': instance.justificativa,
   'status': _$StatusEnumMap[instance.status]!,
   'categorias': _$CategoriasEnumMap[instance.categorias]!,
-  'sugeriu': instance.sugeriu.map((e) => e.toJson()).toList(),
-  'interprete': instance.interprete.map((e) => e.toJson()).toList(),
 };
 
 const _$StatusEnumMap = {

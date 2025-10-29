@@ -4778,8 +4778,6 @@ mixin _$LibrasResponseModel {
   String? get justificativa => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
   Categorias get categorias => throw _privateConstructorUsedError;
-  List<SimpleUsuarioModel> get sugeriu => throw _privateConstructorUsedError;
-  List<SimpleUsuarioModel> get interprete => throw _privateConstructorUsedError;
 
   /// Serializes this LibrasResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -4808,8 +4806,6 @@ abstract class $LibrasResponseModelCopyWith<$Res> {
     String? justificativa,
     Status status,
     Categorias categorias,
-    List<SimpleUsuarioModel> sugeriu,
-    List<SimpleUsuarioModel> interprete,
   });
 }
 
@@ -4837,8 +4833,6 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
     Object? justificativa = freezed,
     Object? status = null,
     Object? categorias = null,
-    Object? sugeriu = null,
-    Object? interprete = null,
   }) {
     return _then(
       _value.copyWith(
@@ -4887,16 +4881,6 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
                     ? _value.categorias
                     : categorias // ignore: cast_nullable_to_non_nullable
                         as Categorias,
-            sugeriu:
-                null == sugeriu
-                    ? _value.sugeriu
-                    : sugeriu // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleUsuarioModel>,
-            interprete:
-                null == interprete
-                    ? _value.interprete
-                    : interprete // ignore: cast_nullable_to_non_nullable
-                        as List<SimpleUsuarioModel>,
           )
           as $Val,
     );
@@ -4922,8 +4906,6 @@ abstract class _$$LibrasResponseModelImplCopyWith<$Res>
     String? justificativa,
     Status status,
     Categorias categorias,
-    List<SimpleUsuarioModel> sugeriu,
-    List<SimpleUsuarioModel> interprete,
   });
 }
 
@@ -4950,8 +4932,6 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
     Object? justificativa = freezed,
     Object? status = null,
     Object? categorias = null,
-    Object? sugeriu = null,
-    Object? interprete = null,
   }) {
     return _then(
       _$LibrasResponseModelImpl(
@@ -5000,16 +4980,6 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
                 ? _value.categorias
                 : categorias // ignore: cast_nullable_to_non_nullable
                     as Categorias,
-        sugeriu:
-            null == sugeriu
-                ? _value._sugeriu
-                : sugeriu // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleUsuarioModel>,
-        interprete:
-            null == interprete
-                ? _value._interprete
-                : interprete // ignore: cast_nullable_to_non_nullable
-                    as List<SimpleUsuarioModel>,
       ),
     );
   }
@@ -5029,10 +4999,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     this.justificativa,
     required this.status,
     required this.categorias,
-    required final List<SimpleUsuarioModel> sugeriu,
-    required final List<SimpleUsuarioModel> interprete,
-  }) : _sugeriu = sugeriu,
-       _interprete = interprete;
+  });
 
   factory _$LibrasResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LibrasResponseModelImplFromJson(json);
@@ -5055,25 +5022,10 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
   final Status status;
   @override
   final Categorias categorias;
-  final List<SimpleUsuarioModel> _sugeriu;
-  @override
-  List<SimpleUsuarioModel> get sugeriu {
-    if (_sugeriu is EqualUnmodifiableListView) return _sugeriu;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sugeriu);
-  }
-
-  final List<SimpleUsuarioModel> _interprete;
-  @override
-  List<SimpleUsuarioModel> get interprete {
-    if (_interprete is EqualUnmodifiableListView) return _interprete;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_interprete);
-  }
 
   @override
   String toString() {
-    return 'LibrasResponseModel(id: $id, palavra: $palavra, descricao: $descricao, url: $url, video: $video, foto: $foto, justificativa: $justificativa, status: $status, categorias: $categorias, sugeriu: $sugeriu, interprete: $interprete)';
+    return 'LibrasResponseModel(id: $id, palavra: $palavra, descricao: $descricao, url: $url, video: $video, foto: $foto, justificativa: $justificativa, status: $status, categorias: $categorias)';
   }
 
   @override
@@ -5092,12 +5044,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
                 other.justificativa == justificativa) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.categorias, categorias) ||
-                other.categorias == categorias) &&
-            const DeepCollectionEquality().equals(other._sugeriu, _sugeriu) &&
-            const DeepCollectionEquality().equals(
-              other._interprete,
-              _interprete,
-            ));
+                other.categorias == categorias));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5113,8 +5060,6 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     justificativa,
     status,
     categorias,
-    const DeepCollectionEquality().hash(_sugeriu),
-    const DeepCollectionEquality().hash(_interprete),
   );
 
   /// Create a copy of LibrasResponseModel
@@ -5145,8 +5090,6 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
     final String? justificativa,
     required final Status status,
     required final Categorias categorias,
-    required final List<SimpleUsuarioModel> sugeriu,
-    required final List<SimpleUsuarioModel> interprete,
   }) = _$LibrasResponseModelImpl;
 
   factory _LibrasResponseModel.fromJson(Map<String, dynamic> json) =
@@ -5170,10 +5113,6 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
   Status get status;
   @override
   Categorias get categorias;
-  @override
-  List<SimpleUsuarioModel> get sugeriu;
-  @override
-  List<SimpleUsuarioModel> get interprete;
 
   /// Create a copy of LibrasResponseModel
   /// with the given fields replaced by the non-null parameter values.
