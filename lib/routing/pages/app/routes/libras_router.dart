@@ -44,9 +44,8 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return Consumer<SpecificTopicViewModel>(builder: (context, viewModel, state) {
-
       var item = viewModel.models.isEmpty ? null : viewModel.models.firstWhere((u) => u.id == viewModel.modelId);
-      var relateds = item == null ? <String>[] : viewModel.models
+      var itemsRelateds = item == null ? <String>[] : viewModel.models
           .where((u) => u.categorias == item.categorias && u != item)
           .map((u) => u.palavra)
           .toList();
@@ -55,7 +54,7 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
           titulo: item!.palavra,
           timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
           description: item.descricao,
-          relacionados: relateds,
+          relacionados: itemsRelateds,
           urlVideo: item.url!,
       );
     });
