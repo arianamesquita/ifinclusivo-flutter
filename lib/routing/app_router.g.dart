@@ -192,6 +192,7 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
       routes: [
         GoRouteData.$route(
           path: '/app/forum',
+          name: 'feed',
 
           factory: _$ForumRouter._fromState,
           routes: [

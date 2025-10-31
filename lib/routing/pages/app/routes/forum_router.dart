@@ -9,6 +9,7 @@ const TypedStatefulShellBranch<StatefulShellBranchData> forumBranch =
 
 const feedRouter = TypedGoRoute<ForumRouter>(
   path: AppRoutes.forum,
+  name: 'feed',
   routes: [
     publicacaoRoute
   ]

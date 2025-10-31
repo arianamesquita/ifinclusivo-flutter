@@ -841,10 +841,10 @@ packages:
     dependency: "direct main"
     description:
       name: result_command
-      sha256: "09142ebe21c502f63f1ee980f6226d9f78a329e6af395e3f072f55018f1748ed"
+      sha256: "629917f2f492bd9ceb3178868d393e7d5ff9fb6c8fc20f3de5e16ec013bc331d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   result_dart:
     dependency: "direct main"
     description:

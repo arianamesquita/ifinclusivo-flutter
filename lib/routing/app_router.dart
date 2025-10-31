@@ -69,6 +69,8 @@ GoRouter createRouter({required AuthRepository authRepository}) {
     redirect: (BuildContext context, GoRouterState state) {
       final bool loggedIn = authRepository.currentUser != null;
       final String location = state.matchedLocation;
+      final String? name = state.name;
+      print(name);
       final isAuthRoute =
           location == AppRoutes.signIn || location == AppRoutes.signUp;
       if (!loggedIn && !isPublicRoute(location)) {

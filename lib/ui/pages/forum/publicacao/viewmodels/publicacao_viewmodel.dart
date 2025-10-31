@@ -30,6 +30,7 @@ class PublicacaoViewModel extends ChangeNotifier {
     });
     addCommentsCommand = Command2(_addComment);
     deleteCommentsCommand = Command1(_deleteComment);
+    deletePublicationCommand = Command1(_deletePublication);
   }
   final ForumRepository _forumRepository;
   final AuthRepository _authRepository;
@@ -39,9 +40,6 @@ class PublicacaoViewModel extends ChangeNotifier {
   StreamSubscription<UsuarioResponseModel?>? get authSubscription =>
       _authSubscription;
   StreamSubscription<UsuarioResponseModel?>? _authSubscription;
-  bool isDeleted = false;
-  bool showDeletedSnack = false;
-  bool showErrorSnack = false;
   @override
   void dispose() {
     _authSubscription?.cancel();
@@ -64,17 +62,18 @@ class PublicacaoViewModel extends ChangeNotifier {
   late final Command2<ComentarioResponseModel, int, ComentarioRequestModel>
   addCommentsCommand;
   late final Command1<bool, int> deleteCommentsCommand;
+  late final Command1<bool, int> deletePublicationCommand;
 
   double scrollOffset = 0.0;
 
-  AsyncResult<void> deletePublication(int id) async {
+  AsyncResult<bool> _deletePublication(int id) async {
     final result = await _forumRepository.deletePublication(id);
     return result.mapFold((onSuccess) {
       if (_publication != null) {
         _publication = null;
         notifyListeners();
       }
-      return Null;
+      return true;
     }, (onFailure) => onFailure);
   }
 
@@ -89,19 +88,16 @@ class PublicacaoViewModel extends ChangeNotifier {
 
   }
 
-  // 🔹 Deletar resposta da lista
   AsyncResult<void> deleteResposta(int id) async {
     final result = await _forumRepository.deletePublication(id);
     return result.mapFold(
       (onSuccess) {
         _comments = _comments.toList();
         _comments.removeWhere((r) => r.comment.id == id);
-        showDeletedSnack = true;
         notifyListeners();
         return Null;
       },
       (onFailure) {
-        showDeletedSnack = true;
         notifyListeners();
         return onFailure;
       },

@@ -50,6 +50,14 @@ class FeedViewModel extends ChangeNotifier {
     super.dispose();
   }
 
+  removePublicationById(int id) {
+    final index = publications.indexWhere((p) => p.id == id);
+    if (index != -1) {
+      publications.removeAt(index);
+      notifyListeners();
+    }
+  }
+
   Future<void> fetchPublications({
     Set<Categorias>? categories,
     Ordenacao? order,
@@ -121,48 +129,50 @@ class FeedViewModel extends ChangeNotifier {
       },
     );
   }
+
   late final Command1<bool, int> deleteCommentsCommand;
 
   AsyncResult<bool> _deletePublication(int id) async {
     final result = await _forumRepository.deletePublication(id);
 
-   return result.mapFold((onSuccess){
-     int index=  publications.indexWhere((p)=> p.id == id);
-     if(index != -1){
-       publications.removeAt(index);
-       notifyListeners();
-     }
-     return true;
-   }, (onFailure){
-     print(onFailure);
-     return onFailure;
-   });
-
+    return result.mapFold(
+      (onSuccess) {
+        int index = publications.indexWhere((p) => p.id == id);
+        if (index != -1) {
+          publications.removeAt(index);
+          notifyListeners();
+        }
+        return true;
+      },
+      (onFailure) {
+        print(onFailure);
+        return onFailure;
+      },
+    );
   }
+
   toggleLikePublication(int id) async {
     final response = await _forumRepository.toggleLikePublication(id);
-    response.fold((onSuccess){
-      final index = publications.indexWhere((p)=> p.id ==id);
-      if(index !=-1){
-        publications[index] = publications[index].copyWith(curtidoPeloUsuario: onSuccess);
+    response.fold((onSuccess) {
+      final index = publications.indexWhere((p) => p.id == id);
+      if (index != -1) {
+        publications[index] = publications[index].copyWith(
+          curtidoPeloUsuario: onSuccess,
+        );
         notifyListeners();
       }
-    }, (onFailure){});
-
+    }, (onFailure) {});
   }
 
   Future<void> updatePubication(int id) async {
     final result = await _forumRepository.findById(id);
 
-    result.fold(
-            (onSuccess){
-          int index=  publications.indexWhere((p)=> p.id == id);
-          if(index != -1){
-            publications[index] = onSuccess;
-            notifyListeners();
-          }
-        },
-            (onFailure){});
+    result.fold((onSuccess) {
+      int index = publications.indexWhere((p) => p.id == id);
+      if (index != -1) {
+        publications[index] = onSuccess;
+        notifyListeners();
+      }
+    }, (onFailure) {});
   }
-  }
-
+}
