@@ -25,4 +25,23 @@ class LibrasServiceImpl implements LibrasService{
 
     return response.data;
   }
+
+  @override
+  Future<String> getLibrasByWord({String? palavra, int pages = 0, int size = 10, String sort = 'asc'}) async {
+    final queryParams = <String, dynamic>{};
+
+    if(palavra!.isNotEmpty && palavra != null){
+      queryParams['palavra'] = palavra.toLowerCase();
+    }
+
+    queryParams['pages'] = pages;
+    queryParams['size'] = size;
+    queryParams['sortDir'] = 'asc';
+
+    final response = await _dio.get('$basePath/busca-palavras', queryParameters: queryParams);
+    print(response.data);
+
+    return response.data;
+
+  }
 }
