@@ -38,4 +38,32 @@ class LibrasRepositoryImpl implements LibrasRepository{
       throw Exception('falha de conexão, verifique sua internet e tente mais tarde. fora $e');
     }
   }
+
+  @override
+  Future<PaginatedResponse<LibrasResponseModel>> getLibrasByWord({String? palavra, int pages = 0, int size = 10, String sort = 'asc'}) async {
+    try{
+      final data =  await _librasService.getLibrasByWord(pages: pages, palavra: palavra, size: size, sort: sort);
+      var response = PaginatedResponse.fromJson(data, (json)=> LibrasResponseModel.fromJson(json as Map<String, dynamic>));
+      return response;
+    } on DioException catch (e) {
+      if(e.response != null) {
+        final statusCode = e.response!.statusCode;
+        final response = e.response!.data;
+        String errorMessage = 'erro inesperado';
+
+        if(response is Map && response.containsKey('message')) {
+          errorMessage = response['message'];
+        }
+
+        switch(statusCode) {
+          case 404: throw ApiException(message: errorMessage, statusCode: statusCode);
+          case 500: throw InternalServerException();
+        }
+      }
+
+      throw Exception('falha de conexão, verifique sua internet e tente mais tarde. dentro $e');
+    } catch(e) {
+      throw Exception('falha de conexão, verifique sua internet e tente mais tarde. fora $e');
+    }
+  }
 }

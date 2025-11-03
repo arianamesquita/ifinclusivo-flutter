@@ -27,7 +27,7 @@ class LibrasServiceImpl implements LibrasService{
   }
 
   @override
-  Future<String> getLibrasByWord({String? palavra, int pages = 0, int size = 10, String sort = 'asc'}) async {
+  Future<Map<String, dynamic>>  getLibrasByWord({String? palavra, int pages = 0, int size = 10, String sort = 'asc'}) async {
     final queryParams = <String, dynamic>{};
 
     if(palavra!.isNotEmpty && palavra != null){

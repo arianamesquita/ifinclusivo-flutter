@@ -4,4 +4,6 @@ import '../../domain/models/gen_models.dart';
 
 abstract class LibrasRepository{
   Future<PaginatedResponse<LibrasResponseModel>> getLibrasByTopic({int pages = 0, int size = 10, Categorias? categorias});
+
+  Future<PaginatedResponse<LibrasResponseModel>> getLibrasByWord({String? palavra, int pages = 0, int size = 10, String sort = 'asc' });
 }
