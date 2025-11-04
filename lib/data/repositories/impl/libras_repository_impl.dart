@@ -5,6 +5,8 @@ import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/domain/models/gen_models.dart';
 import 'package:if_inclusivo/exceptions/api_exception.dart';
+import 'package:result_dart/result_dart.dart';
+import 'package:result_dart/src/types.dart';
 
 class LibrasRepositoryImpl implements LibrasRepository{
   final LibrasService _librasService;
@@ -56,7 +58,7 @@ class LibrasRepositoryImpl implements LibrasRepository{
         }
 
         switch(statusCode) {
-          case 404: throw ApiException(message: errorMessage, statusCode: statusCode);
+          case 409: throw ApiException(message: errorMessage, statusCode: statusCode);
           case 500: throw InternalServerException();
         }
       }
@@ -64,6 +66,20 @@ class LibrasRepositoryImpl implements LibrasRepository{
       throw Exception('falha de conexão, verifique sua internet e tente mais tarde. dentro $e');
     } catch(e) {
       throw Exception('falha de conexão, verifique sua internet e tente mais tarde. fora $e');
+    }
+  }
+
+  @override
+  AsyncResult<LibrasResponseModel> findById({required int id}) async {
+    try{
+      final respone = await _librasService.getLibrasById(id: id);
+      final model = LibrasResponseModel.fromJson(respone);
+      return Success(model);
+    } on DioException catch(e) {
+      return Failure(e);
+    }
+    catch(e){
+     return Failure(Exception(e));
     }
   }
 }

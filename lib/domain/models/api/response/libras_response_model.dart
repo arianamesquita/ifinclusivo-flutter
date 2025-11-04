@@ -6,7 +6,7 @@ class LibrasResponseModel with _$LibrasResponseModel {
     required int id,
     required String palavra,
     required String descricao,
-    String? url,
+    required String url,
     String? video,
     String? foto,
     String? justificativa,

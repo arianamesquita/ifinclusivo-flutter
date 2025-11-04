@@ -6,11 +6,7 @@ const librasBranch = TypedStatefulShellBranch<StatefulShellBranchData>(
 
 const librasRouter = TypedGoRoute<LibrasRouter>(
   path: AppRoutes.libras,
-  routes: [
-    librasTopicsRoute,
-    midiaRouter,
-    wordSuggestionRouter
-  ],
+  routes: [librasTopicsRoute, midiaRouter, wordSuggestionRouter],
 );
 
 class LibrasRouter extends GoRouteData with _$LibrasRouter {
@@ -32,7 +28,17 @@ class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SpecificTopicPage(categoria: categoria,);
+    final vm = SpecificTopicViewModel(librasRepository: context.read());
+    vm.fetchLibras(
+      Categorias.values.firstWhere(
+        (ca) => ca.name == categoria,
+        orElse: () {
+          NotFoundRoute().push(context);
+          return Categorias.BANCO_DE_DADOS;
+        },
+      ),
+    );
+    return SpecificTopicPage(viewModel: vm);
   }
 }
 
@@ -44,21 +50,9 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return Consumer<SpecificTopicViewModel>(builder: (context, viewModel, state) {
-      var item = viewModel.models.isEmpty ? null : viewModel.models.firstWhere((u) => u.id == viewModel.modelId);
-      var itemsRelateds = item == null ? <String>[] : viewModel.models
-          .where((u) => u.categorias == item.categorias && u != item)
-          .map((u) => u.palavra)
-          .toList();
-
-      return MidiaPageLibras(
-          titulo: item!.palavra,
-          timestamp: 'Adicionado em sexta-feira, 22 de março de 2024',
-          description: item.descricao,
-          relacionados: itemsRelateds,
-          urlVideo: item.url!,
-      );
-    });
+    final vm = LibrasViewModel(repository: context.read());
+    vm.fetchLibrasCmd.execute(id);
+    return MidiaPageLibras(viewModel: vm,);
   }
 }
 

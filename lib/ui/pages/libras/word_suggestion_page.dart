@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/libras_custom_text_field.dart';
-import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
 
 import '../../core/layout/custom_container_shell.dart';
 

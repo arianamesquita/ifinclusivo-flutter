@@ -143,12 +143,7 @@ List<SingleChildWidget> get _viewModelsProviders {
               LoginViewModel(authRepository: context.read<AuthRepository>()),
     ),
 
-    ChangeNotifierProvider<SpecificTopicViewModel>(
-      create:
-          (context) => SpecificTopicViewModel(
-            librasRepository: context.read<LibrasRepository>(),
-          ),
-    ),
+
     ChangeNotifierProvider(
       create:
           (context) => FeedViewModel(

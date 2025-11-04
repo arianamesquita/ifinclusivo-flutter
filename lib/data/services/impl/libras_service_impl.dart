@@ -44,4 +44,10 @@ class LibrasServiceImpl implements LibrasService{
     return response.data;
 
   }
+
+  @override
+  Future<Map<String, dynamic>> getLibrasById({required int id}) async {
+    final response = await _dio.get('$basePath/find/$id');
+    return response.data;
+  }
 }

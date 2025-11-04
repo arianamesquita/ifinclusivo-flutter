@@ -4772,7 +4772,7 @@ mixin _$LibrasResponseModel {
   int get id => throw _privateConstructorUsedError;
   String get palavra => throw _privateConstructorUsedError;
   String get descricao => throw _privateConstructorUsedError;
-  String? get url => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
   String? get video => throw _privateConstructorUsedError;
   String? get foto => throw _privateConstructorUsedError;
   String? get justificativa => throw _privateConstructorUsedError;
@@ -4800,7 +4800,7 @@ abstract class $LibrasResponseModelCopyWith<$Res> {
     int id,
     String palavra,
     String descricao,
-    String? url,
+    String url,
     String? video,
     String? foto,
     String? justificativa,
@@ -4827,7 +4827,7 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
     Object? id = null,
     Object? palavra = null,
     Object? descricao = null,
-    Object? url = freezed,
+    Object? url = null,
     Object? video = freezed,
     Object? foto = freezed,
     Object? justificativa = freezed,
@@ -4852,10 +4852,10 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
                     : descricao // ignore: cast_nullable_to_non_nullable
                         as String,
             url:
-                freezed == url
+                null == url
                     ? _value.url
                     : url // ignore: cast_nullable_to_non_nullable
-                        as String?,
+                        as String,
             video:
                 freezed == video
                     ? _value.video
@@ -4900,7 +4900,7 @@ abstract class _$$LibrasResponseModelImplCopyWith<$Res>
     int id,
     String palavra,
     String descricao,
-    String? url,
+    String url,
     String? video,
     String? foto,
     String? justificativa,
@@ -4926,7 +4926,7 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? palavra = null,
     Object? descricao = null,
-    Object? url = freezed,
+    Object? url = null,
     Object? video = freezed,
     Object? foto = freezed,
     Object? justificativa = freezed,
@@ -4951,10 +4951,10 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
                 : descricao // ignore: cast_nullable_to_non_nullable
                     as String,
         url:
-            freezed == url
+            null == url
                 ? _value.url
                 : url // ignore: cast_nullable_to_non_nullable
-                    as String?,
+                    as String,
         video:
             freezed == video
                 ? _value.video
@@ -4993,7 +4993,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     required this.id,
     required this.palavra,
     required this.descricao,
-    this.url,
+    required this.url,
     this.video,
     this.foto,
     this.justificativa,
@@ -5011,7 +5011,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
   @override
   final String descricao;
   @override
-  final String? url;
+  final String url;
   @override
   final String? video;
   @override
@@ -5084,7 +5084,7 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
     required final int id,
     required final String palavra,
     required final String descricao,
-    final String? url,
+    required final String url,
     final String? video,
     final String? foto,
     final String? justificativa,
@@ -5102,7 +5102,7 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
   @override
   String get descricao;
   @override
-  String? get url;
+  String get url;
   @override
   String? get video;
   @override
