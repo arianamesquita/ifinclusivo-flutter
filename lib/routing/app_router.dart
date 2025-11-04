@@ -5,6 +5,7 @@ import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
 import 'package:if_inclusivo/ui/pages/auth/reset_password/reset_password_page.dart';
 import 'package:if_inclusivo/ui/pages/auth/token/token_page.dart';
+import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/midia_page.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_page.dart';
 import 'package:if_inclusivo/ui/pages/profile/account_security/account_security_page.dart';
@@ -59,9 +60,8 @@ part 'pages/exceptions/exceptions_routes.dart';
 
 
 GoRouter createRouter({required AuthRepository authRepository}) {
-  final authListenable = StreamListenable(authRepository.authStateChanges);
   return GoRouter(
-    refreshListenable: authListenable,
+    refreshListenable: authRepository,
     initialLocation: AppRoutes.aboutUs,
     errorBuilder: (context, state) {
       return const NotFound404();
@@ -69,12 +69,9 @@ GoRouter createRouter({required AuthRepository authRepository}) {
     redirect: (BuildContext context, GoRouterState state) {
       final bool loggedIn = authRepository.currentUser != null;
       final String location = state.matchedLocation;
-      final String? name = state.name;
-      print(name);
       final isAuthRoute =
           location == AppRoutes.signIn || location == AppRoutes.signUp;
       if (!loggedIn && !isPublicRoute(location)) {
-        AuthRedirectHelper.setRedirectLocation(location);
         return AppRoutes.signIn;
       }
 

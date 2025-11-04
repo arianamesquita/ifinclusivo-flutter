@@ -355,16 +355,10 @@ mixin _$LibrasTopicRouter on GoRouteData {
 }
 
 mixin _$MidiaRouter on GoRouteData {
-  static MidiaRouter _fromState(GoRouterState state) =>
-      MidiaRouter(int.parse(state.uri.queryParameters['id']!)!);
-
-  MidiaRouter get _self => this as MidiaRouter;
+  static MidiaRouter _fromState(GoRouterState state) => const MidiaRouter();
 
   @override
-  String get location => GoRouteData.$location(
-    '/app/libras/midia',
-    queryParams: {'id': _self.id.toString()},
-  );
+  String get location => GoRouteData.$location('/app/libras/midia');
 
   @override
   void go(BuildContext context) => context.go(location);

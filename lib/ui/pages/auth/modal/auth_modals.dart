@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/validators/email_validador.dart';
 import 'package:if_inclusivo/domain/validators/password_validator.dart';
+import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/auth/modal/modal_auth_base.dart';
 import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:lucid_validation/lucid_validation.dart';
 import 'package:provider/provider.dart';
 
@@ -379,6 +381,115 @@ class AuthModals {
           child: CircularProgressIndicator(),
         ),
       ),
+    );
+  }
+}
+
+Future<void> showLoginRequiredDialog(BuildContext context) async {
+  final isMobile = ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile;
+
+  if (isMobile) {
+    return showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) => const _LoginRequiredContent(),
+    );
+  } else {
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          insetPadding: const EdgeInsets.all(24),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: const Padding(
+              padding: EdgeInsets.all(24),
+              child: _LoginRequiredContent(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _LoginRequiredContent extends StatelessWidget {
+  const _LoginRequiredContent();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          Icons.lock_outline_rounded,
+          size: 56,
+          color: colorScheme.primary,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Faça login para continuar',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Você precisa estar logado para curtir ou comentar.\nEntre ou crie uma conta gratuita!',
+          style: Theme.of(context).textTheme.bodyMedium,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 24),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                onPressed: () {
+                  RegisterRoute().push(context);
+                },
+                child: const Text('Criar conta'),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: FilledButton(
+                style: FilledButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  LoginRoute().push(context);
+                },
+                child: const Text('Fazer login'),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Agora não'),
+        ),
+      ],
     );
   }
 }
