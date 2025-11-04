@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:result_command/src/command.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../../domain/models/api/response/gen_responses.dart';
 import '../../../../../routing/app_router.dart';
@@ -86,8 +89,6 @@ class _PublicationContentState extends State<PublicationContent> {
                               extra: publication,
                             );
                             if (result == true && context.mounted) {
-                              final feedVm = context.read<FeedViewModel>();
-                              feedVm.updatePubication(publication.id);
                               vm.fetchPublicationCommand.execute(
                                 publication.id,
                               );
@@ -184,13 +185,49 @@ class _PublicationContentState extends State<PublicationContent> {
               onLike: () {
                 vm.toggleLikePublication(publication.id);
               },
-              onComment: () {
-                context.push(
-                  NewPublicacaoRouter().location,
-                  extra: publication,
-                );
+              isLoggedIn: vm.currentUser != null,
+              onComment: null,
+              onShare: () async {
+                const String baseUrl = "http://localhost:5000/";
+                final String publicationUrl =
+                    "$baseUrl/#/app/forum/post/${publication.id}";
+                if (kIsWeb) {
+                  // ------ LÓGICA PARA WEB ------
+                  try {
+                    // Copia o link para a área de transferência
+                    await Clipboard.setData(
+                      ClipboardData(text: publicationUrl),
+                    );
+
+                    // (Recomendado) Mostra um feedback para o usuário
+                    // 'context' precisa estar disponível neste escopo
+                    if (context.mounted) {
+                      // Boa prática: verificar se o widget ainda está montado
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Link copiado para a área de transferência!',
+                          ),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    // Em alguns casos (ex: iframes seguros), o clipboard pode falhar
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Erro ao copiar o link.'),
+                        ),
+                      );
+                    }
+                  }
+                } else {
+                  final String shareText =
+                      "Confira esta publicação interessante: $publicationUrl";
+                  Share.share(shareText);
+                }
               },
-              onShare: () {},
             ),
           ],
         );

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
-import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
-import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/comment_editor.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/comment_tile.dart';
@@ -135,8 +133,6 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                   ),
                 );
               } else if (deleteState is SuccessCommand) {
-                final feedVm = context.read<FeedViewModel>();
-                feedVm.removePublicationById(widget.id);
                 return const Center(
                   child: Text('Publicação excluída com sucesso!'),
                 );
@@ -152,9 +148,8 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                   ),
                 );
               }
-              if(_viewModel.publication!=null){
+              if (_viewModel.publication != null) {
                 return buildBody(context, _viewModel.publication!);
-
               }
               return Center(
                 child: Text(
@@ -202,20 +197,24 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: PublicationContent(),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-            child: ListenableBuilder(
-              listenable: _viewModel.addCommentsCommand,
-              builder: (context, _) {
-                return CommentEditor.add(
-                  imgPath: _viewModel.currentUser?.imgPerfil,
-                  onSubmit: _sendReply,
-                  isLoading: _viewModel.addCommentsCommand.value.isRunning,
-                  clearNotifier: _clearEditorNotifier,
-                );
-              },
+          if (_viewModel.currentUser != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 8,
+              ),
+              child: ListenableBuilder(
+                listenable: _viewModel.addCommentsCommand,
+                builder: (context, _) {
+                  return CommentEditor.add(
+                    imgPath: _viewModel.currentUser?.imgPerfil,
+                    onSubmit: _sendReply,
+                    isLoading: _viewModel.addCommentsCommand.value.isRunning,
+                    clearNotifier: _clearEditorNotifier,
+                  );
+                },
+              ),
             ),
-          ),
           buildOrderBar(context),
           buildChildrenPublication(publicationId: value.id),
         ],
@@ -250,43 +249,70 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                 );
               }
 
-              return Column(
-                children:
-                    vm.comments.map((model) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 12.0,
-                              right: 12,
-                              top: 8,
-                            ),
-                            child: CommentTile(
-                              key: ValueKey(model.comment.id),
-                              viewModel: vm,
-                              userName: model.comment.usuario.nome,
-                              autorId: model.comment.usuario.id,
-                              taggedUser: model.comment.usuarioMencionado?.nome,
-                              parentId: model.comment.id,
-                              dateCreation: model.comment.dataCriacao,
-                              replyCount: model.comment.totalRespostas,
-                              publicationText: model.comment.texto,
-                              commentId: model.comment.id,
-                              publicationId: model.comment.publicacaoId,
-                              imgPath: model.comment.usuario.imgPerfil,
-                            ),
-                          ),
-                          if (_viewModel.comments.last.comment.id !=
-                              model.comment.id)
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  children:
+                      [...vm.comments.map((model) {
+                        return Column(
+                          children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0,
+                              padding: const EdgeInsets.only(
+                                left: 12.0,
+                                right: 12,
+                                top: 8,
                               ),
-                              child: Divider(),
+                              child: CommentTile(
+                                key: ValueKey(model.comment.id),
+                                viewModel: vm,
+                                userName: model.comment.usuario.nome,
+                                autorId: model.comment.usuario.id,
+                                taggedUser: model.comment.usuarioMencionado?.nome,
+                                parentId: model.comment.id,
+                                dateCreation: model.comment.dataCriacao,
+                                replyCount: model.comment.totalRespostas,
+                                publicationText: model.comment.texto,
+                                commentId: model.comment.id,
+                                publicationId: model.comment.publicacaoId,
+                                imgPath: model.comment.usuario.imgPerfil,
+                              ),
                             ),
-                        ],
-                      );
-                    }).toList(),
+                            if (_viewModel.comments.last.comment.id !=
+                                model.comment.id)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12.0,
+                                ),
+                                child: Divider(),
+                              ),
+
+                          ],
+                        );
+                      }),
+                          ListenableBuilder(
+                            listenable: Listenable.merge([_viewModel.fetchMoreCmd,_viewModel]),
+                            builder: (context, _) {
+                              if (_viewModel.publication!.totalRespostas !=
+                                  _viewModel.comments.length){
+                                print(_viewModel.publication!.totalRespostas);
+                                print(_viewModel.comments.length);
+                                return ElevatedButton(
+                                  onPressed:
+                                      () =>
+                                      _viewModel.fetchMoreCmd.execute(
+                                        widget.id,
+                                      ),
+                                  child:
+                                  _viewModel.fetchMoreCmd.value.isRunning
+                                      ? CircularProgressIndicator()
+                                      : Text("carregar mais"),
+                                );
+                              }else {
+                                return SizedBox.shrink();
+                              }
+                            },
+                          ),]
+                ),
               );
             },
           );
