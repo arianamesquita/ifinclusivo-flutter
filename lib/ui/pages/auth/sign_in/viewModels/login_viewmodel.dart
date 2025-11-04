@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:if_inclusivo/data/repositories/auth_repository.dart';
@@ -12,12 +14,31 @@ enum EmailState{
 }
 class LoginViewModel extends ChangeNotifier{
   final AuthRepository _authRepository;
-  LoginViewModel({required AuthRepository authRepository}) : _authRepository = authRepository;
-
+  LoginViewModel({required AuthRepository authRepository}) : _authRepository = authRepository{
+    _initAuthListener();
+  }
   EmailState _emailState = EmailState.idle;
   EmailState get emailState => _emailState;
 
-  final ValueNotifier<bool> isLogged = ValueNotifier<bool>(false);
+  bool _isLoggedIn = false;
+  bool get isLoggedIn => _isLoggedIn;
+
+  StreamSubscription<UsuarioResponseModel?>? _authSubscription;
+
+  void _initAuthListener() {
+    _authSubscription = _authRepository.authStateChanges.listen((user) {
+      if (user == null) {
+        _isLoggedIn = false;
+        notifyListeners();
+      }
+    });
+  }
+  @override
+  void dispose() {
+    _authSubscription?.cancel();
+    super.dispose();
+  }
+
 
   sendToken(email) async {
     _setEmailState(EmailState.loading);
@@ -44,17 +65,18 @@ class LoginViewModel extends ChangeNotifier{
     try {
       await _authRepository.login(credentials.login, credentials.senha);
       debugPrint("Login realizado com sucesso");
-      isLogged.value = true;
+      _isLoggedIn = true;
       return true;
     } on DioException catch (e){
       debugPrint("Erro ${e.response?.statusCode ?? ''} : ${e.message}");
-      isLogged.value = false;
+      _isLoggedIn = false;
       return false;
     } catch (e) {
       debugPrint("Erro inesperado no login ${e.toString()}");
-      isLogged.value = false;
-      notifyListeners();
+      _isLoggedIn = false;
       return false;
+    }finally{
+      notifyListeners();
     }
   }
 
