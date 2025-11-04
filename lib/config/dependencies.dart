@@ -47,17 +47,12 @@ List<SingleChildWidget> providers(SharedPreferences prefs) {
 List<SingleChildWidget> get _authServices {
   return [
     Provider<AuthService>(create: (_) => AuthServiceImpl()),
-    Provider<AuthRepository>(
+    ChangeNotifierProvider<AuthRepository>(
       create:
           (context) => AuthRepositoryImpl(
             authService: context.read<AuthService>(),
             sharedPreferences: context.read<SharedPreferences>(),
           ),
-      dispose: (_, repo) {
-        if (repo is AuthRepositoryImpl) {
-          repo.dispose();
-        }
-      },
     ),
     Provider<GoRouter>(
       create: (context) {
