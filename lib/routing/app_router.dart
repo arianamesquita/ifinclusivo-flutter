@@ -26,6 +26,8 @@ import '../ui/pages/forum/feed/feed_page.dart';
 import '../ui/pages/forum/new publication/publication_editor.dart';
 import '../ui/pages/forum/publicacao/publicacao_page.dart';
 import '../ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
+import '../ui/pages/libras/libras_page/midia_page.dart';
+import '../ui/pages/libras/libras_page/view_models/libras_view_model.dart';
 import '../ui/pages/libras/page_libras.dart';
 import '../ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import '../ui/pages/libras/word_suggestion_page.dart';
