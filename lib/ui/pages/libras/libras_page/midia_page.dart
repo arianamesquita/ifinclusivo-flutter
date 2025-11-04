@@ -1,24 +1,23 @@
+
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_page/view_models/libras_view_model.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/midia_card_info.dart';
 import 'package:if_inclusivo/utils/text_formater.dart';
+import 'package:result_command/src/command.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
-import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
 
 class MidiaPageLibras extends StatefulWidget {
-  final String titulo;
-  final String urlVideo;
-  final String timestamp;
-  final List<String> relacionados;
-  final String description;
+
+    final LibrasViewModel viewModel;
+
 
   const MidiaPageLibras({
     super.key,
-    required this.titulo,
-    required this.timestamp,
-    required this.relacionados,
-    required this.urlVideo,
-    required this.description,
+    required this.viewModel,
+
   });
 
   @override
@@ -28,21 +27,14 @@ class MidiaPageLibras extends StatefulWidget {
 class _MidiaPageLibrasState extends State<MidiaPageLibras> {
   YoutubePlayerController? _controller;
   late final String? videoId;
+  late final LibrasResponseModel model;
+  bool initialized = false;
 
   @override
   void initState() {
     super.initState();
-    videoId = YoutubePlayerController.convertUrlToId(widget.urlVideo);
 
-    _controller = YoutubePlayerController.fromVideoId(
-      videoId: videoId!,
-      autoPlay: false,
-      params: const YoutubePlayerParams(
-        mute: true,
-        showControls: true,
-        showFullscreenButton: true,
-      ),
-    );
+
   }
 
   @override
@@ -50,27 +42,63 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
     return CustomContainerShell(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-        child: Column(
-          children: [
-            TopContentLibras(),
-            const SizedBox(height: 24),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                if (constraints.maxWidth < 900) {
-                  return _buildNarrowLayout(context);
-                } else {
-                  return _buildWideLayout(context);
+        child: ListenableBuilder(
+          listenable: widget.viewModel.fetchLibrasCmd,
+          builder: (context,_) {
+            final status = widget.viewModel.fetchLibrasCmd.value;
+
+            switch (status){
+
+              case RunningCommand<LibrasResponseModel>():
+                // TODO: Handle this case.
+                throw UnimplementedError();
+              case FailureCommand<LibrasResponseModel>(:final error):
+                // TODO: Handle this case.
+                throw UnimplementedError();
+              case SuccessCommand<LibrasResponseModel>(:final value):
+                if(!initialized){
+                  videoId = YoutubePlayerController.convertUrlToId(value.url);
+
+                  _controller = YoutubePlayerController.fromVideoId(
+                    videoId: videoId!,
+                    autoPlay: false,
+                    params: const YoutubePlayerParams(
+                      mute: true,
+                      showControls: true,
+                      showFullscreenButton: true,
+                    ),
+                  );
+                  initialized = true;
+                  model = value;
                 }
-              },
-            ),
-          ],
+
+                return Column(
+                  children: [
+                    TopContentLibras(),
+                    const SizedBox(height: 24),
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        if (constraints.maxWidth < 900) {
+                          return _buildNarrowLayout();
+                        } else {
+                          return _buildWideLayout(context);
+                        }
+                      },
+                    ),
+                  ],
+                );
+              default: return SizedBox.shrink();
+            }
+
+
+          }
         ),
       ),
     );
   }
 
   Widget _buildMidiaContent(BuildContext context) {
-    String palavra = formatarTexto(widget.titulo);
+    String palavra = formatarTexto(model.palavra);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +121,7 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
         ),
         const SizedBox(height: 14),
         Text(
-          widget.timestamp,
+          DateTime.now().timeZoneName,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
             color: Theme.of(context).colorScheme.secondary,
           ),
@@ -103,7 +131,7 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
           maxWidth: 635,
           textAlign: TextAlign.left,
           title: 'Descrição',
-          label: widget.description,
+          label: model.descricao,
           titleStyle: Theme.of(context).textTheme.titleMedium,
           labelStyle: Theme.of(context).textTheme.bodyMedium,
         ),
@@ -133,7 +161,6 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
                   ?.copyWith(color: Colors.white),
             ),
           ),
-          ...widget.relacionados.map((item) => _buildRelatedLinkItem(item)),
         ],
       ),
     );
@@ -171,7 +198,7 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
     );
   }
 
-  Widget _buildNarrowLayout(BuildContext context) {
+  Widget _buildNarrowLayout() {
     return Column(
       children: [
         _buildMidiaContent(context),

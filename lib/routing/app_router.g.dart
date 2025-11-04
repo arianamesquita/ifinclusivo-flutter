@@ -217,7 +217,7 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
               factory: _$LibrasTopicRouter._fromState,
             ),
             GoRouteData.$route(
-              path: 'midia',
+              path: 'midia/:id',
 
               factory: _$MidiaRouter._fromState,
             ),
@@ -355,14 +355,13 @@ mixin _$LibrasTopicRouter on GoRouteData {
 
 mixin _$MidiaRouter on GoRouteData {
   static MidiaRouter _fromState(GoRouterState state) =>
-      MidiaRouter(int.parse(state.uri.queryParameters['id']!)!);
+      MidiaRouter(int.parse(state.pathParameters['id']!)!);
 
   MidiaRouter get _self => this as MidiaRouter;
 
   @override
   String get location => GoRouteData.$location(
-    '/app/libras/midia',
-    queryParams: {'id': _self.id.toString()},
+    '/app/libras/midia/${Uri.encodeComponent(_self.id.toString())}',
   );
 
   @override

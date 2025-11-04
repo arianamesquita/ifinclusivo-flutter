@@ -30,6 +30,7 @@ class SpecificTopicViewModel extends ChangeNotifier{
   List<LibrasResponseModel> _models = [];
   List<LibrasResponseModel> get models => _models;
 
+
   fetchLibras(Categorias category) async {
     if(_state != SpecificTopicsState.loading) {
       _state = SpecificTopicsState.loading;
