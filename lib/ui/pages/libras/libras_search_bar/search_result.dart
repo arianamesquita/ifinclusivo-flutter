@@ -6,6 +6,7 @@ import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/viewmodels/libras
 import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/widgets/search_result_block.dart';
 import 'package:provider/provider.dart';
 
+
 class SearchResult extends StatefulWidget {
   const SearchResult({super.key });
 
