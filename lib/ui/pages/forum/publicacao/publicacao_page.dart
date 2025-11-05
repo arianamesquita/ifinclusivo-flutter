@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
-import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/comment_editor.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/comment_tile.dart';
@@ -114,27 +113,49 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
       body: ListenableBuilder(
         listenable: _viewModel,
         builder: (context, _) {
-          if (_viewModel.isDeleted) {
-            return Center(child: Text('Esta publicação foi removida.'));
-          }
-
-          if (_viewModel.publication != null) {
-            return buildBody(context, _viewModel.publication!);
-          }
           return ListenableBuilder(
-            listenable: _viewModel.fetchPublicationCommand,
+            listenable: Listenable.merge([
+              _viewModel.fetchPublicationCommand,
+              _viewModel.deletePublicationCommand,
+            ]),
             builder: (context, _) {
-              final state = _viewModel.fetchPublicationCommand.value;
-              switch (state) {
-                case RunningCommand<PublicacaoDetalhadaModel>():
-                  return const Center(child: CircularProgressIndicator());
-                case FailureCommand<PublicacaoDetalhadaModel>(:final error):
-                  return Center(child: Text('Erro: ${error.toString()}'));
-                case SuccessCommand<PublicacaoDetalhadaModel>():
-                case IdleCommand<PublicacaoDetalhadaModel>():
-                case CancelledCommand<PublicacaoDetalhadaModel>():
-                  return const SizedBox.shrink();
+              final fetchState = _viewModel.fetchPublicationCommand.value;
+              final deleteState = _viewModel.deletePublicationCommand.value;
+
+              // 🧩 Primeiro, trata o estado de deleção (por exemplo, mostrando loading ou erro)
+              if (deleteState is RunningCommand) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (deleteState is FailureCommand) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Erro ao apagar comentário.'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              } else if (deleteState is SuccessCommand) {
+                return const Center(
+                  child: Text('Publicação excluída com sucesso!'),
+                );
               }
+
+              // 🧩 Depois, trata o estado do fetch
+              if (fetchState is RunningCommand) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (fetchState is FailureCommand) {
+                return Center(
+                  child: Text(
+                    'Erro: Não foi possivel carregar sua pagina, tente novamente mais tarde',
+                  ),
+                );
+              }
+              if (_viewModel.publication != null) {
+                return buildBody(context, _viewModel.publication!);
+              }
+              return Center(
+                child: Text(
+                  'Erro: Não foi possivel carregar sua pagina, tente novamente mais tarde',
+                ),
+              );
             },
           );
         },
@@ -174,22 +195,26 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: PublicationContent(model: value),
+            child: PublicationContent(),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-            child: ListenableBuilder(
-              listenable: _viewModel.addCommentsCommand,
-              builder: (context, _) {
-                return CommentEditor.add(
-                  imgPath: _viewModel.currentUser?.imgPerfil,
-                  onSubmit: _sendReply,
-                  isLoading: _viewModel.addCommentsCommand.value.isRunning,
-                  clearNotifier: _clearEditorNotifier,
-                );
-              },
+          if (_viewModel.currentUser != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 8,
+              ),
+              child: ListenableBuilder(
+                listenable: _viewModel.addCommentsCommand,
+                builder: (context, _) {
+                  return CommentEditor.add(
+                    imgPath: _viewModel.currentUser?.imgPerfil,
+                    onSubmit: _sendReply,
+                    isLoading: _viewModel.addCommentsCommand.value.isRunning,
+                    clearNotifier: _clearEditorNotifier,
+                  );
+                },
+              ),
             ),
-          ),
           buildOrderBar(context),
           buildChildrenPublication(publicationId: value.id),
         ],
@@ -208,27 +233,6 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
     return ListenableBuilder(
       listenable: _viewModel,
       builder: (context, _) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (_viewModel.showDeletedSnack) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Publicação apagada com sucesso!'),
-                backgroundColor: Colors.green,
-              ),
-            );
-            _viewModel.showDeletedSnack = false;
-          }
-          if (_viewModel.showErrorSnack) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(_viewModel.errorMessage),
-                backgroundColor: Colors.red,
-              ),
-            );
-            _viewModel.showErrorSnack = false;
-          }
-        });
-
         if (!_viewModel.fetchRespostasCommand.value.isRunning &&
             !_viewModel.fetchRespostasCommand.value.isFailure) {
           return Consumer<PublicacaoViewModel>(
@@ -245,43 +249,70 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
                 );
               }
 
-              return Column(
-                children:
-                    _viewModel.comments.map((model) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 12.0,
-                              right: 12,
-                              top: 8,
-                            ),
-                            child: CommentTile(
-                              key: ValueKey(model.comment.id),
-                              viewModel: _viewModel,
-                              userName: model.comment.usuario.nome,
-                              autorId: model.comment.usuario.id,
-                              taggedUser: model.comment.usuarioMencionado?.nome,
-                              parentId: model.comment.id,
-                              dateCreation: model.comment.dataCriacao,
-                              replyCount: model.comment.totalRespostas,
-                              publicationText: model.comment.texto,
-                              commentId: model.comment.id,
-                              publicationId: model.comment.publicacaoId,
-                              imgPath: model.comment.usuario.imgPerfil,
-                            ),
-                          ),
-                          if (_viewModel.comments.last.comment.id !=
-                              model.comment.id)
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  children:
+                      [...vm.comments.map((model) {
+                        return Column(
+                          children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0,
+                              padding: const EdgeInsets.only(
+                                left: 12.0,
+                                right: 12,
+                                top: 8,
                               ),
-                              child: Divider(),
+                              child: CommentTile(
+                                key: ValueKey(model.comment.id),
+                                viewModel: vm,
+                                userName: model.comment.usuario.nome,
+                                autorId: model.comment.usuario.id,
+                                taggedUser: model.comment.usuarioMencionado?.nome,
+                                parentId: model.comment.id,
+                                dateCreation: model.comment.dataCriacao,
+                                replyCount: model.comment.totalRespostas,
+                                publicationText: model.comment.texto,
+                                commentId: model.comment.id,
+                                publicationId: model.comment.publicacaoId,
+                                imgPath: model.comment.usuario.imgPerfil,
+                              ),
                             ),
-                        ],
-                      );
-                    }).toList(),
+                            if (_viewModel.comments.last.comment.id !=
+                                model.comment.id)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12.0,
+                                ),
+                                child: Divider(),
+                              ),
+
+                          ],
+                        );
+                      }),
+                          ListenableBuilder(
+                            listenable: Listenable.merge([_viewModel.fetchMoreCmd,_viewModel]),
+                            builder: (context, _) {
+                              if (_viewModel.publication!.totalRespostas !=
+                                  _viewModel.comments.length){
+                                print(_viewModel.publication!.totalRespostas);
+                                print(_viewModel.comments.length);
+                                return ElevatedButton(
+                                  onPressed:
+                                      () =>
+                                      _viewModel.fetchMoreCmd.execute(
+                                        widget.id,
+                                      ),
+                                  child:
+                                  _viewModel.fetchMoreCmd.value.isRunning
+                                      ? CircularProgressIndicator()
+                                      : Text("carregar mais"),
+                                );
+                              }else {
+                                return SizedBox.shrink();
+                              }
+                            },
+                          ),]
+                ),
               );
             },
           );
@@ -362,36 +393,6 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
           child: Divider(),
         ),
       ],
-    );
-  }
-
-  _showDialog(PublicacaoViewModel vm, model) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("Confirmar exclusão"),
-          content: const Text(
-            "Tem certeza que deseja excluir esta publicação? Essa ação não poderá ser desfeita.",
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("Cancelar"),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                await vm.deleteResposta(model.id);
-              },
-              child: const Text("Excluir"),
-            ),
-          ],
-        );
-      },
     );
   }
 }

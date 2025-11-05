@@ -1,10 +1,12 @@
 
 
+import 'package:flutter/foundation.dart';
+
 import '../../domain/models/api/request/gen_requests.dart';
 import '../../domain/models/api/response/gen_responses.dart';
 import '../../domain/models/api/simple_model/gen_simple_models.dart';
 
-abstract class AuthRepository{
+abstract class AuthRepository extends ChangeNotifier{
 
   Stream<UsuarioResponseModel?> get authStateChanges;
 

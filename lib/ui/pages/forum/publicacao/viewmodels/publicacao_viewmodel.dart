@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:if_inclusivo/data/repositories/forum_repository.dart';
+import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:result_command/result_command.dart';
 import 'package:result_dart/result_dart.dart';
 
@@ -14,8 +15,11 @@ class PublicacaoViewModel extends ChangeNotifier {
   PublicacaoViewModel({
     required ForumRepository forumRepository,
     required AuthRepository authRepository,
+    required PublicationsViewModel publicationsViewModel,
   }) : _authRepository = authRepository,
-       _forumRepository = forumRepository {
+       _forumRepository = forumRepository,
+       _publicationsViewModel = publicationsViewModel {
+    fetchMoreCmd = Command1(_fetchMore);
     fetchPublicationCommand = Command1<PublicacaoDetalhadaModel, int>(
       _fetchPublication,
     );
@@ -30,18 +34,17 @@ class PublicacaoViewModel extends ChangeNotifier {
     });
     addCommentsCommand = Command2(_addComment);
     deleteCommentsCommand = Command1(_deleteComment);
+    deletePublicationCommand = Command1(_deletePublication);
   }
   final ForumRepository _forumRepository;
   final AuthRepository _authRepository;
+  final PublicationsViewModel _publicationsViewModel;
 
   UsuarioResponseModel? currentUser;
 
   StreamSubscription<UsuarioResponseModel?>? get authSubscription =>
       _authSubscription;
   StreamSubscription<UsuarioResponseModel?>? _authSubscription;
-  bool isDeleted = false;
-  bool showDeletedSnack = false;
-  bool showErrorSnack = false;
   @override
   void dispose() {
     _authSubscription?.cancel();
@@ -64,44 +67,67 @@ class PublicacaoViewModel extends ChangeNotifier {
   late final Command2<ComentarioResponseModel, int, ComentarioRequestModel>
   addCommentsCommand;
   late final Command1<bool, int> deleteCommentsCommand;
+  late final Command1<bool, int> deletePublicationCommand;
+
+
 
   double scrollOffset = 0.0;
 
-  AsyncResult<void> deletePublication(int id) async {
+  ComentarioResponseModel? _respostaEscolhida;
+  ComentarioResponseModel? get respostaEscolhida => _respostaEscolhida;
+
+  AsyncResult<bool> _deletePublication(int id) async {
     final result = await _forumRepository.deletePublication(id);
     return result.mapFold((onSuccess) {
       if (_publication != null) {
+        _publicationsViewModel.delete(publicationId: _publication!.id);
         _publication = null;
         notifyListeners();
       }
-      return Null;
+      return true;
     }, (onFailure) => onFailure);
   }
 
   toggleLikePublication(int id) async {
     final response = await _forumRepository.toggleLikePublication(id);
-    response.fold((onSuccess){
-      if(_publication!=null){
-        _publication = _publication!.copyWith(curtidoPeloUsuario: onSuccess);
+    response.fold((onSuccess) {
+      if (_publication != null) {
+        _publication = _publication!.copyWith(
+          curtidoPeloUsuario: onSuccess,
+          totalLikes:
+              onSuccess
+                  ? _publication!.totalLikes + 1
+                  : _publication!.totalLikes - 1,
+        );
+        _publicationsViewModel.update(
+          publicationId: _publication!.id,
+          publication: _publication!,
+        );
         notifyListeners();
       }
-    }, (onFailure){});
-
+    }, (onFailure) {});
   }
 
-  // 🔹 Deletar resposta da lista
   AsyncResult<void> deleteResposta(int id) async {
     final result = await _forumRepository.deletePublication(id);
     return result.mapFold(
       (onSuccess) {
         _comments = _comments.toList();
         _comments.removeWhere((r) => r.comment.id == id);
-        showDeletedSnack = true;
+        if (_publication != null) {
+          _publication = _publication!.copyWith(
+            totalRespostas: _publication!.totalRespostas - 1,
+          );
+          _publicationsViewModel.update(
+            publicationId: _publication!.id,
+            publication: _publication!,
+          );
+        }
+
         notifyListeners();
         return Null;
       },
       (onFailure) {
-        showDeletedSnack = true;
         notifyListeners();
         return onFailure;
       },
@@ -113,6 +139,7 @@ class PublicacaoViewModel extends ChangeNotifier {
     return result.mapFold(
       (onSuccess) {
         _publication = onSuccess;
+        _publicationsViewModel.add(publication: onSuccess);
         notifyListeners();
         return onSuccess;
       },
@@ -123,11 +150,13 @@ class PublicacaoViewModel extends ChangeNotifier {
       },
     );
   }
+  Ordenacao _order = Ordenacao.RELEVANCIA;
 
   AsyncResult<List<ComentarioResponseModel>> _fetchRespostas(
     int id,
     Ordenacao order,
   ) async {
+    _order = order;
     final result = await _forumRepository.fetchComments(
       id: id,
       ordenarPor: order,
@@ -136,16 +165,72 @@ class PublicacaoViewModel extends ChangeNotifier {
     );
     return result.mapFold(
       (onSuccess) {
-        _comments =
-            onSuccess.content
-                .map(
-                  (comment) => CommentNode(
-                    addCommand: Command2(_addComment),
-                    updateCommand: Command2(_updateComment),
-                    comment: comment,
-                  ),
-                )
-                .toList();
+        _comments.addAll(
+          onSuccess.content
+              .map(
+                (comment) => CommentNode(
+                  addCommand: Command2(_addComment),
+                  updateCommand: Command2(_updateComment),
+                  comment: comment,
+                ),
+              )
+              .toList(),
+        );
+
+        if (_publication?.respostaEscolhidaId != null) {
+          final index = _comments.indexWhere(
+            (test) => test.comment.id == _publication!.respostaEscolhidaId!,
+          );
+          if (index != -1) {
+            _respostaEscolhida = _comments[index].comment;
+          }
+        }
+        notifyListeners();
+        return onSuccess.content;
+      },
+      (onFailure) {
+        _errorMessage = onFailure.toString();
+        notifyListeners();
+        return onFailure;
+      },
+    );
+  }
+  int _pageComment =0;
+
+  late final Command1<List<ComentarioResponseModel>, int> fetchMoreCmd;
+
+  AsyncResult<List<ComentarioResponseModel>> _fetchMore(
+    int id,
+  ) async {
+    _pageComment++;
+    final result = await _forumRepository.fetchComments(
+      id: id,
+      ordenarPor: _order,
+      page: _pageComment,
+      size: 10,
+    );
+    return result.mapFold(
+      (onSuccess) {
+        _comments.addAll(
+          onSuccess.content
+              .map(
+                (comment) => CommentNode(
+                  addCommand: Command2(_addComment),
+                  updateCommand: Command2(_updateComment),
+                  comment: comment,
+                ),
+              )
+              .toList(),
+        );
+
+        if (_publication?.respostaEscolhidaId != null) {
+          final index = _comments.indexWhere(
+            (test) => test.comment.id == _publication!.respostaEscolhidaId!,
+          );
+          if (index != -1) {
+            _respostaEscolhida = _comments[index].comment;
+          }
+        }
         notifyListeners();
         return onSuccess.content;
       },
@@ -229,8 +314,7 @@ class PublicacaoViewModel extends ChangeNotifier {
           final comment = _comments.firstWhere(
             (commentNode) => commentNode.comment.id == onSuccess.parentId,
           );
-          comment.replies.insert(
-            0,
+          comment.replies.add(
             CommentNode(
               addCommand: Command2(_addComment),
               updateCommand: Command2(_updateComment),
@@ -252,7 +336,17 @@ class PublicacaoViewModel extends ChangeNotifier {
               comment: onSuccess,
             ),
           );
+          if (_publication != null) {
+            _publication = _publication!.copyWith(
+              totalRespostas: _publication!.totalRespostas + 1,
+            );
+            _publicationsViewModel.update(
+              publicationId: _publication!.id,
+              publication: _publication!,
+            );
+          }
         }
+
         notifyListeners();
         return onSuccess;
       },
@@ -299,8 +393,6 @@ class PublicacaoViewModel extends ChangeNotifier {
     );
   }
 
-
-
   AsyncResult<bool> _deleteComment(int commentId) async {
     final result = await _forumRepository.deleteComment(commentId);
     return result.mapFold(
@@ -319,8 +411,17 @@ class PublicacaoViewModel extends ChangeNotifier {
                       .clamp(0, double.infinity)
                       .toInt(),
             );
-            parent.showReplies = parent.comment.totalRespostas >0;
+            parent.showReplies = parent.comment.totalRespostas > 0;
           }
+        }
+        if (_publication != null) {
+          _publication = _publication!.copyWith(
+            totalRespostas: _publication!.totalRespostas - 1,
+          );
+          _publicationsViewModel.update(
+            publicationId: _publication!.id,
+            publication: _publication!,
+          );
         }
 
         notifyListeners();

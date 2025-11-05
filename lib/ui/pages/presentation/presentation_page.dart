@@ -27,7 +27,8 @@ class _PresentationPageState extends State<PresentationPage> {
             children: [
               CustomAppBarBlocked(
                 onPressedSingIn: () {
-                  context.push('/login');
+                  final current = GoRouter.of(context).state.fullPath;
+                  context.push('/login', extra: current);
                 },
                 onPressedSingUp: () {
                   context.push('/register');

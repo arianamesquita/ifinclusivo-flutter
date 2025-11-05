@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
-import 'package:if_inclusivo/ui/pages/libras/search_result.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/search_result.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/libras_custom_search_bar.dart';
-import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +37,6 @@ class _TopicLibrasState extends State<TopicLibras> {
         imageAsset: "assets/card_libras_icons/banco_de_dados.png",
         onTap: () {
           LibrasTopicRouter(Categorias.BANCO_DE_DADOS.name).go(context);
-
         },
       ),
       FilterBlockGridParams(
@@ -46,7 +44,6 @@ class _TopicLibrasState extends State<TopicLibras> {
         imageAsset: "assets/card_libras_icons/programacao.png",
         onTap: () {
           LibrasTopicRouter(Categorias.PROGRAMACAO.name).go(context);
-
         },
       ),
       FilterBlockGridParams(
@@ -54,7 +51,6 @@ class _TopicLibrasState extends State<TopicLibras> {
         imageAsset: "assets/card_libras_icons/web.png",
         onTap: () {
           LibrasTopicRouter(Categorias.WEB.name).go(context);
-
         },
       ),
       FilterBlockGridParams(
@@ -62,47 +58,48 @@ class _TopicLibrasState extends State<TopicLibras> {
         imageAsset: "assets/card_libras_icons/estrutura_de_dados.png",
         onTap: () {
           LibrasTopicRouter(Categorias.ESTRUTURA_DE_DADOS.name).go(context);
-
         },
       ),
       FilterBlockGridParams(
         label: 'Arquitetura de Computadores',
         imageAsset: "assets/card_libras_icons/arquitetura_de_comp.png",
         onTap: () {
-          LibrasTopicRouter(Categorias.ARQUITETURA_DE_COMPUTADORES.name).go(context);
-
+          LibrasTopicRouter(
+            Categorias.ARQUITETURA_DE_COMPUTADORES.name,
+          ).go(context);
         },
       ),
     ];
 
     DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
 
-    return Consumer<SpecificTopicViewModel>(builder: (context, viewModel, state) {
-      return device == DeviceScreenType.mobile
-          ? Scaffold(
-        appBar: AppBar(title: Text('Converte libras')),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Text("Um dicionário de sinais criado para a comunidade"),
-                LibrasCustomSearchBar(
-                  onChanged: (findString) {
-                    setState(() {
-                      word = findString;
-                    });
-                  },
-                ),
-                SizedBox(height: 90),
-                word.isEmpty ? FilterBlockGrid(filterBlockList: items) : SearchResult(),
-              ],
+    return device == DeviceScreenType.mobile
+        ? Scaffold(
+          appBar: AppBar(title: Text('Converte libras')),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text("Um dicionário de sinais criado para a comunidade"),
+                  LibrasCustomSearchBar(
+                    onChanged: (findString) {
+                      setState(() {
+                        word = findString;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 90),
+                  word.isEmpty
+                      ? FilterBlockGrid(filterBlockList: items)
+                      : SearchResult(),
+                ],
+              ),
             ),
           ),
-        ),
-      )
-          : CustomContainerShell(
-        child: SingleChildScrollView(
-          child: Column(
+        )
+        : CustomContainerShell(
+          child: SingleChildScrollView(
+            child: Column(
               children: [
                 TopContentLibras(
                   title: "CONVERTE LIBRAS",
@@ -115,13 +112,14 @@ class _TopicLibrasState extends State<TopicLibras> {
                     },
                   ),
                 ),
-                word.isEmpty ? Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 37),
-                  child: FilterBlockGrid(filterBlockList: items),
-                ) : SearchResult(),]
+                SizedBox(height: 15),
+                word.isEmpty
+                    ? FilterBlockGrid(filterBlockList: items)
+                    : SearchResult(),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
   }
 }

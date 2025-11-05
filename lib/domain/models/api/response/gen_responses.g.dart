@@ -361,7 +361,7 @@ _$LibrasResponseModelImpl _$$LibrasResponseModelImplFromJson(
   id: (json['id'] as num).toInt(),
   palavra: json['palavra'] as String,
   descricao: json['descricao'] as String,
-  url: json['url'] as String?,
+  url: json['url'] as String,
   video: json['video'] as String?,
   foto: json['foto'] as String?,
   justificativa: json['justificativa'] as String?,

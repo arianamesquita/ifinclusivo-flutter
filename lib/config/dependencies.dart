@@ -48,17 +48,12 @@ List<SingleChildWidget> providers(SharedPreferences prefs) {
 List<SingleChildWidget> get _authServices {
   return [
     Provider<AuthService>(create: (_) => AuthServiceImpl()),
-    Provider<AuthRepository>(
+    ChangeNotifierProvider<AuthRepository>(
       create:
           (context) => AuthRepositoryImpl(
             authService: context.read<AuthService>(),
             sharedPreferences: context.read<SharedPreferences>(),
           ),
-      dispose: (_, repo) {
-        if (repo is AuthRepositoryImpl) {
-          repo.dispose();
-        }
-      },
     ),
     Provider<GoRouter>(
       create: (context) {
@@ -144,12 +139,7 @@ List<SingleChildWidget> get _viewModelsProviders {
               LoginViewModel(authRepository: context.read<AuthRepository>()),
     ),
 
-    ChangeNotifierProvider<SpecificTopicViewModel>(
-      create:
-          (context) => SpecificTopicViewModel(
-            librasRepository: context.read<LibrasRepository>(),
-          ),
-    ),
+
     ChangeNotifierProvider(
       create:
           (context) => FeedViewModel(

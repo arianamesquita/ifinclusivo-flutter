@@ -5,7 +5,7 @@ import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
 import 'package:if_inclusivo/ui/pages/auth/reset_password/reset_password_page.dart';
 import 'package:if_inclusivo/ui/pages/auth/token/token_page.dart';
-import 'package:if_inclusivo/ui/pages/libras/midia_page.dart';
+import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/specific_topic_page.dart';
 import 'package:if_inclusivo/ui/pages/profile/account_security/account_security_page.dart';
 import 'package:if_inclusivo/ui/pages/profile/profile_page.dart';
@@ -26,6 +26,8 @@ import '../ui/pages/forum/feed/feed_page.dart';
 import '../ui/pages/forum/new publication/publication_editor.dart';
 import '../ui/pages/forum/publicacao/publicacao_page.dart';
 import '../ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
+import '../ui/pages/libras/libras_page/midia_page.dart';
+import '../ui/pages/libras/libras_page/view_models/libras_view_model.dart';
 import '../ui/pages/libras/page_libras.dart';
 import '../ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import '../ui/pages/libras/word_suggestion_page.dart';
@@ -60,9 +62,8 @@ part 'pages/exceptions/exceptions_routes.dart';
 
 
 GoRouter createRouter({required AuthRepository authRepository}) {
-  final authListenable = StreamListenable(authRepository.authStateChanges);
   return GoRouter(
-    refreshListenable: authListenable,
+    refreshListenable: authRepository,
     initialLocation: AppRoutes.aboutUs,
     errorBuilder: (context, state) {
       return const NotFound404();
@@ -73,7 +74,6 @@ GoRouter createRouter({required AuthRepository authRepository}) {
       final isAuthRoute =
           location == AppRoutes.signIn || location == AppRoutes.signUp;
       if (!loggedIn && !isPublicRoute(location)) {
-        AuthRedirectHelper.setRedirectLocation(location);
         return AppRoutes.signIn;
       }
 

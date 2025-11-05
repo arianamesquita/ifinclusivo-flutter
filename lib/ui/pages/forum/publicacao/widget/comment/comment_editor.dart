@@ -155,24 +155,29 @@ class _CommentEditorState extends State<CommentEditor> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          _isTooLong
-                              ? Theme.of(context).colorScheme.error
-                              : Theme.of(context).colorScheme.outline,
-                      spreadRadius: 0.1,
-                      blurRadius: 1,
-                    ),
-                  ],
+                  color:
+                      (_isTooLong)
+                          ? Theme.of(context).colorScheme.surface
+                          : null,
                   borderRadius: BorderRadius.circular(16),
+                  boxShadow:
+                      (_isTooLong)
+                          ? [
+                            BoxShadow(
+                              color: Theme.of(context).colorScheme.error,
+                              spreadRadius: 0.1,
+                              blurRadius: 1,
+                            ),
+                          ]
+                          : null,
                   border: BoxBorder.all(
-                    width: 1,
                     color:
-                        _isTooLong
+                        (_isTooLong )
                             ? Theme.of(context).colorScheme.error
+                            : (_focusNode.hasFocus)
+                            ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.outline,
+                    width: (_focusNode.hasFocus) ? 2 : 1,
                   ),
                 ),
                 child: Column(
