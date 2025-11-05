@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../core/widgets/search_bar.dart';
 
+
 class LibrasCustomSearchBar extends CustomSearchBar {
-  static const Color textInputColor = Color.fromRGBO(64, 29, 78, 1);
 
   const LibrasCustomSearchBar({
     super.key,
-    required super.onTap,
+    required super.onSubmitted,
+    required super.controller,
     super.backgroundColor = const WidgetStatePropertyAll(Color.fromRGBO(255, 255, 255, 1)),
     super.hintText = 'Buscar',
     super.leading = const Icon(Icons.search, color: textInputColor),
@@ -23,9 +24,7 @@ class LibrasCustomSearchBar extends CustomSearchBar {
       BorderSide(color: Colors.blue, width: 1),
     ),
     super.hintStyle = const WidgetStatePropertyAll(
-      TextStyle(
-        color: textInputColor,
-      ),
+      TextStyle(color: textInputColor),
     ),
     super.textStyle = const WidgetStatePropertyAll(
       TextStyle(
@@ -35,6 +34,8 @@ class LibrasCustomSearchBar extends CustomSearchBar {
       ),
     ),
   });
+
+  static const Color textInputColor = Color.fromRGBO(64, 29, 78, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -49,3 +50,4 @@ class LibrasCustomSearchBar extends CustomSearchBar {
     );
   }
 }
+

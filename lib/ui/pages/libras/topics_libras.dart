@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/search_result.dart';
@@ -10,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/layout/custom_container_shell.dart';
 import 'filter_block/filter_block_grid.dart';
+import 'libras_search_bar/viewmodels/libras_search_bar_viewmodel.dart';
 
 class TopicLibras extends StatefulWidget {
   const TopicLibras({super.key});
@@ -19,10 +19,21 @@ class TopicLibras extends StatefulWidget {
 }
 
 class _TopicLibrasState extends State<TopicLibras> {
+
+  final TextEditingController _searchController = TextEditingController();
   String word = '';
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
+    final vm = context.watch<LibrasSearchBarViewmodel>();
+
     var items = [
       FilterBlockGridParams(
         label: 'Redes',
@@ -81,15 +92,18 @@ class _TopicLibrasState extends State<TopicLibras> {
                 children: [
                   Text("Um dicionário de sinais criado para a comunidade"),
                   LibrasCustomSearchBar(
-                    onTap: () => {
-                      word = findString;
-                    }
-
+                    controller: _searchController,
+                    onSubmitted: (value) {
+                      setState(() {
+                        word = value.trim();
+                      });
+                      context.read<LibrasSearchBarViewmodel>().fetchLibrasByWord(word);
+                    },
                   ),
                   SizedBox(height: 90),
                   word.isEmpty
                       ? FilterBlockGrid(filterBlockList: items)
-                      : SearchResult(vm: context.read(),),
+                      : SearchResult(),
                 ],
               ),
             ),
@@ -103,17 +117,19 @@ class _TopicLibrasState extends State<TopicLibras> {
                   title: "CONVERTE LIBRAS",
                   subtitle: "Um dicionário de sinais criado para a comunidade",
                   searchBar: LibrasCustomSearchBar(
-                    onChanged: (findString) {
+                    controller: _searchController,
+                    onSubmitted: (value) {
                       setState(() {
-                        word = findString;
+                        word = value.trim();
                       });
+                      context.read<LibrasSearchBarViewmodel>().fetchLibrasByWord(word);
                     },
                   ),
                 ),
                 SizedBox(height: 15),
                 word.isEmpty
                     ? FilterBlockGrid(filterBlockList: items)
-                    : SearchResult(vm: context.read(),),
+                    : SearchResult(),
                 SizedBox(height: 20),
               ],
             ),

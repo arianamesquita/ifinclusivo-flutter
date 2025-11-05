@@ -9,15 +9,15 @@ enum LibrasSearchBarState {
   error,
 }
 
-class LibrasSearchBarViewmodel extends ChangeNotifier{
+class LibrasSearchBarViewmodel with ChangeNotifier{
   LibrasSearchBarViewmodel({required LibrasRepository librasRepository}) : _librasRepository = librasRepository;
   final LibrasRepository _librasRepository;
 
-  LibrasSearchBarState _state = LibrasSearchBarState.loading;
   String _errorMessage = '';
-
-  LibrasSearchBarState get state => _state;
   String get errorMessage => _errorMessage;
+
+  LibrasSearchBarState _state = LibrasSearchBarState.loading;
+  LibrasSearchBarState get state => _state;
 
   List<LibrasResponseModel> _words = [];
   List<LibrasResponseModel> get words => _words;
@@ -35,5 +35,7 @@ class LibrasSearchBarViewmodel extends ChangeNotifier{
       _state = LibrasSearchBarState.error;
       _errorMessage = e.toString();
     }
+
+    notifyListeners();
   }
 }
