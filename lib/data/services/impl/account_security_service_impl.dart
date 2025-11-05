@@ -40,5 +40,22 @@ class AccountSecurityServiceImpl implements AccountSecurityService {
     }
   }
 
+  @override
+  Future<Map<String, dynamic>> getUserById(int id, String token) async {
+    try {
+      final response = await _dio.get(
+        '/users/$id',
+        options: Options(
+          headers: {'Authorization': 'Bearer $token'},
+        ),
+      );
+
+      return Map<String, dynamic>.from(response.data);
+    } on DioException catch (e) {
+      final status = e.response?.statusCode;
+      final message = e.response?.data?['message'] ?? e.message;
+      throw Exception('Erro ao buscar usuário ($status): $message');
+    }
+  }
 
 }

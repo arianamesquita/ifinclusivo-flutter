@@ -30,12 +30,22 @@ class ProfilePage extends StatefulWidget{
         body: Container(
             child: Stack(
                 children: [
-                  ElevatedButton(
-                    child: Text("Configurações"),
-                    onPressed: () {
-                      AccountSecurityRouter().go(context);
-                    },
-                  )
+                  Column(
+                    children: [
+                      ElevatedButton(
+                        child: Text("Configurações"),
+                        onPressed: () {
+                          AccountSecurityRouter().go(context);
+                        },
+                      ),
+                      ElevatedButton(
+                        child: Text("EditProfile"),
+                        onPressed: () {
+                          EditProfileRouter().go(context);
+                        },
+                      )
+                    ],
+                  ),
               ]
           )
         )

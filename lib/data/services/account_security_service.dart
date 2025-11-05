@@ -4,4 +4,6 @@ abstract class AccountSecurityService {
       Map<String, dynamic>updatePaswwordRequest);
 
   Future<bool> deleteAccount(String password);
+
+  Future<Map<String, dynamic>> getUserById(int id, String token);
 }
