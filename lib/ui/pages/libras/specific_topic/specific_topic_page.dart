@@ -40,7 +40,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
                   return SpecificTopicGridParams(
                     title: model.palavra,
                     description: model.descricao,
-                    url: model.url!,
+                    url: model.url,
                     onTap:
                         () => {
                           widget.viewModel.setId(model.id),
