@@ -7,7 +7,7 @@ class LibrasCustomSearchBar extends CustomSearchBar {
 
   const LibrasCustomSearchBar({
     super.key,
-    required super.onChanged,
+    required super.onTap,
     super.backgroundColor = const WidgetStatePropertyAll(Color.fromRGBO(255, 255, 255, 1)),
     super.hintText = 'Buscar',
     super.leading = const Icon(Icons.search, color: textInputColor),

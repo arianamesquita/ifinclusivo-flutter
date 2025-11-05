@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/search_result.dart';
-import 'package:if_inclusivo/ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/libras_custom_search_bar.dart';
 import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
@@ -82,16 +81,15 @@ class _TopicLibrasState extends State<TopicLibras> {
                 children: [
                   Text("Um dicionário de sinais criado para a comunidade"),
                   LibrasCustomSearchBar(
-                    onChanged: (findString) {
-                      setState(() {
-                        word = findString;
-                      });
-                    },
+                    onTap: () => {
+                      word = findString;
+                    }
+
                   ),
                   SizedBox(height: 90),
                   word.isEmpty
                       ? FilterBlockGrid(filterBlockList: items)
-                      : SearchResult(),
+                      : SearchResult(vm: context.read(),),
                 ],
               ),
             ),
@@ -115,7 +113,7 @@ class _TopicLibrasState extends State<TopicLibras> {
                 SizedBox(height: 15),
                 word.isEmpty
                     ? FilterBlockGrid(filterBlockList: items)
-                    : SearchResult(),
+                    : SearchResult(vm: context.read(),),
                 SizedBox(height: 20),
               ],
             ),
