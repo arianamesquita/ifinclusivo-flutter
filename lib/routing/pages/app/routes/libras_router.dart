@@ -65,6 +65,6 @@ class WordSuggestionRouter extends GoRouteData with _$WordSuggestionRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return WordSuggestionPage();
+    return WordSuggestionPage(viewModel: WordSuggestionViewModel(librasRepository: context.read<LibrasRepository>()),);
   }
 }

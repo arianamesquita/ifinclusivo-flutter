@@ -50,4 +50,10 @@ class LibrasServiceImpl implements LibrasService{
     final response = await _dio.get('$basePath/find/$id');
     return response.data;
   }
+
+  @override
+  Future<Map<String, dynamic>> saveWord(Map<String, dynamic> model) async {
+    final result = await _dio.post('$basePath/sugere', data: model);
+    return result.data;
+  }
 }
