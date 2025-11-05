@@ -41,6 +41,7 @@ _$AlunoNapneRequestModelImpl _$$AlunoNapneRequestModelImplFromJson(
   senha: json['senha'] as String,
   matricula: (json['matricula'] as num).toInt(),
   biografia: json['biografia'] as String?,
+  curso: $enumDecode(_$CursosEnumMap, json['curso']),
   condicao: json['condicao'] as String,
   laudo: json['laudo'] as String,
   necessidadeEspecial: json['necessidadeEspecial'] as String,
@@ -57,6 +58,7 @@ Map<String, dynamic> _$$AlunoNapneRequestModelImplToJson(
   'senha': instance.senha,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
+  'curso': cursoToJson(instance.curso),
   'condicao': instance.condicao,
   'laudo': instance.laudo,
   'necessidadeEspecial': instance.necessidadeEspecial,
@@ -127,6 +129,110 @@ Map<String, dynamic> _$$InterpreteRequestModelImplToJson(
   'nome': instance.nome,
   'login': instance.login,
   'senha': instance.senha,
+  'matricula': instance.matricula,
+  'biografia': instance.biografia,
+  'especialidade': instance.especialidade,
+  'salary': instance.salary,
+};
+
+_$AlunoDetailsRequestModelImpl _$$AlunoDetailsRequestModelImplFromJson(
+  Map<String, dynamic> json,
+) => _$AlunoDetailsRequestModelImpl(
+  nome: json['nome'] as String,
+  matricula: (json['matricula'] as num).toInt(),
+  curso: $enumDecode(_$CursosEnumMap, json['curso']),
+  biografia: json['biografia'] as String?,
+);
+
+Map<String, dynamic> _$$AlunoDetailsRequestModelImplToJson(
+  _$AlunoDetailsRequestModelImpl instance,
+) => <String, dynamic>{
+  'nome': instance.nome,
+  'matricula': instance.matricula,
+  'curso': cursoToJson(instance.curso),
+  'biografia': instance.biografia,
+};
+
+_$AlunoNapneDetailsRequestModelImpl
+_$$AlunoNapneDetailsRequestModelImplFromJson(Map<String, dynamic> json) =>
+    _$AlunoNapneDetailsRequestModelImpl(
+      nome: json['nome'] as String,
+      matricula: (json['matricula'] as num).toInt(),
+      biografia: json['biografia'] as String?,
+      curso: $enumDecode(_$CursosEnumMap, json['curso']),
+      condicao: json['condicao'] as String,
+      laudo: json['laudo'] as String,
+      necessidadeEspecial: json['necessidadeEspecial'] as String,
+      necessidadeEscolar: json['necessidadeEscolar'] as String,
+      acompanhamento: json['acompanhamento'] as String,
+      situacao: json['situacao'] as String,
+    );
+
+Map<String, dynamic> _$$AlunoNapneDetailsRequestModelImplToJson(
+  _$AlunoNapneDetailsRequestModelImpl instance,
+) => <String, dynamic>{
+  'nome': instance.nome,
+  'matricula': instance.matricula,
+  'biografia': instance.biografia,
+  'curso': cursoToJson(instance.curso),
+  'condicao': instance.condicao,
+  'laudo': instance.laudo,
+  'necessidadeEspecial': instance.necessidadeEspecial,
+  'necessidadeEscolar': instance.necessidadeEscolar,
+  'acompanhamento': instance.acompanhamento,
+  'situacao': instance.situacao,
+};
+
+_$ProfessorDetailsRequestModelImpl _$$ProfessorDetailsRequestModelImplFromJson(
+  Map<String, dynamic> json,
+) => _$ProfessorDetailsRequestModelImpl(
+  nome: json['nome'] as String,
+  matricula: (json['matricula'] as num).toInt(),
+  biografia: json['biografia'] as String?,
+  formacao: json['formacao'] as String,
+);
+
+Map<String, dynamic> _$$ProfessorDetailsRequestModelImplToJson(
+  _$ProfessorDetailsRequestModelImpl instance,
+) => <String, dynamic>{
+  'nome': instance.nome,
+  'matricula': instance.matricula,
+  'biografia': instance.biografia,
+  'formacao': instance.formacao,
+};
+
+_$TutorDetailsRequestModelImpl _$$TutorDetailsRequestModelImplFromJson(
+  Map<String, dynamic> json,
+) => _$TutorDetailsRequestModelImpl(
+  nome: json['nome'] as String,
+  matricula: (json['matricula'] as num).toInt(),
+  biografia: json['biografia'] as String?,
+  especialidade: json['especialidade'] as String,
+);
+
+Map<String, dynamic> _$$TutorDetailsRequestModelImplToJson(
+  _$TutorDetailsRequestModelImpl instance,
+) => <String, dynamic>{
+  'nome': instance.nome,
+  'matricula': instance.matricula,
+  'biografia': instance.biografia,
+  'especialidade': instance.especialidade,
+};
+
+_$InterpreteDetailsRequestModelImpl
+_$$InterpreteDetailsRequestModelImplFromJson(Map<String, dynamic> json) =>
+    _$InterpreteDetailsRequestModelImpl(
+      nome: json['nome'] as String,
+      matricula: (json['matricula'] as num).toInt(),
+      biografia: json['biografia'] as String?,
+      especialidade: json['especialidade'] as String,
+      salary: (json['salary'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$$InterpreteDetailsRequestModelImplToJson(
+  _$InterpreteDetailsRequestModelImpl instance,
+) => <String, dynamic>{
+  'nome': instance.nome,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
   'especialidade': instance.especialidade,

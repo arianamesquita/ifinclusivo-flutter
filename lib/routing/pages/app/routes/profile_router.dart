@@ -38,7 +38,7 @@ class EditProfileRouter extends GoRouteData with _$EditProfileRouter {
 
 const TypedGoRoute<ProfileRouter> profileRouter = TypedGoRoute<ProfileRouter>(
   path: AppRoutes.profile,
-  routes: [accountSecurityRouter],
+  routes: [accountSecurityRouter,editProfileRouter],
 );
 
 class ProfileRouter extends GoRouteData with _$ProfileRouter {

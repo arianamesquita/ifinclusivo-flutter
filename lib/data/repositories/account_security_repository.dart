@@ -9,5 +9,20 @@ abstract class AccountSecurityRepository {
 
   AsyncResult<bool> deleteAccount( String password );
 
-  //Future<UsuarioResponseModel> getUserById(int id, String token);
+  AsyncResult<UsuarioResponseModel> findById({int? id});
+  AsyncResult<UsuarioResponseModel> updateAluno({
+    required AlunoDetailsRequestModel alunoDetails,
+  });
+  AsyncResult<UsuarioResponseModel> updateAlunoNapne({
+    required AlunoNapneDetailsRequestModel alunoNapneDetails,
+  });
+  AsyncResult<UsuarioResponseModel> updateProfessor({
+    required ProfessorDetailsRequestModel professorDetails,
+  });
+  AsyncResult<UsuarioResponseModel> updateTutor({
+    required TutorDetailsRequestModel tutorDetails,
+  });
+  AsyncResult<UsuarioResponseModel> updateInterprete({
+    required InterpreteDetailsRequestModel interpreteDetails,
+  });
 }

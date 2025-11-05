@@ -31,6 +31,7 @@ class AlunoNapneRequestModel with _$AlunoNapneRequestModel {
     required String senha,
     required int matricula,
     String? biografia,
+    @JsonKey(toJson: cursoToJson) required Cursos curso,
     required String condicao,
     required String laudo,
     required String necessidadeEspecial,
@@ -87,4 +88,76 @@ class InterpreteRequestModel with _$InterpreteRequestModel {
 
   factory InterpreteRequestModel.fromJson(Map<String, dynamic> json) =>
       _$InterpreteRequestModelFromJson(json);
+}
+
+@freezed
+class AlunoDetailsRequestModel with _$AlunoDetailsRequestModel {
+  const factory AlunoDetailsRequestModel({
+    required String nome,
+    required int matricula, // Long -> String
+    @JsonKey(toJson: cursoToJson) required Cursos curso,
+    String? biografia,
+  }) = _AlunoDetailsRequestModel;
+
+  factory AlunoDetailsRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$AlunoDetailsRequestModelFromJson(json);
+}
+
+@freezed
+class AlunoNapneDetailsRequestModel with _$AlunoNapneDetailsRequestModel {
+  const factory AlunoNapneDetailsRequestModel({
+    required String nome,
+    required int matricula,
+    String? biografia,
+    @JsonKey(toJson: cursoToJson) required Cursos curso,
+    required String condicao,
+    required String laudo,
+    required String necessidadeEspecial,
+    required String necessidadeEscolar,
+    required String acompanhamento,
+    required String situacao,
+  }) = _AlunoNapneDetailsRequestModel;
+
+  factory AlunoNapneDetailsRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$AlunoNapneDetailsRequestModelFromJson(json);
+}
+
+@freezed
+class ProfessorDetailsRequestModel with _$ProfessorDetailsRequestModel {
+  const factory ProfessorDetailsRequestModel({
+    required String nome,
+    required int matricula,
+    String? biografia,
+    required String formacao,
+  }) = _ProfessorDetailsRequestModel;
+
+  factory ProfessorDetailsRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$ProfessorDetailsRequestModelFromJson(json);
+}
+
+@freezed
+class TutorDetailsRequestModel with _$TutorDetailsRequestModel {
+  const factory TutorDetailsRequestModel({
+    required String nome,
+    required int matricula,
+    String? biografia,
+    required String especialidade,
+  }) = _TutorDetailsRequestModel;
+
+  factory TutorDetailsRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$TutorDetailsRequestModelFromJson(json);
+}
+
+@freezed
+class InterpreteDetailsRequestModel with _$InterpreteDetailsRequestModel {
+  const factory InterpreteDetailsRequestModel({
+    required String nome,
+    required int matricula,
+    String? biografia,
+    required String especialidade, // Campo do Tutor
+    required double salary,
+  }) = _InterpreteDetailsRequestModel;
+
+  factory InterpreteDetailsRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$InterpreteDetailsRequestModelFromJson(json);
 }

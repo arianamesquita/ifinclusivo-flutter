@@ -53,7 +53,7 @@ class ProfilePreview extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FilledButton(
-                onPressed: () {},
+                onPressed: () => EditProfileRouter().go(context),
                 child: Text('Editar Perfil'),
               ),
               IconButton(

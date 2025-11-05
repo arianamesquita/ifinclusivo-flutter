@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/data/repositories/auth_repository.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
-import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/profile/profile/widgets/profile_info.dart';
 import 'package:if_inclusivo/ui/pages/profile/profile/widgets/profile_preview.dart';
 import 'package:provider/provider.dart';

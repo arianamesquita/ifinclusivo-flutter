@@ -58,4 +58,40 @@ class AccountSecurityServiceImpl implements AccountSecurityService {
     }
   }
 
+  @override
+  Future<Map<String, dynamic>> findById({required int id}) async{
+    final response = await _dio.get('/user/$id');
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateAluno({required Map<String, dynamic> alunoDetails}) async{
+    final response = await _dio.put('/alunos',data: alunoDetails);
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateAlunoNapne({required Map<String, dynamic> alunoNapneDetails}) async{
+    final response = await _dio.put('/alunosNapne',data: alunoNapneDetails);
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateInterprete({required Map<String, dynamic> interpreteDetails}) async{
+    final response = await _dio.put('/interpretes',data: interpreteDetails);
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateProfessor({required Map<String, dynamic> professorDetails})async{
+    final response = await _dio.put('/professores',data: professorDetails);
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateTutor({required Map<String, dynamic> tutorDetails}) async{
+    final response = await _dio.put('/professores',data: tutorDetails);
+    return response.data;
+  }
+
 }

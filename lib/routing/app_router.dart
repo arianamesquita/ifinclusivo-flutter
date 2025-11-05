@@ -33,6 +33,7 @@ import '../ui/pages/libras/word_suggestion_page.dart';
 import '../ui/pages/presentation/aboult_us/about_us_page.dart';
 import '../ui/pages/presentation/about_napne/about_napne_page.dart';
 import '../ui/pages/presentation/presentation_page.dart';
+import '../ui/pages/profile/edit_profile/edit_profile_page.dart';
 import '../ui/pages/shell/shell_page.dart';
 import '../utils/dialog_page.dart';
 import '../utils/stream_listenable.dart';

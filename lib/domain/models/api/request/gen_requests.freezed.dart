@@ -313,6 +313,8 @@ mixin _$AlunoNapneRequestModel {
   String get senha => throw _privateConstructorUsedError;
   int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso => throw _privateConstructorUsedError;
   String get condicao => throw _privateConstructorUsedError;
   String get laudo => throw _privateConstructorUsedError;
   String get necessidadeEspecial => throw _privateConstructorUsedError;
@@ -343,6 +345,7 @@ abstract class $AlunoNapneRequestModelCopyWith<$Res> {
     String senha,
     int matricula,
     String? biografia,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
     String condicao,
     String laudo,
     String necessidadeEspecial,
@@ -375,6 +378,7 @@ class _$AlunoNapneRequestModelCopyWithImpl<
     Object? senha = null,
     Object? matricula = null,
     Object? biografia = freezed,
+    Object? curso = null,
     Object? condicao = null,
     Object? laudo = null,
     Object? necessidadeEspecial = null,
@@ -409,6 +413,11 @@ class _$AlunoNapneRequestModelCopyWithImpl<
                     ? _value.biografia
                     : biografia // ignore: cast_nullable_to_non_nullable
                         as String?,
+            curso:
+                null == curso
+                    ? _value.curso
+                    : curso // ignore: cast_nullable_to_non_nullable
+                        as Cursos,
             condicao:
                 null == condicao
                     ? _value.condicao
@@ -460,6 +469,7 @@ abstract class _$$AlunoNapneRequestModelImplCopyWith<$Res>
     String senha,
     int matricula,
     String? biografia,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
     String condicao,
     String laudo,
     String necessidadeEspecial,
@@ -489,6 +499,7 @@ class __$$AlunoNapneRequestModelImplCopyWithImpl<$Res>
     Object? senha = null,
     Object? matricula = null,
     Object? biografia = freezed,
+    Object? curso = null,
     Object? condicao = null,
     Object? laudo = null,
     Object? necessidadeEspecial = null,
@@ -523,6 +534,11 @@ class __$$AlunoNapneRequestModelImplCopyWithImpl<$Res>
                 ? _value.biografia
                 : biografia // ignore: cast_nullable_to_non_nullable
                     as String?,
+        curso:
+            null == curso
+                ? _value.curso
+                : curso // ignore: cast_nullable_to_non_nullable
+                    as Cursos,
         condicao:
             null == condicao
                 ? _value.condicao
@@ -567,6 +583,7 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
     required this.senha,
     required this.matricula,
     this.biografia,
+    @JsonKey(toJson: cursoToJson) required this.curso,
     required this.condicao,
     required this.laudo,
     required this.necessidadeEspecial,
@@ -589,6 +606,9 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
   @override
   final String? biografia;
   @override
+  @JsonKey(toJson: cursoToJson)
+  final Cursos curso;
+  @override
   final String condicao;
   @override
   final String laudo;
@@ -603,7 +623,7 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
 
   @override
   String toString() {
-    return 'AlunoNapneRequestModel(nome: $nome, login: $login, senha: $senha, matricula: $matricula, biografia: $biografia, condicao: $condicao, laudo: $laudo, necessidadeEspecial: $necessidadeEspecial, necessidadeEscolar: $necessidadeEscolar, acompanhamento: $acompanhamento, situacao: $situacao)';
+    return 'AlunoNapneRequestModel(nome: $nome, login: $login, senha: $senha, matricula: $matricula, biografia: $biografia, curso: $curso, condicao: $condicao, laudo: $laudo, necessidadeEspecial: $necessidadeEspecial, necessidadeEscolar: $necessidadeEscolar, acompanhamento: $acompanhamento, situacao: $situacao)';
   }
 
   @override
@@ -618,6 +638,7 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
                 other.matricula == matricula) &&
             (identical(other.biografia, biografia) ||
                 other.biografia == biografia) &&
+            (identical(other.curso, curso) || other.curso == curso) &&
             (identical(other.condicao, condicao) ||
                 other.condicao == condicao) &&
             (identical(other.laudo, laudo) || other.laudo == laudo) &&
@@ -640,6 +661,7 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
     senha,
     matricula,
     biografia,
+    curso,
     condicao,
     laudo,
     necessidadeEspecial,
@@ -673,6 +695,7 @@ abstract class _AlunoNapneRequestModel implements AlunoNapneRequestModel {
     required final String senha,
     required final int matricula,
     final String? biografia,
+    @JsonKey(toJson: cursoToJson) required final Cursos curso,
     required final String condicao,
     required final String laudo,
     required final String necessidadeEspecial,
@@ -694,6 +717,9 @@ abstract class _AlunoNapneRequestModel implements AlunoNapneRequestModel {
   int get matricula;
   @override
   String? get biografia;
+  @override
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso;
   @override
   String get condicao;
   @override
@@ -1618,6 +1644,1442 @@ abstract class _InterpreteRequestModel implements InterpreteRequestModel {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InterpreteRequestModelImplCopyWith<_$InterpreteRequestModelImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+AlunoDetailsRequestModel _$AlunoDetailsRequestModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _AlunoDetailsRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AlunoDetailsRequestModel {
+  String get nome => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError; // Long -> String
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso => throw _privateConstructorUsedError;
+  String? get biografia => throw _privateConstructorUsedError;
+
+  /// Serializes this AlunoDetailsRequestModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of AlunoDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AlunoDetailsRequestModelCopyWith<AlunoDetailsRequestModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AlunoDetailsRequestModelCopyWith<$Res> {
+  factory $AlunoDetailsRequestModelCopyWith(
+    AlunoDetailsRequestModel value,
+    $Res Function(AlunoDetailsRequestModel) then,
+  ) = _$AlunoDetailsRequestModelCopyWithImpl<$Res, AlunoDetailsRequestModel>;
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
+    String? biografia,
+  });
+}
+
+/// @nodoc
+class _$AlunoDetailsRequestModelCopyWithImpl<
+  $Res,
+  $Val extends AlunoDetailsRequestModel
+>
+    implements $AlunoDetailsRequestModelCopyWith<$Res> {
+  _$AlunoDetailsRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of AlunoDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? curso = null,
+    Object? biografia = freezed,
+  }) {
+    return _then(
+      _value.copyWith(
+            nome:
+                null == nome
+                    ? _value.nome
+                    : nome // ignore: cast_nullable_to_non_nullable
+                        as String,
+            matricula:
+                null == matricula
+                    ? _value.matricula
+                    : matricula // ignore: cast_nullable_to_non_nullable
+                        as int,
+            curso:
+                null == curso
+                    ? _value.curso
+                    : curso // ignore: cast_nullable_to_non_nullable
+                        as Cursos,
+            biografia:
+                freezed == biografia
+                    ? _value.biografia
+                    : biografia // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$AlunoDetailsRequestModelImplCopyWith<$Res>
+    implements $AlunoDetailsRequestModelCopyWith<$Res> {
+  factory _$$AlunoDetailsRequestModelImplCopyWith(
+    _$AlunoDetailsRequestModelImpl value,
+    $Res Function(_$AlunoDetailsRequestModelImpl) then,
+  ) = __$$AlunoDetailsRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
+    String? biografia,
+  });
+}
+
+/// @nodoc
+class __$$AlunoDetailsRequestModelImplCopyWithImpl<$Res>
+    extends
+        _$AlunoDetailsRequestModelCopyWithImpl<
+          $Res,
+          _$AlunoDetailsRequestModelImpl
+        >
+    implements _$$AlunoDetailsRequestModelImplCopyWith<$Res> {
+  __$$AlunoDetailsRequestModelImplCopyWithImpl(
+    _$AlunoDetailsRequestModelImpl _value,
+    $Res Function(_$AlunoDetailsRequestModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AlunoDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? curso = null,
+    Object? biografia = freezed,
+  }) {
+    return _then(
+      _$AlunoDetailsRequestModelImpl(
+        nome:
+            null == nome
+                ? _value.nome
+                : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        matricula:
+            null == matricula
+                ? _value.matricula
+                : matricula // ignore: cast_nullable_to_non_nullable
+                    as int,
+        curso:
+            null == curso
+                ? _value.curso
+                : curso // ignore: cast_nullable_to_non_nullable
+                    as Cursos,
+        biografia:
+            freezed == biografia
+                ? _value.biografia
+                : biografia // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AlunoDetailsRequestModelImpl implements _AlunoDetailsRequestModel {
+  const _$AlunoDetailsRequestModelImpl({
+    required this.nome,
+    required this.matricula,
+    @JsonKey(toJson: cursoToJson) required this.curso,
+    this.biografia,
+  });
+
+  factory _$AlunoDetailsRequestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AlunoDetailsRequestModelImplFromJson(json);
+
+  @override
+  final String nome;
+  @override
+  final int matricula;
+  // Long -> String
+  @override
+  @JsonKey(toJson: cursoToJson)
+  final Cursos curso;
+  @override
+  final String? biografia;
+
+  @override
+  String toString() {
+    return 'AlunoDetailsRequestModel(nome: $nome, matricula: $matricula, curso: $curso, biografia: $biografia)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AlunoDetailsRequestModelImpl &&
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.matricula, matricula) ||
+                other.matricula == matricula) &&
+            (identical(other.curso, curso) || other.curso == curso) &&
+            (identical(other.biografia, biografia) ||
+                other.biografia == biografia));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, nome, matricula, curso, biografia);
+
+  /// Create a copy of AlunoDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AlunoDetailsRequestModelImplCopyWith<_$AlunoDetailsRequestModelImpl>
+  get copyWith => __$$AlunoDetailsRequestModelImplCopyWithImpl<
+    _$AlunoDetailsRequestModelImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AlunoDetailsRequestModelImplToJson(this);
+  }
+}
+
+abstract class _AlunoDetailsRequestModel implements AlunoDetailsRequestModel {
+  const factory _AlunoDetailsRequestModel({
+    required final String nome,
+    required final int matricula,
+    @JsonKey(toJson: cursoToJson) required final Cursos curso,
+    final String? biografia,
+  }) = _$AlunoDetailsRequestModelImpl;
+
+  factory _AlunoDetailsRequestModel.fromJson(Map<String, dynamic> json) =
+      _$AlunoDetailsRequestModelImpl.fromJson;
+
+  @override
+  String get nome;
+  @override
+  int get matricula; // Long -> String
+  @override
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso;
+  @override
+  String? get biografia;
+
+  /// Create a copy of AlunoDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AlunoDetailsRequestModelImplCopyWith<_$AlunoDetailsRequestModelImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+AlunoNapneDetailsRequestModel _$AlunoNapneDetailsRequestModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _AlunoNapneDetailsRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AlunoNapneDetailsRequestModel {
+  String get nome => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
+  String? get biografia => throw _privateConstructorUsedError;
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso => throw _privateConstructorUsedError;
+  String get condicao => throw _privateConstructorUsedError;
+  String get laudo => throw _privateConstructorUsedError;
+  String get necessidadeEspecial => throw _privateConstructorUsedError;
+  String get necessidadeEscolar => throw _privateConstructorUsedError;
+  String get acompanhamento => throw _privateConstructorUsedError;
+  String get situacao => throw _privateConstructorUsedError;
+
+  /// Serializes this AlunoNapneDetailsRequestModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of AlunoNapneDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AlunoNapneDetailsRequestModelCopyWith<AlunoNapneDetailsRequestModel>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AlunoNapneDetailsRequestModelCopyWith<$Res> {
+  factory $AlunoNapneDetailsRequestModelCopyWith(
+    AlunoNapneDetailsRequestModel value,
+    $Res Function(AlunoNapneDetailsRequestModel) then,
+  ) =
+      _$AlunoNapneDetailsRequestModelCopyWithImpl<
+        $Res,
+        AlunoNapneDetailsRequestModel
+      >;
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    String? biografia,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
+    String condicao,
+    String laudo,
+    String necessidadeEspecial,
+    String necessidadeEscolar,
+    String acompanhamento,
+    String situacao,
+  });
+}
+
+/// @nodoc
+class _$AlunoNapneDetailsRequestModelCopyWithImpl<
+  $Res,
+  $Val extends AlunoNapneDetailsRequestModel
+>
+    implements $AlunoNapneDetailsRequestModelCopyWith<$Res> {
+  _$AlunoNapneDetailsRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of AlunoNapneDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? curso = null,
+    Object? condicao = null,
+    Object? laudo = null,
+    Object? necessidadeEspecial = null,
+    Object? necessidadeEscolar = null,
+    Object? acompanhamento = null,
+    Object? situacao = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            nome:
+                null == nome
+                    ? _value.nome
+                    : nome // ignore: cast_nullable_to_non_nullable
+                        as String,
+            matricula:
+                null == matricula
+                    ? _value.matricula
+                    : matricula // ignore: cast_nullable_to_non_nullable
+                        as int,
+            biografia:
+                freezed == biografia
+                    ? _value.biografia
+                    : biografia // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            curso:
+                null == curso
+                    ? _value.curso
+                    : curso // ignore: cast_nullable_to_non_nullable
+                        as Cursos,
+            condicao:
+                null == condicao
+                    ? _value.condicao
+                    : condicao // ignore: cast_nullable_to_non_nullable
+                        as String,
+            laudo:
+                null == laudo
+                    ? _value.laudo
+                    : laudo // ignore: cast_nullable_to_non_nullable
+                        as String,
+            necessidadeEspecial:
+                null == necessidadeEspecial
+                    ? _value.necessidadeEspecial
+                    : necessidadeEspecial // ignore: cast_nullable_to_non_nullable
+                        as String,
+            necessidadeEscolar:
+                null == necessidadeEscolar
+                    ? _value.necessidadeEscolar
+                    : necessidadeEscolar // ignore: cast_nullable_to_non_nullable
+                        as String,
+            acompanhamento:
+                null == acompanhamento
+                    ? _value.acompanhamento
+                    : acompanhamento // ignore: cast_nullable_to_non_nullable
+                        as String,
+            situacao:
+                null == situacao
+                    ? _value.situacao
+                    : situacao // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$AlunoNapneDetailsRequestModelImplCopyWith<$Res>
+    implements $AlunoNapneDetailsRequestModelCopyWith<$Res> {
+  factory _$$AlunoNapneDetailsRequestModelImplCopyWith(
+    _$AlunoNapneDetailsRequestModelImpl value,
+    $Res Function(_$AlunoNapneDetailsRequestModelImpl) then,
+  ) = __$$AlunoNapneDetailsRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    String? biografia,
+    @JsonKey(toJson: cursoToJson) Cursos curso,
+    String condicao,
+    String laudo,
+    String necessidadeEspecial,
+    String necessidadeEscolar,
+    String acompanhamento,
+    String situacao,
+  });
+}
+
+/// @nodoc
+class __$$AlunoNapneDetailsRequestModelImplCopyWithImpl<$Res>
+    extends
+        _$AlunoNapneDetailsRequestModelCopyWithImpl<
+          $Res,
+          _$AlunoNapneDetailsRequestModelImpl
+        >
+    implements _$$AlunoNapneDetailsRequestModelImplCopyWith<$Res> {
+  __$$AlunoNapneDetailsRequestModelImplCopyWithImpl(
+    _$AlunoNapneDetailsRequestModelImpl _value,
+    $Res Function(_$AlunoNapneDetailsRequestModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AlunoNapneDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? curso = null,
+    Object? condicao = null,
+    Object? laudo = null,
+    Object? necessidadeEspecial = null,
+    Object? necessidadeEscolar = null,
+    Object? acompanhamento = null,
+    Object? situacao = null,
+  }) {
+    return _then(
+      _$AlunoNapneDetailsRequestModelImpl(
+        nome:
+            null == nome
+                ? _value.nome
+                : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        matricula:
+            null == matricula
+                ? _value.matricula
+                : matricula // ignore: cast_nullable_to_non_nullable
+                    as int,
+        biografia:
+            freezed == biografia
+                ? _value.biografia
+                : biografia // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        curso:
+            null == curso
+                ? _value.curso
+                : curso // ignore: cast_nullable_to_non_nullable
+                    as Cursos,
+        condicao:
+            null == condicao
+                ? _value.condicao
+                : condicao // ignore: cast_nullable_to_non_nullable
+                    as String,
+        laudo:
+            null == laudo
+                ? _value.laudo
+                : laudo // ignore: cast_nullable_to_non_nullable
+                    as String,
+        necessidadeEspecial:
+            null == necessidadeEspecial
+                ? _value.necessidadeEspecial
+                : necessidadeEspecial // ignore: cast_nullable_to_non_nullable
+                    as String,
+        necessidadeEscolar:
+            null == necessidadeEscolar
+                ? _value.necessidadeEscolar
+                : necessidadeEscolar // ignore: cast_nullable_to_non_nullable
+                    as String,
+        acompanhamento:
+            null == acompanhamento
+                ? _value.acompanhamento
+                : acompanhamento // ignore: cast_nullable_to_non_nullable
+                    as String,
+        situacao:
+            null == situacao
+                ? _value.situacao
+                : situacao // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AlunoNapneDetailsRequestModelImpl
+    implements _AlunoNapneDetailsRequestModel {
+  const _$AlunoNapneDetailsRequestModelImpl({
+    required this.nome,
+    required this.matricula,
+    this.biografia,
+    @JsonKey(toJson: cursoToJson) required this.curso,
+    required this.condicao,
+    required this.laudo,
+    required this.necessidadeEspecial,
+    required this.necessidadeEscolar,
+    required this.acompanhamento,
+    required this.situacao,
+  });
+
+  factory _$AlunoNapneDetailsRequestModelImpl.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$AlunoNapneDetailsRequestModelImplFromJson(json);
+
+  @override
+  final String nome;
+  @override
+  final int matricula;
+  @override
+  final String? biografia;
+  @override
+  @JsonKey(toJson: cursoToJson)
+  final Cursos curso;
+  @override
+  final String condicao;
+  @override
+  final String laudo;
+  @override
+  final String necessidadeEspecial;
+  @override
+  final String necessidadeEscolar;
+  @override
+  final String acompanhamento;
+  @override
+  final String situacao;
+
+  @override
+  String toString() {
+    return 'AlunoNapneDetailsRequestModel(nome: $nome, matricula: $matricula, biografia: $biografia, curso: $curso, condicao: $condicao, laudo: $laudo, necessidadeEspecial: $necessidadeEspecial, necessidadeEscolar: $necessidadeEscolar, acompanhamento: $acompanhamento, situacao: $situacao)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AlunoNapneDetailsRequestModelImpl &&
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.matricula, matricula) ||
+                other.matricula == matricula) &&
+            (identical(other.biografia, biografia) ||
+                other.biografia == biografia) &&
+            (identical(other.curso, curso) || other.curso == curso) &&
+            (identical(other.condicao, condicao) ||
+                other.condicao == condicao) &&
+            (identical(other.laudo, laudo) || other.laudo == laudo) &&
+            (identical(other.necessidadeEspecial, necessidadeEspecial) ||
+                other.necessidadeEspecial == necessidadeEspecial) &&
+            (identical(other.necessidadeEscolar, necessidadeEscolar) ||
+                other.necessidadeEscolar == necessidadeEscolar) &&
+            (identical(other.acompanhamento, acompanhamento) ||
+                other.acompanhamento == acompanhamento) &&
+            (identical(other.situacao, situacao) ||
+                other.situacao == situacao));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    nome,
+    matricula,
+    biografia,
+    curso,
+    condicao,
+    laudo,
+    necessidadeEspecial,
+    necessidadeEscolar,
+    acompanhamento,
+    situacao,
+  );
+
+  /// Create a copy of AlunoNapneDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AlunoNapneDetailsRequestModelImplCopyWith<
+    _$AlunoNapneDetailsRequestModelImpl
+  >
+  get copyWith => __$$AlunoNapneDetailsRequestModelImplCopyWithImpl<
+    _$AlunoNapneDetailsRequestModelImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AlunoNapneDetailsRequestModelImplToJson(this);
+  }
+}
+
+abstract class _AlunoNapneDetailsRequestModel
+    implements AlunoNapneDetailsRequestModel {
+  const factory _AlunoNapneDetailsRequestModel({
+    required final String nome,
+    required final int matricula,
+    final String? biografia,
+    @JsonKey(toJson: cursoToJson) required final Cursos curso,
+    required final String condicao,
+    required final String laudo,
+    required final String necessidadeEspecial,
+    required final String necessidadeEscolar,
+    required final String acompanhamento,
+    required final String situacao,
+  }) = _$AlunoNapneDetailsRequestModelImpl;
+
+  factory _AlunoNapneDetailsRequestModel.fromJson(Map<String, dynamic> json) =
+      _$AlunoNapneDetailsRequestModelImpl.fromJson;
+
+  @override
+  String get nome;
+  @override
+  int get matricula;
+  @override
+  String? get biografia;
+  @override
+  @JsonKey(toJson: cursoToJson)
+  Cursos get curso;
+  @override
+  String get condicao;
+  @override
+  String get laudo;
+  @override
+  String get necessidadeEspecial;
+  @override
+  String get necessidadeEscolar;
+  @override
+  String get acompanhamento;
+  @override
+  String get situacao;
+
+  /// Create a copy of AlunoNapneDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AlunoNapneDetailsRequestModelImplCopyWith<
+    _$AlunoNapneDetailsRequestModelImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+ProfessorDetailsRequestModel _$ProfessorDetailsRequestModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _ProfessorDetailsRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProfessorDetailsRequestModel {
+  String get nome => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
+  String? get biografia => throw _privateConstructorUsedError;
+  String get formacao => throw _privateConstructorUsedError;
+
+  /// Serializes this ProfessorDetailsRequestModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ProfessorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ProfessorDetailsRequestModelCopyWith<ProfessorDetailsRequestModel>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProfessorDetailsRequestModelCopyWith<$Res> {
+  factory $ProfessorDetailsRequestModelCopyWith(
+    ProfessorDetailsRequestModel value,
+    $Res Function(ProfessorDetailsRequestModel) then,
+  ) =
+      _$ProfessorDetailsRequestModelCopyWithImpl<
+        $Res,
+        ProfessorDetailsRequestModel
+      >;
+  @useResult
+  $Res call({String nome, int matricula, String? biografia, String formacao});
+}
+
+/// @nodoc
+class _$ProfessorDetailsRequestModelCopyWithImpl<
+  $Res,
+  $Val extends ProfessorDetailsRequestModel
+>
+    implements $ProfessorDetailsRequestModelCopyWith<$Res> {
+  _$ProfessorDetailsRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ProfessorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? formacao = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            nome:
+                null == nome
+                    ? _value.nome
+                    : nome // ignore: cast_nullable_to_non_nullable
+                        as String,
+            matricula:
+                null == matricula
+                    ? _value.matricula
+                    : matricula // ignore: cast_nullable_to_non_nullable
+                        as int,
+            biografia:
+                freezed == biografia
+                    ? _value.biografia
+                    : biografia // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            formacao:
+                null == formacao
+                    ? _value.formacao
+                    : formacao // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$ProfessorDetailsRequestModelImplCopyWith<$Res>
+    implements $ProfessorDetailsRequestModelCopyWith<$Res> {
+  factory _$$ProfessorDetailsRequestModelImplCopyWith(
+    _$ProfessorDetailsRequestModelImpl value,
+    $Res Function(_$ProfessorDetailsRequestModelImpl) then,
+  ) = __$$ProfessorDetailsRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String nome, int matricula, String? biografia, String formacao});
+}
+
+/// @nodoc
+class __$$ProfessorDetailsRequestModelImplCopyWithImpl<$Res>
+    extends
+        _$ProfessorDetailsRequestModelCopyWithImpl<
+          $Res,
+          _$ProfessorDetailsRequestModelImpl
+        >
+    implements _$$ProfessorDetailsRequestModelImplCopyWith<$Res> {
+  __$$ProfessorDetailsRequestModelImplCopyWithImpl(
+    _$ProfessorDetailsRequestModelImpl _value,
+    $Res Function(_$ProfessorDetailsRequestModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ProfessorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? formacao = null,
+  }) {
+    return _then(
+      _$ProfessorDetailsRequestModelImpl(
+        nome:
+            null == nome
+                ? _value.nome
+                : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        matricula:
+            null == matricula
+                ? _value.matricula
+                : matricula // ignore: cast_nullable_to_non_nullable
+                    as int,
+        biografia:
+            freezed == biografia
+                ? _value.biografia
+                : biografia // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        formacao:
+            null == formacao
+                ? _value.formacao
+                : formacao // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ProfessorDetailsRequestModelImpl
+    implements _ProfessorDetailsRequestModel {
+  const _$ProfessorDetailsRequestModelImpl({
+    required this.nome,
+    required this.matricula,
+    this.biografia,
+    required this.formacao,
+  });
+
+  factory _$ProfessorDetailsRequestModelImpl.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$ProfessorDetailsRequestModelImplFromJson(json);
+
+  @override
+  final String nome;
+  @override
+  final int matricula;
+  @override
+  final String? biografia;
+  @override
+  final String formacao;
+
+  @override
+  String toString() {
+    return 'ProfessorDetailsRequestModel(nome: $nome, matricula: $matricula, biografia: $biografia, formacao: $formacao)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfessorDetailsRequestModelImpl &&
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.matricula, matricula) ||
+                other.matricula == matricula) &&
+            (identical(other.biografia, biografia) ||
+                other.biografia == biografia) &&
+            (identical(other.formacao, formacao) ||
+                other.formacao == formacao));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, nome, matricula, biografia, formacao);
+
+  /// Create a copy of ProfessorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProfessorDetailsRequestModelImplCopyWith<
+    _$ProfessorDetailsRequestModelImpl
+  >
+  get copyWith => __$$ProfessorDetailsRequestModelImplCopyWithImpl<
+    _$ProfessorDetailsRequestModelImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProfessorDetailsRequestModelImplToJson(this);
+  }
+}
+
+abstract class _ProfessorDetailsRequestModel
+    implements ProfessorDetailsRequestModel {
+  const factory _ProfessorDetailsRequestModel({
+    required final String nome,
+    required final int matricula,
+    final String? biografia,
+    required final String formacao,
+  }) = _$ProfessorDetailsRequestModelImpl;
+
+  factory _ProfessorDetailsRequestModel.fromJson(Map<String, dynamic> json) =
+      _$ProfessorDetailsRequestModelImpl.fromJson;
+
+  @override
+  String get nome;
+  @override
+  int get matricula;
+  @override
+  String? get biografia;
+  @override
+  String get formacao;
+
+  /// Create a copy of ProfessorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ProfessorDetailsRequestModelImplCopyWith<
+    _$ProfessorDetailsRequestModelImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+TutorDetailsRequestModel _$TutorDetailsRequestModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _TutorDetailsRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TutorDetailsRequestModel {
+  String get nome => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
+  String? get biografia => throw _privateConstructorUsedError;
+  String get especialidade => throw _privateConstructorUsedError;
+
+  /// Serializes this TutorDetailsRequestModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of TutorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $TutorDetailsRequestModelCopyWith<TutorDetailsRequestModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TutorDetailsRequestModelCopyWith<$Res> {
+  factory $TutorDetailsRequestModelCopyWith(
+    TutorDetailsRequestModel value,
+    $Res Function(TutorDetailsRequestModel) then,
+  ) = _$TutorDetailsRequestModelCopyWithImpl<$Res, TutorDetailsRequestModel>;
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    String? biografia,
+    String especialidade,
+  });
+}
+
+/// @nodoc
+class _$TutorDetailsRequestModelCopyWithImpl<
+  $Res,
+  $Val extends TutorDetailsRequestModel
+>
+    implements $TutorDetailsRequestModelCopyWith<$Res> {
+  _$TutorDetailsRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of TutorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? especialidade = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            nome:
+                null == nome
+                    ? _value.nome
+                    : nome // ignore: cast_nullable_to_non_nullable
+                        as String,
+            matricula:
+                null == matricula
+                    ? _value.matricula
+                    : matricula // ignore: cast_nullable_to_non_nullable
+                        as int,
+            biografia:
+                freezed == biografia
+                    ? _value.biografia
+                    : biografia // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            especialidade:
+                null == especialidade
+                    ? _value.especialidade
+                    : especialidade // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$TutorDetailsRequestModelImplCopyWith<$Res>
+    implements $TutorDetailsRequestModelCopyWith<$Res> {
+  factory _$$TutorDetailsRequestModelImplCopyWith(
+    _$TutorDetailsRequestModelImpl value,
+    $Res Function(_$TutorDetailsRequestModelImpl) then,
+  ) = __$$TutorDetailsRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    String? biografia,
+    String especialidade,
+  });
+}
+
+/// @nodoc
+class __$$TutorDetailsRequestModelImplCopyWithImpl<$Res>
+    extends
+        _$TutorDetailsRequestModelCopyWithImpl<
+          $Res,
+          _$TutorDetailsRequestModelImpl
+        >
+    implements _$$TutorDetailsRequestModelImplCopyWith<$Res> {
+  __$$TutorDetailsRequestModelImplCopyWithImpl(
+    _$TutorDetailsRequestModelImpl _value,
+    $Res Function(_$TutorDetailsRequestModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of TutorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? especialidade = null,
+  }) {
+    return _then(
+      _$TutorDetailsRequestModelImpl(
+        nome:
+            null == nome
+                ? _value.nome
+                : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        matricula:
+            null == matricula
+                ? _value.matricula
+                : matricula // ignore: cast_nullable_to_non_nullable
+                    as int,
+        biografia:
+            freezed == biografia
+                ? _value.biografia
+                : biografia // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        especialidade:
+            null == especialidade
+                ? _value.especialidade
+                : especialidade // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TutorDetailsRequestModelImpl implements _TutorDetailsRequestModel {
+  const _$TutorDetailsRequestModelImpl({
+    required this.nome,
+    required this.matricula,
+    this.biografia,
+    required this.especialidade,
+  });
+
+  factory _$TutorDetailsRequestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TutorDetailsRequestModelImplFromJson(json);
+
+  @override
+  final String nome;
+  @override
+  final int matricula;
+  @override
+  final String? biografia;
+  @override
+  final String especialidade;
+
+  @override
+  String toString() {
+    return 'TutorDetailsRequestModel(nome: $nome, matricula: $matricula, biografia: $biografia, especialidade: $especialidade)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TutorDetailsRequestModelImpl &&
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.matricula, matricula) ||
+                other.matricula == matricula) &&
+            (identical(other.biografia, biografia) ||
+                other.biografia == biografia) &&
+            (identical(other.especialidade, especialidade) ||
+                other.especialidade == especialidade));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, nome, matricula, biografia, especialidade);
+
+  /// Create a copy of TutorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TutorDetailsRequestModelImplCopyWith<_$TutorDetailsRequestModelImpl>
+  get copyWith => __$$TutorDetailsRequestModelImplCopyWithImpl<
+    _$TutorDetailsRequestModelImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TutorDetailsRequestModelImplToJson(this);
+  }
+}
+
+abstract class _TutorDetailsRequestModel implements TutorDetailsRequestModel {
+  const factory _TutorDetailsRequestModel({
+    required final String nome,
+    required final int matricula,
+    final String? biografia,
+    required final String especialidade,
+  }) = _$TutorDetailsRequestModelImpl;
+
+  factory _TutorDetailsRequestModel.fromJson(Map<String, dynamic> json) =
+      _$TutorDetailsRequestModelImpl.fromJson;
+
+  @override
+  String get nome;
+  @override
+  int get matricula;
+  @override
+  String? get biografia;
+  @override
+  String get especialidade;
+
+  /// Create a copy of TutorDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TutorDetailsRequestModelImplCopyWith<_$TutorDetailsRequestModelImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+InterpreteDetailsRequestModel _$InterpreteDetailsRequestModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _InterpreteDetailsRequestModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$InterpreteDetailsRequestModel {
+  String get nome => throw _privateConstructorUsedError;
+  int get matricula => throw _privateConstructorUsedError;
+  String? get biografia => throw _privateConstructorUsedError;
+  String get especialidade =>
+      throw _privateConstructorUsedError; // Campo do Tutor
+  double get salary => throw _privateConstructorUsedError;
+
+  /// Serializes this InterpreteDetailsRequestModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of InterpreteDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $InterpreteDetailsRequestModelCopyWith<InterpreteDetailsRequestModel>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InterpreteDetailsRequestModelCopyWith<$Res> {
+  factory $InterpreteDetailsRequestModelCopyWith(
+    InterpreteDetailsRequestModel value,
+    $Res Function(InterpreteDetailsRequestModel) then,
+  ) =
+      _$InterpreteDetailsRequestModelCopyWithImpl<
+        $Res,
+        InterpreteDetailsRequestModel
+      >;
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    String? biografia,
+    String especialidade,
+    double salary,
+  });
+}
+
+/// @nodoc
+class _$InterpreteDetailsRequestModelCopyWithImpl<
+  $Res,
+  $Val extends InterpreteDetailsRequestModel
+>
+    implements $InterpreteDetailsRequestModelCopyWith<$Res> {
+  _$InterpreteDetailsRequestModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of InterpreteDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? especialidade = null,
+    Object? salary = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            nome:
+                null == nome
+                    ? _value.nome
+                    : nome // ignore: cast_nullable_to_non_nullable
+                        as String,
+            matricula:
+                null == matricula
+                    ? _value.matricula
+                    : matricula // ignore: cast_nullable_to_non_nullable
+                        as int,
+            biografia:
+                freezed == biografia
+                    ? _value.biografia
+                    : biografia // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            especialidade:
+                null == especialidade
+                    ? _value.especialidade
+                    : especialidade // ignore: cast_nullable_to_non_nullable
+                        as String,
+            salary:
+                null == salary
+                    ? _value.salary
+                    : salary // ignore: cast_nullable_to_non_nullable
+                        as double,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$InterpreteDetailsRequestModelImplCopyWith<$Res>
+    implements $InterpreteDetailsRequestModelCopyWith<$Res> {
+  factory _$$InterpreteDetailsRequestModelImplCopyWith(
+    _$InterpreteDetailsRequestModelImpl value,
+    $Res Function(_$InterpreteDetailsRequestModelImpl) then,
+  ) = __$$InterpreteDetailsRequestModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String nome,
+    int matricula,
+    String? biografia,
+    String especialidade,
+    double salary,
+  });
+}
+
+/// @nodoc
+class __$$InterpreteDetailsRequestModelImplCopyWithImpl<$Res>
+    extends
+        _$InterpreteDetailsRequestModelCopyWithImpl<
+          $Res,
+          _$InterpreteDetailsRequestModelImpl
+        >
+    implements _$$InterpreteDetailsRequestModelImplCopyWith<$Res> {
+  __$$InterpreteDetailsRequestModelImplCopyWithImpl(
+    _$InterpreteDetailsRequestModelImpl _value,
+    $Res Function(_$InterpreteDetailsRequestModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of InterpreteDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nome = null,
+    Object? matricula = null,
+    Object? biografia = freezed,
+    Object? especialidade = null,
+    Object? salary = null,
+  }) {
+    return _then(
+      _$InterpreteDetailsRequestModelImpl(
+        nome:
+            null == nome
+                ? _value.nome
+                : nome // ignore: cast_nullable_to_non_nullable
+                    as String,
+        matricula:
+            null == matricula
+                ? _value.matricula
+                : matricula // ignore: cast_nullable_to_non_nullable
+                    as int,
+        biografia:
+            freezed == biografia
+                ? _value.biografia
+                : biografia // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        especialidade:
+            null == especialidade
+                ? _value.especialidade
+                : especialidade // ignore: cast_nullable_to_non_nullable
+                    as String,
+        salary:
+            null == salary
+                ? _value.salary
+                : salary // ignore: cast_nullable_to_non_nullable
+                    as double,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$InterpreteDetailsRequestModelImpl
+    implements _InterpreteDetailsRequestModel {
+  const _$InterpreteDetailsRequestModelImpl({
+    required this.nome,
+    required this.matricula,
+    this.biografia,
+    required this.especialidade,
+    required this.salary,
+  });
+
+  factory _$InterpreteDetailsRequestModelImpl.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$InterpreteDetailsRequestModelImplFromJson(json);
+
+  @override
+  final String nome;
+  @override
+  final int matricula;
+  @override
+  final String? biografia;
+  @override
+  final String especialidade;
+  // Campo do Tutor
+  @override
+  final double salary;
+
+  @override
+  String toString() {
+    return 'InterpreteDetailsRequestModel(nome: $nome, matricula: $matricula, biografia: $biografia, especialidade: $especialidade, salary: $salary)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InterpreteDetailsRequestModelImpl &&
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.matricula, matricula) ||
+                other.matricula == matricula) &&
+            (identical(other.biografia, biografia) ||
+                other.biografia == biografia) &&
+            (identical(other.especialidade, especialidade) ||
+                other.especialidade == especialidade) &&
+            (identical(other.salary, salary) || other.salary == salary));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    nome,
+    matricula,
+    biografia,
+    especialidade,
+    salary,
+  );
+
+  /// Create a copy of InterpreteDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InterpreteDetailsRequestModelImplCopyWith<
+    _$InterpreteDetailsRequestModelImpl
+  >
+  get copyWith => __$$InterpreteDetailsRequestModelImplCopyWithImpl<
+    _$InterpreteDetailsRequestModelImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InterpreteDetailsRequestModelImplToJson(this);
+  }
+}
+
+abstract class _InterpreteDetailsRequestModel
+    implements InterpreteDetailsRequestModel {
+  const factory _InterpreteDetailsRequestModel({
+    required final String nome,
+    required final int matricula,
+    final String? biografia,
+    required final String especialidade,
+    required final double salary,
+  }) = _$InterpreteDetailsRequestModelImpl;
+
+  factory _InterpreteDetailsRequestModel.fromJson(Map<String, dynamic> json) =
+      _$InterpreteDetailsRequestModelImpl.fromJson;
+
+  @override
+  String get nome;
+  @override
+  int get matricula;
+  @override
+  String? get biografia;
+  @override
+  String get especialidade; // Campo do Tutor
+  @override
+  double get salary;
+
+  /// Create a copy of InterpreteDetailsRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InterpreteDetailsRequestModelImplCopyWith<
+    _$InterpreteDetailsRequestModelImpl
+  >
   get copyWith => throw _privateConstructorUsedError;
 }
 

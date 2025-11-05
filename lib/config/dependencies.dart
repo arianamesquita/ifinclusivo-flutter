@@ -107,6 +107,7 @@ List<SingleChildWidget> get _repositoriesData {
       create:
           (context) => AccountSecurityRepositoryImpl(
         service: context.read<AccountSecurityService>(),
+            prefs: context.read<SharedPreferences>()
       ),
     ),
   ];
