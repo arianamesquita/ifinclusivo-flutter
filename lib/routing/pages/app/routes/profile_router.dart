@@ -1,5 +1,13 @@
 part of '../../../app_router.dart';
 
+const TypedStatefulShellBranch<StatefulShellBranchData> profileBranch =
+TypedStatefulShellBranch<StatefulShellBranchData>(
+  routes: <TypedRoute<RouteData>>[profileRouter],
+);
+
+
+
+
 const TypedGoRoute<AccountSecurityRouter> accountSecurityRouter =
 TypedGoRoute<AccountSecurityRouter>(
   path: AppRoutes.accountSecurity, // ex: 'account-security'
@@ -27,9 +35,3 @@ class ProfileRouter extends GoRouteData with _$ProfileRouter {
     return ProfilePage();
   }
 }
-
-const TypedStatefulShellBranch<StatefulShellBranchData> profileBranch =
-TypedStatefulShellBranch<StatefulShellBranchData>(
-  routes: <TypedRoute<RouteData>>[profileRouter],
-);
-

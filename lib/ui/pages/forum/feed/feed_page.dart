@@ -336,6 +336,7 @@ class _FeedPageState extends State<FeedPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: SearchAnchor(
+                  viewConstraints:(ResponsiveUtils.getDeviceType(context)!= DeviceScreenType.mobile)? BoxConstraints(maxHeight: 300):null,
                   searchController: controller,
                   viewOnChanged: (s) async => await viewModel.searchSuggestions(query: s) ,
                   viewOnSubmitted: (value) async {

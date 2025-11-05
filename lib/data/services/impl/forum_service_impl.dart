@@ -18,6 +18,8 @@ class ForumServiceImpl implements ForumService {
     return response.data;
   }
 
+
+
   @override
   Future<Map<String, dynamic>> fetchFeedPublication({
     Set<Categorias>? categorias,
@@ -42,6 +44,16 @@ class ForumServiceImpl implements ForumService {
     final response = await _dio.get(basePath, queryParameters: queryParameters);
     return response.data;
   }
+
+
+  @override
+  Future<Map<String, dynamic>> fetchPublicationsByUserID({required int id, int page = 0, int size = 10}) async {
+    final queryParameters = <String, dynamic>{'page': page, 'size': size};
+
+    final response = await _dio.get('$basePath/user/$id', queryParameters: queryParameters);
+    return response.data;
+  }
+
 
   /// Busca uma publicação por ID (com árvore de pais, sem filhos)
   @override
@@ -156,4 +168,6 @@ class ForumServiceImpl implements ForumService {
     final response = await _dio.get('$basePath/suggestions',queryParameters: queryParameters);
     return response.data;
   }
+
+
 }

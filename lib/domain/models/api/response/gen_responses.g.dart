@@ -28,7 +28,7 @@ _$AlunoResponseModelImpl _$$AlunoResponseModelImplFromJson(
           .toList(),
   token: json['token'] as String?,
   firebaseToken: json['firebaseToken'] as String?,
-  curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
+  curso: json['curso'] as String,
   $type: json['userType'] as String?,
 );
 
@@ -80,7 +80,7 @@ _$AlunoNapneResponseModelImpl _$$AlunoNapneResponseModelImplFromJson(
           .toList(),
   token: json['token'] as String?,
   firebaseToken: json['firebaseToken'] as String?,
-  curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
+  curso: json['curso'] as String,
   condicao: json['condicao'] as String,
   laudo: json['laudo'] as String,
   necessidadeEspecial: json['necessidadeEspecial'] as String,

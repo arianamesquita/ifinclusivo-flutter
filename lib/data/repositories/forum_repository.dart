@@ -16,6 +16,11 @@ abstract class ForumRepository {
     String? query
 
   });
+  AsyncResult<PaginatedResponse<PublicacaoDetalhadaModel>> fetchPublicationsByUserID({
+    required int id,
+    int page = 0,
+    int size = 10,
+  });
 
   AsyncResult<PublicacaoDetalhadaModel> findById(int id);
   AsyncResult<bool> toggleLikePublication(int publicationId);

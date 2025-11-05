@@ -34,12 +34,14 @@ class _ShellPageState extends State<ShellPage> {
   void closeDrawer() {
     scaffoldKey.currentState!.closeDrawer();
   }
+
   @override
   void initState() {
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final librasRepository = context.read<LibrasRepository>();
-      var response = await librasRepository.getLibrasByTopic(categorias: Categorias.REDES);
+      var response = await librasRepository.getLibrasByTopic(
+        categorias: Categorias.REDES,
+      );
     });
 
     super.initState();
@@ -49,7 +51,6 @@ class _ShellPageState extends State<ShellPage> {
   Widget build(BuildContext context) {
     final authRepository = context.read<AuthRepository>();
 
-
     return StreamBuilder<UsuarioResponseModel?>(
       stream: authRepository.authStateChanges,
 
@@ -58,9 +59,12 @@ class _ShellPageState extends State<ShellPage> {
         final UsuarioResponseModel? currentUser = snapshot.data;
         final bool isLoggedIn = currentUser != null;
 
-        final List<Roles> userRoles = currentUser?.roles?? [];
+        final List<Roles> userRoles = currentUser?.roles ?? [];
 
-        final auth = AuthGuardShell(isLoggedIn: isLoggedIn, userRoles: userRoles);
+        final auth = AuthGuardShell(
+          isLoggedIn: isLoggedIn,
+          userRoles: userRoles,
+        );
         var deviceType = ResponsiveUtils.getDeviceType(context);
         if (deviceType == DeviceScreenType.mobile) {
           return _buildAppMobile(
@@ -75,7 +79,7 @@ class _ShellPageState extends State<ShellPage> {
             auth.allowedBranches(),
             context,
             isLoggedIn,
-            authRepository.currentUser
+            authRepository.currentUser,
           );
         }
       },
@@ -87,8 +91,7 @@ class _ShellPageState extends State<ShellPage> {
     List<int> allowedBranches,
     BuildContext context,
     bool isLoggedIn,
-  UsuarioResponseModel? user
-
+    UsuarioResponseModel? user,
   ) {
     return Scaffold(
       key: scaffoldKey,
@@ -105,7 +108,9 @@ class _ShellPageState extends State<ShellPage> {
             },
             destinations:
                 allowedBranches
-                    .map((i) => AppDestinations.rail(context, user?.imgPerfil)[i])
+                    .map(
+                      (i) => AppDestinations.rail(context, user?.imgPerfil)[i],
+                    )
                     .toList(),
             isLoggedIn: isLoggedIn,
             onPressedMenu: openDrawer,
@@ -119,7 +124,7 @@ class _ShellPageState extends State<ShellPage> {
         context,
         isLoggedIn,
         closeDrawer,
-        user
+        user,
       ),
     );
   }
@@ -130,9 +135,8 @@ class _ShellPageState extends State<ShellPage> {
     BuildContext context,
     bool isLoggedIn,
     void Function() onPressedMenu,
-      UsuarioResponseModel? user
-
-      ) {
+    UsuarioResponseModel? user,
+  ) {
     return CustomNavigationDrawer(
       selectedIndex: auth.mapSelectedIndex(
         allowedBranches,
@@ -144,7 +148,7 @@ class _ShellPageState extends State<ShellPage> {
       },
       destinations:
           allowedBranches
-              .map((i) => AppDestinations.drawer(context,user?.imgPerfil)[i])
+              .map((i) => AppDestinations.drawer(context, user?.imgPerfil)[i])
               .toList(),
       isLoggedIn: isLoggedIn,
       onPressedMenu: onPressedMenu,
@@ -158,63 +162,63 @@ class _ShellPageState extends State<ShellPage> {
     BuildContext context,
     bool isLoggedIn,
   ) {
-    return BuildMobileAPP(child: widget.child);
+    return BuildMobileAPP(
+      auth: auth,
+      allowedBranches: allowedBranches,
+      isLoggedIn: isLoggedIn,
+      child: widget.child,
+    );
   }
 }
 
 class BuildMobileAPP extends StatefulWidget {
+  final AuthGuardShell auth;
+  final List<int>
+  allowedBranches; // Esta lista ainda pode ser usada para controle de acesso
+  final bool isLoggedIn;
   final StatefulNavigationShell child;
 
-  const BuildMobileAPP({super.key, required this.child});
+  const BuildMobileAPP({
+    super.key,
+    required this.child,
+    required this.auth,
+    required this.allowedBranches,
+    required this.isLoggedIn,
+  });
 
   @override
   State<BuildMobileAPP> createState() => _BuildMobileAPPState();
 }
 
-class _BuildMobileAPPState extends State<BuildMobileAPP>
-    with TickerProviderStateMixin {
-  late TabController _tabController;
-  int lastIndexTabBar = 0;
-
+class _BuildMobileAPPState extends State<BuildMobileAPP> {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-    _tabController.addListener(() {
-      if (_tabController.indexIsChanging) return;
-
-      if (_tabController.index == 0) {
-        widget.child.goBranch(0); // Fórum
-        setState(() => lastIndexTabBar = 0);
-      } else {
-        widget.child.goBranch(2); // Tópicos
-        setState(() => lastIndexTabBar = 2);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final authRepository = context.read<AuthRepository>();
 
-
     return StreamBuilder<UsuarioResponseModel?>(
-        stream: authRepository.authStateChanges,
-
-        initialData: authRepository.currentUser,
-        builder: (context, snapshot) {
+      stream: authRepository.authStateChanges,
+      initialData: authRepository.currentUser,
+      builder: (context, snapshot) {
         return Scaffold(
           body: widget.child,
           bottomNavigationBar: NavigationBar(
-            selectedIndex: widget.child.currentIndex,
-            onDestinationSelected: widget.child.goBranch,
-            destinations: AppDestinations.bottom(context,authRepository.currentUser?.imgPerfil),
+            selectedIndex:widget.auth.mapSelectedIndex(
+              widget.allowedBranches,
+              widget.child.currentIndex,
+            ),
+            onDestinationSelected:(newIndex) {
+              final branch = widget.allowedBranches[newIndex];
+              widget.child.goBranch(branch);
+            },
+            destinations: AppDestinations.bottom(
+              context,
+              authRepository.currentUser?.imgPerfil,
+            ),
             indicatorColor: Theme.of(context).colorScheme.primary,
             backgroundColor: Theme.of(context).colorScheme.tertiary,
             labelTextStyle: WidgetStatePropertyAll(
@@ -224,7 +228,7 @@ class _BuildMobileAPPState extends State<BuildMobileAPP>
             ),
           ),
         );
-      }
+      },
     );
   }
 }

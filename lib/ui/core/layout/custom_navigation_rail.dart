@@ -123,7 +123,8 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
                 spacing: 4,
                 children: [
                   FilledButton(
-                    onPressed: () => repository.logout(),
+                    onPressed: () {repository.logout();
+                      ForumRouter().go(context);},
                     style: FilledButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.error,
                       padding: EdgeInsets.symmetric(

@@ -60,6 +60,34 @@ class ForumRepositoryImpl implements ForumRepository {
     }
   }
 
+
+  @override
+  AsyncResult<PaginatedResponse<PublicacaoDetalhadaModel>> fetchPublicationsByUserID({
+    required int id,
+    int page = 0,
+    int size = 10,
+  }) async {
+    try {
+      final responseMap = await _service.fetchPublicationsByUserID(
+        id: id,
+          page: page,
+          size: size,
+      );
+
+      return Success(
+        PaginatedResponse<PublicacaoDetalhadaModel>.fromJson(
+          responseMap,
+              (json) =>
+              PublicacaoDetalhadaModel.fromJson(json as Map<String, dynamic>),
+        ),
+      );
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Falha ao processar a resposta do servidor.'));
+    }
+  }
+
   @override
   AsyncResult<PublicacaoDetalhadaModel> findById(int id) async {
     try {

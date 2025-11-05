@@ -15,7 +15,7 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
     required List<Roles> roles,
     String? token,
     String? firebaseToken,
-    required CursoRequestModel curso,
+    required String curso,
   }) = _AlunoResponseModel;
 
   const factory UsuarioResponseModel.alunoNapne({
@@ -30,7 +30,7 @@ class UsuarioResponseModel with _$UsuarioResponseModel {
     required List<Roles> roles,
     String? token,
     String? firebaseToken,
-    required CursoRequestModel curso,
+    required String curso,
     required String condicao,
     required String laudo,
     required String necessidadeEspecial,

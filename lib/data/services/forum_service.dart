@@ -18,6 +18,11 @@ abstract class ForumService {
 
   });
   Future<Map<String, dynamic>> findPublicationById(int id);
+  Future<Map<String, dynamic>> fetchPublicationsByUserID({
+    required int id,
+    int page = 0,
+    int size = 10,
+  });
 
   Future<void> deletePublication(int id);
   Future<Map<String, dynamic>> toggleLikePublication(int publicationID);
