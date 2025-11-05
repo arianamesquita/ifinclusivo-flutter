@@ -36,34 +36,45 @@ class _ProfilePageState extends State<ProfilePage> {
     }
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 25.0,
-                  horizontal: 21,
-                ),
-                child:
-                    deviceType == DeviceScreenType.mobile
-                        ? Column(spacing: 15,
-                          mainAxisSize: MainAxisSize.min,
-                          children: _buildInfosMobile(user),
-                        )
-                        : Row(
-                          spacing:
-                              deviceType == DeviceScreenType.tablet
-                                  ? 50
-                                  : 100,
-
-                          children: _buildInfos(user),
-                        ),
-              ),
-            ),
-          ],
+        child: StreamBuilder(
+          stream: repository.authStateChanges,
+          initialData: repository.currentUser,
+          builder: (context, asyncSnapshot) {
+            return Column(
+              children: [
+                _buildCardInfo(deviceType, user),
+              ],
+            );
+          }
         ),
       ),
     );
+  }
+
+  Card _buildCardInfo(DeviceScreenType deviceType, UsuarioResponseModel user) {
+    return Card(
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(
+                    vertical: 25.0,
+                    horizontal: deviceType == DeviceScreenType.desktop
+                        ?100:21,
+                  ),
+                  child:
+                      deviceType == DeviceScreenType.mobile
+                          ? Column(spacing: 15,
+                            mainAxisSize: MainAxisSize.min,
+                            children: _buildInfosMobile(user),
+                          )
+                          : Row(
+                            spacing:
+                                deviceType == DeviceScreenType.tablet
+                                    ? 50
+                                    : 100,
+
+                            children: _buildInfos(user),
+                          ),
+                ),
+              );
   }
 
   List<Widget> _buildInfos(UsuarioResponseModel user) {

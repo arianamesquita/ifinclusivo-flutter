@@ -56,6 +56,9 @@ class _ProfilePageState extends State<AccountSecurityPage> {
     return Consumer<AccountSecurityViewModel>(
       builder: (context, viewModel, child) {
         return Scaffold(
+          appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.surface,
+              scrolledUnderElevation: 0,
+              elevation: 0),
           body: SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {
