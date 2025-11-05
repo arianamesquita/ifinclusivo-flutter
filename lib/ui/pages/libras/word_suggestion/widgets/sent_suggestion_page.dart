@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 
-import '../../core/layout/custom_container_shell.dart';
+import '../../../../core/layout/custom_container_shell.dart';
 
 class SentSuggestionPage extends StatelessWidget {
-  const SentSuggestionPage({super.key});
+  const SentSuggestionPage({super.key, required this.onPressed});
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +52,7 @@ class SentSuggestionPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      //adicionar rota para voltar à página de sugerir palavra
-                    },
+                    onPressed: onPressed,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF529F85),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

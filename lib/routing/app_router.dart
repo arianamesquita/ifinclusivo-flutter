@@ -13,6 +13,7 @@ import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../data/repositories/auth_repository.dart';
+import '../data/repositories/libras_repository.dart';
 import '../domain/models/api/response/gen_responses.dart';
 import '../domain/models/enums/categorias.dart';
 import '../guards/router_guard.dart';
@@ -27,7 +28,8 @@ import '../ui/pages/forum/publicacao/publicacao_page.dart';
 import '../ui/pages/forum/publicacao/viewmodels/publicacao_viewmodel.dart';
 import '../ui/pages/libras/page_libras.dart';
 import '../ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
-import '../ui/pages/libras/word_suggestion_page.dart';
+import '../ui/pages/libras/word_suggestion/viewModels/word_suggestion_view_model.dart';
+import '../ui/pages/libras/word_suggestion/word_suggestion_page.dart';
 import '../ui/pages/presentation/aboult_us/about_us_page.dart';
 import '../ui/pages/presentation/about_napne/about_napne_page.dart';
 import '../ui/pages/presentation/presentation_page.dart';
