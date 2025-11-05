@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
@@ -6,12 +5,12 @@ import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/domain/validators/word_suggestion_validator.dart';
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/viewModels/word_suggestion_view_model.dart';
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/libras_custom_text_field.dart';
-import 'package:if_inclusivo/ui/pages/libras/widgets/top_content_libras.dart';
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/sent_suggestion_page.dart';
-import 'package:result_command/src/command.dart';
+import 'package:result_command/result_command.dart';
 
 import '../../../../domain/models/enums/status.dart';
 import '../../../core/layout/custom_container_shell.dart';
+import '../libras_page/widgets/top_content_libras.dart';
 
 class WordSuggestionPage extends StatefulWidget {
   const WordSuggestionPage({super.key, required this.viewModel});
