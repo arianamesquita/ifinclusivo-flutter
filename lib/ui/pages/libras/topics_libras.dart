@@ -21,7 +21,6 @@ class TopicLibras extends StatefulWidget {
 class _TopicLibrasState extends State<TopicLibras> {
 
   final TextEditingController _searchController = TextEditingController();
-  String word = '';
 
   @override
   void dispose() {
@@ -83,27 +82,28 @@ class _TopicLibrasState extends State<TopicLibras> {
 
     DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
 
+    final Widget content = vm.isSearchActive
+        ? const SearchResult()
+        : FilterBlockGrid(filterBlockList: items);
+
+
     return device == DeviceScreenType.mobile
         ? Scaffold(
           appBar: AppBar(title: Text('Converte libras')),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
+                  mainAxisSize: MainAxisSize.min,
                 children: [
                   Text("Um dicionário de sinais criado para a comunidade"),
                   LibrasCustomSearchBar(
                     controller: _searchController,
                     onSubmitted: (value) {
-                      setState(() {
-                        word = value.trim();
-                      });
-                      context.read<LibrasSearchBarViewmodel>().fetchLibrasByWord(word);
+                      context.read<LibrasSearchBarViewmodel>().fetchLibrasByWord(value.trim());
                     },
                   ),
                   SizedBox(height: 90),
-                  word.isEmpty
-                      ? FilterBlockGrid(filterBlockList: items)
-                      : SearchResult(),
+                  content,
                 ],
               ),
             ),
@@ -112,6 +112,7 @@ class _TopicLibrasState extends State<TopicLibras> {
         : CustomContainerShell(
           child: SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 TopContentLibras(
                   title: "CONVERTE LIBRAS",
@@ -119,17 +120,12 @@ class _TopicLibrasState extends State<TopicLibras> {
                   searchBar: LibrasCustomSearchBar(
                     controller: _searchController,
                     onSubmitted: (value) {
-                      setState(() {
-                        word = value.trim();
-                      });
-                      context.read<LibrasSearchBarViewmodel>().fetchLibrasByWord(word);
+                      context.read<LibrasSearchBarViewmodel>().fetchLibrasByWord(value.trim());
                     },
                   ),
                 ),
                 SizedBox(height: 15),
-                word.isEmpty
-                    ? FilterBlockGrid(filterBlockList: items)
-                    : SearchResult(),
+                content,
                 SizedBox(height: 20),
               ],
             ),
