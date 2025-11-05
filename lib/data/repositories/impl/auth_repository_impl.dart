@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -10,7 +11,7 @@ import '../../../domain/models/api/simple_model/gen_simple_models.dart';
 import '../../services/auth_service.dart';
 import '../auth_repository.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
+class AuthRepositoryImpl  extends ChangeNotifier implements AuthRepository  {
   final AuthService _authService;
   final SharedPreferences _prefs;
 
@@ -43,6 +44,7 @@ class AuthRepositoryImpl implements AuthRepository {
         await _clearSession();
       }
     }
+    notifyListeners();
   }
 
   @override
@@ -56,16 +58,15 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<UsuarioResponseModel> login(String email, String password) async {
    try {
       final userJson = await _authService.login(email, password);
-      print(userJson);
       final user = UsuarioResponseModel.fromJson(userJson);
-      print(user);
-
       await _saveSession(user);
       _currentUser = user;
       _authStateController.add(user);
       return user;
     }catch(e){
      throw Exception('erro ao fazer login ${e.toString()}');
+   }finally {
+     notifyListeners();
    }
   }
 
@@ -79,34 +80,31 @@ class AuthRepositoryImpl implements AuthRepository {
       await _clearSession();
       _currentUser = null;
       _authStateController.add(null);
+      notifyListeners();
     }
   }
 
   @override
   Future<SimpleUsuarioModel> registerTutor(TutorRequestModel tutorData) async {
     final json = await _authService.registerTutor(tutorData.toJson());
-    print(json);
     return SimpleUsuarioModel.fromJson(json);
   }
 
   @override
   Future<SimpleUsuarioModel> registerProfessor(ProfessorRequestModel professor) async {
     final json = await _authService.registerProfessor(professor.toJson());
-    print(json);
     return SimpleUsuarioModel.fromJson(json);
   }
 
   @override
   Future<SimpleUsuarioModel> registerInterprete(InterpreteRequestModel interprete) async {
     final json = await _authService.registerInterprete(interprete.toJson());
-    print(json);
     return SimpleUsuarioModel.fromJson(json);
   }
 
   @override
   Future<SimpleUsuarioModel> registerAluno(AlunoRequestModel aluno) async {
     final json = await _authService.registerAluno(aluno.toJson());
-    print(json);
     return SimpleUsuarioModel.fromJson(json);
   }
 
@@ -132,7 +130,9 @@ class AuthRepositoryImpl implements AuthRepository {
     await _prefs.remove(_userKey);
   }
 
+  @override
   void dispose() {
+    super.dispose();
     _authStateController.close();
   }
 

@@ -121,18 +121,18 @@ class _ContentCardState extends State<ContentCard> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Theme.of(context).colorScheme.surfaceContainerLow.withValues(alpha: 0.0),
-            Theme.of(context).colorScheme.surfaceContainerLow,
+            Theme.of(context).colorScheme.surfaceContainerLowest.withValues(alpha: 0.0),
+            Theme.of(context).colorScheme.surfaceContainerLowest,
           ],
         ),
       ),
-      alignment: Alignment.bottomCenter,
+      alignment: Alignment.center,
       child: _buildToggleButton(onPressed),
     );
   }
 
   Widget _buildToggleButton(onPressed) {
-    return ElevatedButton(
+    return FilledButton(
       onPressed: onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,

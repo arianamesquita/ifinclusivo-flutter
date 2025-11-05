@@ -8,6 +8,7 @@ import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/widgets/co
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/widgets/replies_list_comment.dart';
 import 'package:result_command/result_command.dart';
 import '../../../../../../utils/forum_utils.dart';
+import '../../../../auth/modal/auth_modals.dart';
 
 class CommentTile extends StatefulWidget {
   final int commentId;
@@ -247,14 +248,19 @@ class _CommentTileState extends State<CommentTile> {
                         taggedUser: widget.taggedUser,
                         viewModel: _viewModel,
                         onReply: () {
+                          if(_viewModel.currentUser != null) {
                           setState(() {
                             _showReply = !_showReply;
-                          });
+                          });}else {
+                            showLoginRequiredDialog(context);
+                          }
+
                         },
                         onLike: () {},
                         replyCount: commentNode.comment.totalRespostas,
                         openReplies: () async {
-                          await _viewModel.toggleReplies(widget.commentId);
+                            await _viewModel.toggleReplies(widget.commentId);
+
                         },
                         closeReplies:
                             widget.showChildrenTree

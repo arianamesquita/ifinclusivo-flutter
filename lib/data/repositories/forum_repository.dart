@@ -13,6 +13,8 @@ abstract class ForumRepository {
     Ordenacao? ordenarPor,
     int page = 0,
     int size = 10,
+    String? query
+
   });
 
   AsyncResult<PublicacaoDetalhadaModel> findById(int id);
@@ -23,6 +25,12 @@ abstract class ForumRepository {
     PublicacaoRequestModel request,
   );
   AsyncResult<void> deletePublication(int id);
+
+  AsyncResult<List<String>>searchSuggestions({
+    Set<Categorias>? categorias,
+    required String query
+
+  });
 
 
   AsyncResult<ComentarioResponseModel> addComment({
@@ -49,4 +57,6 @@ abstract class ForumRepository {
   });
 
   AsyncResult<void> deleteComment(int commentId);
+
+
 }

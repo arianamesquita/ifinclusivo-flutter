@@ -23,10 +23,10 @@ class ActionsBarComment extends StatelessWidget {
     return Row(
       spacing: 5,
       children: [
-        IconButton(
+       /* IconButton(
           onPressed: onLike,
           icon: Icon(Icons.favorite_outline_rounded),
-        ),
+        ),*/
 
         TextButton(onPressed: onReply, child: Text('Responder')),
         if (replyCount > 0)
