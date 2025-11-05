@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:if_inclusivo/data/repositories/account_security_repository.dart';
 import 'package:if_inclusivo/data/services/account_security_service.dart';
+import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:result_dart/result_dart.dart';
 
 import '../../../domain/models/api/request/gen_requests.dart';
@@ -66,4 +67,14 @@ class AccountSecurityRepositoryImpl implements AccountSecurityRepository{
       'Falha de conexão. Verifique sua internet e tente novamente.',
     );
   }
+
+  // @override
+  // Future<UsuarioResponseModel> getUserById(int id, String token) async {
+  //   final response = await _api.getUserById(id, token);
+  //   final fetchedUser = UsuarioResponseModel.fromJson(response);
+  //
+  //   print("o usuário foi pego $fetchedUser");
+  //
+  //   return fetchedUser;
+  // }
 }

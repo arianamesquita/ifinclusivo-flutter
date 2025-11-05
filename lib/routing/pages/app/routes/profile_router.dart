@@ -22,6 +22,20 @@ class AccountSecurityRouter extends GoRouteData with _$AccountSecurityRouter {
   }
 }
 
+const TypedGoRoute<EditProfileRouter> editProfileRouter =
+TypedGoRoute<EditProfileRouter>(
+  path: AppRoutes.editProfile,
+);
+
+class EditProfileRouter extends GoRouteData with _$EditProfileRouter {
+  const EditProfileRouter();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const EditProfilePage();
+  }
+}
+
 const TypedGoRoute<ProfileRouter> profileRouter = TypedGoRoute<ProfileRouter>(
   path: AppRoutes.profile,
   routes: [accountSecurityRouter],

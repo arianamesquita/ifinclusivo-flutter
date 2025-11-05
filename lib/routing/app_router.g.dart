@@ -252,6 +252,11 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
 
               factory: _$AccountSecurityRouter._fromState,
             ),
+            GoRouteData.$route(
+              path: 'edit',
+
+              factory: _$EditProfileRouter._fromState,
+            ),
           ],
         ),
       ],
@@ -447,6 +452,27 @@ mixin _$AccountSecurityRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/profile/security');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$EditProfileRouter on GoRouteData {
+  static EditProfileRouter _fromState(GoRouterState state) =>
+      const EditProfileRouter();
+
+  @override
+  String get location => GoRouteData.$location('/app/profile/edit');
 
   @override
   void go(BuildContext context) => context.go(location);
