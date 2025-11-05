@@ -18,12 +18,15 @@ class ForumServiceImpl implements ForumService {
     return response.data;
   }
 
+
+
   @override
   Future<Map<String, dynamic>> fetchFeedPublication({
     Set<Categorias>? categorias,
     Ordenacao? ordenarPor,
     int page = 0,
     int size = 10,
+    String? query
   }) async {
     final queryParameters = <String, dynamic>{'page': page, 'size': size};
 
@@ -34,9 +37,23 @@ class ForumServiceImpl implements ForumService {
     if (categorias != null && categorias.isNotEmpty) {
       queryParameters['categorias'] = categorias.map((e) => e.name).toList();
     }
+    if(query != null ){
+      queryParameters['query'] = query;
+
+    }
     final response = await _dio.get(basePath, queryParameters: queryParameters);
     return response.data;
   }
+
+
+  @override
+  Future<Map<String, dynamic>> fetchPublicationsByUserID({required int id, int page = 0, int size = 10}) async {
+    final queryParameters = <String, dynamic>{'page': page, 'size': size};
+
+    final response = await _dio.get('$basePath/user/$id', queryParameters: queryParameters);
+    return response.data;
+  }
+
 
   /// Busca uma publicação por ID (com árvore de pais, sem filhos)
   @override
@@ -54,7 +71,7 @@ class ForumServiceImpl implements ForumService {
     int size = 10,
   }) async {
     final queryParameters = {
-      'ordenarPor': ordenarPor.name,
+      'ordenacao': ordenarPor.name,
       'page': page,
       'size': size,
     };
@@ -80,11 +97,13 @@ class ForumServiceImpl implements ForumService {
     final response = await _dio.put('$basePath/$id', data: publicacaoRequest);
     return response.data;
   }
+
   @override
   Future<Map<String, dynamic>> toggleLikePublication(int publicationID) async {
     final response = await _dio.put('/publicacoes/$publicationID/like');
     return response.data;
   }
+
   @override
   Future<Map<String, dynamic>> findReplies({
     required int id,
@@ -135,6 +154,20 @@ class ForumServiceImpl implements ForumService {
   @override
   Future<void> deleteComment(int commentId) async =>
       await _dio.delete('/comentarios/$commentId');
+
+  @override
+  Future<List<dynamic>> searchSuggestions({
+    Set<Categorias>? categorias,
+    required String query,
+  }) async {
+    final queryParameters = <String, dynamic>{'query': query};
+    if (categorias != null && categorias.isNotEmpty) {
+      queryParameters['categorias'] = categorias.map((e) => e.name).toList();
+    }
+
+    final response = await _dio.get('$basePath/suggestions',queryParameters: queryParameters);
+    return response.data;
+  }
 
 
 }

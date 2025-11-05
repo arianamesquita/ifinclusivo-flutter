@@ -20,7 +20,7 @@ class AppRoutes {
 
 
   static const String libras = '$_app/libras';
-  static const String midia = 'midia';
+  static const String midia = 'midia/:id';
   static const String categoriaLibras = 'category/:categoria';
   static const String librasCategory = 'category/:categoria';
   static const String wordSuggestion = 'word-suggestion';
@@ -30,6 +30,7 @@ class AppRoutes {
   static const String notification = '$_app/notification';
   static const String profile = '$_app/profile';
   static const String accountSecurity = 'security';
+  static const String editProfile = 'edit';
 
   static const String token = '/auth/verify-email';
   static const String resetPassword = '/auth/reset_password';
@@ -53,6 +54,7 @@ class AppRoutes {
     AppRoute(path: notification, allowedRoles: Roles.values),
     AppRoute(path: profile, allowedRoles: Roles.values),
     AppRoute(path: accountSecurity, allowedRoles: Roles.values),
+    AppRoute(path: editProfile, allowedRoles: Roles.values),
 
     AppRoute(path: token, isPublic: true),
     AppRoute(path: resetPassword, isPublic: true),

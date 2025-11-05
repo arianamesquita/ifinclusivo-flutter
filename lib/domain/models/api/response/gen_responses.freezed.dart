@@ -66,7 +66,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )
     aluno,
     required TResult Function(
@@ -81,7 +81,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -152,7 +152,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult? Function(
@@ -167,7 +167,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -238,7 +238,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult Function(
@@ -253,7 +253,7 @@ mixin _$UsuarioResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -504,12 +504,11 @@ abstract class _$$AlunoResponseModelImplCopyWith<$Res>
     List<Roles> roles,
     String? token,
     String? firebaseToken,
-    CursoRequestModel curso,
+    String curso,
   });
 
   @override
   $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
-  $CursoRequestModelCopyWith<$Res> get curso;
 }
 
 /// @nodoc
@@ -600,19 +599,9 @@ class __$$AlunoResponseModelImplCopyWithImpl<$Res>
             null == curso
                 ? _value.curso
                 : curso // ignore: cast_nullable_to_non_nullable
-                    as CursoRequestModel,
+                    as String,
       ),
     );
-  }
-
-  /// Create a copy of UsuarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CursoRequestModelCopyWith<$Res> get curso {
-    return $CursoRequestModelCopyWith<$Res>(_value.curso, (value) {
-      return _then(_value.copyWith(curso: value));
-    });
   }
 }
 
@@ -668,7 +657,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
   @override
   final String? firebaseToken;
   @override
-  final CursoRequestModel curso;
+  final String curso;
 
   @JsonKey(name: 'userType')
   final String $type;
@@ -751,7 +740,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )
     aluno,
     required TResult Function(
@@ -766,7 +755,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -854,7 +843,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult? Function(
@@ -869,7 +858,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -957,7 +946,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult Function(
@@ -972,7 +961,7 @@ class _$AlunoResponseModelImpl implements _AlunoResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -1108,7 +1097,7 @@ abstract class _AlunoResponseModel implements UsuarioResponseModel {
     required final List<Roles> roles,
     final String? token,
     final String? firebaseToken,
-    required final CursoRequestModel curso,
+    required final String curso,
   }) = _$AlunoResponseModelImpl;
 
   factory _AlunoResponseModel.fromJson(Map<String, dynamic> json) =
@@ -1136,7 +1125,7 @@ abstract class _AlunoResponseModel implements UsuarioResponseModel {
   String? get token;
   @override
   String? get firebaseToken;
-  CursoRequestModel get curso;
+  String get curso;
 
   /// Create a copy of UsuarioResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -1167,7 +1156,7 @@ abstract class _$$AlunoNapneResponseModelImplCopyWith<$Res>
     List<Roles> roles,
     String? token,
     String? firebaseToken,
-    CursoRequestModel curso,
+    String curso,
     String condicao,
     String laudo,
     String necessidadeEspecial,
@@ -1178,7 +1167,6 @@ abstract class _$$AlunoNapneResponseModelImplCopyWith<$Res>
 
   @override
   $ConfigAcblResponseModelCopyWith<$Res>? get configAcessibilidadeEntity;
-  $CursoRequestModelCopyWith<$Res> get curso;
 }
 
 /// @nodoc
@@ -1276,7 +1264,7 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
             null == curso
                 ? _value.curso
                 : curso // ignore: cast_nullable_to_non_nullable
-                    as CursoRequestModel,
+                    as String,
         condicao:
             null == condicao
                 ? _value.condicao
@@ -1309,16 +1297,6 @@ class __$$AlunoNapneResponseModelImplCopyWithImpl<$Res>
                     as String,
       ),
     );
-  }
-
-  /// Create a copy of UsuarioResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CursoRequestModelCopyWith<$Res> get curso {
-    return $CursoRequestModelCopyWith<$Res>(_value.curso, (value) {
-      return _then(_value.copyWith(curso: value));
-    });
   }
 }
 
@@ -1380,7 +1358,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
   @override
   final String? firebaseToken;
   @override
-  final CursoRequestModel curso;
+  final String curso;
   @override
   final String condicao;
   @override
@@ -1491,7 +1469,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )
     aluno,
     required TResult Function(
@@ -1506,7 +1484,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -1600,7 +1578,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult? Function(
@@ -1615,7 +1593,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -1709,7 +1687,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult Function(
@@ -1724,7 +1702,7 @@ class _$AlunoNapneResponseModelImpl implements _AlunoNapneResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -1866,7 +1844,7 @@ abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
     required final List<Roles> roles,
     final String? token,
     final String? firebaseToken,
-    required final CursoRequestModel curso,
+    required final String curso,
     required final String condicao,
     required final String laudo,
     required final String necessidadeEspecial,
@@ -1900,7 +1878,7 @@ abstract class _AlunoNapneResponseModel implements UsuarioResponseModel {
   String? get token;
   @override
   String? get firebaseToken;
-  CursoRequestModel get curso;
+  String get curso;
   String get condicao;
   String get laudo;
   String get necessidadeEspecial;
@@ -2176,7 +2154,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )
     aluno,
     required TResult Function(
@@ -2191,7 +2169,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -2279,7 +2257,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult? Function(
@@ -2294,7 +2272,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -2382,7 +2360,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult Function(
@@ -2397,7 +2375,7 @@ class _$ProfessorResponseModelImpl implements _ProfessorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -2829,7 +2807,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )
     aluno,
     required TResult Function(
@@ -2844,7 +2822,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -2932,7 +2910,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult? Function(
@@ -2947,7 +2925,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -3035,7 +3013,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult Function(
@@ -3050,7 +3028,7 @@ class _$TutorResponseModelImpl implements _TutorResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -3512,7 +3490,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )
     aluno,
     required TResult Function(
@@ -3527,7 +3505,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -3617,7 +3595,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult? Function(
@@ -3632,7 +3610,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -3722,7 +3700,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
     )?
     aluno,
     TResult Function(
@@ -3737,7 +3715,7 @@ class _$InterpreteResponseModelImpl implements _InterpreteResponseModel {
       List<Roles> roles,
       String? token,
       String? firebaseToken,
-      CursoRequestModel curso,
+      String curso,
       String condicao,
       String laudo,
       String necessidadeEspecial,
@@ -4995,7 +4973,7 @@ mixin _$LibrasResponseModel {
   int get id => throw _privateConstructorUsedError;
   String get palavra => throw _privateConstructorUsedError;
   String get descricao => throw _privateConstructorUsedError;
-  String? get url => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
   String? get video => throw _privateConstructorUsedError;
   String? get foto => throw _privateConstructorUsedError;
   String? get justificativa => throw _privateConstructorUsedError;
@@ -5023,7 +5001,7 @@ abstract class $LibrasResponseModelCopyWith<$Res> {
     int id,
     String palavra,
     String descricao,
-    String? url,
+    String url,
     String? video,
     String? foto,
     String? justificativa,
@@ -5050,7 +5028,7 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
     Object? id = null,
     Object? palavra = null,
     Object? descricao = null,
-    Object? url = freezed,
+    Object? url = null,
     Object? video = freezed,
     Object? foto = freezed,
     Object? justificativa = freezed,
@@ -5075,10 +5053,10 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
                     : descricao // ignore: cast_nullable_to_non_nullable
                         as String,
             url:
-                freezed == url
+                null == url
                     ? _value.url
                     : url // ignore: cast_nullable_to_non_nullable
-                        as String?,
+                        as String,
             video:
                 freezed == video
                     ? _value.video
@@ -5123,7 +5101,7 @@ abstract class _$$LibrasResponseModelImplCopyWith<$Res>
     int id,
     String palavra,
     String descricao,
-    String? url,
+    String url,
     String? video,
     String? foto,
     String? justificativa,
@@ -5149,7 +5127,7 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? palavra = null,
     Object? descricao = null,
-    Object? url = freezed,
+    Object? url = null,
     Object? video = freezed,
     Object? foto = freezed,
     Object? justificativa = freezed,
@@ -5174,10 +5152,10 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
                 : descricao // ignore: cast_nullable_to_non_nullable
                     as String,
         url:
-            freezed == url
+            null == url
                 ? _value.url
                 : url // ignore: cast_nullable_to_non_nullable
-                    as String?,
+                    as String,
         video:
             freezed == video
                 ? _value.video
@@ -5216,7 +5194,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     required this.id,
     required this.palavra,
     required this.descricao,
-    this.url,
+    required this.url,
     this.video,
     this.foto,
     this.justificativa,
@@ -5234,7 +5212,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
   @override
   final String descricao;
   @override
-  final String? url;
+  final String url;
   @override
   final String? video;
   @override
@@ -5307,7 +5285,7 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
     required final int id,
     required final String palavra,
     required final String descricao,
-    final String? url,
+    required final String url,
     final String? video,
     final String? foto,
     final String? justificativa,
@@ -5325,7 +5303,7 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
   @override
   String get descricao;
   @override
-  String? get url;
+  String get url;
   @override
   String? get video;
   @override

@@ -7,10 +7,9 @@ import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart'
 import 'package:if_inclusivo/ui/pages/forum/feed/widgets/filter_chips_bar.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:provider/provider.dart';
-import 'package:result_command/src/command.dart';
+import 'package:result_command/result_command.dart';
 
 import '../../../../domain/models/enums/categorias.dart';
-import '../../../core/widgets/search_bar.dart';
 import '../publicacao/widget/card/publicacao_card.dart';
 
 class FeedPage extends StatefulWidget {
@@ -23,6 +22,12 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   final ScrollController _scrollController = ScrollController();
   bool _showFab = true;
+  final SearchController controller = SearchController();
+
+
+
+  // Escuta mudanças no texto
+
 
   @override
   void initState() {
@@ -31,6 +36,13 @@ class _FeedPageState extends State<FeedPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await context.read<FeedViewModel>().fetchPublications();
     });
+ /*   controller.addListener(() async {
+      final query = controller.text;
+      if (query.isNotEmpty) {
+        await context.read<FeedViewModel>().searchSuggestions(query: query);
+        controller.openView();
+      }
+    });*/
 
     _scrollController.addListener(() async {
       final vm = context.read<FeedViewModel>();
@@ -144,6 +156,7 @@ class _FeedPageState extends State<FeedPage> {
                                     key: ValueKey(
                                       viewModel.publications[index].id,
                                     ),
+                                    isLoggedIn: viewModel.currentUser != null,
                                     onLike: () {
                                       viewModel.toggleLikePublication(
                                         viewModel.publications[index].id,
@@ -322,7 +335,79 @@ class _FeedPageState extends State<FeedPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: CustomSearchBar(onChanged: (query) {}),
+                child: SearchAnchor(
+                  viewConstraints:(ResponsiveUtils.getDeviceType(context)!= DeviceScreenType.mobile)? BoxConstraints(maxHeight: 300):null,
+                  searchController: controller,
+                  viewOnChanged: (s) async => await viewModel.searchSuggestions(query: s) ,
+                  viewOnSubmitted: (value) async {
+                    controller.closeView(value);
+                    await viewModel.fetchPublications(query: value);
+
+                  },
+                  builder: (
+                      BuildContext context,
+                      SearchController searchController,
+                      ) {
+                    return ValueListenableBuilder<TextEditingValue>(
+                      valueListenable: searchController,
+                      builder: (context, value, _) {
+                        return SearchBar(
+                          onSubmitted: (value) async {
+                            controller.closeView(value);
+                            await viewModel.fetchPublications(query: value);
+                          },
+                          controller: searchController,
+                          hintText: 'Buscar publicações...',
+                          onTap: () {
+                            searchController.openView();
+                          },
+                          onChanged: (query) async {
+                            if (query.isNotEmpty) {
+                              searchController.openView();
+                              await viewModel.searchSuggestions(query: query);
+                            }
+                          },
+                          trailing: [
+                            if (value.text.isNotEmpty)
+                              IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () async {
+                                  searchController.clear();
+                                 await viewModel.fetchPublications(query: '');
+                                },
+                              ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  suggestionsBuilder: (
+                      BuildContext context,
+                      SearchController searchController,
+                      ) {
+                    final suggestions = viewModel.suggestions;
+
+                    if (suggestions.isEmpty) {
+                      return [
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text('Nenhuma sugestão encontrada'),
+                        ),
+                      ];
+                    }
+
+                    return suggestions.map((sugestao) {
+                      return ListTile(
+                        title: Text(sugestao),
+                        onTap: () async {
+                          searchController.text = sugestao;
+                          searchController.closeView(sugestao);
+                         await viewModel.fetchPublications(query: sugestao);
+                        },
+                      );
+                    }).toList();
+                  },
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),

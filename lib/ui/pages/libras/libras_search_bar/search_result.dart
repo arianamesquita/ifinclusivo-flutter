@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
-import 'package:if_inclusivo/ui/pages/libras/search_not_found.dart';
-import 'package:if_inclusivo/ui/pages/libras/widgets/search_result_block.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/search_not_found.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/widgets/search_result_block.dart';
 
 class SearchResult extends StatelessWidget {
   SearchResult({super.key});

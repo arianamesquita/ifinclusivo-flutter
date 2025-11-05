@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../auth/modal/auth_modals.dart';
+
 class BottomBarPublication extends StatefulWidget {
   final int likes;
   final int comments;
-  final bool isLiked; // já vem do backend
+  final bool isLiked;
+  final bool isLoggedIn;
   final VoidCallback? onLike;
   final VoidCallback? onComment;
   final VoidCallback? onShare;
@@ -13,6 +16,7 @@ class BottomBarPublication extends StatefulWidget {
     required this.likes,
     required this.comments,
     this.isLiked = false,
+    required this.isLoggedIn ,
     this.onLike,
     this.onComment,
     this.onShare,
@@ -33,7 +37,25 @@ class _BottomBarPublicationState extends State<BottomBarPublication> {
     _likes = widget.likes;
   }
 
+  @override
+  void didUpdateWidget(covariant BottomBarPublication oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.isLiked != oldWidget.isLiked) {
+      _liked = widget.isLiked;
+    }
+    if (widget.likes != oldWidget.likes) {
+      _likes = widget.likes;
+    }
+  }
+
   void _toggleLike() {
+    if (!widget.isLoggedIn) {
+      showLoginRequiredDialog(context);
+      return;
+    }
+
+    // comportamento otimista
     setState(() {
       if (_liked) {
         _liked = false;
@@ -44,14 +66,21 @@ class _BottomBarPublicationState extends State<BottomBarPublication> {
       }
     });
 
-    // dispara callback para o pai salvar no backend
-    widget.onLike?.call();
+    widget.onLike?.call(); // callback pro backend
+  }
+
+  void _handleComment() {
+    if (!widget.isLoggedIn) {
+      showLoginRequiredDialog(context);
+      return;
+    }
+    widget.onComment?.call();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric( vertical: 12.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -71,7 +100,7 @@ class _BottomBarPublicationState extends State<BottomBarPublication> {
                 label: Text(_likes.toString()),
               ),
               TextButton.icon(
-                onPressed: widget.onComment,
+                onPressed: _handleComment,
                 icon: const Icon(Icons.insert_comment_outlined),
                 label: Text(widget.comments.toString()),
               ),

@@ -21,6 +21,7 @@ import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.da
 import 'package:if_inclusivo/ui/pages/auth/token/viewmodels/validate_token_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/profile/account_security/viewModels/account_security_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/profile/edit_profile/viewModels/edit_profile_viewmodel.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -47,17 +48,12 @@ List<SingleChildWidget> providers(SharedPreferences prefs) {
 List<SingleChildWidget> get _authServices {
   return [
     Provider<AuthService>(create: (_) => AuthServiceImpl()),
-    Provider<AuthRepository>(
+    ChangeNotifierProvider<AuthRepository>(
       create:
           (context) => AuthRepositoryImpl(
             authService: context.read<AuthService>(),
             sharedPreferences: context.read<SharedPreferences>(),
           ),
-      dispose: (_, repo) {
-        if (repo is AuthRepositoryImpl) {
-          repo.dispose();
-        }
-      },
     ),
     Provider<GoRouter>(
       create: (context) {
@@ -111,6 +107,7 @@ List<SingleChildWidget> get _repositoriesData {
       create:
           (context) => AccountSecurityRepositoryImpl(
         service: context.read<AccountSecurityService>(),
+            prefs: context.read<SharedPreferences>()
       ),
     ),
   ];
@@ -143,12 +140,7 @@ List<SingleChildWidget> get _viewModelsProviders {
               LoginViewModel(authRepository: context.read<AuthRepository>()),
     ),
 
-    ChangeNotifierProvider<SpecificTopicViewModel>(
-      create:
-          (context) => SpecificTopicViewModel(
-            librasRepository: context.read<LibrasRepository>(),
-          ),
-    ),
+
     ChangeNotifierProvider(
       create:
           (context) => FeedViewModel(

@@ -50,40 +50,36 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
   void initState() {
     super.initState();
   }
+
   @override
   void dispose() {
     _loginController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
-  hasListen(){
-    final viewModel = context.watch<LoginViewModel>();
-    if(viewModel.isLogged.value == true) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(
-        const SnackBar(
-          content: Text( 'Usuário logado com sucesso!'),
-          backgroundColor:
-          Colors.green,
-          duration: Duration(
-            seconds: 5,
-          ),
-        ),
-      );
-      context.pushReplacement('/home');
-    }
-  }
+
   bool _validateForm() {
     final ValidationResult result = loginValidator.validate(loginModel);
     return result.isValid;
   }
+
   @override
   Widget build(BuildContext context) {
     final deviceType = ResponsiveUtils.getDeviceType(context);
     final fontScale = ResponsiveUtils.fontScale(context);
     return Consumer<LoginViewModel>(
       builder: (context, viewModel, child) {
+        if (viewModel.isLoggedIn) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (context.canPop()) {
+
+              context.pop();
+            } else {
+              ForumRouter().go(context);
+            }
+          });
+        }
+
         return Scaffold(
           body: Container(
             decoration: BoxDecoration(
@@ -156,40 +152,56 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 6,
-                                                offset: const Offset(0,3)
-                                            )
-                                          ]
+                                        borderRadius: BorderRadius.circular(50),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
                                       ),
                                       child: TextFormField(
                                         controller: _loginController,
                                         style: const TextStyle(
-                                          color: Color.fromRGBO(22, 29, 27, 1)
+                                          color: Color.fromRGBO(22, 29, 27, 1),
                                         ),
                                         decoration: InputDecoration(
                                           hintText: 'Digite seu login',
                                           filled: true,
-                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          fillColor: Color.fromRGBO(
+                                            252,
+                                            249,
+                                            248,
+                                            1,
+                                          ),
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
+                                            borderRadius: BorderRadius.circular(
+                                              50,
+                                            ),
                                             borderSide: BorderSide.none,
                                           ), // dá a borda Material
-                                          errorText: isEmailError ? errorEmail : null, // mostra o erro se existir
+                                          errorText:
+                                              isEmailError
+                                                  ? errorEmail
+                                                  : null, // mostra o erro se existir
                                         ),
                                         validator: (String? value) {
-                                          final email = EmailModel(email: value ?? '');
-                                          final ValidationResult result = emailValidator.validate(email);
+                                          final email = EmailModel(
+                                            email: value ?? '',
+                                          );
+                                          final ValidationResult result =
+                                              emailValidator.validate(email);
                                           if (result.isValid) {
-                                            setState(() => isEmailError = false);
+                                            setState(
+                                              () => isEmailError = false,
+                                            );
                                             return null;
                                           }
                                           setState(() {
                                             isEmailError = true;
-                                            errorEmail = 'E-mail inválido, ex: joaosilva@gmail.com';
+                                            errorEmail =
+                                                'E-mail inválido, ex: joaosilva@gmail.com';
                                           });
                                           return errorEmail;
                                         },
@@ -220,53 +232,72 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 6,
-                                                offset: const Offset(0,3)
-                                            )
-                                          ]
+                                        borderRadius: BorderRadius.circular(50),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
                                       ),
                                       child: TextFormField(
                                         controller: _passwordController,
                                         style: const TextStyle(
-                                            color: Color.fromRGBO(22, 29, 27, 1)
+                                          color: Color.fromRGBO(22, 29, 27, 1),
                                         ),
                                         obscureText: !passwordVisible,
                                         decoration: InputDecoration(
                                           hintText: 'Digite sua senha',
                                           filled: true,
-                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          fillColor: Color.fromRGBO(
+                                            252,
+                                            249,
+                                            248,
+                                            1,
+                                          ),
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
+                                            borderRadius: BorderRadius.circular(
+                                              50,
+                                            ),
                                             borderSide: BorderSide.none,
                                           ), // dá a borda Material
-                                          errorText: isSenhaError ? errorSenha : null, // mostra o erro se existir
+                                          errorText:
+                                              isSenhaError
+                                                  ? errorSenha
+                                                  : null, // mostra o erro se existir
                                           suffixIcon: IconButton(
                                             icon: Icon(
-                                              passwordVisible ? Icons.visibility_off : Icons.visibility,
+                                              passwordVisible
+                                                  ? Icons.visibility_off
+                                                  : Icons.visibility,
                                             ),
                                             onPressed: () {
                                               setState(() {
-                                                passwordVisible = !passwordVisible;
+                                                passwordVisible =
+                                                    !passwordVisible;
                                               });
                                             },
                                           ),
                                         ),
                                         validator: (String? value) {
-                                          final password = PasswordModel(password: value ?? '');
-                                          final ValidationResult result = senhaValidator.validate(password);
+                                          final password = PasswordModel(
+                                            password: value ?? '',
+                                          );
+                                          final ValidationResult result =
+                                              senhaValidator.validate(password);
 
                                           if (result.isValid) {
-                                            setState(() => isSenhaError = false);
+                                            setState(
+                                              () => isSenhaError = false,
+                                            );
                                             return null;
                                           }
 
                                           setState(() {
                                             isSenhaError = true;
-                                            errorSenha = 'Deve conter 6 letras.';
+                                            errorSenha =
+                                                'Deve conter 6 letras.';
                                           });
                                           return errorSenha;
                                         },
@@ -281,24 +312,53 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                     SizedBox(
                                       width: double.infinity,
                                       child: ElevatedButton(
-                                        onPressed: isLoading ? null : () async {
-                                          setState(() => isLoading = true);
-                                          final credentials = LoginRequestModel(
-                                            login: _loginController.text,
-                                            senha: _passwordController.text,
-                                          );
-                                          final success = await viewModel.login(credentials);
-                                          setState(() => isLoading = false);
-                                          if (success) {
-                                            if(context.canPop()) {
-                                              context.pop();
-                                            }  else ForumRouter().go(context);
-                                          }else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(content: Text("Usuário ou senha inválidos")),
-                                            );
-                                          }
-                                        },
+                                        onPressed:
+                                            isLoading
+                                                ? null
+                                                : () async {
+                                                  setState(
+                                                    () => isLoading = true,
+                                                  );
+                                                  final credentials =
+                                                      LoginRequestModel(
+                                                        login:
+                                                            _loginController
+                                                                .text,
+                                                        senha:
+                                                            _passwordController
+                                                                .text,
+                                                      );
+                                                  final success =
+                                                      await viewModel.login(
+                                                        credentials,
+                                                      );
+                                                  setState(
+                                                    () => isLoading = false,
+                                                  );
+                                                  if (success) {
+                                                    {
+                                                      ScaffoldMessenger.of(
+                                                        context,
+                                                      ).showSnackBar(
+                                                        const SnackBar(
+                                                          content: Text(
+                                                            "Bem vindo de volta",
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                      context,
+                                                    ).showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                          "Usuário ou senha inválidos",
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Color.fromRGBO(
                                             76,
@@ -315,22 +375,31 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: isLoading
-                                              ? const SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: CircularProgressIndicator(
-                                              color: Colors.white,
-                                              strokeWidth: 2,
-                                            ),
-                                          )
-                                              : Text(
-                                            'Entrar',
-                                            style: TextStyle(
-                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize ?? 18) * fontScale,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
+                                          child:
+                                              isLoading
+                                                  ? const SizedBox(
+                                                    height: 20,
+                                                    width: 20,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                          color: Colors.white,
+                                                          strokeWidth: 2,
+                                                        ),
+                                                  )
+                                                  : Text(
+                                                    'Entrar',
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          (Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyLarge
+                                                                  ?.fontSize ??
+                                                              18) *
+                                                          fontScale,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
                                         ),
                                       ),
                                     ),
@@ -403,7 +472,9 @@ class _LoginDialogContentState extends State<LoginDialogContent> {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              RegisterRoute().pushReplacement(context);
+                                              RegisterRoute().pushReplacement(
+                                                context,
+                                              );
                                             },
                                             child: Text(
                                               'Cadastre-se',

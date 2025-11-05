@@ -11,7 +11,16 @@ import '../../../../../domain/models/enums/categorias.dart';
 
 enum FeedState { initialLoading, loadingMore, content, error, empty }
 
-class FeedViewModel extends ChangeNotifier {
+abstract class PublicationsViewModel {
+  void add({required PublicacaoDetalhadaModel publication});
+  void update({
+    required int publicationId,
+    required PublicacaoDetalhadaModel publication,
+  });
+  void delete({required int publicationId});
+}
+
+class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
   FeedViewModel({
     required ForumRepository forumRepository,
     required AuthRepository authRepository,
@@ -43,6 +52,7 @@ class FeedViewModel extends ChangeNotifier {
 
   Set<Categorias> _currentCategories = {};
   Ordenacao _currentOrder = Ordenacao.RELEVANCIA;
+  String? _query;
 
   @override
   void dispose() {
@@ -50,30 +60,65 @@ class FeedViewModel extends ChangeNotifier {
     super.dispose();
   }
 
+  List<String> _suggestions = [];
+  List<String> get suggestions => _suggestions;
+
+  Future<void> searchSuggestions({
+    required String query,
+    Set<Categorias>? categorias,
+  }) async {
+    final result = await _forumRepository.searchSuggestions(
+      query: query,
+      categorias: categorias,
+    );
+    result.fold(
+      (onSuccess) {
+        _suggestions = onSuccess;
+      },
+      (onFailure) {
+        _suggestions = [];
+      },
+    );
+
+    notifyListeners();
+  }
+
   Future<void> fetchPublications({
     Set<Categorias>? categories,
     Ordenacao? order,
+    String? query
   }) async {
-    if (categories != null || order != null) {
-      _currentCategories = categories ?? {};
-      _currentOrder = order ?? Ordenacao.MAIS_RECENTE;
+    if (categories != null || order != null|| query != null) {
+      if (categories != null) _currentCategories = categories;
+      if (order != null) _currentOrder = order;
+      // Se vier vazia, considera sem query ativa
+      if (query != null) {
+        _query = query.isEmpty ? null : query;
+      }
       _currentPage = 0;
       publications.clear();
       _hasMorePages = true;
+
     }
 
     _state = FeedState.initialLoading;
     notifyListeners();
-
     final response = await _forumRepository.fetchFeedPublication(
       categorias: _currentCategories,
       ordenarPor: _currentOrder,
       page: 0,
+      query: _query
     );
 
     response.fold(
       (onSuccess) {
-        publications.addAll(onSuccess.content.toList());
+        final existingIds = publications.map((p) => p.id).toSet();
+        final newPublications = onSuccess.content
+            .where((p) => !existingIds.contains(p.id))
+            .toList();
+
+
+        publications.addAll(newPublications.toList());
         _hasMorePages = !onSuccess.last; // agora funciona
         _currentPage = 1;
 
@@ -104,11 +149,16 @@ class FeedViewModel extends ChangeNotifier {
       categorias: _currentCategories,
       ordenarPor: _currentOrder,
       page: _currentPage,
+      query: _query
     );
 
     response.fold(
       (onSuccess) {
-        publications.addAll(onSuccess.content);
+        final existingIds = publications.map((p) => p.id).toSet();
+        final newPublications = onSuccess.content
+            .where((p) => !existingIds.contains(p.id))
+            .toList();
+        publications.addAll(newPublications);
         _hasMorePages = !onSuccess.last;
         _currentPage++;
         _state = FeedState.content;
@@ -121,48 +171,79 @@ class FeedViewModel extends ChangeNotifier {
       },
     );
   }
+
   late final Command1<bool, int> deleteCommentsCommand;
 
   AsyncResult<bool> _deletePublication(int id) async {
     final result = await _forumRepository.deletePublication(id);
 
-   return result.mapFold((onSuccess){
-     int index=  publications.indexWhere((p)=> p.id == id);
-     if(index != -1){
-       publications.removeAt(index);
-       notifyListeners();
-     }
-     return true;
-   }, (onFailure){
-     print(onFailure);
-     return onFailure;
-   });
-
+    return result.mapFold(
+      (onSuccess) {
+        int index = publications.indexWhere((p) => p.id == id);
+        if (index != -1) {
+          publications.removeAt(index);
+          notifyListeners();
+        }
+        return true;
+      },
+      (onFailure) {
+        print(onFailure);
+        return onFailure;
+      },
+    );
   }
+
   toggleLikePublication(int id) async {
     final response = await _forumRepository.toggleLikePublication(id);
-    response.fold((onSuccess){
-      final index = publications.indexWhere((p)=> p.id ==id);
-      if(index !=-1){
-        publications[index] = publications[index].copyWith(curtidoPeloUsuario: onSuccess);
+    response.fold((onSuccess) {
+      final index = publications.indexWhere((p) => p.id == id);
+      if (index != -1) {
+        publications[index] = publications[index].copyWith(
+          curtidoPeloUsuario: onSuccess,
+        );
         notifyListeners();
       }
-    }, (onFailure){});
-
+    }, (onFailure) {});
   }
 
   Future<void> updatePubication(int id) async {
     final result = await _forumRepository.findById(id);
 
-    result.fold(
-            (onSuccess){
-          int index=  publications.indexWhere((p)=> p.id == id);
-          if(index != -1){
-            publications[index] = onSuccess;
-            notifyListeners();
-          }
-        },
-            (onFailure){});
-  }
+    result.fold((onSuccess) {
+      int index = publications.indexWhere((p) => p.id == id);
+      if (index != -1) {
+        publications[index] = onSuccess;
+        notifyListeners();
+      }
+    }, (onFailure) {});
   }
 
+  @override
+  void add({required PublicacaoDetalhadaModel publication}) {
+    final exists = publications.any((p) => p.id == publication.id);
+    if (exists) return;
+
+    publications.insert(0, publication);
+    notifyListeners();
+  }
+
+  @override
+  void delete({required int publicationId}) {
+    final index = publications.indexWhere((p) => p.id == publicationId);
+    if (index == -1) return;
+
+    publications.removeAt(index);
+    notifyListeners();
+  }
+
+  @override
+  void update({
+    required int publicationId,
+    required PublicacaoDetalhadaModel publication,
+  }) {
+    final index = publications.indexWhere((p) => p.id == publicationId);
+    if (index == -1) return;
+    publications[index] = publication;
+    notifyListeners();
+  }
+}

@@ -35,19 +35,49 @@ class ForumRepositoryImpl implements ForumRepository {
     Ordenacao? ordenarPor,
     int page = 0,
     int size = 10,
+    String? query
+
   }) async {
     try {
       final responseMap = await _service.fetchFeedPublication(
         categorias: categorias,
         ordenarPor: ordenarPor,
         page: page,
-        size: size,
+        size: size, query: query
       );
 
       return Success(
         PaginatedResponse<PublicacaoDetalhadaModel>.fromJson(
           responseMap,
           (json) =>
+              PublicacaoDetalhadaModel.fromJson(json as Map<String, dynamic>),
+        ),
+      );
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Falha ao processar a resposta do servidor.'));
+    }
+  }
+
+
+  @override
+  AsyncResult<PaginatedResponse<PublicacaoDetalhadaModel>> fetchPublicationsByUserID({
+    required int id,
+    int page = 0,
+    int size = 10,
+  }) async {
+    try {
+      final responseMap = await _service.fetchPublicationsByUserID(
+        id: id,
+          page: page,
+          size: size,
+      );
+
+      return Success(
+        PaginatedResponse<PublicacaoDetalhadaModel>.fromJson(
+          responseMap,
+              (json) =>
               PublicacaoDetalhadaModel.fromJson(json as Map<String, dynamic>),
         ),
       );
@@ -134,7 +164,6 @@ class ForumRepositoryImpl implements ForumRepository {
   AsyncResult<bool> toggleLikePublication(int publicationId)async {
     try {
       final response = await _service.toggleLikePublication(publicationId);
-      print(response);
       return Success(response['liked']);
     } on DioException catch (e) {
 
@@ -240,6 +269,19 @@ class ForumRepositoryImpl implements ForumRepository {
       return Failure(_handleDioError(e));
     } catch (e) {
       return Failure(Exception('Erro inesperado ao excluir a comentário. $e'));
+    }
+  }
+
+  @override
+  AsyncResult<List<String>> searchSuggestions({Set<Categorias>? categorias, required String query}) async{
+    try {
+     final result = await _service.searchSuggestions(categorias: categorias,query: query);
+     final list = List<String>.from(result);
+     return Success(list);
+    } on DioException catch (e) {
+      return Failure(_handleDioError(e));
+    } catch (e) {
+      return Failure(Exception('Erro inesperado ao sugerir a titulos. $e'));
     }
   }
 
