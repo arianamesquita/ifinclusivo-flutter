@@ -50,6 +50,8 @@ class LibrasSearchBarViewmodel with ChangeNotifier{
       _errorMessage = e.toString();
     }
 
+
+
     notifyListeners();
   }
 }

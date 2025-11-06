@@ -15,13 +15,10 @@ class LibrasPage extends StatefulWidget {
 class _LibrasPageState extends State<LibrasPage> {
   @override
   Widget build(BuildContext context) {
-    // 1. Use ChangeNotifierProvider para criar e fornecer a VM
     return ChangeNotifierProvider(
       create: (context) => LibrasSearchBarViewmodel(
-        // Use context.read para pegar o repositório que já deve estar provido acima
         librasRepository: context.read<LibrasRepository>(),
       ),
-      // 2. TopicLibras agora é um 'child' e não precisa mais do parâmetro 'vm'
       child: const TopicLibras(),
     );
   }

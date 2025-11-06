@@ -34,7 +34,6 @@ class LibrasCustomSearchBar extends CustomSearchBar {
         fontFamily: 'Poppins',
       ),
     ),
-    super.enabled=false
   });
 
   static const Color textInputColor = Color.fromRGBO(64, 29, 78, 1);
