@@ -70,6 +70,8 @@ class _SearchResultState extends State<SearchResult> {
                 : Padding(
               padding: const EdgeInsets.only(top: 20),
               child: SearchNotFound(
+                text: 'Não encontramos esta palavra.',
+                text2: 'Nos ajude a melhorar nosso glossário!',
                 errorIcon: Icons.error,
                 onPressed: () {
                   WordSuggestionRouter().push(context);
