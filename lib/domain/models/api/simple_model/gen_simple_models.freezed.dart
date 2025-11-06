@@ -1111,7 +1111,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )
     aluno,
     required TResult Function(
@@ -1121,7 +1121,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -1177,7 +1177,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult? Function(
@@ -1187,7 +1187,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -1243,7 +1243,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult Function(
@@ -1253,7 +1253,7 @@ mixin _$SimpleUsuarioModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -1586,7 +1586,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )
     aluno,
     required TResult Function(
@@ -1596,7 +1596,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -1656,7 +1656,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult? Function(
@@ -1666,7 +1666,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -1726,7 +1726,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult Function(
@@ -1736,7 +1736,7 @@ class _$SimpleUsuarioModelUsuarioImpl implements _SimpleUsuarioModelUsuario {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -2056,7 +2056,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )
     aluno,
     required TResult Function(
@@ -2066,7 +2066,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -2134,7 +2134,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult? Function(
@@ -2144,7 +2144,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -2212,7 +2212,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult Function(
@@ -2222,7 +2222,7 @@ class _$SimpleTutorModelImpl implements _SimpleTutorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -2553,7 +2553,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )
     aluno,
     required TResult Function(
@@ -2563,7 +2563,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -2631,7 +2631,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult? Function(
@@ -2641,7 +2641,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -2709,7 +2709,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult Function(
@@ -2719,7 +2719,7 @@ class _$SimpleProfessorModelImpl implements _SimpleProfessorModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -2853,10 +2853,8 @@ abstract class _$$SimpleAlunoModelImplCopyWith<$Res>
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
-    CursoRequestModel curso,
+    Cursos curso,
   });
-
-  $CursoRequestModelCopyWith<$Res> get curso;
 }
 
 /// @nodoc
@@ -2917,19 +2915,9 @@ class __$$SimpleAlunoModelImplCopyWithImpl<$Res>
             null == curso
                 ? _value.curso
                 : curso // ignore: cast_nullable_to_non_nullable
-                    as CursoRequestModel,
+                    as Cursos,
       ),
     );
-  }
-
-  /// Create a copy of SimpleUsuarioModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CursoRequestModelCopyWith<$Res> get curso {
-    return $CursoRequestModelCopyWith<$Res>(_value.curso, (value) {
-      return _then(_value.copyWith(curso: value));
-    });
   }
 }
 
@@ -2970,7 +2958,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
   }
 
   @override
-  final CursoRequestModel curso;
+  final Cursos curso;
 
   @JsonKey(name: 'userType')
   final String $type;
@@ -3060,7 +3048,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )
     aluno,
     required TResult Function(
@@ -3070,7 +3058,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -3130,7 +3118,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult? Function(
@@ -3140,7 +3128,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -3208,7 +3196,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult Function(
@@ -3218,7 +3206,7 @@ class _$SimpleAlunoModelImpl implements _SimpleAlunoModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -3300,7 +3288,7 @@ abstract class _SimpleAlunoModel implements SimpleUsuarioModel {
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
-    required final CursoRequestModel curso,
+    required final Cursos curso,
   }) = _$SimpleAlunoModelImpl;
 
   factory _SimpleAlunoModel.fromJson(Map<String, dynamic> json) =
@@ -3318,7 +3306,7 @@ abstract class _SimpleAlunoModel implements SimpleUsuarioModel {
   DateTime get dataCriacao;
   @override
   List<Roles> get roles;
-  CursoRequestModel get curso;
+  Cursos get curso;
 
   /// Create a copy of SimpleUsuarioModel
   /// with the given fields replaced by the non-null parameter values.
@@ -3344,13 +3332,11 @@ abstract class _$$SimpleAlunoNapneModelImplCopyWith<$Res>
     String? biografia,
     DateTime dataCriacao,
     List<Roles> roles,
-    CursoRequestModel curso,
+    Cursos curso,
     String condicao,
     String necessidadeEspecial,
     String necessidadeEscolar,
   });
-
-  $CursoRequestModelCopyWith<$Res> get curso;
 }
 
 /// @nodoc
@@ -3414,7 +3400,7 @@ class __$$SimpleAlunoNapneModelImplCopyWithImpl<$Res>
             null == curso
                 ? _value.curso
                 : curso // ignore: cast_nullable_to_non_nullable
-                    as CursoRequestModel,
+                    as Cursos,
         condicao:
             null == condicao
                 ? _value.condicao
@@ -3432,16 +3418,6 @@ class __$$SimpleAlunoNapneModelImplCopyWithImpl<$Res>
                     as String,
       ),
     );
-  }
-
-  /// Create a copy of SimpleUsuarioModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CursoRequestModelCopyWith<$Res> get curso {
-    return $CursoRequestModelCopyWith<$Res>(_value.curso, (value) {
-      return _then(_value.copyWith(curso: value));
-    });
   }
 }
 
@@ -3485,7 +3461,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
   }
 
   @override
-  final CursoRequestModel curso;
+  final Cursos curso;
   @override
   final String condicao;
   @override
@@ -3591,7 +3567,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )
     aluno,
     required TResult Function(
@@ -3601,7 +3577,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -3672,7 +3648,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult? Function(
@@ -3682,7 +3658,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -3753,7 +3729,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult Function(
@@ -3763,7 +3739,7 @@ class _$SimpleAlunoNapneModelImpl implements _SimpleAlunoNapneModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -3856,7 +3832,7 @@ abstract class _SimpleAlunoNapneModel implements SimpleUsuarioModel {
     final String? biografia,
     required final DateTime dataCriacao,
     required final List<Roles> roles,
-    required final CursoRequestModel curso,
+    required final Cursos curso,
     required final String condicao,
     required final String necessidadeEspecial,
     required final String necessidadeEscolar,
@@ -3877,7 +3853,7 @@ abstract class _SimpleAlunoNapneModel implements SimpleUsuarioModel {
   DateTime get dataCriacao;
   @override
   List<Roles> get roles;
-  CursoRequestModel get curso;
+  Cursos get curso;
   String get condicao;
   String get necessidadeEspecial;
   String get necessidadeEscolar;
@@ -4115,7 +4091,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )
     aluno,
     required TResult Function(
@@ -4125,7 +4101,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -4194,7 +4170,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult? Function(
@@ -4204,7 +4180,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,
@@ -4273,7 +4249,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
     )?
     aluno,
     TResult Function(
@@ -4283,7 +4259,7 @@ class _$SimpleInterpreteModelImpl implements _SimpleInterpreteModel {
       String? biografia,
       DateTime dataCriacao,
       List<Roles> roles,
-      CursoRequestModel curso,
+      Cursos curso,
       String condicao,
       String necessidadeEspecial,
       String necessidadeEscolar,

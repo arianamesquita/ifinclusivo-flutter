@@ -13,8 +13,8 @@ _$AlunoRequestModelImpl _$$AlunoRequestModelImplFromJson(
   login: json['login'] as String,
   senha: json['senha'] as String,
   matricula: (json['matricula'] as num).toInt(),
-  curso: $enumDecode(_$CursosEnumMap, json['curso']),
   biografia: json['biografia'] as String?,
+  curso: $enumDecode(_$CursosEnumMap, json['curso']),
 );
 
 Map<String, dynamic> _$$AlunoRequestModelImplToJson(
@@ -24,13 +24,15 @@ Map<String, dynamic> _$$AlunoRequestModelImplToJson(
   'login': instance.login,
   'senha': instance.senha,
   'matricula': instance.matricula,
-  'curso': cursoToJson(instance.curso),
   'biografia': instance.biografia,
+  'curso': _$CursosEnumMap[instance.curso]!,
 };
 
 const _$CursosEnumMap = {
-  Cursos.SISTEMAS_INFORMACAO: 'SISTEMAS_INFORMACAO',
-  Cursos.MEDIO_TECNICO_TI: 'MEDIO_TECNICO_TI',
+  Cursos.SI: 'SI',
+  Cursos.CIENCIA_COMPUTACAO: 'CIENCIA_COMPUTACAO',
+  Cursos.ENGENHARIA_DE_SOFTWARE: 'ENGENHARIA_DE_SOFTWARE',
+  Cursos.TADS: 'TADS',
 };
 
 _$AlunoNapneRequestModelImpl _$$AlunoNapneRequestModelImplFromJson(
@@ -58,7 +60,7 @@ Map<String, dynamic> _$$AlunoNapneRequestModelImplToJson(
   'senha': instance.senha,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
-  'curso': cursoToJson(instance.curso),
+  'curso': _$CursosEnumMap[instance.curso]!,
   'condicao': instance.condicao,
   'laudo': instance.laudo,
   'necessidadeEspecial': instance.necessidadeEspecial,
@@ -149,7 +151,7 @@ Map<String, dynamic> _$$AlunoDetailsRequestModelImplToJson(
 ) => <String, dynamic>{
   'nome': instance.nome,
   'matricula': instance.matricula,
-  'curso': cursoToJson(instance.curso),
+  'curso': _$CursosEnumMap[instance.curso]!,
   'biografia': instance.biografia,
 };
 
@@ -174,7 +176,7 @@ Map<String, dynamic> _$$AlunoNapneDetailsRequestModelImplToJson(
   'nome': instance.nome,
   'matricula': instance.matricula,
   'biografia': instance.biografia,
-  'curso': cursoToJson(instance.curso),
+  'curso': _$CursosEnumMap[instance.curso]!,
   'condicao': instance.condicao,
   'laudo': instance.laudo,
   'necessidadeEspecial': instance.necessidadeEspecial,

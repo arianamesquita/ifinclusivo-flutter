@@ -621,7 +621,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                           return DropdownMenuItem<Cursos>(
                                             value: curso,
                                             child: Text(
-                                              curso == Cursos.SISTEMAS_INFORMACAO
+                                              curso == Cursos.SI
                                                   ? 'Sistemas de Informação'
                                                   : 'Ensino Médio - Técnico de TI',
                                               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),

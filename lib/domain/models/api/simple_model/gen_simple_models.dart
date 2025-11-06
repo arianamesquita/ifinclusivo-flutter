@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 
 import '../../../../guards/roles.dart';
+import '../../enums/cursos.dart';
 import '../request/gen_requests.dart';
 
 
