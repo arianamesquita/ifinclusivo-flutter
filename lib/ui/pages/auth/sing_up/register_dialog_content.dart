@@ -4,6 +4,7 @@ import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/enums/cursos.dart';
 import 'package:if_inclusivo/domain/validators/email_validador.dart';
 import 'package:if_inclusivo/domain/validators/login_validator.dart';
+import 'package:if_inclusivo/domain/validators/matricula_validator.dart';
 import 'package:if_inclusivo/domain/validators/name_validator.dart';
 import 'package:if_inclusivo/domain/validators/password_validator.dart';
 import 'package:if_inclusivo/ui/pages/auth/modal/auth_modals.dart';
@@ -29,6 +30,8 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   final NameFieldValidator nameValidator = NameFieldValidator();
   final TextEditingController _emailController = TextEditingController();
   final EmailFieldValidator emailValidator = EmailFieldValidator();
+  late final TextEditingController _matriculaController;
+  final MatriculaFieldValidator matriculaValidator = MatriculaFieldValidator();
   final TextEditingController _senhaController = TextEditingController();
   final PasswordFieldValidator senhaValidator = PasswordFieldValidator();
   final TextEditingController _confirmController = TextEditingController();
@@ -38,10 +41,13 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   String? _tipoSelecionado;
   Cursos? _cursoSelecionado;
 
+  bool isLoading = false;
   bool isNameError = false;
   String errorName = '';
   bool isEmailError = false;
   String errorEmail = '';
+  bool isMatriculaError = false;
+  String errorMatricula = '';
   bool isSenhaError = false;
   String errorSenha = '';
   bool isConfirmError = false;
@@ -53,12 +59,14 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   @override
   void initState() {
     super.initState();
+    _matriculaController = TextEditingController();
   }
 
   void _resetForm() {
     _nameController.clear();
     _emailController.clear();
     _senhaController.clear();
+    _matriculaController.clear();
     _especialidadeController.clear();
     _especialidade2Controller.clear();
     _formacaoController.clear();
@@ -160,6 +168,60 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                             errorName = 'Nome inválido, ex: João da Silva';
                                           });
                                           return errorName;
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        "Matrícula",
+                                        style: TextStyle(
+                                            color: Theme.of(context).colorScheme.onSurface,
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
+                                                ?? 18) * fontScale,
+                                            fontWeight: FontWeight.w400
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 6,
+                                                offset: const Offset(0,3)
+                                            )
+                                          ]
+                                      ),
+                                      child: TextFormField(
+                                        controller: _matriculaController,
+                                        style: TextStyle(
+                                          color: Theme.of(context).colorScheme.onSurface,
+                                        ),
+                                        decoration: InputDecoration(
+                                          hintText: 'Digite sua matrícula',
+                                          filled: true,
+                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(50),
+                                            borderSide: BorderSide.none,
+                                          ), // dá a borda Material
+                                          errorText: isMatriculaError ? errorMatricula : null, // mostra o erro se existir
+                                        ),
+                                        validator: (String? value) {
+                                          final matricula = MatriculaModel(matricula: value ?? '');
+                                          final ValidationResult result = matriculaValidator.validate(matricula);
+                                          if (result.isValid) {
+                                            setState(() => isMatriculaError = false);
+                                            return null;
+                                          }
+                                          setState(() {
+                                            isMatriculaError = true;
+                                            errorMatricula = 'Matrícula inválida, ex: 2022121212121212';
+                                          });
+                                          return errorMatricula;
                                         },
                                       ),
                                     ),
@@ -592,16 +654,25 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                     SizedBox(
                                       width: double.infinity,
                                       child: ElevatedButton(
-                                          onPressed: () async {
+                                          onPressed:
+                                          isLoading
+                                              ? null
+                                              : () async {
+                                            setState(
+                                                  () => isLoading = true,
+                                            );
                                             if(_tipoSelecionado == 'professor') {
                                               final professorData = ProfessorRequestModel(
                                                 nome: _nameController.text,
                                                 login: _emailController.text,
                                                 senha: _senhaController.text,
                                                 formacao: _formacaoController.text,
-                                                matricula:0,
+                                                matricula: int.parse(_matriculaController.text),
                                               );
                                               final success = await viewModel.registerNewProfessor(professorData);
+                                              setState(
+                                                    () => isLoading = false,
+                                              );
                                               if(success && viewModel.errorMessage == null){
                                                 AuthModals.userCreatedSuccess(context: context);
                                                 LoginRoute().pushReplacement(context);
@@ -610,15 +681,19 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                                 viewModel.errorMessage ?? 'Usuário Duplicado';
                                                 AuthModals.userRegisterError(context: context);
                                                 _resetForm();
-                                              }                                          }else if(_tipoSelecionado == 'tutor') {
+                                              }
+                                            }else if(_tipoSelecionado == 'tutor') {
                                               final tutorData = TutorRequestModel(
                                                 nome: _nameController.text,
                                                 login: _emailController.text,
                                                 senha: _senhaController.text,
                                                 especialidade: _especialidadeController.text,
-                                                matricula:0,
+                                                matricula: int.parse(_matriculaController.text),
                                               );
                                               final success = await viewModel.registerNewTutor(tutorData);
+                                              setState(
+                                                    () => isLoading = false,
+                                              );
                                               print('Salvo com sucesso $success');
                                               if(success && viewModel.errorMessage == null){
                                                 AuthModals.userCreatedSuccess(context: context);
@@ -628,16 +703,20 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                                 viewModel.errorMessage ?? 'Usuário Duplicado';
                                                 AuthModals.userRegisterError(context: context);
                                                 _resetForm();
-                                              }                                          }else if(_tipoSelecionado == 'interprete') {
+                                              }
+                                            }else if(_tipoSelecionado == 'interprete') {
                                               final interpreteData = InterpreteRequestModel(
                                                 nome: _nameController.text,
                                                 login: _emailController.text,
                                                 senha: _senhaController.text,
                                                 salary: 0,
                                                 especialidade: _especialidadeController.text,
-                                                matricula:0,
+                                                matricula: int.parse(_matriculaController.text),
                                               );
                                               final success = await viewModel.registerNewInterprete(interpreteData);
+                                              setState(
+                                                    () => isLoading = false,
+                                              );
                                               print('Salvo com sucesso $success');
                                               if(success && viewModel.errorMessage == null){
                                                 AuthModals.userCreatedSuccess(context: context);
@@ -654,9 +733,12 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                                 login: _emailController.text,
                                                 senha: _senhaController.text,
                                                 curso: _cursoSelecionado!,
-                                                matricula:0,
+                                                matricula: int.parse(_matriculaController.text),
                                               );
                                               final success = await viewModel.registerNewAluno(alunoData);
+                                              setState(
+                                                    () => isLoading = false,
+                                              );
                                               print('Salvo com sucesso $success');
                                               if(success && viewModel.errorMessage == null){
                                                 AuthModals.userCreatedSuccess(context: context);
@@ -675,7 +757,18 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                           ),
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Text(
+                                            child:
+                                            isLoading
+                                                ? const SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child:
+                                              CircularProgressIndicator(
+                                                color: Colors.white,
+                                                strokeWidth: 2,
+                                              ),
+                                            ) :
+                                            Text(
                                               'Cadastrar',
                                               style: TextStyle(
                                                   fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
