@@ -76,14 +76,13 @@ class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
       categorias: categorias,
     );
     result.fold(
-      (onSuccess) {
+          (onSuccess) {
         _suggestions = onSuccess;
       },
-      (onFailure) {
+          (onFailure) {
         _suggestions = [];
       },
     );
-    await Future.delayed(Duration(seconds: 2));
     loadingSugestion = false;
     notifyListeners();
   }

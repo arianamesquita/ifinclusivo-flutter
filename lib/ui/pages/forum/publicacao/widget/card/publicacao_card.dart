@@ -21,7 +21,8 @@ class PublicacaoCard extends StatelessWidget {
     required this.model,
     required this.onTap,
     required this.menuItems,
-    this.onLike, required this.isLoggedIn,
+    this.onLike,
+    required this.isLoggedIn,
   });
 
   @override
@@ -66,7 +67,7 @@ class PublicacaoCard extends StatelessWidget {
                   likes: model.totalLikes,
                   comments: model.totalRespostas,
                   isLiked: model.curtidoPeloUsuario,
-                  isLoggedIn:isLoggedIn ,
+                  isLoggedIn: isLoggedIn,
                   onLike: onLike,
                   onComment: () {
                     PublicacaoRouter(model.id).go(context);

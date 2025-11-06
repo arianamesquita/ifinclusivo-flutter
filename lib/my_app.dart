@@ -29,8 +29,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             title: 'IF Inclusivo',
             theme: theme.light(),
-            darkTheme: theme.dark(),
-            themeMode: ThemeMode.system,
+            themeMode: ThemeMode.light,
             routerConfig: router,
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
