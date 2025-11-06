@@ -198,7 +198,7 @@ _$SimpleAlunoModelImpl _$$SimpleAlunoModelImplFromJson(
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
-  curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
+  curso: $enumDecode(_$CursosEnumMap, json['curso']),
   $type: json['userType'] as String?,
 );
 
@@ -211,8 +211,15 @@ Map<String, dynamic> _$$SimpleAlunoModelImplToJson(
   'biografia': instance.biografia,
   'dataCriacao': instance.dataCriacao.toIso8601String(),
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
-  'curso': instance.curso,
+  'curso': _$CursosEnumMap[instance.curso]!,
   'userType': instance.$type,
+};
+
+const _$CursosEnumMap = {
+  Cursos.SI: 'SI',
+  Cursos.CIENCIA_COMPUTACAO: 'CIENCIA_COMPUTACAO',
+  Cursos.ENGENHARIA_DE_SOFTWARE: 'ENGENHARIA_DE_SOFTWARE',
+  Cursos.TADS: 'TADS',
 };
 
 _$SimpleAlunoNapneModelImpl _$$SimpleAlunoNapneModelImplFromJson(
@@ -227,7 +234,7 @@ _$SimpleAlunoNapneModelImpl _$$SimpleAlunoNapneModelImplFromJson(
       (json['roles'] as List<dynamic>)
           .map((e) => $enumDecode(_$RolesEnumMap, e))
           .toList(),
-  curso: CursoRequestModel.fromJson(json['curso'] as Map<String, dynamic>),
+  curso: $enumDecode(_$CursosEnumMap, json['curso']),
   condicao: json['condicao'] as String,
   necessidadeEspecial: json['necessidadeEspecial'] as String,
   necessidadeEscolar: json['necessidadeEscolar'] as String,
@@ -243,7 +250,7 @@ Map<String, dynamic> _$$SimpleAlunoNapneModelImplToJson(
   'biografia': instance.biografia,
   'dataCriacao': instance.dataCriacao.toIso8601String(),
   'roles': instance.roles.map((e) => _$RolesEnumMap[e]!).toList(),
-  'curso': instance.curso,
+  'curso': _$CursosEnumMap[instance.curso]!,
   'condicao': instance.condicao,
   'necessidadeEspecial': instance.necessidadeEspecial,
   'necessidadeEscolar': instance.necessidadeEscolar,

@@ -1,6 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-enum Cursos{
-  SISTEMAS_INFORMACAO,
-  MEDIO_TECNICO_TI
+enum Cursos {
+  @JsonValue('SI')
+  SI,
+  @JsonValue('CIENCIA_COMPUTACAO')
+  CIENCIA_COMPUTACAO,
+  @JsonValue('ENGENHARIA_DE_SOFTWARE')
+  ENGENHARIA_DE_SOFTWARE,
+  @JsonValue('TADS')
+  TADS,
 }

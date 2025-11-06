@@ -25,9 +25,8 @@ mixin _$AlunoRequestModel {
   String get login => throw _privateConstructorUsedError;
   String get senha => throw _privateConstructorUsedError;
   int get matricula => throw _privateConstructorUsedError; // Long -> String
-  @JsonKey(toJson: cursoToJson)
-  Cursos get curso => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
+  Cursos get curso => throw _privateConstructorUsedError;
 
   /// Serializes this AlunoRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,8 +50,8 @@ abstract class $AlunoRequestModelCopyWith<$Res> {
     String login,
     String senha,
     int matricula,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
     String? biografia,
+    Cursos curso,
   });
 }
 
@@ -75,8 +74,8 @@ class _$AlunoRequestModelCopyWithImpl<$Res, $Val extends AlunoRequestModel>
     Object? login = null,
     Object? senha = null,
     Object? matricula = null,
-    Object? curso = null,
     Object? biografia = freezed,
+    Object? curso = null,
   }) {
     return _then(
       _value.copyWith(
@@ -100,16 +99,16 @@ class _$AlunoRequestModelCopyWithImpl<$Res, $Val extends AlunoRequestModel>
                     ? _value.matricula
                     : matricula // ignore: cast_nullable_to_non_nullable
                         as int,
-            curso:
-                null == curso
-                    ? _value.curso
-                    : curso // ignore: cast_nullable_to_non_nullable
-                        as Cursos,
             biografia:
                 freezed == biografia
                     ? _value.biografia
                     : biografia // ignore: cast_nullable_to_non_nullable
                         as String?,
+            curso:
+                null == curso
+                    ? _value.curso
+                    : curso // ignore: cast_nullable_to_non_nullable
+                        as Cursos,
           )
           as $Val,
     );
@@ -130,8 +129,8 @@ abstract class _$$AlunoRequestModelImplCopyWith<$Res>
     String login,
     String senha,
     int matricula,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
     String? biografia,
+    Cursos curso,
   });
 }
 
@@ -153,8 +152,8 @@ class __$$AlunoRequestModelImplCopyWithImpl<$Res>
     Object? login = null,
     Object? senha = null,
     Object? matricula = null,
-    Object? curso = null,
     Object? biografia = freezed,
+    Object? curso = null,
   }) {
     return _then(
       _$AlunoRequestModelImpl(
@@ -178,16 +177,16 @@ class __$$AlunoRequestModelImplCopyWithImpl<$Res>
                 ? _value.matricula
                 : matricula // ignore: cast_nullable_to_non_nullable
                     as int,
-        curso:
-            null == curso
-                ? _value.curso
-                : curso // ignore: cast_nullable_to_non_nullable
-                    as Cursos,
         biografia:
             freezed == biografia
                 ? _value.biografia
                 : biografia // ignore: cast_nullable_to_non_nullable
                     as String?,
+        curso:
+            null == curso
+                ? _value.curso
+                : curso // ignore: cast_nullable_to_non_nullable
+                    as Cursos,
       ),
     );
   }
@@ -201,8 +200,8 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
     required this.login,
     required this.senha,
     required this.matricula,
-    @JsonKey(toJson: cursoToJson) required this.curso,
     this.biografia,
+    required this.curso,
   });
 
   factory _$AlunoRequestModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -218,14 +217,13 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
   final int matricula;
   // Long -> String
   @override
-  @JsonKey(toJson: cursoToJson)
-  final Cursos curso;
-  @override
   final String? biografia;
+  @override
+  final Cursos curso;
 
   @override
   String toString() {
-    return 'AlunoRequestModel(nome: $nome, login: $login, senha: $senha, matricula: $matricula, curso: $curso, biografia: $biografia)';
+    return 'AlunoRequestModel(nome: $nome, login: $login, senha: $senha, matricula: $matricula, biografia: $biografia, curso: $curso)';
   }
 
   @override
@@ -238,15 +236,15 @@ class _$AlunoRequestModelImpl implements _AlunoRequestModel {
             (identical(other.senha, senha) || other.senha == senha) &&
             (identical(other.matricula, matricula) ||
                 other.matricula == matricula) &&
-            (identical(other.curso, curso) || other.curso == curso) &&
             (identical(other.biografia, biografia) ||
-                other.biografia == biografia));
+                other.biografia == biografia) &&
+            (identical(other.curso, curso) || other.curso == curso));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, nome, login, senha, matricula, curso, biografia);
+      Object.hash(runtimeType, nome, login, senha, matricula, biografia, curso);
 
   /// Create a copy of AlunoRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -271,8 +269,8 @@ abstract class _AlunoRequestModel implements AlunoRequestModel {
     required final String login,
     required final String senha,
     required final int matricula,
-    @JsonKey(toJson: cursoToJson) required final Cursos curso,
     final String? biografia,
+    required final Cursos curso,
   }) = _$AlunoRequestModelImpl;
 
   factory _AlunoRequestModel.fromJson(Map<String, dynamic> json) =
@@ -287,10 +285,9 @@ abstract class _AlunoRequestModel implements AlunoRequestModel {
   @override
   int get matricula; // Long -> String
   @override
-  @JsonKey(toJson: cursoToJson)
-  Cursos get curso;
-  @override
   String? get biografia;
+  @override
+  Cursos get curso;
 
   /// Create a copy of AlunoRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -313,7 +310,6 @@ mixin _$AlunoNapneRequestModel {
   String get senha => throw _privateConstructorUsedError;
   int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
-  @JsonKey(toJson: cursoToJson)
   Cursos get curso => throw _privateConstructorUsedError;
   String get condicao => throw _privateConstructorUsedError;
   String get laudo => throw _privateConstructorUsedError;
@@ -345,7 +341,7 @@ abstract class $AlunoNapneRequestModelCopyWith<$Res> {
     String senha,
     int matricula,
     String? biografia,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
+    Cursos curso,
     String condicao,
     String laudo,
     String necessidadeEspecial,
@@ -469,7 +465,7 @@ abstract class _$$AlunoNapneRequestModelImplCopyWith<$Res>
     String senha,
     int matricula,
     String? biografia,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
+    Cursos curso,
     String condicao,
     String laudo,
     String necessidadeEspecial,
@@ -583,7 +579,7 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
     required this.senha,
     required this.matricula,
     this.biografia,
-    @JsonKey(toJson: cursoToJson) required this.curso,
+    required this.curso,
     required this.condicao,
     required this.laudo,
     required this.necessidadeEspecial,
@@ -606,7 +602,6 @@ class _$AlunoNapneRequestModelImpl implements _AlunoNapneRequestModel {
   @override
   final String? biografia;
   @override
-  @JsonKey(toJson: cursoToJson)
   final Cursos curso;
   @override
   final String condicao;
@@ -695,7 +690,7 @@ abstract class _AlunoNapneRequestModel implements AlunoNapneRequestModel {
     required final String senha,
     required final int matricula,
     final String? biografia,
-    @JsonKey(toJson: cursoToJson) required final Cursos curso,
+    required final Cursos curso,
     required final String condicao,
     required final String laudo,
     required final String necessidadeEspecial,
@@ -718,7 +713,6 @@ abstract class _AlunoNapneRequestModel implements AlunoNapneRequestModel {
   @override
   String? get biografia;
   @override
-  @JsonKey(toJson: cursoToJson)
   Cursos get curso;
   @override
   String get condicao;
@@ -1657,7 +1651,6 @@ AlunoDetailsRequestModel _$AlunoDetailsRequestModelFromJson(
 mixin _$AlunoDetailsRequestModel {
   String get nome => throw _privateConstructorUsedError;
   int get matricula => throw _privateConstructorUsedError; // Long -> String
-  @JsonKey(toJson: cursoToJson)
   Cursos get curso => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
 
@@ -1678,12 +1671,7 @@ abstract class $AlunoDetailsRequestModelCopyWith<$Res> {
     $Res Function(AlunoDetailsRequestModel) then,
   ) = _$AlunoDetailsRequestModelCopyWithImpl<$Res, AlunoDetailsRequestModel>;
   @useResult
-  $Res call({
-    String nome,
-    int matricula,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
-    String? biografia,
-  });
+  $Res call({String nome, int matricula, Cursos curso, String? biografia});
 }
 
 /// @nodoc
@@ -1746,12 +1734,7 @@ abstract class _$$AlunoDetailsRequestModelImplCopyWith<$Res>
   ) = __$$AlunoDetailsRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String nome,
-    int matricula,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
-    String? biografia,
-  });
+  $Res call({String nome, int matricula, Cursos curso, String? biografia});
 }
 
 /// @nodoc
@@ -1810,7 +1793,7 @@ class _$AlunoDetailsRequestModelImpl implements _AlunoDetailsRequestModel {
   const _$AlunoDetailsRequestModelImpl({
     required this.nome,
     required this.matricula,
-    @JsonKey(toJson: cursoToJson) required this.curso,
+    required this.curso,
     this.biografia,
   });
 
@@ -1823,7 +1806,6 @@ class _$AlunoDetailsRequestModelImpl implements _AlunoDetailsRequestModel {
   final int matricula;
   // Long -> String
   @override
-  @JsonKey(toJson: cursoToJson)
   final Cursos curso;
   @override
   final String? biografia;
@@ -1871,7 +1853,7 @@ abstract class _AlunoDetailsRequestModel implements AlunoDetailsRequestModel {
   const factory _AlunoDetailsRequestModel({
     required final String nome,
     required final int matricula,
-    @JsonKey(toJson: cursoToJson) required final Cursos curso,
+    required final Cursos curso,
     final String? biografia,
   }) = _$AlunoDetailsRequestModelImpl;
 
@@ -1883,7 +1865,6 @@ abstract class _AlunoDetailsRequestModel implements AlunoDetailsRequestModel {
   @override
   int get matricula; // Long -> String
   @override
-  @JsonKey(toJson: cursoToJson)
   Cursos get curso;
   @override
   String? get biografia;
@@ -1907,7 +1888,6 @@ mixin _$AlunoNapneDetailsRequestModel {
   String get nome => throw _privateConstructorUsedError;
   int get matricula => throw _privateConstructorUsedError;
   String? get biografia => throw _privateConstructorUsedError;
-  @JsonKey(toJson: cursoToJson)
   Cursos get curso => throw _privateConstructorUsedError;
   String get condicao => throw _privateConstructorUsedError;
   String get laudo => throw _privateConstructorUsedError;
@@ -1941,7 +1921,7 @@ abstract class $AlunoNapneDetailsRequestModelCopyWith<$Res> {
     String nome,
     int matricula,
     String? biografia,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
+    Cursos curso,
     String condicao,
     String laudo,
     String necessidadeEspecial,
@@ -2051,7 +2031,7 @@ abstract class _$$AlunoNapneDetailsRequestModelImplCopyWith<$Res>
     String nome,
     int matricula,
     String? biografia,
-    @JsonKey(toJson: cursoToJson) Cursos curso,
+    Cursos curso,
     String condicao,
     String laudo,
     String necessidadeEspecial,
@@ -2155,7 +2135,7 @@ class _$AlunoNapneDetailsRequestModelImpl
     required this.nome,
     required this.matricula,
     this.biografia,
-    @JsonKey(toJson: cursoToJson) required this.curso,
+    required this.curso,
     required this.condicao,
     required this.laudo,
     required this.necessidadeEspecial,
@@ -2175,7 +2155,6 @@ class _$AlunoNapneDetailsRequestModelImpl
   @override
   final String? biografia;
   @override
-  @JsonKey(toJson: cursoToJson)
   final Cursos curso;
   @override
   final String condicao;
@@ -2259,7 +2238,7 @@ abstract class _AlunoNapneDetailsRequestModel
     required final String nome,
     required final int matricula,
     final String? biografia,
-    @JsonKey(toJson: cursoToJson) required final Cursos curso,
+    required final Cursos curso,
     required final String condicao,
     required final String laudo,
     required final String necessidadeEspecial,
@@ -2278,7 +2257,6 @@ abstract class _AlunoNapneDetailsRequestModel
   @override
   String? get biografia;
   @override
-  @JsonKey(toJson: cursoToJson)
   Cursos get curso;
   @override
   String get condicao;
