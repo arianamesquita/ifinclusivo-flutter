@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/enums/cursos.dart';
@@ -200,9 +201,14 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                         style: TextStyle(
                                           color: Theme.of(context).colorScheme.onSurface,
                                         ),
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly, // 👈 só permite números
+                                        ],
                                         decoration: InputDecoration(
                                           hintText: 'Digite sua matrícula',
                                           filled: true,
+
                                           fillColor: Color.fromRGBO(252, 249, 248, 1),
                                           border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(50),
@@ -616,8 +622,26 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
                                         ),
                                       ),
                                       DropdownButtonFormField<Cursos>(
-                                        value: _cursoSelecionado,
+                                        initialValue: _cursoSelecionado,
+                                        hint: Text('Selecione um Curso'),
                                         items: Cursos.values.map((curso) {
+                                          String label;
+                                          switch(curso){
+                                            case Cursos.SI:
+                                              label = "Sistemas de Informação";
+                                              break;
+                                            case Cursos.CIENCIA_COMPUTACAO:
+                                              label = "Ciência da computação";
+                                              break;
+
+                                            case Cursos.ENGENHARIA_DE_SOFTWARE:
+                                              label = "Engenharia de Software";
+                                              break;
+
+                                            case Cursos.TADS:
+                                              label = "TADS";
+                                              break;
+                                          }
                                           return DropdownMenuItem<Cursos>(
                                             value: curso,
                                             child: Text(
