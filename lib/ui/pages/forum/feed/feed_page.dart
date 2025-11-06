@@ -340,96 +340,89 @@ class _FeedPageState extends State<FeedPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: SizedBox(
-                  height: 250,
-                  child: SearchAnchor(
-                    viewConstraints:(ResponsiveUtils.getDeviceType(context)!= DeviceScreenType.mobile)? BoxConstraints(maxHeight: 300):null,
-                    searchController: controller,
-                    viewOnChanged: (s) async => await viewModel.searchSuggestions(query: s) ,
-                    viewOnSubmitted: (value) async {
-                      controller.closeView(value);
-                      await viewModel.fetchPublications(query: value);
+                child: SearchAnchor(
+                  isFullScreen: ResponsiveUtils.getDeviceType(context)== DeviceScreenType.mobile,
+                  viewConstraints:(ResponsiveUtils.getDeviceType(context)!= DeviceScreenType.mobile)? BoxConstraints(maxHeight: 300):null,
+                  searchController: controller,
+                  viewOnChanged: (s) async => await viewModel.searchSuggestions(query: s) ,
+                  viewOnSubmitted: (value) async {
+                    controller.closeView(value);
+                    await viewModel.fetchPublications(query: value);
 
-                    },
-                    builder: (
+                  },
+                  builder: (
+                      BuildContext context,
+                      SearchController searchController,
+                      ) {
+                    return ValueListenableBuilder<TextEditingValue>(
+                      valueListenable: searchController,
+                      builder: (context, value, _) {
+                        return SearchBar(
+                          onSubmitted: (value) async {
+                            controller.closeView(value);
+                            await viewModel.fetchPublications(query: value);
+                          },
+                          controller: searchController,
+                          hintText: 'Buscar publicações...',
+                          onTap: () {
+                            searchController.openView();
+                          },
+                          onChanged: (query) async {
+                               viewModel.searchSuggestions(query: query);
+                              await viewModel.searchSuggestions(query: '$query ');
+                          },
+                          trailing: [
+                            if (value.text.isNotEmpty)
+                              IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () async {
+                                  searchController.clear();
+                                 await viewModel.fetchPublications(query: '');
+                                },
+                              ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                    suggestionsBuilder: (
                         BuildContext context,
                         SearchController searchController,
                         ) {
-                      return ValueListenableBuilder<TextEditingValue>(
-                        valueListenable: searchController,
-                        builder: (context, value, _) {
-                          return SearchBar(
-                            onSubmitted: (value) async {
-                              controller.closeView(value);
-                              await viewModel.fetchPublications(query: value);
-                            },
-                            controller: searchController,
-                            hintText: 'Buscar publicações...',
-                            onTap: () {
-                              searchController.openView();
-                            },
-                            onChanged: (query) async {
-                              if (query.isNotEmpty) {
-                                searchController.openView();
-                                await viewModel.searchSuggestions(query: query);
-                              }
-                            },
-                            trailing: [
-                              if (value.text.isNotEmpty)
-                                IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () async {
-                                    searchController.clear();
-                                   await viewModel.fetchPublications(query: '');
-                                  },
-                                ),
-                            ],
-                          );
-                        },
-                      );
+
+                      final suggestions = viewModel.suggestions;
+
+                      final List<Widget> widgets = [];
+
+                      if (viewModel.loadingSugestion) {
+                        widgets.add(
+                          const LinearProgressIndicator(),
+                        );
+                      }
+
+                      if (suggestions.isEmpty && !viewModel.loadingSugestion) {
+                        widgets.add(
+                          const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Text('Nenhuma sugestão encontrada'),
+                          ),
+                        );
+                      } else {
+                        widgets.addAll(
+                          suggestions.map((sugestao) {
+                            return ListTile(
+                              title: Text(sugestao),
+                              onTap: () async {
+                                searchController.text = sugestao;
+                                searchController.closeView(sugestao);
+                                await viewModel.fetchPublications(query: sugestao);
+                              },
+                            );
+                          }),
+                        );
+                      }
+                      return widgets;
                     },
-                      suggestionsBuilder: (
-                          BuildContext context,
-                          SearchController searchController,
-                          ) {
-                        final suggestions = viewModel.suggestions;
-
-                        // Lista de widgets que será exibida
-                        final List<Widget> widgets = [];
-
-                        // Se estiver carregando, adiciona o indicador no topo
-                        if (viewModel.loadingSugestion) {
-                          widgets.add(
-                            const LinearProgressIndicator(),
-                          );
-                        }
-
-                        // Se não há sugestões (e não está carregando)
-                        if (suggestions.isEmpty && !viewModel.loadingSugestion) {
-                          widgets.add(
-                            const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Text('Nenhuma sugestão encontrada'),
-                            ),
-                          );
-                        } else {
-                          // Adiciona as sugestões abaixo
-                          widgets.addAll(
-                            suggestions.map((sugestao) {
-                              return ListTile(
-                                title: Text(sugestao),
-                                onTap: () async {
-                                  searchController.text = sugestao;
-                                  searchController.closeView(sugestao);
-                                  await viewModel.fetchPublications(query: sugestao);
-                                },
-                              );
-                            }),
-                          );
-                        }
-                        return widgets;
-                      },
-                  ),
                 ),
               ),
               Padding(

@@ -38,7 +38,7 @@ class AboutUsPage extends StatelessWidget {
         title: 'Fórum',
         label: 'Espaço de diálogo e apoio entre os alunos.',
         color: color1,
-        onTap: () {},
+        onTap: () {ForumRouter().go(context);},
       ),
       StackItemInfo(
         iconPath: 'assets/icons/napne.png',

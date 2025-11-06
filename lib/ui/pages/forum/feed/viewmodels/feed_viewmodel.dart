@@ -68,6 +68,7 @@ class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
     required String query,
     Set<Categorias>? categorias,
   }) async {
+    if(query.trim().isEmpty) return;
     loadingSugestion = true;
     notifyListeners();
     final result = await _forumRepository.searchSuggestions(
@@ -82,6 +83,7 @@ class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
         _suggestions = [];
       },
     );
+    await Future.delayed(Duration(seconds: 2));
     loadingSugestion = false;
     notifyListeners();
   }

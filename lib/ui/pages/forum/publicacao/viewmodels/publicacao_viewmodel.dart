@@ -414,15 +414,7 @@ class PublicacaoViewModel extends ChangeNotifier {
             parent.showReplies = parent.comment.totalRespostas > 0;
           }
         }
-        if (_publication != null) {
-          _publication = _publication!.copyWith(
-            totalRespostas: _publication!.totalRespostas - 1,
-          );
-          _publicationsViewModel.update(
-            publicationId: _publication!.id,
-            publication: _publication!,
-          );
-        }
+
 
         notifyListeners();
         return isRemoved;
@@ -457,7 +449,19 @@ class PublicacaoViewModel extends ChangeNotifier {
     }
 
     int index = _comments.indexWhere((c) => c.comment.id == id);
-    if (removeAtIndex(index, _comments)) return true;
+    if (removeAtIndex(index, _comments)) {
+      if (_publication != null) {
+        _publication = _publication!.copyWith(
+          totalRespostas: _publication!.totalRespostas - 1,
+        );
+        _publicationsViewModel.update(
+          publicationId: _publication!.id,
+          publication: _publication!,
+        );
+      }
+
+      return true;
+    }
 
     for (final parent in _comments) {
       int replyIndex = parent.replies.indexWhere((c) => c.comment.id == id);
