@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/config/environment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/repositories/auth_repository.dart';
 import '../routing/app_router.dart';
@@ -12,12 +12,8 @@ class DioConfig {
       AuthRepository authRepository,
       GoRouter router,
       ) {
-    final baseUrl = kReleaseMode
-        ? const String.fromEnvironment('BASE_URL')
-        : dotenv.env['API_BASE_URL'];
-    if (baseUrl == null) {
-      throw Exception("A variável BASE_URL não foi encontrada no arquivo .env");
-    }
+    final baseUrl = Environment.baseUrl;
+
 
     final dio = Dio(
       BaseOptions(
