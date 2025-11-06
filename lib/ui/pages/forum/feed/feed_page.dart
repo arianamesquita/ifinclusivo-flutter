@@ -24,10 +24,7 @@ class _FeedPageState extends State<FeedPage> {
   bool _showFab = true;
   final SearchController controller = SearchController();
 
-
-
   // Escuta mudanças no texto
-
 
   @override
   void initState() {
@@ -36,7 +33,7 @@ class _FeedPageState extends State<FeedPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await context.read<FeedViewModel>().fetchPublications();
     });
- /*   controller.addListener(() async {
+    /*   controller.addListener(() async {
       final query = controller.text;
       if (query.isNotEmpty) {
         await context.read<FeedViewModel>().searchSuggestions(query: query);
@@ -336,18 +333,25 @@ class _FeedPageState extends State<FeedPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: SearchAnchor(
-                  viewConstraints:(ResponsiveUtils.getDeviceType(context)!= DeviceScreenType.mobile)? BoxConstraints(maxHeight: 300):null,
+                  isFullScreen:
+                      ResponsiveUtils.getDeviceType(context) ==
+                      DeviceScreenType.mobile,
+                  viewConstraints:
+                      (ResponsiveUtils.getDeviceType(context) !=
+                              DeviceScreenType.mobile)
+                          ? BoxConstraints(maxHeight: 300)
+                          : null,
                   searchController: controller,
-                  viewOnChanged: (s) async => await viewModel.searchSuggestions(query: s) ,
+                  viewOnChanged:
+                      (s) async => await viewModel.searchSuggestions(query: s),
                   viewOnSubmitted: (value) async {
                     controller.closeView(value);
                     await viewModel.fetchPublications(query: value);
-
                   },
                   builder: (
-                      BuildContext context,
-                      SearchController searchController,
-                      ) {
+                    BuildContext context,
+                    SearchController searchController,
+                  ) {
                     return ValueListenableBuilder<TextEditingValue>(
                       valueListenable: searchController,
                       builder: (context, value, _) {
@@ -362,10 +366,8 @@ class _FeedPageState extends State<FeedPage> {
                             searchController.openView();
                           },
                           onChanged: (query) async {
-                            if (query.isNotEmpty) {
-                              searchController.openView();
-                              await viewModel.searchSuggestions(query: query);
-                            }
+                            viewModel.searchSuggestions(query: query);
+                            await viewModel.searchSuggestions(query: '$query ');
                           },
                           trailing: [
                             if (value.text.isNotEmpty)
@@ -373,7 +375,7 @@ class _FeedPageState extends State<FeedPage> {
                                 icon: const Icon(Icons.clear),
                                 onPressed: () async {
                                   searchController.clear();
-                                 await viewModel.fetchPublications(query: '');
+                                  await viewModel.fetchPublications(query: '');
                                 },
                               ),
                           ],
@@ -382,30 +384,41 @@ class _FeedPageState extends State<FeedPage> {
                     );
                   },
                   suggestionsBuilder: (
-                      BuildContext context,
-                      SearchController searchController,
-                      ) {
+                    BuildContext context,
+                    SearchController searchController,
+                  ) {
                     final suggestions = viewModel.suggestions;
 
-                    if (suggestions.isEmpty) {
-                      return [
+                    final List<Widget> widgets = [];
+
+                    if (viewModel.loadingSugestion) {
+                      widgets.add(const LinearProgressIndicator());
+                    }
+
+                    if (suggestions.isEmpty && !viewModel.loadingSugestion) {
+                      widgets.add(
                         const Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Text('Nenhuma sugestão encontrada'),
                         ),
-                      ];
-                    }
-
-                    return suggestions.map((sugestao) {
-                      return ListTile(
-                        title: Text(sugestao),
-                        onTap: () async {
-                          searchController.text = sugestao;
-                          searchController.closeView(sugestao);
-                         await viewModel.fetchPublications(query: sugestao);
-                        },
                       );
-                    }).toList();
+                    } else {
+                      widgets.addAll(
+                        suggestions.map((sugestao) {
+                          return ListTile(
+                            title: Text(sugestao),
+                            onTap: () async {
+                              searchController.text = sugestao;
+                              searchController.closeView(sugestao);
+                              await viewModel.fetchPublications(
+                                query: sugestao,
+                              );
+                            },
+                          );
+                        }),
+                      );
+                    }
+                    return widgets;
                   },
                 ),
               ),
