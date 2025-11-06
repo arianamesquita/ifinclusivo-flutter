@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class SearchNotFound extends StatelessWidget {
-  final IconData errorIcon;
-  final String text = 'Não encontramos esta palavra.';
-  final String text2 = 'Nos ajude a melhorar nosso glossário!';
+  final IconData? errorIcon;
+  final String text;
+  final String text2;
   final GestureTapCallback onPressed;
 
   const SearchNotFound({
     super.key,
-    required this.errorIcon,
+    this.errorIcon,
     required this.onPressed,
+    required this.text,
+    required this.text2,
   });
 
   @override

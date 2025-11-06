@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:if_inclusivo/domain/models/enums/categorias.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/search_not_found.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_topic_grid.dart';
 import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
@@ -18,7 +17,6 @@ class SpecificTopicPage extends StatefulWidget {
 }
 
 class _SpecificTopicPageState extends State<SpecificTopicPage> {
-
   @override
   Widget build(BuildContext context) {
     DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
@@ -30,11 +28,13 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        String title = widget.viewModel.category.name.toLowerCase().replaceAll('_', ' ');
-
+        String title = widget.viewModel.category.name.toLowerCase().replaceAll(
+          '_',
+          ' ',
+        );
 
         List<SpecificTopicGridParams> items =
-        widget.viewModel.models.isEmpty
+            widget.viewModel.models.isEmpty
                 ? []
                 : widget.viewModel.models.map((model) {
                   return SpecificTopicGridParams(
@@ -50,6 +50,21 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
                   );
                 }).toList();
 
+        Widget searchNotFound = SearchNotFound(
+          onPressed: () {
+            WordSuggestionRouter().push(context);
+          },
+          text: 'Não foram encontradas palavras relacionadas a este tema',
+          text2: 'Gostaria de sugerir alguma?',
+        );
+
+        Widget specificTopicGrid = SpecificTopicGrid(specificTopicsList: items);
+        Widget content = specificTopicGrid;
+
+        if (items.isEmpty) {
+          content = searchNotFound;
+        }
+
         return device == DeviceScreenType.mobile
             ? Scaffold(
               appBar: AppBar(title: Text(title)),
@@ -61,7 +76,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
                         "Explore os principais sinais de Libras sobre este tema.",
                       ),
                       const SizedBox(height: 90),
-                      SpecificTopicGrid(specificTopicsList: items),
+                      content,
                     ],
                   ),
                 ),
@@ -76,7 +91,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
                         "Explore os principais sinais de Libras sobre este tema.",
                   ),
                   const SizedBox(height: 15),
-                  SpecificTopicGrid(specificTopicsList: items),
+                  content,
                 ],
               ),
             );
