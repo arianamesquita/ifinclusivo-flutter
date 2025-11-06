@@ -215,7 +215,7 @@ class ForumRepositoryImpl implements ForumRepository {
       );
     }
   }
-  Never _handleDioError(DioException e) {
+   _handleDioError(DioException e) {
     if (e.response != null) {
       final statusCode = e.response!.statusCode;
       final responseData = e.response!.data;
@@ -225,25 +225,25 @@ class ForumRepositoryImpl implements ForumRepository {
       }
       switch (statusCode) {
         case 400:
-          throw BadRequestException(
+          return BadRequestException(
             message: errorMessage,
             errors: responseData,
           );
         case 401:
-          throw UnauthorizedException(message: errorMessage);
+          return UnauthorizedException(message: errorMessage);
         case 403:
-          throw ForbiddenException(message: errorMessage);
+          return ForbiddenException(message: errorMessage);
         case 404:
-          throw NotFoundException(message: errorMessage);
+          return NotFoundException(message: errorMessage);
         case 409:
-          throw ApiException(message: errorMessage, statusCode: statusCode);
+          return ApiException(message: errorMessage, statusCode: statusCode);
         case 500:
-          throw InternalServerException();
+          return InternalServerException();
         default:
-          throw ApiException(message: errorMessage, statusCode: statusCode);
+          return ApiException(message: errorMessage, statusCode: statusCode);
       }
     }
-    throw Exception(
+    return Exception(
       'Falha de conexão. Verifique sua internet e tente novamente. $e',
     );
   }
