@@ -141,6 +141,11 @@ class _FeedPageState extends State<FeedPage> {
                         child: Center(
                           child: Text("Nenhuma publicação encontrada"),
                         ),
+                      )else if (viewModel.state == FeedState.error)
+                      const SliverFillRemaining(
+                        child: Center(
+                          child: Text("Error Inesperado"),
+                        ),
                       )
                     else
                       SliverList(
@@ -381,32 +386,47 @@ class _FeedPageState extends State<FeedPage> {
                       },
                     );
                   },
-                  suggestionsBuilder: (
-                      BuildContext context,
-                      SearchController searchController,
-                      ) {
-                    final suggestions = viewModel.suggestions;
+                    suggestionsBuilder: (
+                        BuildContext context,
+                        SearchController searchController,
+                        ) {
+                      final suggestions = viewModel.suggestions;
 
-                    if (suggestions.isEmpty) {
-                      return [
-                        const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text('Nenhuma sugestão encontrada'),
-                        ),
-                      ];
-                    }
+                      // Lista de widgets que será exibida
+                      final List<Widget> widgets = [];
 
-                    return suggestions.map((sugestao) {
-                      return ListTile(
-                        title: Text(sugestao),
-                        onTap: () async {
-                          searchController.text = sugestao;
-                          searchController.closeView(sugestao);
-                         await viewModel.fetchPublications(query: sugestao);
-                        },
-                      );
-                    }).toList();
-                  },
+                      // Se estiver carregando, adiciona o indicador no topo
+                      if (viewModel.loadingSugestion) {
+                        widgets.add(
+                          const LinearProgressIndicator(),
+                        );
+                      }
+
+                      // Se não há sugestões (e não está carregando)
+                      if (suggestions.isEmpty && !viewModel.loadingSugestion) {
+                        widgets.add(
+                          const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Text('Nenhuma sugestão encontrada'),
+                          ),
+                        );
+                      } else {
+                        // Adiciona as sugestões abaixo
+                        widgets.addAll(
+                          suggestions.map((sugestao) {
+                            return ListTile(
+                              title: Text(sugestao),
+                              onTap: () async {
+                                searchController.text = sugestao;
+                                searchController.closeView(sugestao);
+                                await viewModel.fetchPublications(query: sugestao);
+                              },
+                            );
+                          }),
+                        );
+                      }
+                      return widgets;
+                    },
                 ),
               ),
               Padding(

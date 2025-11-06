@@ -62,11 +62,14 @@ class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
 
   List<String> _suggestions = [];
   List<String> get suggestions => _suggestions;
+  bool loadingSugestion = false;
 
   Future<void> searchSuggestions({
     required String query,
     Set<Categorias>? categorias,
   }) async {
+    loadingSugestion = true;
+    notifyListeners();
     final result = await _forumRepository.searchSuggestions(
       query: query,
       categorias: categorias,
@@ -79,7 +82,7 @@ class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
         _suggestions = [];
       },
     );
-
+    loadingSugestion = false;
     notifyListeners();
   }
 

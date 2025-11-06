@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
@@ -16,8 +17,7 @@ import 'config/dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: 'assets/env/.env');
-
+    await dotenv.load(fileName: 'assets/env/.env');
   timeago.setLocaleMessages('pt_BR', timeago.PtBrMessages());
 
   final sharedPreferences = await SharedPreferences.getInstance();

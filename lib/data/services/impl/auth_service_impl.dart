@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:if_inclusivo/data/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +11,9 @@ class AuthServiceImpl implements AuthService {
   }
 
   void init() {
-    final baseUrl = dotenv.env['API_BASE_URL'];
+    final baseUrl = kReleaseMode
+        ? const String.fromEnvironment('BASE_URL')
+        : dotenv.env['API_BASE_URL'];;
     if (baseUrl == null) {
       throw Exception("A variável BASE_URL não foi encontrada no arquivo .env");
     }
