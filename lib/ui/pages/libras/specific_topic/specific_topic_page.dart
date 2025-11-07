@@ -17,6 +17,33 @@ class SpecificTopicPage extends StatefulWidget {
 }
 
 class _SpecificTopicPageState extends State<SpecificTopicPage> {
+
+  final ScrollController _controller = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    final vm = widget.viewModel;
+
+    if (_controller.position.pixels >=
+        _controller.position.maxScrollExtent - 200 &&
+        vm.state != SpecificTopicsState.loadingMore &&
+        vm.hasMore) {
+      vm.loadMore();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_onScroll);
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
@@ -32,7 +59,9 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
           '_',
           ' ',
         );
-
+        if (title.isNotEmpty) {
+          title = title[0].toUpperCase() + title.substring(1);
+        }
         List<SpecificTopicGridParams> items =
             widget.viewModel.models.isEmpty
                 ? []
@@ -43,9 +72,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
                     url: model.url,
                     onTap:
                         () => {
-                          widget.viewModel.setId(model.id),
-                          widget.viewModel.setVideoUrl(model.url),
-                          MidiaRouter(model.id).go(context),
+                          MidiaCategoriaRouter( categoria: widget.viewModel.category.name, id: model.id).go(context),
                         },
                   );
                 }).toList();
@@ -70,6 +97,7 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
               appBar: AppBar(title: Text(title)),
               body: SafeArea(
                 child: SingleChildScrollView(
+                  controller: _controller,
                   child: Column(
                     children: [
                       const Text(
@@ -77,12 +105,18 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
                       ),
                       const SizedBox(height: 90),
                       content,
+                      if(widget.viewModel.state == SpecificTopicsState.loadingMore)SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(),
+                      )
                     ],
                   ),
                 ),
               ),
             )
             : CustomContainerShell(
+          scrollController: _controller,
               child: Column(
                 children: [
                   TopContentLibras(
@@ -92,6 +126,11 @@ class _SpecificTopicPageState extends State<SpecificTopicPage> {
                   ),
                   const SizedBox(height: 15),
                   content,
+                  if(widget.viewModel.state == SpecificTopicsState.loadingMore)SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(),
+                  )
                 ],
               ),
             );

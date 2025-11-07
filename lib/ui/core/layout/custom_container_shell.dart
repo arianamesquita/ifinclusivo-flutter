@@ -7,15 +7,16 @@ import '../../../routing/app_router.dart';
 
 class CustomContainerShell extends StatelessWidget {
   final Widget child;
-  final bool showBackButton; // controle se botão aparece
-  final bool alwaysActive; // se deve aparecer mesmo sem nada na pilha
-  final VoidCallback? onBack; // callback customizável
+  final bool showBackButton;
+  final bool alwaysActive;
+  final VoidCallback? onBack;
+  final ScrollController? scrollController;
   const CustomContainerShell({
     super.key,
     required this.child,
     this.showBackButton = true,
     this.alwaysActive = false,
-    this.onBack,
+    this.onBack, this.scrollController,
   });
 
   @override
@@ -46,7 +47,9 @@ class CustomContainerShell extends StatelessWidget {
                     SizedBox(height: 200),
                   ],
                 ),
-                Expanded(child: SingleChildScrollView(child:ConstrainedBox(
+                Expanded(child: SingleChildScrollView(
+                    controller: scrollController,
+                    child:ConstrainedBox(
                     constraints: BoxConstraints(
                       minHeight: MediaQuery.of(context).size.height,
                     ),

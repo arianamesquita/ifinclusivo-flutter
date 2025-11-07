@@ -4608,6 +4608,211 @@ abstract class _LibrasRequestModel implements LibrasRequestModel {
       throw _privateConstructorUsedError;
 }
 
+SugereLibrasModel _$SugereLibrasModelFromJson(Map<String, dynamic> json) {
+  return _SugereLibrasModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SugereLibrasModel {
+  String get palavra => throw _privateConstructorUsedError;
+  String get descricao => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
+
+  /// Serializes this SugereLibrasModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of SugereLibrasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SugereLibrasModelCopyWith<SugereLibrasModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SugereLibrasModelCopyWith<$Res> {
+  factory $SugereLibrasModelCopyWith(
+    SugereLibrasModel value,
+    $Res Function(SugereLibrasModel) then,
+  ) = _$SugereLibrasModelCopyWithImpl<$Res, SugereLibrasModel>;
+  @useResult
+  $Res call({String palavra, String descricao, String? url});
+}
+
+/// @nodoc
+class _$SugereLibrasModelCopyWithImpl<$Res, $Val extends SugereLibrasModel>
+    implements $SugereLibrasModelCopyWith<$Res> {
+  _$SugereLibrasModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SugereLibrasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? palavra = null,
+    Object? descricao = null,
+    Object? url = freezed,
+  }) {
+    return _then(
+      _value.copyWith(
+            palavra:
+                null == palavra
+                    ? _value.palavra
+                    : palavra // ignore: cast_nullable_to_non_nullable
+                        as String,
+            descricao:
+                null == descricao
+                    ? _value.descricao
+                    : descricao // ignore: cast_nullable_to_non_nullable
+                        as String,
+            url:
+                freezed == url
+                    ? _value.url
+                    : url // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$SugereLibrasModelImplCopyWith<$Res>
+    implements $SugereLibrasModelCopyWith<$Res> {
+  factory _$$SugereLibrasModelImplCopyWith(
+    _$SugereLibrasModelImpl value,
+    $Res Function(_$SugereLibrasModelImpl) then,
+  ) = __$$SugereLibrasModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String palavra, String descricao, String? url});
+}
+
+/// @nodoc
+class __$$SugereLibrasModelImplCopyWithImpl<$Res>
+    extends _$SugereLibrasModelCopyWithImpl<$Res, _$SugereLibrasModelImpl>
+    implements _$$SugereLibrasModelImplCopyWith<$Res> {
+  __$$SugereLibrasModelImplCopyWithImpl(
+    _$SugereLibrasModelImpl _value,
+    $Res Function(_$SugereLibrasModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of SugereLibrasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? palavra = null,
+    Object? descricao = null,
+    Object? url = freezed,
+  }) {
+    return _then(
+      _$SugereLibrasModelImpl(
+        palavra:
+            null == palavra
+                ? _value.palavra
+                : palavra // ignore: cast_nullable_to_non_nullable
+                    as String,
+        descricao:
+            null == descricao
+                ? _value.descricao
+                : descricao // ignore: cast_nullable_to_non_nullable
+                    as String,
+        url:
+            freezed == url
+                ? _value.url
+                : url // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SugereLibrasModelImpl implements _SugereLibrasModel {
+  const _$SugereLibrasModelImpl({
+    required this.palavra,
+    required this.descricao,
+    this.url,
+  });
+
+  factory _$SugereLibrasModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SugereLibrasModelImplFromJson(json);
+
+  @override
+  final String palavra;
+  @override
+  final String descricao;
+  @override
+  final String? url;
+
+  @override
+  String toString() {
+    return 'SugereLibrasModel(palavra: $palavra, descricao: $descricao, url: $url)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SugereLibrasModelImpl &&
+            (identical(other.palavra, palavra) || other.palavra == palavra) &&
+            (identical(other.descricao, descricao) ||
+                other.descricao == descricao) &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, palavra, descricao, url);
+
+  /// Create a copy of SugereLibrasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SugereLibrasModelImplCopyWith<_$SugereLibrasModelImpl> get copyWith =>
+      __$$SugereLibrasModelImplCopyWithImpl<_$SugereLibrasModelImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SugereLibrasModelImplToJson(this);
+  }
+}
+
+abstract class _SugereLibrasModel implements SugereLibrasModel {
+  const factory _SugereLibrasModel({
+    required final String palavra,
+    required final String descricao,
+    final String? url,
+  }) = _$SugereLibrasModelImpl;
+
+  factory _SugereLibrasModel.fromJson(Map<String, dynamic> json) =
+      _$SugereLibrasModelImpl.fromJson;
+
+  @override
+  String get palavra;
+  @override
+  String get descricao;
+  @override
+  String? get url;
+
+  /// Create a copy of SugereLibrasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SugereLibrasModelImplCopyWith<_$SugereLibrasModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 AnalisePalavraRequestModel _$AnalisePalavraRequestModelFromJson(
   Map<String, dynamic> json,
 ) {

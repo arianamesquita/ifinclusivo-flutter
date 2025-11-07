@@ -52,6 +52,7 @@ class FilterBlockGrid extends StatelessWidget {
             totalItemsWidth + (crossAxisCount - 1) * horizontalSpacing;
 
         return Column(
+          spacing: 37,
           children: [
             Center(
               child: ConstrainedBox(
@@ -73,7 +74,6 @@ class FilterBlockGrid extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15,),
             CardInfo(
               title: 'Dicionário de Sinais',
               label: 'Digite palavras e veja a tradução para Libras em vídeos explicativos. \n\n Um recurso pensado para facilitar a comunicação e promover a inclusão.',

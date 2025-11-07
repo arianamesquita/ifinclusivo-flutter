@@ -20,4 +20,22 @@ class LibrasViewModel extends ChangeNotifier {
    return result;
   }
 
+
+  List<LibrasRelacionadasModel> _relacionados = [];
+  List<LibrasRelacionadasModel> get relacionados => _relacionados;
+  bool loading = false;
+
+  fetchRelacionados({required int id}) async{
+    loading = true;
+    notifyListeners();
+
+    final result = await _repository.fetchRelatedById(id: id);
+    result.fold((onSuccess)=> _relacionados = onSuccess.content, (onFailure)=> _relacionados=[]);
+
+    loading = false;
+    notifyListeners();
+
+  }
+
+
 }

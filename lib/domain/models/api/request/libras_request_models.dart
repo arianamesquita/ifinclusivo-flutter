@@ -18,6 +18,35 @@ class LibrasRequestModel with _$LibrasRequestModel {
 }
 
 @freezed
+class SugereLibrasModel with _$SugereLibrasModel {
+  const factory SugereLibrasModel({
+    required String palavra,
+    required String descricao,
+    String? url,
+  }) = _SugereLibrasModel;
+
+  factory SugereLibrasModel.fromJson(Map<String, dynamic> json) =>
+      _$SugereLibrasModelFromJson(json);
+}
+
+class SugereLibrasUploadModel {
+  final SugereLibrasModel data;
+
+  final File? videoFile;
+
+  final Uint8List? videoBytes;
+  final String? videoName;
+
+  SugereLibrasUploadModel({
+    required this.data,
+    this.videoFile,
+    this.videoBytes,
+    this.videoName,
+  });
+
+  bool get hasVideo => videoFile != null || videoBytes != null;
+}
+@freezed
 class AnalisePalavraRequestModel with _$AnalisePalavraRequestModel {
   const factory AnalisePalavraRequestModel({
     required String palavra,

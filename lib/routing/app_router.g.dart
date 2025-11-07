@@ -216,6 +216,13 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
               path: 'category/:categoria',
 
               factory: _$LibrasTopicRouter._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'midia/:id',
+
+                  factory: _$MidiaCategoriaRouter._fromState,
+                ),
+              ],
             ),
             GoRouteData.$route(
               path: 'midia/:id',
@@ -359,15 +366,46 @@ mixin _$LibrasTopicRouter on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+mixin _$MidiaCategoriaRouter on GoRouteData {
+  static MidiaCategoriaRouter _fromState(GoRouterState state) =>
+      MidiaCategoriaRouter(
+        categoria: state.pathParameters['categoria']!,
+        id: int.parse(state.pathParameters['id']!)!,
+      );
+
+  MidiaCategoriaRouter get _self => this as MidiaCategoriaRouter;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/app/libras/category/${Uri.encodeComponent(_self.categoria)}/midia/${Uri.encodeComponent(_self.id.toString())}',
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
 mixin _$MidiaRouter on GoRouteData {
-  static MidiaRouter _fromState(GoRouterState state) =>
-      MidiaRouter(int.parse(state.pathParameters['id']!)!);
+  static MidiaRouter _fromState(GoRouterState state) => MidiaRouter(
+    int.parse(state.pathParameters['id']!)!,
+    categoria: state.uri.queryParameters['categoria'],
+  );
 
   MidiaRouter get _self => this as MidiaRouter;
 
   @override
   String get location => GoRouteData.$location(
     '/app/libras/midia/${Uri.encodeComponent(_self.id.toString())}',
+    queryParams: {if (_self.categoria != null) 'categoria': _self.categoria},
   );
 
   @override

@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
@@ -7,6 +10,8 @@ import 'package:if_inclusivo/ui/pages/libras/word_suggestion/viewModels/word_sug
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/libras_custom_text_field.dart';
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/sent_suggestion_page.dart';
 import 'package:result_command/result_command.dart';
+import 'package:video_player/video_player.dart';
+import 'dart:html' as html;
 
 import '../../../../domain/models/enums/status.dart';
 import '../../../core/layout/custom_container_shell.dart';
@@ -27,6 +32,11 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
   final _linkController = TextEditingController();
   WordSuggestion _wordSuggestion = WordSuggestion.empty();
   final WordSuggestionValidator _validator = WordSuggestionValidator();
+  File? _selectedVideo; // usado em mobile
+  Uint8List? _selectedVideoBytes; // usado no web
+  String? _selectedVideoName; // nome do arquivo
+  String? _videoPreviewUrl; // para mostrar preview no web
+  Duration? _videoDuration;
 
   _validateForm() => _validator.validate(_wordSuggestion).isValid;
 
@@ -42,6 +52,9 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
     _wordController.dispose();
     _reasonController.dispose();
     _linkController.dispose();
+    if (kIsWeb && _videoPreviewUrl != null) {
+      html.Url.revokeObjectUrl(_videoPreviewUrl!);
+    }
     super.dispose();
   }
 
@@ -50,6 +63,7 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
     final value = cmd.value;
     switch (value) {
       case FailureCommand<LibrasResponseModel>():
+        print(value.error.toString());
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(value.error.toString())));
@@ -59,18 +73,35 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
         return;
     }
   }
+  void _resetForm() {
+    _formKey.currentState?.reset();
+    _wordSuggestion = WordSuggestion.empty();
+    _wordController.clear();
+    _reasonController.clear();
+    _linkController.clear();
 
+    // Limpa vídeo selecionado (mobile e web)
+    if (kIsWeb) {
+      if (_videoPreviewUrl != null) {
+        html.Url.revokeObjectUrl(_videoPreviewUrl!);
+      }
+      _videoPreviewUrl = null;
+      _selectedVideoBytes = null;
+      _selectedVideoName = null;
+    } else {
+      _selectedVideo = null;
+    }
+
+    _videoDuration = null;
+
+  }
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: widget.viewModel.saveWordCmd,
       builder: (context, _) {
         if (widget.viewModel.saveWordCmd.value.isSuccess) {
-          _formKey.currentState?.reset();
-          _wordSuggestion = WordSuggestion.empty();
-          _wordController.clear();
-          _reasonController.clear();
-          _linkController.clear();
+          _resetForm();
           return SentSuggestionPage(
             onPressed: widget.viewModel.saveWordCmd.reset,
           );
@@ -108,7 +139,8 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                       children: [
                         LibrasCustomTextField(
                           label: "Palavra ou termo",
-                          hintText: "Ex: Inteligência Artificial, JavaScript, API",
+                          hintText:
+                              "Ex: Inteligência Artificial, JavaScript, API",
                           controller: _wordController,
                           validator: _validator.byField(
                             _wordSuggestion,
@@ -131,7 +163,10 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 7),
-                              child: Icon(Icons.play_circle, color: Color(0xFFA60F13)),
+                              child: Icon(
+                                Icons.play_circle,
+                                color: Color(0xFFA60F13),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 7),
@@ -141,14 +176,16 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                                   context,
                                 ).textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.normal,
-                                  color: Theme.of(context).colorScheme.onSurface,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),
                             ),
                           ],
                         ),
                         LibrasCustomTextField(
-                          label: "Se você conhece um vídeo que demonstre o sinal, nos ajude colando o link.",
+                          label:
+                              "Se você conhece um vídeo que demonstre o sinal, nos ajude colando o link.",
                           hintText: "Cole o link do vídeo aqui",
                           controller: _linkController,
                           onChanged: _wordSuggestion.setLink,
@@ -161,7 +198,8 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                                 padding: const EdgeInsets.only(right: 7),
                                 child: Icon(
                                   Icons.videocam_outlined,
-                                  color: Theme.of(context).colorScheme.secondary,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                               Padding(
@@ -172,7 +210,8 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                                     context,
                                   ).textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.normal,
-                                    color: Theme.of(context).colorScheme.onSurface,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                   ),
                                 ),
                               ),
@@ -186,27 +225,32 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                               Padding(
                                 padding: const EdgeInsets.only(right: 20),
                                 child: FloatingActionButton(
-                                  onPressed: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          "Botão de vídeo pressionado!",
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: _pickVideo,
+
                                   backgroundColor: Colors.white,
                                   elevation: 6,
                                   highlightElevation: 10,
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: Colors.black,
+                                  child: Icon(
+                                    _selectedVideo == null &&
+                                        _selectedVideoBytes == null
+                                        ? Icons.add
+                                        : Icons.check,
+                                    color:
+                                    _selectedVideo == null &&
+                                        _selectedVideoBytes == null
+                                            ? Colors.black
+                                            : Colors.green,
                                     size: 28,
                                   ),
                                 ),
                               ),
                               Text(
-                                "Formatos aceitos: mp4, WebM\nDuração máxima: 2 minutos",
+                                // Verifica se qualquer um dos seletores está nulo
+                                _selectedVideo == null &&
+                                        _selectedVideoBytes == null
+                                    ? "Formatos aceitos: MP4, WebM\nDuração máxima: 3 minutos"
+                                    // Usa a variável correta dependendo da plataforma
+                                    : "Vídeo selecionado: ${kIsWeb ? _selectedVideoName : _selectedVideo!.path.split('/').last}\nDuração: ${_videoDuration?.inSeconds ?? 0}s",
                                 style: Theme.of(
                                   context,
                                 ).textTheme.titleSmall?.copyWith(
@@ -226,16 +270,21 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                                     widget.viewModel.saveWordCmd.value.isRunning
                                         ? null
                                         : () {
-                                          if (_formKey.currentState!.validate() &&
+                                          if (_formKey.currentState!
+                                                  .validate() &&
                                               _validateForm()) {
-                                            widget.viewModel.saveWordCmd.execute(
-                                              LibrasRequestModel(
-                                                palavra: _wordSuggestion.word,
-                                                descricao: _wordSuggestion.reason,
-                                                url: _wordSuggestion.link,
-                                                status: Status.EMANALISE,
-                                                categorias:
-                                                    Categorias.BANCO_DE_DADOS,
+                                            widget.viewModel.saveWordCmd
+                                                .execute(
+                                              SugereLibrasUploadModel(
+                                                data: SugereLibrasModel(
+                                                  palavra: _wordSuggestion.word,
+                                                  descricao: _wordSuggestion.reason,
+                                                  url: _wordSuggestion.link,
+                                                ),
+
+                                                videoFile: _selectedVideo,
+                                                videoBytes: _selectedVideoBytes,
+                                                videoName: _selectedVideoName,
                                               ),
                                             );
                                           }
@@ -276,5 +325,81 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
         );
       },
     );
+  }
+
+  Future<void> _pickVideo() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['mp4', 'webm'],
+      withData: kIsWeb, // true no web para pegar bytes
+    );
+
+    if (result == null) return;
+
+    VideoPlayerController controller;
+    Duration duration;
+
+    if (kIsWeb) {
+      // ----- 🕸️ WEB -----
+      final fileBytes = result.files.single.bytes!;
+      final blob = html.Blob([fileBytes]);
+      final url = html.Url.createObjectUrlFromBlob(blob);
+
+      controller = VideoPlayerController.network(url);
+      await controller.initialize();
+      duration = controller.value.duration;
+      await controller.dispose(); // <-- DESCARTE O CONTROLLER AQUI
+
+      if (duration > const Duration(minutes: 3)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('O vídeo deve ter no máximo 3 minutos.'),
+          ),
+        );
+        html.Url.revokeObjectUrl(url); // Libera o blob se falhar
+        return;
+      }
+
+      // Se já existia um vídeo, revoga o URL antigo
+      if (_videoPreviewUrl != null) {
+        html.Url.revokeObjectUrl(_videoPreviewUrl!);
+      }
+
+      setState(() {
+        _selectedVideoBytes = fileBytes;
+        _selectedVideoName = result.files.single.name;
+        _videoPreviewUrl = url; // Armazena o novo URL
+        _videoDuration = duration;
+        _selectedVideo = null; // Garante que o modo mobile esteja limpo
+      });
+    } else {
+      // ----- 📱 MOBILE / DESKTOP -----
+      final path = result.files.single.path;
+      if (path == null) return;
+
+      final file = File(path);
+      controller = VideoPlayerController.file(file);
+      await controller.initialize();
+      duration = controller.value.duration;
+      await controller.dispose(); // Já estava correto aqui
+
+      if (duration > const Duration(minutes: 3)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('O vídeo deve ter no máximo 3 minutos.'),
+          ),
+        );
+        return;
+      }
+
+      setState(() {
+        _selectedVideo = file;
+        _videoDuration = duration;
+        // Garante que o modo web esteja limpo
+        _selectedVideoBytes = null;
+        _selectedVideoName = null;
+        _videoPreviewUrl = null;
+      });
+    }
   }
 }

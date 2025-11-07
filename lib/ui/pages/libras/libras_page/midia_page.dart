@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
+import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/pages/libras/libras_page/view_models/libras_view_model.dart';
 import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/midia_card_info.dart';
 import 'package:if_inclusivo/utils/text_formater.dart';
@@ -10,10 +11,7 @@ import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
 import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
 
 class MidiaPageLibras extends StatefulWidget {
-
-    final LibrasViewModel viewModel;
-
-
+  final LibrasViewModel viewModel;
   const MidiaPageLibras({
     super.key,
     required this.viewModel,
@@ -33,8 +31,6 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
   @override
   void initState() {
     super.initState();
-
-
   }
 
   @override
@@ -50,11 +46,15 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
             switch (status){
 
               case RunningCommand<LibrasResponseModel>():
-                // TODO: Handle this case.
-                throw UnimplementedError();
+                return Center(child: CircularProgressIndicator(),);
               case FailureCommand<LibrasResponseModel>(:final error):
-                // TODO: Handle this case.
-                throw UnimplementedError();
+                return Center(
+                  child: Text(
+                    'Erro ao carregar o vídeo: $error',
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                );
+
               case SuccessCommand<LibrasResponseModel>(:final value):
                 if(!initialized){
                   videoId = YoutubePlayerController.convertUrlToId(value.url);
@@ -161,27 +161,40 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
                   ?.copyWith(color: Colors.white),
             ),
           ),
+          if(widget.viewModel.loading)
+            CircularProgressIndicator(),
+          if(!widget.viewModel.loading && widget.viewModel.relacionados.isEmpty )
+            Text('Não foi possível carregar...'),
+          ...widget.viewModel.relacionados.map((toElement)=> _buildRelatedLinkItem(toElement.palavra, toElement.id))
         ],
       ),
     );
   }
 
-  Widget _buildRelatedLinkItem(String title) {
+  Widget _buildRelatedLinkItem(String title, int id) {
     String palavra = formatarTexto(title);
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: const BoxDecoration(
-        color: Color.fromRGBO(172, 130, 186, 1),
-        border: Border(top: BorderSide(color: Colors.white, width: 2.5)),
-      ),
-      child: Text(
-        palavra,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+    return   Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => MidiaRouter(id).push(context),
+        hoverColor: const Color.fromRGBO(230, 170, 252, 0.7019607843137254), // hover suave
+
+        child: Ink(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(172, 130, 186, 1),
+            border: Border(top: BorderSide(color: Colors.white, width: 2.5)),
+          ),
+          child: Text(
+            palavra,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );
