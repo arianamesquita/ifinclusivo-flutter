@@ -4974,11 +4974,12 @@ mixin _$LibrasResponseModel {
   String get palavra => throw _privateConstructorUsedError;
   String get descricao => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
+  String? get fileUrl => throw _privateConstructorUsedError;
   String? get video => throw _privateConstructorUsedError;
   String? get foto => throw _privateConstructorUsedError;
   String? get justificativa => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
-  Categorias get categorias => throw _privateConstructorUsedError;
+  Categorias? get categorias => throw _privateConstructorUsedError;
 
   /// Serializes this LibrasResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -5002,11 +5003,12 @@ abstract class $LibrasResponseModelCopyWith<$Res> {
     String palavra,
     String descricao,
     String url,
+    String? fileUrl,
     String? video,
     String? foto,
     String? justificativa,
     Status status,
-    Categorias categorias,
+    Categorias? categorias,
   });
 }
 
@@ -5029,11 +5031,12 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
     Object? palavra = null,
     Object? descricao = null,
     Object? url = null,
+    Object? fileUrl = freezed,
     Object? video = freezed,
     Object? foto = freezed,
     Object? justificativa = freezed,
     Object? status = null,
-    Object? categorias = null,
+    Object? categorias = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -5057,6 +5060,11 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
                     ? _value.url
                     : url // ignore: cast_nullable_to_non_nullable
                         as String,
+            fileUrl:
+                freezed == fileUrl
+                    ? _value.fileUrl
+                    : fileUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
             video:
                 freezed == video
                     ? _value.video
@@ -5078,10 +5086,10 @@ class _$LibrasResponseModelCopyWithImpl<$Res, $Val extends LibrasResponseModel>
                     : status // ignore: cast_nullable_to_non_nullable
                         as Status,
             categorias:
-                null == categorias
+                freezed == categorias
                     ? _value.categorias
                     : categorias // ignore: cast_nullable_to_non_nullable
-                        as Categorias,
+                        as Categorias?,
           )
           as $Val,
     );
@@ -5102,11 +5110,12 @@ abstract class _$$LibrasResponseModelImplCopyWith<$Res>
     String palavra,
     String descricao,
     String url,
+    String? fileUrl,
     String? video,
     String? foto,
     String? justificativa,
     Status status,
-    Categorias categorias,
+    Categorias? categorias,
   });
 }
 
@@ -5128,11 +5137,12 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
     Object? palavra = null,
     Object? descricao = null,
     Object? url = null,
+    Object? fileUrl = freezed,
     Object? video = freezed,
     Object? foto = freezed,
     Object? justificativa = freezed,
     Object? status = null,
-    Object? categorias = null,
+    Object? categorias = freezed,
   }) {
     return _then(
       _$LibrasResponseModelImpl(
@@ -5156,6 +5166,11 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
                 ? _value.url
                 : url // ignore: cast_nullable_to_non_nullable
                     as String,
+        fileUrl:
+            freezed == fileUrl
+                ? _value.fileUrl
+                : fileUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
         video:
             freezed == video
                 ? _value.video
@@ -5177,10 +5192,10 @@ class __$$LibrasResponseModelImplCopyWithImpl<$Res>
                 : status // ignore: cast_nullable_to_non_nullable
                     as Status,
         categorias:
-            null == categorias
+            freezed == categorias
                 ? _value.categorias
                 : categorias // ignore: cast_nullable_to_non_nullable
-                    as Categorias,
+                    as Categorias?,
       ),
     );
   }
@@ -5195,11 +5210,12 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     required this.palavra,
     required this.descricao,
     required this.url,
+    this.fileUrl,
     this.video,
     this.foto,
     this.justificativa,
     required this.status,
-    required this.categorias,
+    this.categorias,
   });
 
   factory _$LibrasResponseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -5214,6 +5230,8 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
   @override
   final String url;
   @override
+  final String? fileUrl;
+  @override
   final String? video;
   @override
   final String? foto;
@@ -5222,11 +5240,11 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
   @override
   final Status status;
   @override
-  final Categorias categorias;
+  final Categorias? categorias;
 
   @override
   String toString() {
-    return 'LibrasResponseModel(id: $id, palavra: $palavra, descricao: $descricao, url: $url, video: $video, foto: $foto, justificativa: $justificativa, status: $status, categorias: $categorias)';
+    return 'LibrasResponseModel(id: $id, palavra: $palavra, descricao: $descricao, url: $url, fileUrl: $fileUrl, video: $video, foto: $foto, justificativa: $justificativa, status: $status, categorias: $categorias)';
   }
 
   @override
@@ -5239,6 +5257,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
             (identical(other.descricao, descricao) ||
                 other.descricao == descricao) &&
             (identical(other.url, url) || other.url == url) &&
+            (identical(other.fileUrl, fileUrl) || other.fileUrl == fileUrl) &&
             (identical(other.video, video) || other.video == video) &&
             (identical(other.foto, foto) || other.foto == foto) &&
             (identical(other.justificativa, justificativa) ||
@@ -5256,6 +5275,7 @@ class _$LibrasResponseModelImpl implements _LibrasResponseModel {
     palavra,
     descricao,
     url,
+    fileUrl,
     video,
     foto,
     justificativa,
@@ -5286,11 +5306,12 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
     required final String palavra,
     required final String descricao,
     required final String url,
+    final String? fileUrl,
     final String? video,
     final String? foto,
     final String? justificativa,
     required final Status status,
-    required final Categorias categorias,
+    final Categorias? categorias,
   }) = _$LibrasResponseModelImpl;
 
   factory _LibrasResponseModel.fromJson(Map<String, dynamic> json) =
@@ -5305,6 +5326,8 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
   @override
   String get url;
   @override
+  String? get fileUrl;
+  @override
   String? get video;
   @override
   String? get foto;
@@ -5313,7 +5336,7 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
   @override
   Status get status;
   @override
-  Categorias get categorias;
+  Categorias? get categorias;
 
   /// Create a copy of LibrasResponseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -5321,6 +5344,192 @@ abstract class _LibrasResponseModel implements LibrasResponseModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LibrasResponseModelImplCopyWith<_$LibrasResponseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+LibrasRelacionadasModel _$LibrasRelacionadasModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _LibrasRelacionadasModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LibrasRelacionadasModel {
+  int get id => throw _privateConstructorUsedError;
+  String get palavra => throw _privateConstructorUsedError;
+
+  /// Serializes this LibrasRelacionadasModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of LibrasRelacionadasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $LibrasRelacionadasModelCopyWith<LibrasRelacionadasModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LibrasRelacionadasModelCopyWith<$Res> {
+  factory $LibrasRelacionadasModelCopyWith(
+    LibrasRelacionadasModel value,
+    $Res Function(LibrasRelacionadasModel) then,
+  ) = _$LibrasRelacionadasModelCopyWithImpl<$Res, LibrasRelacionadasModel>;
+  @useResult
+  $Res call({int id, String palavra});
+}
+
+/// @nodoc
+class _$LibrasRelacionadasModelCopyWithImpl<
+  $Res,
+  $Val extends LibrasRelacionadasModel
+>
+    implements $LibrasRelacionadasModelCopyWith<$Res> {
+  _$LibrasRelacionadasModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of LibrasRelacionadasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? id = null, Object? palavra = null}) {
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            palavra:
+                null == palavra
+                    ? _value.palavra
+                    : palavra // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$LibrasRelacionadasModelImplCopyWith<$Res>
+    implements $LibrasRelacionadasModelCopyWith<$Res> {
+  factory _$$LibrasRelacionadasModelImplCopyWith(
+    _$LibrasRelacionadasModelImpl value,
+    $Res Function(_$LibrasRelacionadasModelImpl) then,
+  ) = __$$LibrasRelacionadasModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id, String palavra});
+}
+
+/// @nodoc
+class __$$LibrasRelacionadasModelImplCopyWithImpl<$Res>
+    extends
+        _$LibrasRelacionadasModelCopyWithImpl<
+          $Res,
+          _$LibrasRelacionadasModelImpl
+        >
+    implements _$$LibrasRelacionadasModelImplCopyWith<$Res> {
+  __$$LibrasRelacionadasModelImplCopyWithImpl(
+    _$LibrasRelacionadasModelImpl _value,
+    $Res Function(_$LibrasRelacionadasModelImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of LibrasRelacionadasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? id = null, Object? palavra = null}) {
+    return _then(
+      _$LibrasRelacionadasModelImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        palavra:
+            null == palavra
+                ? _value.palavra
+                : palavra // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$LibrasRelacionadasModelImpl implements _LibrasRelacionadasModel {
+  const _$LibrasRelacionadasModelImpl({
+    required this.id,
+    required this.palavra,
+  });
+
+  factory _$LibrasRelacionadasModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LibrasRelacionadasModelImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String palavra;
+
+  @override
+  String toString() {
+    return 'LibrasRelacionadasModel(id: $id, palavra: $palavra)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LibrasRelacionadasModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.palavra, palavra) || other.palavra == palavra));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, palavra);
+
+  /// Create a copy of LibrasRelacionadasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LibrasRelacionadasModelImplCopyWith<_$LibrasRelacionadasModelImpl>
+  get copyWith => __$$LibrasRelacionadasModelImplCopyWithImpl<
+    _$LibrasRelacionadasModelImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LibrasRelacionadasModelImplToJson(this);
+  }
+}
+
+abstract class _LibrasRelacionadasModel implements LibrasRelacionadasModel {
+  const factory _LibrasRelacionadasModel({
+    required final int id,
+    required final String palavra,
+  }) = _$LibrasRelacionadasModelImpl;
+
+  factory _LibrasRelacionadasModel.fromJson(Map<String, dynamic> json) =
+      _$LibrasRelacionadasModelImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  String get palavra;
+
+  /// Create a copy of LibrasRelacionadasModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LibrasRelacionadasModelImplCopyWith<_$LibrasRelacionadasModelImpl>
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 MessageResponseModel _$MessageResponseModelFromJson(Map<String, dynamic> json) {

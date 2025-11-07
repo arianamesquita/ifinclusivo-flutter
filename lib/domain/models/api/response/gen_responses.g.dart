@@ -362,11 +362,12 @@ _$LibrasResponseModelImpl _$$LibrasResponseModelImplFromJson(
   palavra: json['palavra'] as String,
   descricao: json['descricao'] as String,
   url: json['url'] as String,
+  fileUrl: json['fileUrl'] as String?,
   video: json['video'] as String?,
   foto: json['foto'] as String?,
   justificativa: json['justificativa'] as String?,
   status: $enumDecode(_$StatusEnumMap, json['status']),
-  categorias: $enumDecode(_$CategoriasEnumMap, json['categorias']),
+  categorias: $enumDecodeNullable(_$CategoriasEnumMap, json['categorias']),
 );
 
 Map<String, dynamic> _$$LibrasResponseModelImplToJson(
@@ -376,11 +377,12 @@ Map<String, dynamic> _$$LibrasResponseModelImplToJson(
   'palavra': instance.palavra,
   'descricao': instance.descricao,
   'url': instance.url,
+  'fileUrl': instance.fileUrl,
   'video': instance.video,
   'foto': instance.foto,
   'justificativa': instance.justificativa,
   'status': _$StatusEnumMap[instance.status]!,
-  'categorias': _$CategoriasEnumMap[instance.categorias]!,
+  'categorias': _$CategoriasEnumMap[instance.categorias],
 };
 
 const _$StatusEnumMap = {
@@ -388,6 +390,17 @@ const _$StatusEnumMap = {
   Status.REPROVADO: 'REPROVADO',
   Status.EMANALISE: 'EMANALISE',
 };
+
+_$LibrasRelacionadasModelImpl _$$LibrasRelacionadasModelImplFromJson(
+  Map<String, dynamic> json,
+) => _$LibrasRelacionadasModelImpl(
+  id: (json['id'] as num).toInt(),
+  palavra: json['palavra'] as String,
+);
+
+Map<String, dynamic> _$$LibrasRelacionadasModelImplToJson(
+  _$LibrasRelacionadasModelImpl instance,
+) => <String, dynamic>{'id': instance.id, 'palavra': instance.palavra};
 
 _$MessageResponseModelImpl _$$MessageResponseModelImplFromJson(
   Map<String, dynamic> json,
