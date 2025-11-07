@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 
 
 class SearchResult extends StatefulWidget {
-  const SearchResult({super.key });
+ final LibrasSearchBarViewmodel viewmodel;
+  const SearchResult({super.key, required this.viewmodel });
 
   @override
   State<SearchResult> createState() => _SearchResultState();
@@ -17,15 +18,14 @@ class SearchResult extends StatefulWidget {
 class _SearchResultState extends State<SearchResult> {
   @override
   Widget build(BuildContext context) {
-    final vm = context.watch<LibrasSearchBarViewmodel>();
 
-    if (vm.state == LibrasSearchBarState.loading) {
+    if (widget.viewmodel.state == LibrasSearchBarState.loading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    final words = vm.words.isEmpty
+    final List<Widget> words = widget.viewmodel.words.isEmpty
         ? []
-        : vm.words.map((word) {
+        : widget.viewmodel.words.map((word) {
       return SearchResultBlock(
         url: word.url,
         description: word.descricao,
@@ -34,40 +34,25 @@ class _SearchResultState extends State<SearchResult> {
       );
     }).toList();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 90, top: 20),
-          child: Text(
-            'Resultados Encontrados para o Tópico Buscado:',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: const Color.fromRGBO(28, 122, 229, 1),
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 869),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left:15,top: 20),
+            child: Text(
+              'Resultados Encontrados para o Tópico Buscado:',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: const Color.fromRGBO(28, 122, 229, 1),
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 20),
-        Expanded(
-          child: Padding(
+          const SizedBox(height: 20),
+          Padding(
             padding: const EdgeInsets.only(top: 20),
             child: words.isNotEmpty
-                ? CustomContainerShell(
-              child: SafeArea(
-                child: ListView.builder(
-                  itemCount: words.length,
-                  itemBuilder: (context, index) {
-                    final item = words[index];
-                    return SearchResultBlock(
-                      topicName: item.topicName,
-                      url: item.url,
-                      description: item.description,
-                      onTap: () {},
-                    );
-                  },
-                ),
-              ),
-            )
-                : Padding(
+                ? Column(children: words,): Padding(
               padding: const EdgeInsets.only(top: 20),
               child: SearchNotFound(
                 text: 'Não encontramos esta palavra.',
@@ -79,8 +64,8 @@ class _SearchResultState extends State<SearchResult> {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

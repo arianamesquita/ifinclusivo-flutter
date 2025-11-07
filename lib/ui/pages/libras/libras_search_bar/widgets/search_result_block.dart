@@ -41,12 +41,16 @@ class _SearchResultBlockState extends State<SearchResultBlock> {
   @override
   Widget build(BuildContext context) {
     videoId = YoutubePlayerController.convertUrlToId(widget.url)!;
-    return HoverEffect(
-      child: Center(
-        child: InkWell(
-          onTap: widget.onTap,
+    return Card(
+      color: Theme.of(context).colorScheme.surfaceContainerLowest,
+      elevation: 5,
+      child: InkWell(
+        onTap: widget.onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 26),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 12,
             children: [
               Image.network(
                 YoutubePlayerController.getThumbnail(
@@ -55,10 +59,9 @@ class _SearchResultBlockState extends State<SearchResultBlock> {
                   webp: false,
                 ),
                 fit: BoxFit.cover,
-                width: 60,
-                height: 60,
+                width: 80,
+                height: 79,
               ),
-              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +82,8 @@ class _SearchResultBlockState extends State<SearchResultBlock> {
               ),
             ],
           ),
-        )
-      ),
+        ),
+      )
     );
   }
 }
