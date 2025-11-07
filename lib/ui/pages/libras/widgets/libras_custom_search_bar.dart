@@ -9,6 +9,7 @@ class LibrasCustomSearchBar extends CustomSearchBar {
     super.key,
     required super.onSubmitted,
     required super.controller,
+    super.trailing,
 
     super.backgroundColor = const WidgetStatePropertyAll(Color.fromRGBO(255, 255, 255, 1)),
     super.hintText = 'Buscar',
@@ -34,7 +35,6 @@ class LibrasCustomSearchBar extends CustomSearchBar {
         fontFamily: 'Poppins',
       ),
     ),
-    super.enabled=false
   });
 
   static const Color textInputColor = Color.fromRGBO(64, 29, 78, 1);
