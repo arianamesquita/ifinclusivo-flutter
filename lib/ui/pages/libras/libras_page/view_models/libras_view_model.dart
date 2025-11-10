@@ -16,6 +16,7 @@ class LibrasViewModel extends ChangeNotifier {
   late final Command1<LibrasResponseModel, int> fetchLibrasCmd;
 
   AsyncResult<LibrasResponseModel> fetchLibras(int id) async {
+    await fetchRelacionados(id: id);
     final result = await _repository.findById(id: id);
    return result;
   }

@@ -1,19 +1,14 @@
-import 'dart:io';
-import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+if (dart.library.io) 'dart:io';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
-import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/domain/validators/word_suggestion_validator.dart';
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/viewModels/word_suggestion_view_model.dart';
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/libras_custom_text_field.dart';
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/sent_suggestion_page.dart';
 import 'package:result_command/result_command.dart';
-import 'package:video_player/video_player.dart';
-import 'dart:html' as html;
-
-import '../../../../domain/models/enums/status.dart';
 import '../../../core/layout/custom_container_shell.dart';
 import '../libras_page/widgets/top_content_libras.dart';
 
@@ -32,7 +27,7 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
   final _linkController = TextEditingController();
   WordSuggestion _wordSuggestion = WordSuggestion.empty();
   final WordSuggestionValidator _validator = WordSuggestionValidator();
-  File? _selectedVideo; // usado em mobile
+  XFile? _selectedVideoFile;// usado em mobile
   Uint8List? _selectedVideoBytes; // usado no web
   String? _selectedVideoName; // nome do arquivo
   String? _videoPreviewUrl; // para mostrar preview no web
@@ -52,9 +47,7 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
     _wordController.dispose();
     _reasonController.dispose();
     _linkController.dispose();
-    if (kIsWeb && _videoPreviewUrl != null) {
-      html.Url.revokeObjectUrl(_videoPreviewUrl!);
-    }
+
     super.dispose();
   }
 
@@ -73,6 +66,7 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
         return;
     }
   }
+
   void _resetForm() {
     _formKey.currentState?.reset();
     _wordSuggestion = WordSuggestion.empty();
@@ -82,19 +76,16 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
 
     // Limpa vídeo selecionado (mobile e web)
     if (kIsWeb) {
-      if (_videoPreviewUrl != null) {
-        html.Url.revokeObjectUrl(_videoPreviewUrl!);
-      }
       _videoPreviewUrl = null;
       _selectedVideoBytes = null;
       _selectedVideoName = null;
     } else {
-      _selectedVideo = null;
+      _selectedVideoFile = null;
     }
 
     _videoDuration = null;
-
   }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -218,26 +209,28 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                             ],
                           ),
                         ),
-                        Padding(
+                       Padding(
                           padding: const EdgeInsets.only(bottom: 30),
                           child: Row(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(right: 20),
                                 child: FloatingActionButton(
-                                  onPressed: _pickVideo,
+                                  onPressed: () async {
+                                    print('clicado');
+                                    await _pickVideo();},
 
                                   backgroundColor: Colors.white,
                                   elevation: 6,
                                   highlightElevation: 10,
                                   child: Icon(
-                                    _selectedVideo == null &&
-                                        _selectedVideoBytes == null
+                                    _selectedVideoFile == null &&
+                                            _selectedVideoBytes == null
                                         ? Icons.add
                                         : Icons.check,
                                     color:
-                                    _selectedVideo == null &&
-                                        _selectedVideoBytes == null
+                                    _selectedVideoFile == null &&
+                                                _selectedVideoBytes == null
                                             ? Colors.black
                                             : Colors.green,
                                     size: 28,
@@ -246,11 +239,11 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                               ),
                               Text(
                                 // Verifica se qualquer um dos seletores está nulo
-                                _selectedVideo == null &&
+                                _selectedVideoFile == null &&
                                         _selectedVideoBytes == null
                                     ? "Formatos aceitos: MP4, WebM\nDuração máxima: 3 minutos"
                                     // Usa a variável correta dependendo da plataforma
-                                    : "Vídeo selecionado: ${kIsWeb ? _selectedVideoName : _selectedVideo!.path.split('/').last}\nDuração: ${_videoDuration?.inSeconds ?? 0}s",
+                                    : "Vídeo selecionado: ${kIsWeb ? _selectedVideoName : _selectedVideoFile!.path.split('/').last}",
                                 style: Theme.of(
                                   context,
                                 ).textTheme.titleSmall?.copyWith(
@@ -275,18 +268,17 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
                                               _validateForm()) {
                                             widget.viewModel.saveWordCmd
                                                 .execute(
-                                              SugereLibrasUploadModel(
-                                                data: SugereLibrasModel(
-                                                  palavra: _wordSuggestion.word,
-                                                  descricao: _wordSuggestion.reason,
-                                                  url: _wordSuggestion.link,
-                                                ),
-
-                                                videoFile: _selectedVideo,
-                                                videoBytes: _selectedVideoBytes,
-                                                videoName: _selectedVideoName,
-                                              ),
-                                            );
+                                                  SugereLibrasUploadModel(
+                                                    data: SugereLibrasModel(
+                                                      palavra: _wordSuggestion.word,
+                                                      descricao: _wordSuggestion.reason,
+                                                      url: _wordSuggestion.link,
+                                                    ),
+                                                    videoFile: _selectedVideoFile,
+                                                    videoBytes: _selectedVideoBytes,
+                                                    videoName: _selectedVideoName,
+                                                  ),
+                                                );
                                           }
                                         },
                                 style: ElevatedButton.styleFrom(
@@ -328,78 +320,33 @@ class _WordSuggestionPageState extends State<WordSuggestionPage> {
   }
 
   Future<void> _pickVideo() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['mp4', 'webm'],
-      withData: kIsWeb, // true no web para pegar bytes
-    );
+    try{
+      const XTypeGroup videoTypeGroup = XTypeGroup(
+        label: 'videos',
+        extensions: <String>['mp4', 'webm'],
+        mimeTypes: <String>['video/mp4', 'video/webm'],
+      );
 
-    if (result == null) return;
+      final XFile? file = await openFile(acceptedTypeGroups: [videoTypeGroup]);
+      if (file == null) return;
 
-    VideoPlayerController controller;
-    Duration duration;
-
-    if (kIsWeb) {
-      // ----- 🕸️ WEB -----
-      final fileBytes = result.files.single.bytes!;
-      final blob = html.Blob([fileBytes]);
-      final url = html.Url.createObjectUrlFromBlob(blob);
-
-      controller = VideoPlayerController.network(url);
-      await controller.initialize();
-      duration = controller.value.duration;
-      await controller.dispose(); // <-- DESCARTE O CONTROLLER AQUI
-
-      if (duration > const Duration(minutes: 3)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('O vídeo deve ter no máximo 3 minutos.'),
-          ),
-        );
-        html.Url.revokeObjectUrl(url); // Libera o blob se falhar
-        return;
+      if (kIsWeb) {
+        final bytes = await file.readAsBytes();
+        setState(() {
+          _selectedVideoBytes = bytes;
+          _selectedVideoName = file.name;
+          _selectedVideoFile = file; // ainda guardamos referência
+        });
+      } else {
+        setState(() {
+          _selectedVideoFile = file; // agora SEM usar File(file.path)
+          _selectedVideoBytes = null;
+          _selectedVideoName = file.name;
+        });
       }
-
-      // Se já existia um vídeo, revoga o URL antigo
-      if (_videoPreviewUrl != null) {
-        html.Url.revokeObjectUrl(_videoPreviewUrl!);
-      }
-
-      setState(() {
-        _selectedVideoBytes = fileBytes;
-        _selectedVideoName = result.files.single.name;
-        _videoPreviewUrl = url; // Armazena o novo URL
-        _videoDuration = duration;
-        _selectedVideo = null; // Garante que o modo mobile esteja limpo
-      });
-    } else {
-      // ----- 📱 MOBILE / DESKTOP -----
-      final path = result.files.single.path;
-      if (path == null) return;
-
-      final file = File(path);
-      controller = VideoPlayerController.file(file);
-      await controller.initialize();
-      duration = controller.value.duration;
-      await controller.dispose(); // Já estava correto aqui
-
-      if (duration > const Duration(minutes: 3)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('O vídeo deve ter no máximo 3 minutos.'),
-          ),
-        );
-        return;
-      }
-
-      setState(() {
-        _selectedVideo = file;
-        _videoDuration = duration;
-        // Garante que o modo web esteja limpo
-        _selectedVideoBytes = null;
-        _selectedVideoName = null;
-        _videoPreviewUrl = null;
-      });
+    }catch (e, stack) {
+      print("Erro ao selecionar arquivo de vídeo: $e");
+      debugPrintStack(stackTrace: stack);
     }
   }
 }

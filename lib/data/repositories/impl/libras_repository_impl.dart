@@ -71,17 +71,18 @@ class LibrasRepositoryImpl implements LibrasRepository {
           'file': await MultipartFile.fromFile(
             uploadModel.videoFile!.path,
             filename: uploadModel.videoFile!.path.split('/').last,
-            contentType: MediaType('video', uploadModel.videoFile!.path.split('.').last),
+            contentType: MediaType('video', uploadModel.videoFile!.path.split('.').last.toLowerCase()),
           ),
 
         if (kIsWeb && uploadModel.videoBytes != null && uploadModel.videoName != null)
           'file': MultipartFile.fromBytes(
             uploadModel.videoBytes!,
             filename: uploadModel.videoName!,
-            contentType: MediaType('video', uploadModel.videoName!.split('.').last),
+            contentType: MediaType('video', uploadModel.videoName!.split('.').last.toLowerCase()),
           ),
 
       });
+
 
       final result = await _librasService.saveWord(formData);
 

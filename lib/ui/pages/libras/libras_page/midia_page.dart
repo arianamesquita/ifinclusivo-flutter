@@ -141,33 +141,38 @@ class _MidiaPageLibrasState extends State<MidiaPageLibras> {
   }
 
   Widget _buildRelatedCard(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(172, 130, 186, 1),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              'Relacionados',
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: Colors.white),
-            ),
+    return ListenableBuilder(
+      listenable: widget.viewModel,
+      builder: (context, _) {
+        return Container(
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(172, 130, 186, 1),
+            borderRadius: BorderRadius.circular(16),
           ),
-          if(widget.viewModel.loading)
-            CircularProgressIndicator(),
-          if(!widget.viewModel.loading && widget.viewModel.relacionados.isEmpty )
-            Text('Não foi possível carregar...'),
-          ...widget.viewModel.relacionados.map((toElement)=> _buildRelatedLinkItem(toElement.palavra, toElement.id))
-        ],
-      ),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  'Relacionados',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: Colors.white),
+                ),
+              ),
+              if(widget.viewModel.loading)
+                CircularProgressIndicator(),
+              if(!widget.viewModel.loading && widget.viewModel.relacionados.isEmpty )
+                Text('Não foi possível carregar...'),
+              ...widget.viewModel.relacionados.map((toElement)=> _buildRelatedLinkItem(toElement.palavra, toElement.id))
+            ],
+          ),
+        );
+      }
     );
   }
 

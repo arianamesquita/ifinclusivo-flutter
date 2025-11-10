@@ -32,7 +32,7 @@ class SugereLibrasModel with _$SugereLibrasModel {
 class SugereLibrasUploadModel {
   final SugereLibrasModel data;
 
-  final File? videoFile;
+  final XFile? videoFile;
 
   final Uint8List? videoBytes;
   final String? videoName;

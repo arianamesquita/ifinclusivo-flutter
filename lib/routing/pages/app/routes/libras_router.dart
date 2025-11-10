@@ -55,7 +55,6 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
   Widget build(BuildContext context, GoRouterState state) {
     final vm = LibrasViewModel(repository: context.read());
     vm.fetchLibrasCmd.execute(id);
-    vm.fetchRelacionados(id: id);
     return MidiaPageLibras(viewModel: vm,);
   }
 }
