@@ -38,7 +38,9 @@ class AboutUsPage extends StatelessWidget {
         title: 'Fórum',
         label: 'Espaço de diálogo e apoio entre os alunos.',
         color: color1,
-        onTap: () {},
+        onTap: () {
+          ForumRouter().go(context);
+        },
       ),
       StackItemInfo(
         iconPath: 'assets/icons/napne.png',
@@ -71,8 +73,7 @@ class AboutUsPage extends StatelessWidget {
             _buildMainStacks(context, fontScale, deviceType, spacing, items),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal:
-                    deviceType == DeviceScreenType.desktop ? 50 : 0,
+                horizontal: deviceType == DeviceScreenType.desktop ? 50 : 0,
                 vertical:
                     deviceType == DeviceScreenType.desktop ? 142 : spacing.$2,
               ),

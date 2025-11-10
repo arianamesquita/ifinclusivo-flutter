@@ -188,8 +188,7 @@ class _PublicationContentState extends State<PublicationContent> {
               isLoggedIn: vm.currentUser != null,
               onComment: null,
               onShare: () async {
-                const String baseUrl = "http://localhost:5000/";
-                final String publicationUrl =
+                const String baseUrl = "https://if-inclusivo.web.app/";                final String publicationUrl =
                     "$baseUrl/#/app/forum/post/${publication.id}";
                 if (kIsWeb) {
                   // ------ LÓGICA PARA WEB ------

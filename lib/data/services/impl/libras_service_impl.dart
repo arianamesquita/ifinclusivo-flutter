@@ -52,8 +52,29 @@ class LibrasServiceImpl implements LibrasService{
   }
 
   @override
-  Future<Map<String, dynamic>> saveWord(Map<String, dynamic> model) async {
-    final result = await _dio.post('$basePath/sugere', data: model);
+  Future<Map<String, dynamic>> saveWord(FormData formData) async {
+    final result = await _dio.post(
+      '$basePath/sugere',
+      data: formData,
+      options: Options(contentType: 'multipart/form-data'),
+    );
+
     return result.data;
+  }
+  @override
+  Future<List<dynamic>> searchSuggestions({
+    required String query,
+  }) async {
+    final queryParameters = <String, dynamic>{'palavra': query};
+    
+    final response = await _dio.get('$basePath/busca-profunda',queryParameters: queryParameters);
+    return response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>> fetchRelatedById({int page = 0, int size = 5, required int id}) async{
+    final queryParameters = <String, dynamic>{'page': page, 'size': size};
+    final response = await _dio.get('$basePath/relacionadas/$id', queryParameters: queryParameters);
+    return response.data;
   }
 }

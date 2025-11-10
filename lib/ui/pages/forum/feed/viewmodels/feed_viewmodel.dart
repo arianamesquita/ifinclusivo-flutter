@@ -62,24 +62,28 @@ class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
 
   List<String> _suggestions = [];
   List<String> get suggestions => _suggestions;
+  bool loadingSugestion = false;
 
   Future<void> searchSuggestions({
     required String query,
     Set<Categorias>? categorias,
   }) async {
+    if(query.trim().isEmpty) return;
+    loadingSugestion = true;
+    notifyListeners();
     final result = await _forumRepository.searchSuggestions(
       query: query,
       categorias: categorias,
     );
     result.fold(
-      (onSuccess) {
+          (onSuccess) {
         _suggestions = onSuccess;
       },
-      (onFailure) {
+          (onFailure) {
         _suggestions = [];
       },
     );
-
+    loadingSugestion = false;
     notifyListeners();
   }
 

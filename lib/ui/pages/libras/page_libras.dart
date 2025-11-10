@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import '../../../data/repositories/libras_repository.dart';
 
 class LibrasPage extends StatefulWidget {
-  const LibrasPage({super.key});
+ final  LibrasSearchBarViewmodel viewmodel;
+  const LibrasPage({super.key, required this.viewmodel});
 
   @override
   State<LibrasPage> createState() => _LibrasPageState();
@@ -15,11 +16,7 @@ class LibrasPage extends StatefulWidget {
 class _LibrasPageState extends State<LibrasPage> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => LibrasSearchBarViewmodel(
-        librasRepository: context.read<LibrasRepository>(),
-      ),
-      child: const TopicLibras(),
-    );
+    // 1. Use ChangeNotifierProvider para criar e fornecer a VM
+    return   TopicLibras(viewmodel:  widget.viewmodel,);
   }
 }

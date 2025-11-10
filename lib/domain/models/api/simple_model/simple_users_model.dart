@@ -41,7 +41,7 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
-    required CursoRequestModel curso,
+    required Cursos curso,
   }) = _SimpleAlunoModel;
 
   const factory SimpleUsuarioModel.alunoNapne({
@@ -51,7 +51,7 @@ class SimpleUsuarioModel with _$SimpleUsuarioModel {
     String? biografia,
     required DateTime dataCriacao,
     required List<Roles> roles,
-    required CursoRequestModel curso,
+    required Cursos curso,
     required String condicao,
     required String necessidadeEspecial,
     required String necessidadeEscolar,
