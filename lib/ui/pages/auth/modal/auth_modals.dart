@@ -397,7 +397,10 @@ Future<void> showLoginRequiredDialog(BuildContext context) async {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      builder: (context) => const _LoginRequiredContent(),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: const _LoginRequiredContent(),
+      ),
     );
   } else {
     return showDialog(

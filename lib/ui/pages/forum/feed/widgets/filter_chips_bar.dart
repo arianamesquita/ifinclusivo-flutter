@@ -3,6 +3,7 @@ import 'package:if_inclusivo/ui/pages/forum/feed/widgets/sort_dropdown_button.da
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 
 import '../../../../../domain/models/enums/categorias.dart';
+import '../../../shell/shell_page.dart';
 
 class FilterChipsBar extends StatefulWidget {
   final void Function(Set<Categorias> selected, String order)? onChanged;
@@ -106,8 +107,7 @@ class _FilterChipsBarState extends State<FilterChipsBar> {
 
     if (ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile) {
       // --- LÓGICA PARA MOBILE: Bottom Sheet ---
-      result = await showModalBottomSheet<Set<Categorias>>(
-        context: context,
+      result = await openAppBottomSheet<Set<Categorias>>(
         isScrollControlled: true,
         builder: (_) => ChipsSelectContent(
           title: 'Filtros:',

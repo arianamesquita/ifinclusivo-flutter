@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 
 import '../../../data/repositories/auth_repository.dart';
 import '../../../domain/models/api/response/gen_responses.dart';
+import '../auth/modal/auth_modals.dart';
 
 class ShellPage extends StatefulWidget {
   const ShellPage({super.key, required this.child});
@@ -170,6 +171,22 @@ class _ShellPageState extends State<ShellPage> {
     );
   }
 }
+final GlobalKey<ScaffoldState> appScaffoldKey = GlobalKey<ScaffoldState>();
+
+Future<T?> openAppBottomSheet<T>({
+  required WidgetBuilder builder,
+  bool isScrollControlled = true,
+}) async {
+  final context = appScaffoldKey.currentContext;
+
+  if (context == null) return null;
+
+  return showModalBottomSheet<T>(
+    context: context,
+    isScrollControlled: isScrollControlled,
+    builder: builder,
+  );
+}
 
 class BuildMobileAPP extends StatefulWidget {
   final AuthGuardShell auth;
@@ -205,6 +222,7 @@ class _BuildMobileAPPState extends State<BuildMobileAPP> {
       initialData: authRepository.currentUser,
       builder: (context, snapshot) {
         return Scaffold(
+          key: appScaffoldKey,
           body: widget.child,
           bottomNavigationBar: NavigationBar(
             selectedIndex:widget.auth.mapSelectedIndex(
@@ -212,8 +230,12 @@ class _BuildMobileAPPState extends State<BuildMobileAPP> {
               widget.child.currentIndex,
             ),
             onDestinationSelected:(newIndex) {
-              final branch = widget.allowedBranches[newIndex];
-              widget.child.goBranch(branch);
+              if(newIndex == 2 && !widget.isLoggedIn){
+                showLoginRequiredDialog(context);
+              }else {
+                final branch = widget.allowedBranches[newIndex];
+                widget.child.goBranch(branch);
+              }
             },
             destinations: AppDestinations.bottom(
               context,
