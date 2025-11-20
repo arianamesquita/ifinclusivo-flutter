@@ -123,170 +123,172 @@ class _FeedPageState extends State<FeedPage> {
                           child: Icon(Icons.add),
                         )
                         : null,
-                body: CustomScrollView(
-                  controller: _scrollController,
-                  slivers: [
-                    buildSliverToBoxAdapter(context),
-                    buildSliverPersistentHeader(viewModel, context),
+                body: SafeArea(
+                  child: CustomScrollView(
+                    controller: _scrollController,
+                    slivers: [
+                      buildSliverToBoxAdapter(context),
+                      buildSliverPersistentHeader(viewModel, context),
 
-                    if (viewModel.state == FeedState.initialLoading)
-                      const SliverFillRemaining(
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                    else if (viewModel.state == FeedState.empty)
-                      const SliverFillRemaining(
-                        child: Center(
-                          child: Text("Nenhuma publicação encontrada"),
-                        ),
-                      )
-                    else
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            if (index < viewModel.publications.length) {
-                              return _centralized(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0,
-                                  ),
-                                  child: PublicacaoCard(
-                                    key: ValueKey(
-                                      viewModel.publications[index].id,
+                      if (viewModel.state == FeedState.initialLoading)
+                        const SliverFillRemaining(
+                          child: Center(child: CircularProgressIndicator()),
+                        )
+                      else if (viewModel.state == FeedState.empty)
+                        const SliverFillRemaining(
+                          child: Center(
+                            child: Text("Nenhuma publicação encontrada"),
+                          ),
+                        )
+                      else
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              if (index < viewModel.publications.length) {
+                                return _centralized(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
                                     ),
-                                    isLoggedIn: viewModel.currentUser != null,
-                                    onLike: () {
-                                      viewModel.toggleLikePublication(
+                                    child: PublicacaoCard(
+                                      key: ValueKey(
                                         viewModel.publications[index].id,
-                                      );
-                                    },
-                                    model: viewModel.publications[index],
-                                    onTap:
-                                        () => PublicacaoRouter(
+                                      ),
+                                      isLoggedIn: viewModel.currentUser != null,
+                                      onLike: () {
+                                        viewModel.toggleLikePublication(
                                           viewModel.publications[index].id,
-                                        ).go(context),
-                                    menuItems:
-                                        (viewModel.currentUser != null &&
-                                                viewModel.currentUser!.id ==
-                                                    viewModel
-                                                        .publications[index]
-                                                        .usuario
-                                                        .id)
-                                            ? [
-                                              PopupMenuItem(
-                                                value: "Editar",
-                                                child: Text("Editar"),
-                                                onTap: () async {
-                                                  final bool?
-                                                  result = await context.push(
-                                                    NewPublicacaoRouter()
-                                                        .location,
-                                                    extra:
-                                                        viewModel
-                                                            .publications[index],
-                                                  );
-
-                                                  if (result == true) {
-                                                    await viewModel
-                                                        .updatePubication(
+                                        );
+                                      },
+                                      model: viewModel.publications[index],
+                                      onTap:
+                                          () => PublicacaoRouter(
+                                            viewModel.publications[index].id,
+                                          ).go(context),
+                                      menuItems:
+                                          (viewModel.currentUser != null &&
+                                                  viewModel.currentUser!.id ==
+                                                      viewModel
+                                                          .publications[index]
+                                                          .usuario
+                                                          .id)
+                                              ? [
+                                                PopupMenuItem(
+                                                  value: "Editar",
+                                                  child: Text("Editar"),
+                                                  onTap: () async {
+                                                    final bool?
+                                                    result = await context.push(
+                                                      NewPublicacaoRouter()
+                                                          .location,
+                                                      extra:
                                                           viewModel
-                                                              .publications[index]
-                                                              .id,
+                                                              .publications[index],
+                                                    );
+
+                                                    if (result == true) {
+                                                      await viewModel
+                                                          .updatePubication(
+                                                            viewModel
+                                                                .publications[index]
+                                                                .id,
+                                                          );
+                                                    }
+                                                  },
+                                                ),
+                                                PopupMenuItem(
+                                                  value: "Excluir",
+                                                  child: Text("Excluir"),
+                                                  onTap: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                            "Confirmar exclusão",
+                                                          ),
+                                                          content: const Text(
+                                                            "Tem certeza que deseja excluir esta publicação? Essa ação não poderá ser desfeita.",
+                                                          ),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                  context,
+                                                                ).pop();
+                                                              },
+                                                              child: const Text(
+                                                                "Cancelar",
+                                                              ),
+                                                            ),
+                                                            ElevatedButton(
+                                                              style: ElevatedButton.styleFrom(
+                                                                backgroundColor:
+                                                                    Theme.of(
+                                                                          context,
+                                                                        )
+                                                                        .colorScheme
+                                                                        .error,
+                                                                foregroundColor:
+                                                                    Theme.of(
+                                                                          context,
+                                                                        )
+                                                                        .colorScheme
+                                                                        .onError,
+                                                              ),
+                                                              onPressed: () async {
+                                                                Navigator.of(
+                                                                  context,
+                                                                ).pop();
+                                                                viewModel
+                                                                    .deleteCommentsCommand
+                                                                    .execute(
+                                                                      viewModel
+                                                                          .publications[index]
+                                                                          .id,
+                                                                    );
+                                                              },
+                                                              child: const Text(
+                                                                "Excluir",
+                                                              ),
+                                                            ),
+                                                          ],
                                                         );
-                                                  }
-                                                },
-                                              ),
-                                              PopupMenuItem(
-                                                value: "Excluir",
-                                                child: Text("Excluir"),
-                                                onTap: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return AlertDialog(
-                                                        title: const Text(
-                                                          "Confirmar exclusão",
-                                                        ),
-                                                        content: const Text(
-                                                          "Tem certeza que deseja excluir esta publicação? Essa ação não poderá ser desfeita.",
-                                                        ),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                context,
-                                                              ).pop();
-                                                            },
-                                                            child: const Text(
-                                                              "Cancelar",
-                                                            ),
-                                                          ),
-                                                          ElevatedButton(
-                                                            style: ElevatedButton.styleFrom(
-                                                              backgroundColor:
-                                                                  Theme.of(
-                                                                        context,
-                                                                      )
-                                                                      .colorScheme
-                                                                      .error,
-                                                              foregroundColor:
-                                                                  Theme.of(
-                                                                        context,
-                                                                      )
-                                                                      .colorScheme
-                                                                      .onError,
-                                                            ),
-                                                            onPressed: () async {
-                                                              Navigator.of(
-                                                                context,
-                                                              ).pop();
-                                                              viewModel
-                                                                  .deleteCommentsCommand
-                                                                  .execute(
-                                                                    viewModel
-                                                                        .publications[index]
-                                                                        .id,
-                                                                  );
-                                                            },
-                                                            child: const Text(
-                                                              "Excluir",
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                              ),
-                                            ]
-                                            : [
-                                              PopupMenuItem(
-                                                value: "denunciar",
-                                                child: Text("Denunciar"),
-                                                onTap: () {
-                                                  print("Denunciar publicação");
-                                                },
-                                              ),
-                                            ],
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ]
+                                              : [
+                                                PopupMenuItem(
+                                                  value: "denunciar",
+                                                  child: Text("Denunciar"),
+                                                  onTap: () {
+                                                    print("Denunciar publicação");
+                                                  },
+                                                ),
+                                              ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            } else {
-                              return const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 16.0),
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            }
-                          },
-                          childCount:
-                              viewModel.publications.length +
-                              (viewModel.state == FeedState.loadingMore
-                                  ? 1
-                                  : 0),
+                                );
+                              } else {
+                                return const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              }
+                            },
+                            childCount:
+                                viewModel.publications.length +
+                                (viewModel.state == FeedState.loadingMore
+                                    ? 1
+                                    : 0),
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -518,9 +520,9 @@ class _SliverSearchFilterDelegate extends SliverPersistentHeaderDelegate {
   _SliverSearchFilterDelegate({required this.child});
 
   @override
-  double get minExtent => 125; // altura mínima
+  double get minExtent => 129; // altura mínima
   @override
-  double get maxExtent => 128; // altura máxima
+  double get maxExtent => 130; // altura máxima
 
   @override
   Widget build(
