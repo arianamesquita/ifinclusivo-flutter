@@ -53,6 +53,7 @@ dev_dependencies:
   freezed: ^2.4.5
   json_serializable:
   flutter_launcher_icons: ^0.14.4
+  rename: ^3.1.0
 
 
 flutter_launcher_icons:
@@ -67,9 +68,8 @@ flutter_launcher_icons:
 
   web:
     generate: true
-    image_path: "assets/app_design/icon fore web.png"
-    background_color: "#FFFFFF"
-    theme_color: "#FFFFFF"
+    image_path: "assets/app_design/icon fore.png"
+
 
 
 flutter_native_splash:

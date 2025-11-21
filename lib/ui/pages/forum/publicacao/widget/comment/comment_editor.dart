@@ -6,6 +6,8 @@ import 'package:flutter_quill/flutter_quill.dart';
 import '../../../../../../utils/forum_utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../../../utils/responsive_utils.dart';
+
 class CommentEditor extends StatefulWidget {
   final Future<void> Function(String text) onSubmit;
   final ValueNotifier<bool>? clearNotifier;
@@ -14,6 +16,7 @@ class CommentEditor extends StatefulWidget {
   final String? initialText;
   final bool isEditing;
   final String? imgPath;
+  final FocusNode? focusNode;
 
   const CommentEditor.add({
     super.key,
@@ -21,7 +24,7 @@ class CommentEditor extends StatefulWidget {
     this.onCancel,
     this.isLoading = false,
     this.clearNotifier,
-    this.imgPath,
+    this.imgPath, this.focusNode,
   }) : initialText = null,
        isEditing = false;
 
@@ -33,7 +36,7 @@ class CommentEditor extends StatefulWidget {
     this.isLoading = false,
     required this.initialText,
     this.clearNotifier,
-    this.imgPath,
+    this.imgPath, this.focusNode,
   }) : isEditing = true;
 
   @override
@@ -42,7 +45,7 @@ class CommentEditor extends StatefulWidget {
 
 class _CommentEditorState extends State<CommentEditor> {
   late final QuillController _quillController;
-  final FocusNode _focusNode = FocusNode();
+  late  final FocusNode _focusNode;
   final ScrollController _scrollController = ScrollController();
 
   bool _showToolbar = false;
@@ -55,6 +58,7 @@ class _CommentEditorState extends State<CommentEditor> {
   @override
   void initState() {
     super.initState();
+    _focusNode = widget.focusNode?? FocusNode();
     if (widget.isEditing && widget.initialText != null) {
       _quillController = QuillController(
         document: loadDocument(text: widget.initialText!),
@@ -73,12 +77,7 @@ class _CommentEditorState extends State<CommentEditor> {
 
   void _handlerClean() {
     if (widget.clearNotifier!.value) {
-      _quillController.clear();
-      FocusScope.of(context).unfocus();
-      setState(() {
-        _showActionsButtons = false;
-        _showToolbar = false;
-      });
+      _handleCancel();
       widget.clearNotifier!.value = false;
     }
   }
@@ -123,19 +122,37 @@ class _CommentEditorState extends State<CommentEditor> {
   }
 
   void _handleFocusChange() {
+
     if (_focusNode.hasFocus && !_showActionsButtons) {
-      setState(() => _showActionsButtons = true);
+      setState(() {
+        _showActionsButtons = true;
+        _pinToolbar = ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile;
+      });
     }
   }
 
-  void _handleCancel() {
+  void _handleCancel() async {
+    _focusNode.removeListener(_handleFocusChange);
+
     widget.onCancel?.call();
     _quillController.clear();
+    _focusNode.canRequestFocus = false;
     FocusScope.of(context).unfocus();
-    setState(() {
-      _showActionsButtons = false;
-      _showToolbar = false;
-    });
+
+    if (mounted) {
+      setState(() {
+        _showActionsButtons = false;
+        _showToolbar = false;
+        _pinToolbar = false;
+      });
+    }
+
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    if (mounted) {
+      _focusNode.canRequestFocus = true;
+      _focusNode.addListener(_handleFocusChange);
+    }
   }
 
   @override

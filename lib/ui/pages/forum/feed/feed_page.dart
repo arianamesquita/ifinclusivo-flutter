@@ -23,6 +23,7 @@ class _FeedPageState extends State<FeedPage> {
   final ScrollController _scrollController = ScrollController();
   bool _showFab = true;
   final SearchController controller = SearchController();
+  FocusNode searchFocus = FocusNode();
 
   // Escuta mudanças no texto
 
@@ -264,7 +265,9 @@ class _FeedPageState extends State<FeedPage> {
                                                   value: "denunciar",
                                                   child: Text("Denunciar"),
                                                   onTap: () {
-                                                    print("Denunciar publicação");
+                                                    print(
+                                                      "Denunciar publicação",
+                                                    );
                                                   },
                                                 ),
                                               ],
@@ -348,6 +351,8 @@ class _FeedPageState extends State<FeedPage> {
                       (s) async => await viewModel.searchSuggestions(query: s),
                   viewOnSubmitted: (value) async {
                     controller.closeView(value);
+                    searchFocus.unfocus();
+
                     await viewModel.fetchPublications(query: value);
                   },
                   builder: (
@@ -357,30 +362,50 @@ class _FeedPageState extends State<FeedPage> {
                     return ValueListenableBuilder<TextEditingValue>(
                       valueListenable: searchController,
                       builder: (context, value, _) {
-                        return SearchBar(
+                        return TextField(
                           onSubmitted: (value) async {
                             controller.closeView(value);
                             await viewModel.fetchPublications(query: value);
                           },
                           controller: searchController,
-                          hintText: 'Buscar publicações...',
+                          focusNode: searchFocus,
                           onTap: () {
+                            searchFocus.unfocus();
                             searchController.openView();
                           },
                           onChanged: (query) async {
                             viewModel.searchSuggestions(query: query);
                             await viewModel.searchSuggestions(query: '$query ');
                           },
-                          trailing: [
-                            if (value.text.isNotEmpty)
-                              IconButton(
-                                icon: const Icon(Icons.clear),
-                                onPressed: () async {
-                                  searchController.clear();
-                                  await viewModel.fetchPublications(query: '');
-                                },
-                              ),
-                          ],
+
+                          decoration: InputDecoration(
+                              hintText: 'Buscar publicações...',
+                              prefixIcon: Icon(Icons.search),
+                              suffixIcon:  (value.text.isNotEmpty)?
+                            IconButton(
+                            icon: const Icon(Icons.clear),
+                        onPressed: () async {
+                        searchController.clear();
+                        await viewModel.fetchPublications(query: '');
+                        },
+                        ): null ,
+                            filled: true,
+                            fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+                            enabledBorder:OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(28),
+                                borderSide: BorderSide(
+                                    color: Color(0xFF1C7AE5)
+                                )
+
+                            ) ,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(28),
+                              borderSide: BorderSide(
+                                color: Color(0xFF1C7AE5)
+                              )
+
+                            )
+                          ),
                         );
                       },
                     );

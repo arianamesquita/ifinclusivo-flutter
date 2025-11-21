@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:if_inclusivo/guards/roles.dart';
+import 'package:if_inclusivo/my_app.dart';
 import 'package:if_inclusivo/routing/app_routes.dart';
 import 'package:if_inclusivo/ui/exceptions/forbidden_403.dart';
 import 'package:if_inclusivo/ui/exceptions/not_found_404.dart';
@@ -66,21 +70,11 @@ part 'pages/exceptions/exceptions_routes.dart';
 
 GoRouter createRouter({required AuthRepository authRepository}) {
   return GoRouter(
+    navigatorKey: rootNavigatorKey,
     refreshListenable: authRepository,
     initialLocation: AppRoutes.aboutUs,
     errorBuilder: (context, state) {
       return const NotFound404();
-    },
-    redirect: (BuildContext context, GoRouterState state) {
-      final bool loggedIn = authRepository.currentUser != null;
-      final String location = state.matchedLocation;
-      final isAuthRoute =
-          location == AppRoutes.signIn || location == AppRoutes.signUp;
-      if (!loggedIn && !isPublicRoute(location)) {
-        return AppRoutes.signIn;
-      }
-
-      return null;
     },
     routes: $appRoutes,
   );

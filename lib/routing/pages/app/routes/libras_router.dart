@@ -85,11 +85,15 @@ const wordSuggestionRouter = TypedGoRoute<WordSuggestionRouter>(
   path: AppRoutes.wordSuggestion,
 );
 
-class WordSuggestionRouter extends GoRouteData with _$WordSuggestionRouter {
+class WordSuggestionRouter extends ProtectedRouteData with _$WordSuggestionRouter {
   const WordSuggestionRouter();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return WordSuggestionPage(viewModel: WordSuggestionViewModel(librasRepository: context.read<LibrasRepository>()),);
   }
+
+  @override
+  // TODO: implement allowedRoles
+  List<Roles> get allowedRoles => Roles.values;
 }

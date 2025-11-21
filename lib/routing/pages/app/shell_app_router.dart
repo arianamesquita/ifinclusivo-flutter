@@ -21,6 +21,6 @@ class ShellAppRouter extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
-    return ShellPage(child: navigationShell);
+    return ShellPage(state: state,child: navigationShell,);
   }
 }

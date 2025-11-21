@@ -409,26 +409,35 @@ class _PublicationEditorPageState extends State<PublicationEditorPage> {
   }
 
   Scaffold buildMobile() {
+    final bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('Nova Publicação'),
         actions: [buildElevatedButton()],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            PublicationForm(
-              titleController: _titleController,
-              bodyController: _bodyController,
-              focusTitle: _focusNodeTitle,
-              focusBody: _focusNodeBody,
-              errorBody: _bodyError,
-              errorTitle: _titleError,
-            ),
-            buildListChips(),
-            if (widget.publicacaoDetalhadaModel == null) _buildTipos(),
-          ],
+      body: PopScope(
+        canPop: !isKeyboardOpen,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) return;
+          FocusScope.of(context).unfocus();
+        },
+
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PublicationForm(
+                titleController: _titleController,
+                bodyController: _bodyController,
+                focusTitle: _focusNodeTitle,
+                focusBody: _focusNodeBody,
+                errorBody: _bodyError,
+                errorTitle: _titleError,
+              ),
+              buildListChips(),
+              if (widget.publicacaoDetalhadaModel == null) _buildTipos(),
+            ],
+          ),
         ),
       ),
     );

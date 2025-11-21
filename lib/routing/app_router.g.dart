@@ -198,6 +198,7 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: 'post/:id',
+              name: 'publication',
 
               factory: _$PublicacaoRouter._fromState,
             ),

@@ -54,6 +54,20 @@ class PublicacaoViewModel extends ChangeNotifier {
   PublicacaoDetalhadaModel? _publication;
   PublicacaoDetalhadaModel? get publication => _publication;
 
+  ComentarioResponseModel? _reply;
+  ComentarioResponseModel? get replyMobile => _reply;
+
+  setReplyMobile(int? commentId){
+    if(commentId != null) {
+      _reply = findCommentById(commentId)?.comment;
+    }else {
+      _reply = null;
+    }
+
+    notifyListeners();
+  }
+
+
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
@@ -165,6 +179,7 @@ class PublicacaoViewModel extends ChangeNotifier {
     );
     return result.mapFold(
       (onSuccess) {
+        _comments.clear();
         _comments.addAll(
           onSuccess.content
               .map(
