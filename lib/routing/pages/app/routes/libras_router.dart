@@ -14,7 +14,7 @@ class LibrasRouter extends GoRouteData with _$LibrasRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return LibrasPage(viewmodel: context.read(),);
+    return LibrasHomePage(viewmodel: context.read(),);
   }
 }
 
@@ -39,7 +39,7 @@ class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
         },
       ),
     );
-    return SpecificTopicPage(viewModel: vm);
+    return TopicLibrasPage(viewModel: vm);
   }
 }
 

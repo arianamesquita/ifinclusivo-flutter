@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/search_not_found.dart';
-import 'package:if_inclusivo/ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
-import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_topic_grid.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
+import 'package:if_inclusivo/ui/pages/libras/topic_libras/viewmodels/specific_topic_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/libras/topic_libras/widgets/specific_topic_grid.dart';
+
 
 import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
 import '../../../core/layout/custom_container_shell.dart';
+import '../libras_details/widgets/top_content_libras.dart';
+import '../libras_home/widgets/search_not_found.dart';
 
-class SpecificTopicPage extends StatefulWidget {
+class TopicLibrasPage extends StatefulWidget {
   final SpecificTopicViewModel viewModel;
-  const SpecificTopicPage({super.key, required this.viewModel});
+  const TopicLibrasPage({super.key, required this.viewModel});
 
   @override
-  State<SpecificTopicPage> createState() => _SpecificTopicPageState();
+  State<TopicLibrasPage> createState() => _TopicLibrasPageState();
 }
 
-class _SpecificTopicPageState extends State<SpecificTopicPage> {
+class _TopicLibrasPageState extends State<TopicLibrasPage> {
 
   final ScrollController _controller = ScrollController();
 

@@ -2,13 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_page/view_models/libras_view_model.dart';
-import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/midia_card_info.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_details/view_models/libras_view_model.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_details/widgets/top_content_libras.dart';
 import 'package:if_inclusivo/utils/text_formater.dart';
-import 'package:result_command/src/command.dart';
+import 'package:result_command/result_command.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
+
+import '../topic_libras/widgets/midia_card_info.dart';
 
 class MidiaPageLibras extends StatefulWidget {
   final LibrasViewModel viewModel;

@@ -9,7 +9,7 @@ import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/libras_cust
 import 'package:if_inclusivo/ui/pages/libras/word_suggestion/widgets/sent_suggestion_page.dart';
 import 'package:result_command/result_command.dart';
 import '../../../core/layout/custom_container_shell.dart';
-import '../libras_page/widgets/top_content_libras.dart';
+import '../libras_details/widgets/top_content_libras.dart';
 
 class WordSuggestionPage extends StatefulWidget {
   const WordSuggestionPage({super.key, required this.viewModel});

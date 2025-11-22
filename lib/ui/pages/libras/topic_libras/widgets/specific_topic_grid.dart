@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:if_inclusivo/ui/pages/libras/specific_topic/widgets/specific_topic.dart';
+
+
+import 'package:flutter/material.dart';
+import 'package:if_inclusivo/ui/pages/libras/topic_libras/widgets/specific_topic.dart';
 
 class SpecificTopicGridParams {
   final String title;
