@@ -22,6 +22,7 @@ import 'package:if_inclusivo/ui/pages/auth/token/viewmodels/validate_token_viewm
 import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/profile/account_security/viewModels/account_security_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/profile/edit_profile/viewModels/edit_profile_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/profile/profile/view_models/profile_view_model.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -152,6 +153,12 @@ List<SingleChildWidget> get _viewModelsProviders {
       create:
           (context) => AccountSecurityViewModel(
           accountRepository: context.read<AccountSecurityRepository>(),
+      ),
+    ),
+    ChangeNotifierProvider(
+      create:
+          (context) => EditProfileViewmodel(
+        accountRepository: context.read<AccountSecurityRepository>(),
       ),
     ),
 

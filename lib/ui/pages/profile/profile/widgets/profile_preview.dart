@@ -54,7 +54,7 @@ class ProfilePreview extends StatelessWidget {
             children: [
               FilledButton(
                 onPressed: ()  {
-                 // EditProfileRouter().go(context);
+                  EditProfileRouter().go(context);
                 },
                 child: Text('Editar Perfil'),
               ),
