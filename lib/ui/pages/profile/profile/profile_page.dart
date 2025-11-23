@@ -35,17 +35,19 @@ class _ProfilePageState extends State<ProfilePage> {
       return Scaffold(body: Center(child: Text('error ao carregar usuario')));
     }
     return Scaffold(
-      body: SingleChildScrollView(
-        child: StreamBuilder(
-          stream: repository.authStateChanges,
-          initialData: repository.currentUser,
-          builder: (context, asyncSnapshot) {
-            return Column(
-              children: [
-                _buildCardInfo(deviceType, user),
-              ],
-            );
-          }
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: StreamBuilder(
+            stream: repository.authStateChanges,
+            initialData: repository.currentUser,
+            builder: (context, asyncSnapshot) {
+              return Column(
+                children: [
+                  _buildCardInfo(deviceType, user),
+                ],
+              );
+            }
+          ),
         ),
       ),
     );

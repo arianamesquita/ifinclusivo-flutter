@@ -71,6 +71,15 @@ class ResponsiveUtils {
         return 800;
     }
   }
-
+  static Widget centralized({required BuildContext context,required Widget child,}) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: ResponsiveUtils.spacingColumn(context),
+        ),
+        child: child,
+      ),
+    );
+  }
 
 }

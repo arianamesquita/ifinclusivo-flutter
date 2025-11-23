@@ -22,6 +22,7 @@ class ForumRouter extends GoRouteData with _$ForumRouter {
 
 const publicacaoRoute = TypedGoRoute<PublicacaoRouter>(
   path: AppRoutes.publication,
+  name: 'publication'
 );
 
 class PublicacaoRouter extends GoRouteData with _$PublicacaoRouter {
@@ -44,6 +45,9 @@ class PublicacaoRouter extends GoRouteData with _$PublicacaoRouter {
       child: PublicacaoPage(id: id),
     );
   }
+
+
+
 }
 
 @TypedGoRoute<NewPublicacaoRouter>(path: AppRoutes.newPublication)

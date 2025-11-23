@@ -4,11 +4,7 @@ part of '../../app_router.dart';
   branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
     forumBranch,
     librasBranch,
-    TypedStatefulShellBranch<StatefulShellBranchData>(
-      routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<MorePageRouter>(path: AppRoutes.more),
-      ],
-    ),
+    moreBranch,
     profileBranch,
   ],
 )
@@ -21,6 +17,6 @@ class ShellAppRouter extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
-    return ShellPage(child: navigationShell);
+    return ShellPage(state: state,child: navigationShell,);
   }
 }

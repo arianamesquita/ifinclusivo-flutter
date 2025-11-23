@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
-import 'package:if_inclusivo/ui/core/layout/custom_container_shell.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/search_not_found.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/viewmodels/libras_search_bar_viewmodel.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/widgets/search_result_block.dart';
-import 'package:provider/provider.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_home/widgets/search_not_found.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_home/viewmodels/libras_search_bar_viewmodel.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_home/widgets/search_result_block.dart';
 
 
 class SearchResult extends StatefulWidget {
- final LibrasSearchBarViewmodel viewmodel;
+ final LibrasHomeViewModel viewmodel;
   const SearchResult({super.key, required this.viewmodel });
 
   @override
@@ -19,7 +17,7 @@ class _SearchResultState extends State<SearchResult> {
   @override
   Widget build(BuildContext context) {
 
-    if (widget.viewmodel.state == LibrasSearchBarState.loading) {
+    if (widget.viewmodel.state == LibrasHomeState.loading) {
       return const Center(child: CircularProgressIndicator());
     }
 

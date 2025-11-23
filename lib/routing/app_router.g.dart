@@ -198,6 +198,7 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: 'post/:id',
+              name: 'publication',
 
               factory: _$PublicacaoRouter._fromState,
             ),
@@ -244,6 +245,13 @@ RouteBase get $shellAppRouter => StatefulShellRouteData.$route(
           path: '/app/more',
 
           factory: _$MorePageRouter._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'management-libras',
+
+              factory: _$ManagementLibrasRouter._fromState,
+            ),
+          ],
         ),
       ],
     ),
@@ -449,6 +457,27 @@ mixin _$MorePageRouter on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/app/more');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$ManagementLibrasRouter on GoRouteData {
+  static ManagementLibrasRouter _fromState(GoRouterState state) =>
+      const ManagementLibrasRouter();
+
+  @override
+  String get location => GoRouteData.$location('/app/more/management-libras');
 
   @override
   void go(BuildContext context) => context.go(location);

@@ -36,13 +36,15 @@ dependencies:
   font_awesome_flutter: ^10.10.0
   youtube_player_iframe: ^5.2.2
   share_plus: ^12.0.1
-  video_player: ^2.10.0
+  video_player: ^2.10.1
   http_parser: ^4.1.2
   file_selector: ^1.0.4
   file_selector_web: ^0.9.4+2
   flutter_native_splash: ^2.4.7
   flutter_inappwebview: ^6.1.5
   app_links: ^6.4.1
+  sliver_tools: ^0.2.12
+  image_picker: ^1.2.1
 
 
 dev_dependencies:
@@ -53,6 +55,7 @@ dev_dependencies:
   freezed: ^2.4.5
   json_serializable:
   flutter_launcher_icons: ^0.14.4
+  rename: ^3.1.0
 
 
 flutter_launcher_icons:
@@ -67,9 +70,8 @@ flutter_launcher_icons:
 
   web:
     generate: true
-    image_path: "assets/app_design/icon fore web.png"
-    background_color: "#FFFFFF"
-    theme_color: "#FFFFFF"
+    image_path: "assets/app_design/web.png"
+
 
 
 flutter_native_splash:

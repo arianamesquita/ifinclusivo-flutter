@@ -20,9 +20,7 @@ import 'package:if_inclusivo/ui/pages/auth/reset_password/viewmodels/reset_passw
 import 'package:if_inclusivo/ui/pages/auth/sign_in/viewModels/login_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/auth/token/viewmodels/validate_token_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_search_bar/viewmodels/libras_search_bar_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/profile/account_security/viewModels/account_security_viewmodel.dart';
-import 'package:if_inclusivo/ui/pages/profile/edit_profile/viewModels/edit_profile_viewmodel.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -32,8 +30,7 @@ import '../data/services/auth_service.dart';
 import '../ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
-import '../ui/pages/forum/new publication/viewmodels/new_poblication_viewmodel.dart';
+import '../ui/pages/libras/libras_home/viewmodels/libras_search_bar_viewmodel.dart';
 import 'dio_config.dart';
 
 List<SingleChildWidget> providers(SharedPreferences prefs) {
@@ -157,7 +154,7 @@ List<SingleChildWidget> get _viewModelsProviders {
     ),
     ChangeNotifierProvider(
       create:
-          (context) => LibrasSearchBarViewmodel(librasRepository: context.read<LibrasRepository>(),
+          (context) => LibrasHomeViewModel(librasRepository: context.read<LibrasRepository>(),
       ),
     ),
 

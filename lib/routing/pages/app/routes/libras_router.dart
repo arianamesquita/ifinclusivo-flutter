@@ -14,7 +14,7 @@ class LibrasRouter extends GoRouteData with _$LibrasRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return LibrasPage(viewmodel: context.read(),);
+    return LibrasHomePage(viewmodel: context.read(),);
   }
 }
 
@@ -39,7 +39,7 @@ class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
         },
       ),
     );
-    return SpecificTopicPage(viewModel: vm);
+    return TopicLibrasPage(viewModel: vm);
   }
 }
 
@@ -55,7 +55,7 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
   Widget build(BuildContext context, GoRouterState state) {
     final vm = LibrasViewModel(repository: context.read());
     vm.fetchLibrasCmd.execute(id);
-    return MidiaPageLibras(viewModel: vm,);
+    return LibrasDetails(viewModel: vm,);
   }
 }
 const midiaCategoriaRouter = TypedGoRoute<MidiaCategoriaRouter>(path: AppRoutes.midia);
@@ -77,7 +77,7 @@ class MidiaCategoriaRouter extends GoRouteData with _$MidiaCategoriaRouter{
     final vm = LibrasViewModel(repository: context.read());
     vm.fetchLibrasCmd.execute(id);
     vm.fetchRelacionados(id: id);
-    return MidiaPageLibras(viewModel: vm,);
+    return LibrasDetails(viewModel: vm,);
   }
 }
 
@@ -85,11 +85,15 @@ const wordSuggestionRouter = TypedGoRoute<WordSuggestionRouter>(
   path: AppRoutes.wordSuggestion,
 );
 
-class WordSuggestionRouter extends GoRouteData with _$WordSuggestionRouter {
+class WordSuggestionRouter extends ProtectedRouteData with _$WordSuggestionRouter {
   const WordSuggestionRouter();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return WordSuggestionPage(viewModel: WordSuggestionViewModel(librasRepository: context.read<LibrasRepository>()),);
   }
+
+  @override
+  // TODO: implement allowedRoles
+  List<Roles> get allowedRoles => Roles.values;
 }

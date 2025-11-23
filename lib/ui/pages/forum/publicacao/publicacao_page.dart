@@ -25,6 +25,7 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
   late final ScrollController _scrollController;
   late final PublicacaoViewModel _viewModel;
   final ValueNotifier<bool> _clearEditorNotifier = ValueNotifier(false);
+  final FocusNode commentEdit = FocusNode();
 
   @override
   void initState() {
@@ -55,6 +56,7 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
         cmd.reset();
         break;
       case SuccessCommand<ComentarioResponseModel>():
+        _viewModel.setReplyMobile(null);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Comentário adicionado com sucesso!'),
@@ -110,78 +112,144 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
         ),
         centerTitle: true,
       ),
-      body: ListenableBuilder(
-        listenable: _viewModel,
-        builder: (context, _) {
-          return ListenableBuilder(
-            listenable: Listenable.merge([
-              _viewModel.fetchPublicationCommand,
-              _viewModel.deletePublicationCommand,
-            ]),
-            builder: (context, _) {
-              final fetchState = _viewModel.fetchPublicationCommand.value;
-              final deleteState = _viewModel.deletePublicationCommand.value;
+      body: SafeArea(
+        child: ListenableBuilder(
+          listenable: _viewModel,
+          builder: (context, _) {
+            return ListenableBuilder(
+              listenable: Listenable.merge([
+                _viewModel.fetchPublicationCommand,
+                _viewModel.deletePublicationCommand,
+              ]),
+              builder: (context, _) {
+                final fetchState = _viewModel.fetchPublicationCommand.value;
+                final deleteState = _viewModel.deletePublicationCommand.value;
 
-              // 🧩 Primeiro, trata o estado de deleção (por exemplo, mostrando loading ou erro)
-              if (deleteState is RunningCommand) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (deleteState is FailureCommand) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Erro ao apagar comentário.'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              } else if (deleteState is SuccessCommand) {
-                return const Center(
-                  child: Text('Publicação excluída com sucesso!'),
-                );
-              }
+                // 🧩 Primeiro, trata o estado de deleção (por exemplo, mostrando loading ou erro)
+                if (deleteState is RunningCommand) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (deleteState is FailureCommand) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Erro ao apagar comentário.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                } else if (deleteState is SuccessCommand) {
+                  return const Center(
+                    child: Text('Publicação excluída com sucesso!'),
+                  );
+                }
 
-              // 🧩 Depois, trata o estado do fetch
-              if (fetchState is RunningCommand) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (fetchState is FailureCommand) {
+                // 🧩 Depois, trata o estado do fetch
+                if (fetchState is RunningCommand) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (fetchState is FailureCommand) {
+                  return Center(
+                    child: Text(
+                      'Erro: Não foi possivel carregar sua pagina, tente novamente mais tarde',
+                    ),
+                  );
+                }
+                if (_viewModel.publication != null) {
+                  return buildBody(context, _viewModel.publication!);
+                }
                 return Center(
                   child: Text(
                     'Erro: Não foi possivel carregar sua pagina, tente novamente mais tarde',
                   ),
                 );
-              }
-              if (_viewModel.publication != null) {
-                return buildBody(context, _viewModel.publication!);
-              }
-              return Center(
-                child: Text(
-                  'Erro: Não foi possivel carregar sua pagina, tente novamente mais tarde',
-                ),
-              );
-            },
-          );
-        },
+              },
+            );
+          },
+        ),
       ),
     );
   }
 
   buildBody(BuildContext context, PublicacaoDetalhadaModel value) {
-    return SingleChildScrollView(
-      child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: ResponsiveUtils.spacingColumn(context),
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: ResponsiveUtils.spacingColumn(context),
+                ),
+                child:
+                    ResponsiveUtils.getDeviceType(context) ==
+                            DeviceScreenType.mobile
+                        ? buildContantPage(value, context)
+                        : Card(
+                          color:
+                              Theme.of(
+                                context,
+                              ).colorScheme.surfaceContainerLowest,
+                          elevation: 4,
+                          clipBehavior: Clip.antiAlias,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 4.0,
+                            vertical: 5,
+                          ),
+                          child: buildContantPage(value, context),
+                        ),
+              ),
+            ),
           ),
-          child:
-              ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile
-                  ? buildContantPage(value, context)
-                  : Card(
-                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                    elevation: 4,
-                    clipBehavior: Clip.antiAlias,
-                    margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 5),
-                    child: buildContantPage(value, context),
-                  ),
         ),
-      ),
+        if (_viewModel.currentUser != null &&
+            ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile)
+          ListenableBuilder(
+            listenable: Listenable.merge([
+              _viewModel.addCommentsCommand,
+              _viewModel,
+            ]),
+            builder: (context, _) {
+              final ComentarioResponseModel? model = _viewModel.replyMobile;
+              if (model != null) {
+                FocusScope.of(context).requestFocus(commentEdit);
+              }
+
+              return Column(
+                children: [
+                  Divider(),
+                  if (model != null)
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 12.0,
+                      ),
+                      color:
+                          Theme.of(context).colorScheme.surfaceContainerHighest,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () => _viewModel.setReplyMobile(null),
+                            icon: Icon(Icons.cancel_outlined),
+                          ),
+                          Text(model.usuario.nome),
+                        ],
+                      ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 8,
+                    ),
+                    child: CommentEditor.add(
+                      focusNode: commentEdit,
+                      imgPath: _viewModel.currentUser?.imgPerfil,
+                      onSubmit: _sendReply,
+                      isLoading: _viewModel.addCommentsCommand.value.isRunning,
+                      clearNotifier: _clearEditorNotifier,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+      ],
     );
   }
 
@@ -197,7 +265,8 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: PublicationContent(),
           ),
-          if (_viewModel.currentUser != null)
+          if (_viewModel.currentUser != null &&
+              ResponsiveUtils.getDeviceType(context) != DeviceScreenType.mobile)
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 12.0,
@@ -223,10 +292,23 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
   }
 
   Future<void> _sendReply(String text) async {
-    _viewModel.addCommentsCommand.execute(
-      _viewModel.publication!.id,
-      ComentarioRequestModel(texto: text),
-    );
+    final model = _viewModel.replyMobile;
+    if (model != null) {
+      _viewModel.addCommentsCommand.execute(
+        _viewModel.publication!.id,
+        ComentarioRequestModel(
+          texto: text,
+          parentId:
+          model.parentId ?? model.id,
+          usuarioMencionadoId: (model.parentId != null)? model.usuario.id: null
+        ),
+      );
+    } else {
+      _viewModel.addCommentsCommand.execute(
+        _viewModel.publication!.id,
+        ComentarioRequestModel(texto: text),
+      );
+    }
   }
 
   ListenableBuilder buildChildrenPublication({required int publicationId}) {
@@ -252,66 +334,67 @@ class _PublicacaoPageState extends State<PublicacaoPage> {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Column(
-                  children:
-                      [...vm.comments.map((model) {
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 12.0,
-                                right: 12,
-                                top: 8,
-                              ),
-                              child: CommentTile(
-                                key: ValueKey(model.comment.id),
-                                viewModel: vm,
-                                userName: model.comment.usuario.nome,
-                                autorId: model.comment.usuario.id,
-                                taggedUser: model.comment.usuarioMencionado?.nome,
-                                parentId: model.comment.id,
-                                dateCreation: model.comment.dataCriacao,
-                                replyCount: model.comment.totalRespostas,
-                                publicationText: model.comment.texto,
-                                commentId: model.comment.id,
-                                publicationId: model.comment.publicacaoId,
-                                imgPath: model.comment.usuario.imgPerfil,
-                              ),
+                  children: [
+                    ...vm.comments.map((model) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12.0,
+                              right: 12,
+                              top: 8,
                             ),
-                            if (_viewModel.comments.last.comment.id !=
-                                model.comment.id)
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0,
-                                ),
-                                child: Divider(),
+                            child: CommentTile(
+                              key: ValueKey(model.comment.id),
+                              viewModel: vm,
+                              userName: model.comment.usuario.nome,
+                              autorId: model.comment.usuario.id,
+                              taggedUser: model.comment.usuarioMencionado?.nome,
+                              parentId: model.comment.id,
+                              dateCreation: model.comment.dataCriacao,
+                              replyCount: model.comment.totalRespostas,
+                              publicationText: model.comment.texto,
+                              commentId: model.comment.id,
+                              publicationId: model.comment.publicacaoId,
+                              imgPath: model.comment.usuario.imgPerfil,
+                            ),
+                          ),
+                          if (_viewModel.comments.last.comment.id !=
+                              model.comment.id)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0,
                               ),
-
-                          ],
-                        );
-                      }),
-                          ListenableBuilder(
-                            listenable: Listenable.merge([_viewModel.fetchMoreCmd,_viewModel]),
-                            builder: (context, _) {
-                              if (_viewModel.publication!.totalRespostas !=
-                                  _viewModel.comments.length){
-                                print(_viewModel.publication!.totalRespostas);
-                                print(_viewModel.comments.length);
-                                return ElevatedButton(
-                                  onPressed:
-                                      () =>
-                                      _viewModel.fetchMoreCmd.execute(
-                                        widget.id,
-                                      ),
-                                  child:
-                                  _viewModel.fetchMoreCmd.value.isRunning
-                                      ? CircularProgressIndicator()
-                                      : Text("carregar mais"),
-                                );
-                              }else {
-                                return SizedBox.shrink();
-                              }
-                            },
-                          ),]
+                              child: Divider(),
+                            ),
+                        ],
+                      );
+                    }),
+                    ListenableBuilder(
+                      listenable: Listenable.merge([
+                        _viewModel.fetchMoreCmd,
+                        _viewModel,
+                      ]),
+                      builder: (context, _) {
+                        if (_viewModel.publication!.totalRespostas !=
+                            _viewModel.comments.length) {
+                          print(_viewModel.publication!.totalRespostas);
+                          print(_viewModel.comments.length);
+                          return ElevatedButton(
+                            onPressed:
+                                () =>
+                                    _viewModel.fetchMoreCmd.execute(widget.id),
+                            child:
+                                _viewModel.fetchMoreCmd.value.isRunning
+                                    ? CircularProgressIndicator()
+                                    : Text("carregar mais"),
+                          );
+                        } else {
+                          return SizedBox.shrink();
+                        }
+                      },
+                    ),
+                  ],
                 ),
               );
             },

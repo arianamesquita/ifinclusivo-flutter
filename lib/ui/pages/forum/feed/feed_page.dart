@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
+import 'package:if_inclusivo/ui/core/widgets/sliver_sticky_header.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/viewmodels/feed_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/forum/feed/widgets/filter_chips_bar.dart';
 import 'package:if_inclusivo/utils/responsive_utils.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:result_command/result_command.dart';
 
 import '../../../../domain/models/enums/categorias.dart';
+import '../../../core/widgets/custom_search_bar.dart';
 import '../publicacao/widget/card/publicacao_card.dart';
 
 class FeedPage extends StatefulWidget {
@@ -23,6 +25,7 @@ class _FeedPageState extends State<FeedPage> {
   final ScrollController _scrollController = ScrollController();
   bool _showFab = true;
   final SearchController controller = SearchController();
+  FocusNode searchFocus = FocusNode();
 
   // Escuta mudanças no texto
 
@@ -124,12 +127,10 @@ class _FeedPageState extends State<FeedPage> {
                         )
                         : null,
                 body: SafeArea(
-                  child: CustomScrollView(
-                    controller: _scrollController,
-                    slivers: [
-                      buildSliverToBoxAdapter(context),
-                      buildSliverPersistentHeader(viewModel, context),
-
+                  child: StickyHeaderScrollView(
+                    header: _buildHeader(context),
+                    stickyHeader: _buildPinSearchBar(viewModel, context),
+                    body: [
                       if (viewModel.state == FeedState.initialLoading)
                         const SliverFillRemaining(
                           child: Center(child: CircularProgressIndicator()),
@@ -264,7 +265,9 @@ class _FeedPageState extends State<FeedPage> {
                                                   value: "denunciar",
                                                   child: Text("Denunciar"),
                                                   onTap: () {
-                                                    print("Denunciar publicação");
+                                                    print(
+                                                      "Denunciar publicação",
+                                                    );
                                                   },
                                                 ),
                                               ],
@@ -321,223 +324,102 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 
-  SliverPersistentHeader buildSliverPersistentHeader(
-    FeedViewModel viewModel,
-    BuildContext context,
-  ) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: _SliverSearchFilterDelegate(
-        child: _centralized(
-          child: Column(
-            spacing: 8,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: SearchAnchor(
-                  isFullScreen:
-                      ResponsiveUtils.getDeviceType(context) ==
-                      DeviceScreenType.mobile,
-                  viewConstraints:
-                      (ResponsiveUtils.getDeviceType(context) !=
-                              DeviceScreenType.mobile)
-                          ? BoxConstraints(maxHeight: 300)
-                          : null,
-                  searchController: controller,
-                  viewOnChanged:
-                      (s) async => await viewModel.searchSuggestions(query: s),
-                  viewOnSubmitted: (value) async {
-                    controller.closeView(value);
-                    await viewModel.fetchPublications(query: value);
-                  },
-                  builder: (
-                    BuildContext context,
-                    SearchController searchController,
-                  ) {
-                    return ValueListenableBuilder<TextEditingValue>(
-                      valueListenable: searchController,
-                      builder: (context, value, _) {
-                        return SearchBar(
-                          onSubmitted: (value) async {
-                            controller.closeView(value);
-                            await viewModel.fetchPublications(query: value);
-                          },
-                          controller: searchController,
-                          hintText: 'Buscar publicações...',
-                          onTap: () {
-                            searchController.openView();
-                          },
-                          onChanged: (query) async {
-                            viewModel.searchSuggestions(query: query);
-                            await viewModel.searchSuggestions(query: '$query ');
-                          },
-                          trailing: [
-                            if (value.text.isNotEmpty)
-                              IconButton(
-                                icon: const Icon(Icons.clear),
-                                onPressed: () async {
-                                  searchController.clear();
-                                  await viewModel.fetchPublications(query: '');
-                                },
-                              ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  suggestionsBuilder: (
-                    BuildContext context,
-                    SearchController searchController,
-                  ) {
-                    final suggestions = viewModel.suggestions;
-
-                    final List<Widget> widgets = [];
-
-                    if (viewModel.loadingSugestion) {
-                      widgets.add(const LinearProgressIndicator());
-                    }
-
-                    if (suggestions.isEmpty && !viewModel.loadingSugestion) {
-                      widgets.add(
-                        const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text('Nenhuma sugestão encontrada'),
-                        ),
-                      );
-                    } else {
-                      widgets.addAll(
-                        suggestions.map((sugestao) {
-                          return ListTile(
-                            title: Text(sugestao),
-                            onTap: () async {
-                              searchController.text = sugestao;
-                              searchController.closeView(sugestao);
-                              await viewModel.fetchPublications(
-                                query: sugestao,
-                              );
-                            },
-                          );
-                        }),
-                      );
-                    }
-                    return widgets;
-                  },
-                ),
+  Widget _buildPinSearchBar(FeedViewModel viewModel, BuildContext context) {
+    return _centralized(
+      child: Container(
+        color: Theme.of(context).colorScheme.surface,
+        child: Column(
+          spacing: 8,
+          children: [
+            SizedBox(height: 5,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: CustomSearchBar(
+                suggestions: viewModel.suggestions,
+                loadingSuggestions: viewModel.loadingSugestion,
+                onQueryChanged:
+                    (q) async => await viewModel.searchSuggestions(query: q),
+                onSubmit:
+                    (value) async =>
+                        await viewModel.fetchPublications(query: value),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: FilterChipsBar(
-                  onChanged: (filters, order) async {
-                    Ordenacao odern =
-                        (order == 'Relevância')
-                            ? Ordenacao.RELEVANCIA
-                            : Ordenacao.MAIS_RECENTE;
-                    await viewModel.fetchPublications(
-                      categories: filters,
-                      order: odern,
-                    );
-                    _scrollController.animateTo(
-                      0,
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.easeOut,
-                    );
-                  },
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: FilterChipsBar(
+                onChanged: (filters, order) async {
+                  Ordenacao odern =
+                      (order == 'Relevância')
+                          ? Ordenacao.RELEVANCIA
+                          : Ordenacao.MAIS_RECENTE;
+                  await viewModel.fetchPublications(
+                    categories: filters,
+                    order: odern,
+                  );
+                  _scrollController.animateTo(
+                    0,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.easeOut,
+                  );
+                },
               ),
-              Container(
-                color: Theme.of(context).colorScheme.outline,
-                width: double.infinity,
-                height: 1,
-              ),
-            ],
-          ),
+            ),
+            Container(
+              color: Theme.of(context).colorScheme.outline,
+              width: double.infinity,
+              height: 1,
+            ),
+          ],
         ),
       ),
     );
   }
 
-  SliverToBoxAdapter buildSliverToBoxAdapter(BuildContext context) {
+  Widget _buildHeader(BuildContext context) {
     final device = ResponsiveUtils.getDeviceType(context);
-    return SliverToBoxAdapter(
-      child:
-          device == DeviceScreenType.mobile
-              ? _centralized(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 16,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/logo/logo_expanded_dark.svg',
-                        height: 60,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.notifications_outlined),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-              : Padding(
-                padding: const EdgeInsets.only(
-                  top: 100,
-                  right: 8,
-                  left: 8,
-                  bottom: 16,
-                ),
-                child: _centralized(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    spacing: 32,
-                    children: [
-                      Text(
-                        "Conecta IF",
-                        style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Compartilhe dúvidas, ideias e soluções com a comunidade",
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ],
-                  ),
+    return _centralized(child:  device == DeviceScreenType.mobile
+        ? Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SvgPicture.asset(
+                'assets/logo/logo_expanded_dark.svg',
+                height: 60,
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.notifications_outlined),
+              ),
+            ],
+          ),
+        )
+        : Padding(
+          padding: const EdgeInsets.only(
+            top: 100,
+            right: 8,
+            left: 8,
+            bottom: 16,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            spacing: 32,
+            children: [
+              Text(
+                "Conecta IF",
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-    );
+              Text(
+                "Compartilhe dúvidas, ideias e soluções com a comunidade",
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
+        ));
   }
-}
-
-class _SliverSearchFilterDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  _SliverSearchFilterDelegate({required this.child});
-
-  @override
-  double get minExtent => 129; // altura mínima
-  @override
-  double get maxExtent => 130; // altura máxima
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      padding: EdgeInsets.only(top: 8),
-      color: Theme.of(context).colorScheme.surface,
-      child: child,
-    );
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
 }

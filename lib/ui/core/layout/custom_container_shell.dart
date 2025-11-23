@@ -10,13 +10,12 @@ class CustomContainerShell extends StatelessWidget {
   final bool showBackButton;
   final bool alwaysActive;
   final VoidCallback? onBack;
-  final ScrollController? scrollController;
   const CustomContainerShell({
     super.key,
     required this.child,
     this.showBackButton = true,
     this.alwaysActive = false,
-    this.onBack, this.scrollController,
+    this.onBack,
   });
 
   @override
@@ -47,13 +46,11 @@ class CustomContainerShell extends StatelessWidget {
                     SizedBox(height: 200),
                   ],
                 ),
-                Expanded(child: SingleChildScrollView(
-                    controller: scrollController,
-                    child:ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: MediaQuery.of(context).size.height,
-                    ),
-                    child: child))),
+                Expanded(child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height,
+                ),
+                child: child)),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -77,12 +74,15 @@ class CustomContainerShell extends StatelessWidget {
           ],
                       ),
                 )
-        : SingleChildScrollView(child: Column(
+        : Stack(
           children: [
-            if (canShowBack) buildElevatedButton(context),
-            child,
+            Expanded(child: child),
+            if (canShowBack) Padding(
+              padding: const EdgeInsets.only(top: 15.0, left: 15),
+              child: buildElevatedButton(context),
+            ),
           ],
-        ));
+        );
   }
 
   Widget buildElevatedButton(BuildContext context) {
@@ -101,7 +101,7 @@ class CustomContainerShell extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           foregroundColor:
                               Theme.of(context).colorScheme.inverseSurface,
-                          backgroundColor: Colors.transparent,
+                          backgroundColor: Theme.of(context).colorScheme.surfaceDim,
                           elevation: 0,
                           textStyle: Theme.of(context).textTheme.labelLarge,
                         ),

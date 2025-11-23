@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
 
 import '../../../../core/layout/custom_container_shell.dart';
+import '../../libras_details/widgets/top_content_libras.dart';
 
 class SentSuggestionPage extends StatelessWidget {
   const SentSuggestionPage({super.key, required this.onPressed});

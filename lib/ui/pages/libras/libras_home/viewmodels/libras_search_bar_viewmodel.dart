@@ -2,22 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:if_inclusivo/data/repositories/libras_repository.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 
-enum LibrasSearchBarState {
+enum LibrasHomeState {
   idle,
   loading,
   loadingMore,
   error,
 }
 
-class LibrasSearchBarViewmodel with ChangeNotifier{
-  LibrasSearchBarViewmodel({required LibrasRepository librasRepository}) : _librasRepository = librasRepository;
+class LibrasHomeViewModel with ChangeNotifier{
+  LibrasHomeViewModel({required LibrasRepository librasRepository}) : _librasRepository = librasRepository;
   final LibrasRepository _librasRepository;
 
   String _errorMessage = '';
   String get errorMessage => _errorMessage;
 
-  LibrasSearchBarState _state = LibrasSearchBarState.loading;
-  LibrasSearchBarState get state => _state;
+  LibrasHomeState _state = LibrasHomeState.loading;
+  LibrasHomeState get state => _state;
 
   List<LibrasResponseModel> _words = [];
   List<LibrasResponseModel> get words => _words;
@@ -31,22 +31,22 @@ class LibrasSearchBarViewmodel with ChangeNotifier{
     if (word.isEmpty) {
       _words = [];
       _currentSearchTerm = '';
-      _state = LibrasSearchBarState.idle;
+      _state = LibrasHomeState.idle;
       notifyListeners();
       return;
     }
 
     _currentSearchTerm = word;
-    _state = LibrasSearchBarState.loading;
+    _state = LibrasHomeState.loading;
     notifyListeners();
 
     try {
       final response = await _librasRepository.getLibrasByWord(palavra: word);
       _words = response.content;
-      _state = LibrasSearchBarState.idle;
+      _state = LibrasHomeState.idle;
     } catch (e) {
       _words = [];
-      _state = LibrasSearchBarState.error;
+      _state = LibrasHomeState.error;
       _errorMessage = e.toString();
     }
 
