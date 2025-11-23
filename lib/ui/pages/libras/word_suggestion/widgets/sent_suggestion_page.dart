@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:if_inclusivo/ui/pages/libras/libras_page/widgets/top_content_libras.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/layout/custom_container_shell.dart';
+import '../../libras_details/widgets/top_content_libras.dart';
 
 class SentSuggestionPage extends StatelessWidget {
   const SentSuggestionPage({super.key, required this.onPressed});
@@ -70,7 +71,7 @@ class SentSuggestionPage extends StatelessWidget {
                   SizedBox(width: 32),
                   ElevatedButton(
                     onPressed: () {
-                      //adicionar rota para voltar à página de busca
+                      context.pop();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFFAC82BA),

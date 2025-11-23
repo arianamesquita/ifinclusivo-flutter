@@ -6,6 +6,7 @@ import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/guards/auth_guard.dart';
 import 'package:if_inclusivo/guards/roles.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
+import 'package:if_inclusivo/routing/app_routes.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_navigation_drawer.dart';
 import 'package:if_inclusivo/ui/core/layout/custom_navigation_rail.dart';
 import 'package:if_inclusivo/ui/core/widgets/hoverable_logo.dart';
@@ -16,10 +17,12 @@ import 'package:provider/provider.dart';
 
 import '../../../data/repositories/auth_repository.dart';
 import '../../../domain/models/api/response/gen_responses.dart';
+import '../auth/modal/auth_modals.dart';
 
 class ShellPage extends StatefulWidget {
-  const ShellPage({super.key, required this.child});
+  const ShellPage({super.key, required this.child, required this.state});
   final StatefulNavigationShell child;
+  final GoRouterState state;
 
   @override
   State<ShellPage> createState() => _ShellPageState();
@@ -72,6 +75,7 @@ class _ShellPageState extends State<ShellPage> {
             auth.allowedBranchesMobile(),
             context,
             isLoggedIn,
+
           );
         } else {
           return _buildAppWebAndTablet(
@@ -167,8 +171,25 @@ class _ShellPageState extends State<ShellPage> {
       allowedBranches: allowedBranches,
       isLoggedIn: isLoggedIn,
       child: widget.child,
+      state: widget.state,
     );
   }
+}
+final GlobalKey<ScaffoldState> appScaffoldKey = GlobalKey<ScaffoldState>();
+
+Future<T?> openAppBottomSheet<T>({
+  required WidgetBuilder builder,
+  bool isScrollControlled = true,
+}) async {
+  final context = appScaffoldKey.currentContext;
+
+  if (context == null) return null;
+
+  return showModalBottomSheet<T>(
+    context: context,
+    isScrollControlled: isScrollControlled,
+    builder: builder,
+  );
 }
 
 class BuildMobileAPP extends StatefulWidget {
@@ -177,13 +198,14 @@ class BuildMobileAPP extends StatefulWidget {
   allowedBranches; // Esta lista ainda pode ser usada para controle de acesso
   final bool isLoggedIn;
   final StatefulNavigationShell child;
+  final GoRouterState state;
 
   const BuildMobileAPP({
     super.key,
     required this.child,
     required this.auth,
     required this.allowedBranches,
-    required this.isLoggedIn,
+    required this.isLoggedIn, required this.state,
   });
 
   @override
@@ -196,15 +218,26 @@ class _BuildMobileAPPState extends State<BuildMobileAPP> {
     super.initState();
   }
 
+  final List<String> _fullScreenRoutes = [
+    AppRoutes.forum, // Exemplo: Esconde em qualquer rota que tenha '/detalhes'
+    AppRoutes.libras,
+    AppRoutes.profile,
+  ];
+
   @override
   Widget build(BuildContext context) {
     final authRepository = context.read<AuthRepository>();
+    final currentPath = widget.state.uri.toString();
+    final bool showFullScreen = !_fullScreenRoutes.any(
+            (route) => currentPath == route
+    );
 
     return StreamBuilder<UsuarioResponseModel?>(
       stream: authRepository.authStateChanges,
       initialData: authRepository.currentUser,
       builder: (context, snapshot) {
-        return Scaffold(
+        return showFullScreen ? widget.child : Scaffold(
+          key: appScaffoldKey,
           body: widget.child,
           bottomNavigationBar: NavigationBar(
             selectedIndex:widget.auth.mapSelectedIndex(
@@ -212,8 +245,12 @@ class _BuildMobileAPPState extends State<BuildMobileAPP> {
               widget.child.currentIndex,
             ),
             onDestinationSelected:(newIndex) {
-              final branch = widget.allowedBranches[newIndex];
-              widget.child.goBranch(branch);
+              if(newIndex == 2 && !widget.isLoggedIn){
+                showLoginRequiredDialog(context);
+              }else {
+                final branch = widget.allowedBranches[newIndex];
+                widget.child.goBranch(branch);
+              }
             },
             destinations: AppDestinations.bottom(
               context,

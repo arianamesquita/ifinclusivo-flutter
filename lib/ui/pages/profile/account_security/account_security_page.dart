@@ -1,7 +1,4 @@
 
-import 'dart:js_interop';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/routing/app_router.dart';

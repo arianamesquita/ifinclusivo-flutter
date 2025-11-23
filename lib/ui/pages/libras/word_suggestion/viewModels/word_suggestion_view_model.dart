@@ -7,7 +7,7 @@ import '../../../../../data/repositories/libras_repository.dart';
 import '../../../../../domain/models/api/request/gen_requests.dart';
 
 class WordSuggestionViewModel extends ChangeNotifier {
-  late final Command1<LibrasResponseModel, LibrasRequestModel> saveWordCmd;
+  late final Command1<LibrasResponseModel, SugereLibrasUploadModel> saveWordCmd;
   final LibrasRepository _librasRepository;
 
   WordSuggestionViewModel({required LibrasRepository librasRepository})
@@ -15,6 +15,6 @@ class WordSuggestionViewModel extends ChangeNotifier {
     saveWordCmd = Command1(_saveWord);
   }
 
-  AsyncResult<LibrasResponseModel> _saveWord(LibrasRequestModel model) async =>
+  AsyncResult<LibrasResponseModel> _saveWord(SugereLibrasUploadModel model) async =>
       await _librasRepository.saveWord(model);
 }

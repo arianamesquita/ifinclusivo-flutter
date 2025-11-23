@@ -6,6 +6,7 @@ import 'package:if_inclusivo/ui/pages/forum/publicacao/viewmodels/publicacao_vie
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/comment_editor.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/widgets/comment_content.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/comment/widgets/replies_list_comment.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:result_command/result_command.dart';
 import '../../../../../../utils/forum_utils.dart';
 import '../../../../auth/modal/auth_modals.dart';
@@ -39,7 +40,8 @@ class CommentTile extends StatefulWidget {
     required this.autorId,
     this.userMark,
     this.parentId,
-    this.taggedId, required this.imgPath,
+    this.taggedId,
+    required this.imgPath,
   }) : showChildrenTree = true;
 
   const CommentTile.noTree({
@@ -55,7 +57,8 @@ class CommentTile extends StatefulWidget {
     required this.autorId,
     this.userMark,
     this.parentId,
-    this.taggedId, required this.imgPath,
+    this.taggedId,
+    required this.imgPath,
   }) : showChildrenTree = false;
   @override
   State<CommentTile> createState() => _CommentTileState();
@@ -241,26 +244,35 @@ class _CommentTileState extends State<CommentTile> {
                     children: [
                       CommentContent(
                         controller: _controller,
-                        showReplyWidget: _showReply,
+                        showReplyWidget:
+                            (ResponsiveUtils.getDeviceType(context) ==
+                                    DeviceScreenType.mobile)
+                                ? false
+                                : _showReply,
                         userName: widget.userName,
                         dateCreation: widget.dateCreation,
                         menuItems: menuItems,
                         taggedUser: widget.taggedUser,
                         viewModel: _viewModel,
                         onReply: () {
-                          if(_viewModel.currentUser != null) {
-                          setState(() {
-                            _showReply = !_showReply;
-                          });}else {
+                          if (_viewModel.currentUser != null) {
+                           if (ResponsiveUtils.getDeviceType(context) ==
+                                DeviceScreenType.mobile) {
+                             _viewModel.setReplyMobile(widget.commentId);
+                           }else {
+                             setState(() {
+                               _showReply = !_showReply;
+                             });
+                           }
+                           _scrollToVisible();
+                          } else {
                             showLoginRequiredDialog(context);
                           }
-
                         },
                         onLike: () {},
                         replyCount: commentNode.comment.totalRespostas,
                         openReplies: () async {
-                            await _viewModel.toggleReplies(widget.commentId);
-
+                          await _viewModel.toggleReplies(widget.commentId);
                         },
                         closeReplies:
                             widget.showChildrenTree
@@ -270,40 +282,43 @@ class _CommentTileState extends State<CommentTile> {
                                   );
                                 }
                                 : null,
-                        showReplies: commentNode.showReplies, imgPath: widget.imgPath,
+                        showReplies: commentNode.showReplies,
+                        imgPath: widget.imgPath,
                       ),
-                      ListenableBuilder(
-                        listenable: commentNode.addCommand,
-                        builder: (context, _) {
-                          return AnimatedSize(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.easeInOut,
-                            child:
-                                _showReply
-                                    ? Padding(
-                                      padding: const EdgeInsets.only(
-                                        bottom: 8.0,
-                                      ),
-                                      child: CommentEditor.add(
-                                        imgPath: widget.imgPath,
-                                        onSubmit: _sendReply,
-                                        clearNotifier: _clearEditorNotifier,
-                                        isLoading:
-                                            commentNode
-                                                .addCommand
-                                                .value
-                                                .isRunning,
-                                        onCancel: () {
-                                          setState(() {
-                                            _showReply = false;
-                                          });
-                                        },
-                                      ),
-                                    )
-                                    : SizedBox.shrink(),
-                          );
-                        },
-                      ),
+                      if (ResponsiveUtils.getDeviceType(context) !=
+                          DeviceScreenType.mobile)
+                        ListenableBuilder(
+                          listenable: commentNode.addCommand,
+                          builder: (context, _) {
+                            return AnimatedSize(
+                              duration: const Duration(milliseconds: 600),
+                              curve: Curves.easeInOut,
+                              child:
+                                  _showReply
+                                      ? Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 8.0,
+                                        ),
+                                        child: CommentEditor.add(
+                                          imgPath: widget.imgPath,
+                                          onSubmit: _sendReply,
+                                          clearNotifier: _clearEditorNotifier,
+                                          isLoading:
+                                              commentNode
+                                                  .addCommand
+                                                  .value
+                                                  .isRunning,
+                                          onCancel: () {
+                                            setState(() {
+                                              _showReply = false;
+                                            });
+                                          },
+                                        ),
+                                      )
+                                      : SizedBox.shrink(),
+                            );
+                          },
+                        ),
 
                       if (widget.showChildrenTree)
                         ListenableBuilder(
@@ -377,5 +392,19 @@ class _CommentTileState extends State<CommentTile> {
             onTap: () {},
           ),
         ];
+  }
+
+  void _scrollToVisible() {
+
+    Future.delayed(const Duration(milliseconds: 600), () {
+      if (mounted) {
+        Scrollable.ensureVisible(
+          context,
+          alignment: 0.5,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
   }
 }

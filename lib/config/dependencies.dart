@@ -32,8 +32,7 @@ import '../data/services/auth_service.dart';
 import '../ui/pages/auth/sing_up/viewModels/registerViewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../ui/pages/libras/specific_topic/viewmodels/specific_topic_viewmodel.dart';
-import '../ui/pages/forum/new publication/viewmodels/new_poblication_viewmodel.dart';
+import '../ui/pages/libras/libras_home/viewmodels/libras_search_bar_viewmodel.dart';
 import 'dio_config.dart';
 
 List<SingleChildWidget> providers(SharedPreferences prefs) {
@@ -159,6 +158,11 @@ List<SingleChildWidget> get _viewModelsProviders {
       create:
           (context) => EditProfileViewmodel(
         accountRepository: context.read<AccountSecurityRepository>(),
+      ),
+    ),
+    ChangeNotifierProvider(
+      create:
+          (context) => LibrasHomeViewModel(librasRepository: context.read<LibrasRepository>(),
       ),
     ),
 

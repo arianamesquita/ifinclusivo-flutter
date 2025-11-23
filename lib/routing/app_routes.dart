@@ -24,6 +24,7 @@ class AppRoutes {
   static const String categoriaLibras = 'category/:categoria';
   static const String librasCategory = 'category/:categoria';
   static const String wordSuggestion = 'word-suggestion';
+  static const String managementLibras = 'management-libras';
 
 
   static const String more = '$_app/more';

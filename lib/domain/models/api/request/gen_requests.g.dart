@@ -363,6 +363,22 @@ const _$CategoriasEnumMap = {
   Categorias.ARQUITETURA_DE_COMPUTADORES: 'ARQUITETURA_DE_COMPUTADORES',
 };
 
+_$SugereLibrasModelImpl _$$SugereLibrasModelImplFromJson(
+  Map<String, dynamic> json,
+) => _$SugereLibrasModelImpl(
+  palavra: json['palavra'] as String,
+  descricao: json['descricao'] as String,
+  url: json['url'] as String?,
+);
+
+Map<String, dynamic> _$$SugereLibrasModelImplToJson(
+  _$SugereLibrasModelImpl instance,
+) => <String, dynamic>{
+  'palavra': instance.palavra,
+  'descricao': instance.descricao,
+  'url': instance.url,
+};
+
 _$AnalisePalavraRequestModelImpl _$$AnalisePalavraRequestModelImplFromJson(
   Map<String, dynamic> json,
 ) => _$AnalisePalavraRequestModelImpl(

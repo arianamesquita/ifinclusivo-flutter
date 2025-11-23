@@ -7,13 +7,25 @@ class LibrasResponseModel with _$LibrasResponseModel {
     required String palavra,
     required String descricao,
     required String url,
+     String? fileUrl,
     String? video,
     String? foto,
     String? justificativa,
     required Status status,
-    required Categorias categorias,
+     Categorias? categorias,
   }) = _LibrasResponseModel;
 
   factory LibrasResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LibrasResponseModelFromJson(json);
+}
+
+@freezed
+class LibrasRelacionadasModel with _$LibrasRelacionadasModel {
+  const factory LibrasRelacionadasModel({
+    required int id,
+    required String palavra,
+  }) = _LibrasRelacionadasModel;
+
+  factory LibrasRelacionadasModel.fromJson(Map<String, dynamic> json) =>
+      _$LibrasRelacionadasModelFromJson(json);
 }

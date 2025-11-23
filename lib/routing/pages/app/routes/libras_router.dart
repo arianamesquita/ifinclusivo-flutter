@@ -14,12 +14,13 @@ class LibrasRouter extends GoRouteData with _$LibrasRouter {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return LibrasPage();
+    return LibrasHomePage(viewmodel: context.read(),);
   }
 }
 
 const librasTopicsRoute = TypedGoRoute<LibrasTopicRouter>(
   path: AppRoutes.librasCategory,
+  routes: [midiaCategoriaRouter]
 );
 
 class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
@@ -38,7 +39,7 @@ class LibrasTopicRouter extends GoRouteData with _$LibrasTopicRouter {
         },
       ),
     );
-    return SpecificTopicPage(viewModel: vm);
+    return TopicLibrasPage(viewModel: vm);
   }
 }
 
@@ -46,13 +47,37 @@ const midiaRouter = TypedGoRoute<MidiaRouter>(path: AppRoutes.midia);
 
 class MidiaRouter extends GoRouteData with _$MidiaRouter {
   final int id;
-  const MidiaRouter(this.id);
+  final String? categoria;
+
+  const MidiaRouter(this.id, {this.categoria});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     final vm = LibrasViewModel(repository: context.read());
     vm.fetchLibrasCmd.execute(id);
-    return MidiaPageLibras(viewModel: vm,);
+    return LibrasDetails(viewModel: vm,);
+  }
+}
+const midiaCategoriaRouter = TypedGoRoute<MidiaCategoriaRouter>(path: AppRoutes.midia);
+
+class MidiaCategoriaRouter extends GoRouteData with _$MidiaCategoriaRouter{
+// 1. Adicione o parâmetro da rota PAI
+  final String categoria;
+
+  // 2. Mantenha o parâmetro da rota FILHA
+  final int id;
+
+  const MidiaCategoriaRouter({
+    required this.categoria,
+    required this.id,
+  });
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final vm = LibrasViewModel(repository: context.read());
+    vm.fetchLibrasCmd.execute(id);
+    vm.fetchRelacionados(id: id);
+    return LibrasDetails(viewModel: vm,);
   }
 }
 
@@ -60,11 +85,15 @@ const wordSuggestionRouter = TypedGoRoute<WordSuggestionRouter>(
   path: AppRoutes.wordSuggestion,
 );
 
-class WordSuggestionRouter extends GoRouteData with _$WordSuggestionRouter {
+class WordSuggestionRouter extends ProtectedRouteData with _$WordSuggestionRouter {
   const WordSuggestionRouter();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return WordSuggestionPage(viewModel: WordSuggestionViewModel(librasRepository: context.read<LibrasRepository>()),);
   }
+
+  @override
+  // TODO: implement allowedRoles
+  List<Roles> get allowedRoles => Roles.values;
 }

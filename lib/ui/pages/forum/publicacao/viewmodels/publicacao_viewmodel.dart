@@ -54,6 +54,20 @@ class PublicacaoViewModel extends ChangeNotifier {
   PublicacaoDetalhadaModel? _publication;
   PublicacaoDetalhadaModel? get publication => _publication;
 
+  ComentarioResponseModel? _reply;
+  ComentarioResponseModel? get replyMobile => _reply;
+
+  setReplyMobile(int? commentId){
+    if(commentId != null) {
+      _reply = findCommentById(commentId)?.comment;
+    }else {
+      _reply = null;
+    }
+
+    notifyListeners();
+  }
+
+
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
@@ -165,6 +179,7 @@ class PublicacaoViewModel extends ChangeNotifier {
     );
     return result.mapFold(
       (onSuccess) {
+        _comments.clear();
         _comments.addAll(
           onSuccess.content
               .map(
@@ -414,15 +429,7 @@ class PublicacaoViewModel extends ChangeNotifier {
             parent.showReplies = parent.comment.totalRespostas > 0;
           }
         }
-        if (_publication != null) {
-          _publication = _publication!.copyWith(
-            totalRespostas: _publication!.totalRespostas - 1,
-          );
-          _publicationsViewModel.update(
-            publicationId: _publication!.id,
-            publication: _publication!,
-          );
-        }
+
 
         notifyListeners();
         return isRemoved;
