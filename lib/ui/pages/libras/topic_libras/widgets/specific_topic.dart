@@ -53,23 +53,34 @@ class _SpecificTopicState extends State<SpecificTopic> {
           borderRadius: BorderRadius.circular(40),
           onTap: widget.onTap,
           child: Container(
-            width: 387,
+            width: 350,
             height: 361,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(30),
               color: Color.fromRGBO(200, 255, 192, 1),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.network(
-                    YoutubePlayerController.getThumbnail(
-                      videoId: videoId,
-                      quality: ThumbnailQuality.high,
-                      webp: false,
-                    ), fit: BoxFit.cover,
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: Image.network(
+                        YoutubePlayerController.getThumbnail(
+                          videoId: videoId,
+                          quality: ThumbnailQuality.high,
+                          webp: false,
+                        ), fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 21),
                   Text(
@@ -83,7 +94,10 @@ class _SpecificTopicState extends State<SpecificTopic> {
                   ),
                   SizedBox(height: 14),
                   Text(
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.start,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                     widget.description,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,

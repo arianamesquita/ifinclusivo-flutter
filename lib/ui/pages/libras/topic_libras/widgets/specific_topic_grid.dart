@@ -1,7 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:if_inclusivo/ui/pages/libras/topic_libras/widgets/specific_topic.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 
 class SpecificTopicGridParams {
   final String title;
@@ -19,71 +18,44 @@ class SpecificTopicGridParams {
 
 class SpecificTopicGrid extends StatelessWidget {
   final List<SpecificTopicGridParams> specificTopicsList;
-
   const SpecificTopicGrid({super.key, required this.specificTopicsList});
-
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // tamanho do componente pai
-        double maxWidth = constraints.maxWidth;
-        // dimensões fixas de cada card
-        const itemWidth = 387.0;
-        const itemHeight = 361.0;
-        // espaçamento máximo
-        const maxVerticalSpacing = 86.0;
-        const maxGridWidth = 957.0;
+   late (double, double) spacing;
+    switch (ResponsiveUtils.getDeviceType(context)){
 
-        // calcula quantas colunas cabem (no máx 2)
-        int crossAxisCount = (maxWidth / itemWidth).floor();
-        crossAxisCount = crossAxisCount.clamp(1, 2);
+      case DeviceScreenType.mobile:
+        spacing = (0,15);
+        break;
+      case DeviceScreenType.tablet:
+        spacing = (20,18);
+        break;
+      case DeviceScreenType.desktop:
+        spacing = (65, 34);
+        break;
+    }
 
-        // largura total dos itens
-        double totalItemsWidth = crossAxisCount * itemWidth;
 
-        // espaçamento horizontal
-        double horizontalSpacing =
-        crossAxisCount > 1
-            ? ((maxWidth < maxGridWidth ? maxWidth : maxGridWidth) -
-            totalItemsWidth) /
-            (crossAxisCount - 1)
-            : 0;
-
-        // espaçamento vertical proporcional
-        double verticalSpacing =
-            maxVerticalSpacing *
-                ((maxWidth < maxGridWidth ? maxWidth : maxGridWidth) / maxGridWidth);
-
-        // largura real do Wrap
-        double wrapWidth =
-            totalItemsWidth + (crossAxisCount - 1) * horizontalSpacing;
-
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 50),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: wrapWidth),
-              child: Wrap(
-                spacing: horizontalSpacing,
-                runSpacing: verticalSpacing,
-                children: specificTopicsList.map((arg) {
-                  return SizedBox(
-                    width: itemWidth,
-                    height: itemHeight,
-                    child: SpecificTopic(
-                      title: arg.title,
-                      description: arg.description,
-                      onTap: arg.onTap,
-                      url: arg.url,
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
-        );
-      },
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 50),
+        child: Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runAlignment: WrapAlignment.start,
+          spacing: spacing.$1,
+          runSpacing: spacing.$2,
+          children:
+              specificTopicsList.map((arg) {
+                return SpecificTopic(
+                  title: arg.title,
+                  description: arg.description,
+                  onTap: arg.onTap,
+                  url: arg.url,
+                );
+              }).toList(),
+        ),
+      ),
     );
   }
 }

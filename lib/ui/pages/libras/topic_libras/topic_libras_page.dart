@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/ui/core/layout/app_header.dart';
 import 'package:if_inclusivo/ui/pages/libras/topic_libras/viewmodels/specific_topic_viewmodel.dart';
 import 'package:if_inclusivo/ui/pages/libras/topic_libras/widgets/specific_topic_grid.dart';
-
 
 import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
 import '../../../core/layout/custom_container_shell.dart';
-import '../libras_details/widgets/top_content_libras.dart';
 import '../libras_home/widgets/search_not_found.dart';
 
 class TopicLibrasPage extends StatefulWidget {
@@ -18,7 +17,6 @@ class TopicLibrasPage extends StatefulWidget {
 }
 
 class _TopicLibrasPageState extends State<TopicLibrasPage> {
-
   final ScrollController _controller = ScrollController();
 
   @override
@@ -31,7 +29,7 @@ class _TopicLibrasPageState extends State<TopicLibrasPage> {
     final vm = widget.viewModel;
 
     if (_controller.position.pixels >=
-        _controller.position.maxScrollExtent - 200 &&
+            _controller.position.maxScrollExtent - 200 &&
         vm.state != SpecificTopicsState.loadingMore &&
         vm.hasMore) {
       vm.loadMore();
@@ -48,92 +46,117 @@ class _TopicLibrasPageState extends State<TopicLibrasPage> {
   @override
   Widget build(BuildContext context) {
     DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
+    String title = widget.viewModel.category.name.toLowerCase().replaceAll(
+      '_',
+      ' ',
+    );
+    if (title.isNotEmpty) {
+      title = title[0].toUpperCase() + title.substring(1);
+    }
 
+    return device == DeviceScreenType.mobile
+        ? _buildMobile(title)
+        : _buildBigScreens(title);
+  }
+
+  CustomContainerShell _buildBigScreens(String title) {
+    return CustomContainerShell(
+      child: SingleChildScrollView(
+        controller: _controller,
+        child: Column(
+          children: [
+            AppHeader(
+              title: title,
+              subTitle:
+                  'Explore os principais sinais de Libras sobre este tema.',
+            ),
+            _buildContent(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Scaffold _buildMobile(String title) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          controller: _controller,
+          child: Column(
+            children: [
+               Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+                 child: Text(
+                  "Explore os principais sinais de Libras sobre este tema.",
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: Theme.of(context).primaryColor
+                  ),
+                   textAlign: TextAlign.center,
+                               ),
+               ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              child: _buildContent(),),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildContent() {
     return ListenableBuilder(
       listenable: widget.viewModel,
       builder: (context, _) {
         if (widget.viewModel.state == SpecificTopicsState.loading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        String title = widget.viewModel.category.name.toLowerCase().replaceAll(
-          '_',
-          ' ',
-        );
-        if (title.isNotEmpty) {
-          title = title[0].toUpperCase() + title.substring(1);
-        }
-        List<SpecificTopicGridParams> items =
-            widget.viewModel.models.isEmpty
-                ? []
-                : widget.viewModel.models.map((model) {
-                  return SpecificTopicGridParams(
-                    title: model.palavra,
-                    description: model.descricao,
-                    url: model.url,
-                    onTap:
-                        () => {
-                          MidiaCategoriaRouter( categoria: widget.viewModel.category.name, id: model.id).go(context),
-                        },
-                  );
-                }).toList();
-
-        Widget searchNotFound = SearchNotFound(
-          onPressed: () {
-            WordSuggestionRouter().push(context);
-          },
-          text: 'Não foram encontradas palavras relacionadas a este tema',
-          text2: 'Gostaria de sugerir alguma?',
-        );
-
-        Widget specificTopicGrid = SpecificTopicGrid(specificTopicsList: items);
-        Widget content = specificTopicGrid;
-
-        if (items.isEmpty) {
-          content = searchNotFound;
-        }
-
-        return device == DeviceScreenType.mobile
-            ? Scaffold(
-              appBar: AppBar(title: Text(title)),
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  controller: _controller,
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Explore os principais sinais de Libras sobre este tema.",
-                      ),
-                      const SizedBox(height: 90),
-                      content,
-                      if(widget.viewModel.state == SpecificTopicsState.loadingMore)SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(),
-                      )
-                    ],
-                  ),
-                ),
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 150.0),
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(),
               ),
+            ),
+          );
+        }
+        final items =
+            widget.viewModel.models.map((model) {
+              return SpecificTopicGridParams(
+                title: model.palavra,
+                description: model.descricao,
+                url: model.url,
+                onTap:
+                    () => {
+                      MidiaCategoriaRouter(
+                        categoria: widget.viewModel.category.name,
+                        id: model.id,
+                      ).go(context),
+                    },
+              );
+            }).toList();
+
+        return items.isEmpty
+            ? SearchNotFound(
+              onPressed: () {
+                WordSuggestionRouter().push(context);
+              },
+              text: 'Não foram encontradas palavras relacionadas a este tema',
+              text2: 'Gostaria de sugerir alguma?',
             )
-            : CustomContainerShell(
-          scrollController: _controller,
-              child: Column(
-                children: [
-                  TopContentLibras(
-                    title: title,
-                    subtitle:
-                        "Explore os principais sinais de Libras sobre este tema.",
-                  ),
-                  const SizedBox(height: 15),
-                  content,
-                  if(widget.viewModel.state == SpecificTopicsState.loadingMore)SizedBox(
+            : Column(
+              children: [
+                ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 884),
+                  child: Center(child: SpecificTopicGrid(specificTopicsList: items)),
+                ),
+                if (widget.viewModel.state == SpecificTopicsState.loading)
+                  SizedBox(
                     width: 50,
                     height: 50,
                     child: CircularProgressIndicator(),
-                  )
-                ],
-              ),
+                  ),
+              ],
             );
       },
     );
