@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
+import 'package:if_inclusivo/ui/core/widgets/sliver_sticky_header.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_home/widgets/libras_home_header.dart';
 
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 
@@ -88,43 +90,26 @@ class _LibrasHomePageState extends State<LibrasHomePage> {
         return device == DeviceScreenType.mobile
             ? _buildMobile()
             : CustomContainerShell(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TopContentLibras(
-                      title: "CONVERTE LIBRAS",
-                      subtitle:
-                          "Um dicionário de sinais criado para a comunidade",
-                      searchBar: CustomSearchBar(
-                        suggestions: widget.viewmodel.suggestions,
-                        loadingSuggestions: widget.viewmodel.loadingSugestion,
-                        onQueryChanged:
-                            (q) async => await widget.viewmodel
-                                .searchSuggestions(query: q),
-                        onSubmit:
-                            (value) async =>
-                                await widget.viewmodel.fetchLibrasByWord(value),
-                      ),
+              child: StickyHeaderScrollView(
+                header: ResponsiveUtils.centralized(context: context, child: LibrasHomeHeader()),
+                stickyHeader: ResponsiveUtils.centralized(context: context, child: _buildSearchBar()),
+                  body: [
+                    SliverToBoxAdapter(
+                      child: ListenableBuilder(
+                          listenable: widget.viewmodel,
+                          builder: (context,_){
+                            final Widget content =
+                            (widget.viewmodel.isSearchActive ||
+                                widget.viewmodel.words.isNotEmpty)
+                                ? ResponsiveUtils.centralized(context: context,child: SearchResult(viewmodel: widget.viewmodel))
+                                : Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 37.0, horizontal: 16),
+                              child: FilterBlockGrid(filterBlockList: _getItems(context)),
+                            );
+                            return content;
+                          }),
                     ),
-                    SizedBox(height: 15),
-                    ListenableBuilder(
-                        listenable: widget.viewmodel,
-                        builder: (context,_){
-                          final Widget content =
-                          (widget.viewmodel.isSearchActive ||
-                              widget.viewmodel.words.isNotEmpty)
-                              ? SearchResult(viewmodel: widget.viewmodel)
-                              : Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 37.0),
-                            child: FilterBlockGrid(filterBlockList: _getItems(context)),
-                          );
-                          return content;
-                        }),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              ),
+                  ],),
             );
       },
     );
@@ -134,71 +119,22 @@ class _LibrasHomePageState extends State<LibrasHomePage> {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 16,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      spacing: 5,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/logo/logo_short_dark.svg',
-                          height: 60,
-                        ),
-                        Text(
-                          'Converte libras',
-                          style: textTheme.headlineMedium,
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.notifications_outlined),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 8,),
-              Padding(
-                padding: const EdgeInsets.symmetric( horizontal: 8.0,),
-                child: CustomSearchBar(
-                  suggestions: widget.viewmodel.suggestions,
-                  loadingSuggestions: widget.viewmodel.loadingSugestion,
-                  onQueryChanged:
-                      (q) async =>
-                  await widget.viewmodel.searchSuggestions(query: q),
-                  onSubmit:
-                      (value) async =>
-                  await widget.viewmodel.fetchLibrasByWord(value),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Container(
-                  color: Theme.of(context).colorScheme.outline,
-                  width: double.infinity,
-                  height: 1,
-                ),
-              ),
-
-              ListenableBuilder(
+      body: StickyHeaderScrollView(
+          header: LibrasHomeHeader(),
+          stickyHeader: Container(
+            color: colorScheme.surface,
+            child: _buildSearchBar(),
+          ),
+          body: [
+            SliverToBoxAdapter(
+              child: ListenableBuilder(
                   listenable: widget.viewmodel,
                   builder: (context,_){
-                final Widget content =
-                (widget.viewmodel.isSearchActive ||
-                    widget.viewmodel.words.isNotEmpty)
-                    ? SearchResult(viewmodel: widget.viewmodel)
-                    : Padding(
+                    final Widget content =
+                    (widget.viewmodel.isSearchActive ||
+                        widget.viewmodel.words.isNotEmpty)
+                        ? SearchResult(viewmodel: widget.viewmodel)
+                        : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Column(
                         children: [
@@ -207,19 +143,52 @@ class _LibrasHomePageState extends State<LibrasHomePage> {
                             child: Text("Um dicionário de sinais criado para a comunidade",
                               textAlign: TextAlign.center,
                               style: textTheme.titleSmall?.copyWith(
-                                color: colorScheme.primary
-                            ),),
+                                  color: colorScheme.primary
+                              ),),
                           ),
                           FilterBlockGrid(filterBlockList: _getItems(context)),
                         ],
                       ),
                     );
-                return content;
-              })
-            ],
+                    return content;
+                  }),
+            )
+          ]),
+    );
+  }
+  _buildSearchBar(){
+    return Column(
+      spacing: 8,
+      children: [
+          SizedBox(height: 5,),
+          Padding(
+          padding: const EdgeInsets.symmetric( horizontal: 8.0,),
+          child: ListenableBuilder(
+            listenable:widget.viewmodel ,
+            builder: (context,_) {
+              return CustomSearchBar(
+                suggestions: widget.viewmodel.suggestions,
+                loadingSuggestions: widget.viewmodel.loadingSugestion,
+                onQueryChanged:
+                    (q) async =>
+                await widget.viewmodel.searchSuggestions(query: q),
+                onSubmit:
+                    (value) async =>
+                await widget.viewmodel.fetchLibrasByWord(value),
+              );
+            }
           ),
         ),
-      ),
+        if(ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile)
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Container(
+            color: Theme.of(context).colorScheme.outline,
+            width: double.infinity,
+            height: 1,
+          ),
+        ),
+      ],
     );
   }
 }

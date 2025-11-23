@@ -30,9 +30,8 @@ class FilterBlockGrid extends StatelessWidget {
             ((crossAxisCount - 1) * gridSpacing);
 
         double constraintWidth = 800.0;
-        if (idealMaxWidth < constraintWidth) {
-          constraintWidth = idealMaxWidth;
-        }
+
+
 
         double finalWidth = screenWidth > constraintWidth ? constraintWidth : screenWidth;
 
