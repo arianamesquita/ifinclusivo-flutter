@@ -55,7 +55,7 @@ class MidiaRouter extends GoRouteData with _$MidiaRouter {
   Widget build(BuildContext context, GoRouterState state) {
     final vm = LibrasViewModel(repository: context.read());
     vm.fetchLibrasCmd.execute(id);
-    return MidiaPageLibras(viewModel: vm,);
+    return LibrasDetails(viewModel: vm,);
   }
 }
 const midiaCategoriaRouter = TypedGoRoute<MidiaCategoriaRouter>(path: AppRoutes.midia);
@@ -77,7 +77,7 @@ class MidiaCategoriaRouter extends GoRouteData with _$MidiaCategoriaRouter{
     final vm = LibrasViewModel(repository: context.read());
     vm.fetchLibrasCmd.execute(id);
     vm.fetchRelacionados(id: id);
-    return MidiaPageLibras(viewModel: vm,);
+    return LibrasDetails(viewModel: vm,);
   }
 }
 

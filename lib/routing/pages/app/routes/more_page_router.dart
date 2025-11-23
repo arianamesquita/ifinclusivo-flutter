@@ -15,11 +15,13 @@ class MorePageRouter extends GoRouteData with _$MorePageRouter {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return CustomContainerShell(
-      child: Placeholder(
-        color: Colors.yellow,
-        child: ElevatedButton(
-          onPressed: () => ManagementLibrasRouter().go(context),
-          child: Text("gerenciar libras"),
+      child: SingleChildScrollView(
+        child: Placeholder(
+          color: Colors.yellow,
+          child: ElevatedButton(
+            onPressed: () => ManagementLibrasRouter().go(context),
+            child: Text("gerenciar libras"),
+          ),
         ),
       ),
     );
