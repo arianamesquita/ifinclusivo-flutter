@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:if_inclusivo/data/repositories/auth_repository.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../domain/models/api/response/gen_responses.dart';
 import '../../../../../routing/app_router.dart';
@@ -15,14 +13,15 @@ class ProfilePreview extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
           SizedBox(
             width: 189,
             height: 189,
-            child: CircleAvatar(backgroundImage: NetworkImage(user.imgPerfil)),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(user.imgPerfil),
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 17.0, bottom: 21),
+            padding: const EdgeInsets.only(top: 17.0,bottom: 21),
             child: Column(
               spacing: 8,
               children: [
@@ -40,7 +39,9 @@ class ProfilePreview extends StatelessWidget {
                 ),
                 Text(
                   user.biografia ?? 'sem biografia',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(
                     color: Theme.of(context).colorScheme.outline,
                   ),
                 ),
@@ -52,13 +53,13 @@ class ProfilePreview extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FilledButton(
-                onPressed: () {
-                  // EditProfileRouter().go(context);
+                onPressed: ()  {
+                  EditProfileRouter().go(context);
                 },
                 child: Text('Editar Perfil'),
               ),
               IconButton(
-                onPressed: () => AccountSecurityRouter().go(context),
+                onPressed:()=> AccountSecurityRouter().go(context),
                 icon: Icon(Icons.settings),
                 color: Theme.of(context).colorScheme.primary,
                 tooltip: 'Configurações',
