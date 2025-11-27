@@ -236,6 +236,10 @@ class _BuildMobileAPPState extends State<BuildMobileAPP> {
       stream: authRepository.authStateChanges,
       initialData: authRepository.currentUser,
       builder: (context, snapshot) {
+        if(authRepository.currentUser == null){
+          ForumRouter().go(context);
+        }
+
         return showFullScreen ? widget.child : Scaffold(
           key: appScaffoldKey,
           body: widget.child,

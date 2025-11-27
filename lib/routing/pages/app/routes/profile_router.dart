@@ -27,13 +27,17 @@ TypedGoRoute<EditProfileRouter>(
   path: AppRoutes.editProfile,
 );
 
-class EditProfileRouter extends GoRouteData with _$EditProfileRouter {
+class EditProfileRouter extends ProtectedRouteData with _$EditProfileRouter {
   const EditProfileRouter();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const EditProfilePage();
   }
+
+  @override
+  // TODO: implement allowedRoles
+  List<Roles> get allowedRoles => Roles.values;
 }
 
 const TypedGoRoute<ProfileRouter> profileRouter = TypedGoRoute<ProfileRouter>(
