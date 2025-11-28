@@ -36,7 +36,6 @@ class EditProfileRouter extends ProtectedRouteData with _$EditProfileRouter {
   }
 
   @override
-  // TODO: implement allowedRoles
   List<Roles> get allowedRoles => Roles.values;
 }
 
