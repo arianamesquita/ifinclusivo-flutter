@@ -180,12 +180,14 @@ final GlobalKey<ScaffoldState> appScaffoldKey = GlobalKey<ScaffoldState>();
 Future<T?> openAppBottomSheet<T>({
   required WidgetBuilder builder,
   bool isScrollControlled = true,
+  showDragHandle = true
 }) async {
   final context = appScaffoldKey.currentContext;
 
   if (context == null) return null;
 
   return showModalBottomSheet<T>(
+    showDragHandle: showDragHandle,
     context: context,
     isScrollControlled: isScrollControlled,
     builder: builder,
@@ -236,9 +238,7 @@ class _BuildMobileAPPState extends State<BuildMobileAPP> {
       stream: authRepository.authStateChanges,
       initialData: authRepository.currentUser,
       builder: (context, snapshot) {
-        if(authRepository.currentUser == null){
-          ForumRouter().go(context);
-        }
+
 
         return showFullScreen ? widget.child : Scaffold(
           key: appScaffoldKey,

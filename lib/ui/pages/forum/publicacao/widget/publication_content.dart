@@ -12,6 +12,8 @@ import 'package:share_plus/share_plus.dart';
 import '../../../../../domain/models/api/response/gen_responses.dart';
 import '../../../../../routing/app_router.dart';
 import '../../../../../utils/forum_utils.dart';
+import '../../../auth/modal/auth_modals.dart';
+import '../../../shell/shell_page.dart';
 import 'card/widgets/account_header.dart';
 import 'card/widgets/bottom_bar_publication.dart';
 import 'card/widgets/list_chips_card.dart';
@@ -178,6 +180,9 @@ class _PublicationContentState extends State<PublicationContent> {
             ListChipsCard(categorias: publication.categorias),
 
             BottomBarPublication(
+              onBlocked: () {
+                showLoginRequiredDialog(context);
+              },
               likes: publication.totalLikes,
               comments: publication.totalRespostas,
               isLiked:
@@ -188,7 +193,8 @@ class _PublicationContentState extends State<PublicationContent> {
               isLoggedIn: vm.currentUser != null,
               onComment: null,
               onShare: () async {
-                const String baseUrl = "https://if-inclusivo.web.app/";                final String publicationUrl =
+                const String baseUrl = "https://if-inclusivo.web.app/";
+                final String publicationUrl =
                     "$baseUrl/#/app/forum/post/${publication.id}";
                 if (kIsWeb) {
                   // ------ LÓGICA PARA WEB ------
@@ -215,9 +221,7 @@ class _PublicationContentState extends State<PublicationContent> {
                     // Em alguns casos (ex: iframes seguros), o clipboard pode falhar
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Erro ao copiar o link.'),
-                        ),
+                        const SnackBar(content: Text('Erro ao copiar o link.')),
                       );
                     }
                   }
