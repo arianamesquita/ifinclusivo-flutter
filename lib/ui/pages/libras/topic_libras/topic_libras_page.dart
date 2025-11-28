@@ -61,18 +61,18 @@ class _TopicLibrasPageState extends State<TopicLibrasPage> {
 
   CustomContainerShell _buildBigScreens(String title) {
     return CustomContainerShell(
-      child: SingleChildScrollView(
+      child: CustomScrollView(
         controller: _controller,
-        child: Column(
-          children: [
-            AppHeader(
+        slivers: [
+          SliverToBoxAdapter(
+            child: AppHeader(
               title: title,
               subTitle:
                   'Explore os principais sinais de Libras sobre este tema.',
             ),
-            _buildContent(),
-          ],
-        ),
+          ),
+         _buildContentSliver()
+        ],
       ),
     );
   }
@@ -81,37 +81,39 @@ class _TopicLibrasPageState extends State<TopicLibrasPage> {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: CustomScrollView(
           controller: _controller,
-          child: Column(
-            children: [
-               Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
-                 child: Text(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 8,
+                ),
+                child: Text(
                   "Explore os principais sinais de Libras sobre este tema.",
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Theme.of(context).primaryColor
+                    color: Theme.of(context).primaryColor,
                   ),
-                   textAlign: TextAlign.center,
-                               ),
-               ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-              child: _buildContent(),),
-            ],
-          ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            _buildContentSliver(),
+          ],
         ),
       ),
     );
   }
 
-  _buildContent() {
+  Widget _buildContentSliver() {
     return ListenableBuilder(
       listenable: widget.viewModel,
       builder: (context, _) {
         if (widget.viewModel.state == SpecificTopicsState.loading) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 150.0),
+          return SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
               child: SizedBox(
                 width: 50,
                 height: 50,
@@ -120,6 +122,7 @@ class _TopicLibrasPageState extends State<TopicLibrasPage> {
             ),
           );
         }
+
         final items =
             widget.viewModel.models.map((model) {
               return SpecificTopicGridParams(
@@ -135,29 +138,28 @@ class _TopicLibrasPageState extends State<TopicLibrasPage> {
                     },
               );
             }).toList();
+        if (items.isEmpty) {
+          return SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
+              child: SearchNotFound(
+                onPressed: () => WordSuggestionRouter().push(context),
+                text: 'Não foram encontradas palavras relacionadas a este tema',
+                text2: 'Gostaria de sugerir alguma?',
+              ),
+            ),
+          );
+        }
 
-        return items.isEmpty
-            ? SearchNotFound(
-              onPressed: () {
-                WordSuggestionRouter().push(context);
-              },
-              text: 'Não foram encontradas palavras relacionadas a este tema',
-              text2: 'Gostaria de sugerir alguma?',
-            )
-            : Column(
-              children: [
-                ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 884),
-                  child: Center(child: SpecificTopicGrid(specificTopicsList: items)),
-                ),
-                if (widget.viewModel.state == SpecificTopicsState.loading)
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(),
-                  ),
-              ],
-            );
+        return SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 884),
+              child: SpecificTopicGrid(specificTopicsList: items),
+            ),
+          ),
+        );
       },
     );
   }

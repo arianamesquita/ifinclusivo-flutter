@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
 import 'package:if_inclusivo/domain/models/enums/cursos.dart';
 import 'package:if_inclusivo/domain/validators/email_validador.dart';
-import 'package:if_inclusivo/domain/validators/login_validator.dart';
 import 'package:if_inclusivo/domain/validators/matricula_validator.dart';
 import 'package:if_inclusivo/domain/validators/name_validator.dart';
 import 'package:if_inclusivo/domain/validators/password_validator.dart';
@@ -15,9 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../routing/app_router.dart';
 import '../../../../utils/responsive_utils.dart';
-import '../../../core/widgets/custom_text_field.dart';
 import '../../../core/widgets/hoverable_logo.dart';
-import '../../../core/widgets/password_text_field.dart';
 
 class RegisterDialogContent extends StatefulWidget {
   const RegisterDialogContent({super.key});
@@ -36,8 +33,10 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
   final TextEditingController _senhaController = TextEditingController();
   final PasswordFieldValidator senhaValidator = PasswordFieldValidator();
   final TextEditingController _confirmController = TextEditingController();
-  final TextEditingController _especialidadeController = TextEditingController();
-  final TextEditingController _especialidade2Controller = TextEditingController();
+  final TextEditingController _especialidadeController =
+      TextEditingController();
+  final TextEditingController _especialidade2Controller =
+      TextEditingController();
   final TextEditingController _formacaoController = TextEditingController();
   String? _tipoSelecionado;
   Cursos? _cursoSelecionado;
@@ -71,6 +70,7 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
     _especialidadeController.clear();
     _especialidade2Controller.clear();
     _formacaoController.clear();
+    _confirmController.clear();
 
     setState(() {
       _cursoSelecionado = null;
@@ -78,828 +78,803 @@ class _RegisterDialogContent extends State<RegisterDialogContent> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<RegisterViewModel>();
     final deviceType = ResponsiveUtils.getDeviceType(context);
     final fontScale = ResponsiveUtils.fontScale(context);
     return Scaffold(
-      body: Stack(
-        children: [
-          if (deviceType == DeviceScreenType.desktop)
-            _buildIntro(context),
-          Row(
-            children: [
-              if (deviceType == DeviceScreenType.desktop)
-                const Expanded(flex: 1, child: SizedBox()),
-              Expanded(
-                  flex: 1,
-                  child: Center(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        width: deviceType == DeviceScreenType.desktop ? 600 :
-                          deviceType == DeviceScreenType.tablet ? 500 : 300,
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                                'Cadastre-se',
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.onSurface,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: (Theme.of(context).textTheme.headlineMedium?.fontSize
-                                      ?? 20) * fontScale,
-                                  fontWeight: FontWeight.w600
+      body:
+          deviceType == DeviceScreenType.mobile
+              ? _buildMobile(viewModel)
+              : Stack(
+                children: [
+                  if (deviceType == DeviceScreenType.desktop)
+                    _buildIntro(context),
+                  Row(
+                    children: [
+                      if (deviceType == DeviceScreenType.desktop)
+                        const Expanded(flex: 1, child: SizedBox()),
+                      Expanded(
+                        flex: 1,
+                        child: Center(
+                          child: SingleChildScrollView(
+                            child: Container(
+                              width:
+                                  deviceType == DeviceScreenType.desktop
+                                      ? 600
+                                      : deviceType == DeviceScreenType.tablet
+                                      ? 500
+                                      : 300,
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Cadastre-se',
+                                    style: TextStyle(
+                                      color:
+                                          Theme.of(
+                                            context,
+                                          ).colorScheme.onSurface,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize:
+                                          (Theme.of(context)
+                                                  .textTheme
+                                                  .headlineMedium
+                                                  ?.fontSize ??
+                                              20) *
+                                          fontScale,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  buildForm(viewModel),
+                                  SizedBox(height: 30),
+                                  _buildButtons(viewModel),
+                                ],
                               ),
                             ),
-                            Form(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Text(
-                                        "Nome Completo",
-                                        style: TextStyle(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                ?? 18) * fontScale,
-                                            fontWeight: FontWeight.w400
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 6,
-                                                offset: const Offset(0,3)
-                                            )
-                                          ]
-                                      ),
-                                      child: TextFormField(
-                                        controller: _nameController,
-                                        style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
-                                        ),
-                                        decoration: InputDecoration(
-                                          hintText: 'Digite seu nome',
-                                          filled: true,
-                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
-                                            borderSide: BorderSide.none,
-                                          ), // dá a borda Material
-                                          errorText: isNameError ? errorName : null, // mostra o erro se existir
-                                        ),
-                                        validator: (String? value) {
-                                          final name = NameModel(name: value ?? '');
-                                          final ValidationResult result = nameValidator.validate(name);
-                                          if (result.isValid) {
-                                            setState(() => isNameError = false);
-                                            return null;
-                                          }
-                                          setState(() {
-                                            isNameError = true;
-                                            errorName = 'Nome inválido, ex: João da Silva';
-                                          });
-                                          return errorName;
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Text(
-                                        "Matrícula",
-                                        style: TextStyle(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                ?? 18) * fontScale,
-                                            fontWeight: FontWeight.w400
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 6,
-                                                offset: const Offset(0,3)
-                                            )
-                                          ]
-                                      ),
-                                      child: TextFormField(
-                                        controller: _matriculaController,
-                                        style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.digitsOnly, // 👈 só permite números
-                                        ],
-                                        decoration: InputDecoration(
-                                          hintText: 'Digite sua matrícula',
-                                          filled: true,
-
-                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
-                                            borderSide: BorderSide.none,
-                                          ), // dá a borda Material
-                                          errorText: isMatriculaError ? errorMatricula : null, // mostra o erro se existir
-                                        ),
-                                        validator: (String? value) {
-                                          final matricula = MatriculaModel(matricula: value ?? '');
-                                          final ValidationResult result = matriculaValidator.validate(matricula);
-                                          if (result.isValid) {
-                                            setState(() => isMatriculaError = false);
-                                            return null;
-                                          }
-                                          setState(() {
-                                            isMatriculaError = true;
-                                            errorMatricula = 'Matrícula inválida, ex: 2022121212121212';
-                                          });
-                                          return errorMatricula;
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Text(
-                                        "E-mail",
-                                        style: TextStyle(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                ?? 18) * fontScale,
-                                            fontWeight: FontWeight.w400
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 6,
-                                                offset: const Offset(0,3)
-                                            )
-                                          ]
-                                      ),
-                                      child: TextFormField(
-                                        controller: _emailController,
-                                        style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
-                                        ),
-                                        decoration: InputDecoration(
-                                          hintText: 'Digite seu e-mail',
-                                          filled: true,
-                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
-                                            borderSide: BorderSide.none,
-                                          ), // dá a borda Material
-                                          errorText: isEmailError ? errorEmail : null, // mostra o erro se existir
-                                        ),
-                                        validator: (String? value) {
-                                          final email = EmailModel(email: value ?? '');
-                                          final ValidationResult result = emailValidator.validate(email);
-                                          if (result.isValid) {
-                                            setState(() => isEmailError = false);
-                                            return null;
-                                          }
-                                          setState(() {
-                                            isEmailError = true;
-                                            errorEmail = 'E-mail inválido, ex: joao.silva@estudante.ifgoiano.edu.br';
-                                          });
-                                          return errorEmail;
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Text(
-                                        "Senha",
-                                        style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
-                                          fontStyle: FontStyle.normal,
-                                          fontSize:
-                                          (Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge
-                                              ?.fontSize ??
-                                              18) *
-                                              fontScale,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 6,
-                                                offset: const Offset(0,3)
-                                            )
-                                          ]
-                                      ),
-                                      child: TextFormField(
-                                        controller: _senhaController,
-                                        style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
-                                        ),
-                                        obscureText: !passwordVisible,
-                                        decoration: InputDecoration(
-                                          hintText: 'Digite sua senha',
-                                          filled: true,
-                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
-                                            borderSide: BorderSide.none,
-                                          ),
-                                          errorText: isSenhaError ? errorSenha : null, // mostra o erro se existir
-                                          suffixIcon: IconButton(
-                                            icon: Icon(
-                                              passwordVisible ? Icons.visibility_off : Icons.visibility,
-                                            ),
-                                            onPressed: () {
-                                              setState(() {
-                                                passwordVisible = !passwordVisible;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        validator: (String? value) {
-                                          final password = PasswordModel(password: value ?? '');
-                                          final ValidationResult result = senhaValidator.validate(password);
-
-                                          if (result.isValid) {
-                                            setState(() => isSenhaError = false);
-                                            return null;
-                                          }
-
-                                          setState(() {
-                                            isSenhaError = true;
-                                            errorSenha = 'Deve conter 6 letras.';
-                                          });
-                                          return errorSenha;
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Text(
-                                        "Confirmar senha",
-                                        style: TextStyle(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                ?? 18) * fontScale,
-                                            fontWeight: FontWeight.w400
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                blurRadius: 6,
-                                                offset: const Offset(0,3)
-                                            )
-                                          ]
-                                      ),
-                                      child: TextFormField(
-                                        controller: _confirmController,
-                                        style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
-                                        ),
-                                        obscureText: !password2Visible,
-                                        decoration: InputDecoration(
-                                          hintText: 'Digite a mesma senha do campo anterior.',
-                                          filled: true,
-                                          fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
-                                            borderSide: BorderSide.none,
-                                          ), // dá a borda Material
-                                          errorText: isConfirmError ? errorConfirm : null, // mostra o erro se existir
-                                          suffixIcon: IconButton(
-                                            icon: Icon(
-                                              password2Visible ? Icons.visibility_off : Icons.visibility,
-                                            ),
-                                            onPressed: () {
-                                              setState(() {
-                                                password2Visible = !passwordVisible;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        validator: (String? value) {
-                                          final isEqual = value == _senhaController.text;
-                                          if (isEqual) {
-                                            setState(() => isConfirmError = false);
-                                            return null;
-                                          }
-                                          setState(() {
-                                            isConfirmError = true;
-                                            errorConfirm = 'Senha inválida, a senha deve ter no mínimo 6 caracteres.';
-                                          });
-                                          return errorConfirm;
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(height: 20,),
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Text(
-                                        "Quem é você?",
-                                        style: TextStyle(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                            fontStyle: FontStyle.normal,
-                                            fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                ?? 18) * fontScale,
-                                            fontWeight: FontWeight.w400
-                                        ),
-                                      ),
-                                    ),
-                                    RadioGroup<String>(
-                                      groupValue: _tipoSelecionado,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _tipoSelecionado = value;
-                                          print('O tipo selecionado $_tipoSelecionado');
-                                        });
-                                      },
-                                      child: Column(
-                                        children: [
-                                          RadioListTile<String>(
-                                            title: Text(
-                                                'Professor',
-                                                style: TextStyle(
-                                                  color: Theme.of(context).colorScheme.onSurface,
-                                                )
-                                            ),
-                                            value: 'professor',
-                                          ),
-                                          RadioListTile<String>(
-                                            title: Text(
-                                                'Tutor',
-                                                style: TextStyle(
-                                                  color: Theme.of(context).colorScheme.onSurface,
-                                                )
-                                            ),
-                                            value: 'tutor',
-                                          ),
-                                          RadioListTile<String>(
-                                            title: Text(
-                                                'Intérprete',
-                                                style: TextStyle(
-                                                  color: Theme.of(context).colorScheme.onSurface,
-                                                )
-                                            ),
-                                            value: 'interprete',
-                                          ),
-                                          RadioListTile<String>(
-                                            title: Text(
-                                                'Aluno',
-                                                style: TextStyle(
-                                                  color: Theme.of(context).colorScheme.onSurface,
-                                                )
-                                            ),
-                                            value: 'aluno',
-                                          ),
-                                        ],
-                                      )
-                                    ),
-                                    if(_tipoSelecionado == 'professor') ...[
-                                      Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Text(
-                                          "Formação (Opcional)",
-                                          style: TextStyle(
-                                              color: Theme.of(context).colorScheme.onSurface,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                  ?? 18) * fontScale,
-                                              fontWeight: FontWeight.w400
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(50),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.grey,
-                                                  blurRadius: 6,
-                                                  offset: const Offset(0,3)
-                                              )
-                                            ]
-                                        ),
-                                        child: TextFormField(
-                                          controller: _formacaoController,
-                                          style: TextStyle(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                          ),
-                                          decoration: InputDecoration(
-                                            hintText: 'Digite qual sua formação.',
-                                            filled: true,
-                                            fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(50),
-                                              borderSide: BorderSide.none,
-                                            ), // dá a borda Material
-                                          ),
-                                        ),
-                                      ),
-                                    ] else if (_tipoSelecionado == 'tutor') ...[
-                                      Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Text(
-                                          "Especialidade",
-                                          style: TextStyle(
-                                              color: Theme.of(context).colorScheme.onSurface,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                  ?? 18) * fontScale,
-                                              fontWeight: FontWeight.w400
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(50),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.grey,
-                                                  blurRadius: 6,
-                                                  offset: const Offset(0,3)
-                                              )
-                                            ]
-                                        ),
-                                        child: TextFormField(
-                                          controller: _especialidadeController,
-                                          style: TextStyle(
-                                            color: Theme.of(context).colorScheme.onSurface,
-                                          ),
-                                          decoration: InputDecoration(
-                                            hintText: 'Digite qual sua especialidade.',
-                                            filled: true,
-                                            fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(50),
-                                              borderSide: BorderSide.none,
-                                            ), // dá a borda Material
-                                          ),
-                                        ),
-                                      ),
-                                    ] else if (_tipoSelecionado == 'interprete') ...[
-                                      Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Text(
-                                          "Especialidade",
-                                          style: TextStyle(
-                                              color: Theme.of(context).colorScheme.onSurface,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                  ?? 18) * fontScale,
-                                              fontWeight: FontWeight.w400
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(50),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.grey,
-                                                  blurRadius: 6,
-                                                  offset: const Offset(0,3)
-                                              )
-                                            ]
-                                        ),
-                                        child: TextFormField(
-                                          controller: _especialidade2Controller,
-                                          style: const TextStyle(
-                                              color: Color.fromRGBO(22, 29, 27, 1)
-                                          ),
-                                          decoration: InputDecoration(
-                                            hintText: 'Digite qual sua especialidade.',
-                                            filled: true,
-                                            fillColor: Color.fromRGBO(252, 249, 248, 1),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(50),
-                                              borderSide: BorderSide.none,
-                                            ), // dá a borda Material
-                                          ),
-                                        ),
-                                      ),
-                                    ] else if (_tipoSelecionado == 'aluno') ...[
-                                      Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Text(
-                                          "Curso",
-                                          style: TextStyle(
-                                              color: Theme.of(context).colorScheme.onSurface,
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                  ?? 18) * fontScale,
-                                              fontWeight: FontWeight.w400
-                                          ),
-                                        ),
-                                      ),
-                                      DropdownButtonFormField<Cursos>(
-                                        initialValue: _cursoSelecionado,
-                                        hint: Text('Selecione um Curso'),
-                                        items: Cursos.values.map((curso) {
-                                          String label;
-                                          switch(curso){
-                                            case Cursos.SI:
-                                              label = "Sistemas de Informação";
-                                              break;
-                                            case Cursos.CIENCIA_COMPUTACAO:
-                                              label = "Ciência da computação";
-                                              break;
-
-                                            case Cursos.ENGENHARIA_DE_SOFTWARE:
-                                              label = "Engenharia de Software";
-                                              break;
-
-                                            case Cursos.TADS:
-                                              label = "TADS";
-                                              break;
-                                          }
-                                          return DropdownMenuItem<Cursos>(
-                                            value: curso,
-                                            child: Text(
-                                              curso == Cursos.SI
-                                                  ? 'Sistemas de Informação'
-                                                  : 'Ensino Médio - Técnico de TI',
-                                              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-                                            ),
-                                          );
-                                        }).toList(),
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _cursoSelecionado = value;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: Colors.white,
-                                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
-                                            borderSide: BorderSide.none,
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(50),
-                                            borderSide: BorderSide.none,
-                                          ),
-                                        ),
-                                        dropdownColor: Colors.white,
-                                        isDense: true,
-                                      ),
-                                    ],
-                                    SizedBox(height: 30),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                          onPressed:
-                                          isLoading
-                                              ? null
-                                              : () async {
-                                            setState(
-                                                  () => isLoading = true,
-                                            );
-                                            if(_tipoSelecionado == 'professor') {
-                                              final professorData = ProfessorRequestModel(
-                                                nome: _nameController.text,
-                                                login: _emailController.text,
-                                                senha: _senhaController.text,
-                                                formacao: _formacaoController.text,
-                                                matricula: int.parse(_matriculaController.text),
-                                              );
-                                              final success = await viewModel.registerNewProfessor(professorData);
-                                              setState(
-                                                    () => isLoading = false,
-                                              );
-                                              if(success && viewModel.errorMessage == null){
-                                                AuthModals.userCreatedSuccess(context: context);
-                                                LoginRoute().pushReplacement(context);
-                                                _resetForm();
-                                              } else {
-                                                viewModel.errorMessage ?? 'Usuário Duplicado';
-                                                AuthModals.userRegisterError(context: context);
-                                                _resetForm();
-                                              }
-                                            }else if(_tipoSelecionado == 'tutor') {
-                                              final tutorData = TutorRequestModel(
-                                                nome: _nameController.text,
-                                                login: _emailController.text,
-                                                senha: _senhaController.text,
-                                                especialidade: _especialidadeController.text,
-                                                matricula: int.parse(_matriculaController.text),
-                                              );
-                                              final success = await viewModel.registerNewTutor(tutorData);
-                                              setState(
-                                                    () => isLoading = false,
-                                              );
-                                              print('Salvo com sucesso $success');
-                                              if(success && viewModel.errorMessage == null){
-                                                AuthModals.userCreatedSuccess(context: context);
-                                                LoginRoute().pushReplacement(context);
-                                                _resetForm();
-                                              } else {
-                                                viewModel.errorMessage ?? 'Usuário Duplicado';
-                                                AuthModals.userRegisterError(context: context);
-                                                _resetForm();
-                                              }
-                                            }else if(_tipoSelecionado == 'interprete') {
-                                              final interpreteData = InterpreteRequestModel(
-                                                nome: _nameController.text,
-                                                login: _emailController.text,
-                                                senha: _senhaController.text,
-                                                salary: 0,
-                                                especialidade: _especialidadeController.text,
-                                                matricula: int.parse(_matriculaController.text),
-                                              );
-                                              final success = await viewModel.registerNewInterprete(interpreteData);
-                                              setState(
-                                                    () => isLoading = false,
-                                              );
-                                              print('Salvo com sucesso $success');
-                                              if(success && viewModel.errorMessage == null){
-                                                AuthModals.userCreatedSuccess(context: context);
-                                                LoginRoute().pushReplacement(context);
-                                                _resetForm();
-                                              } else {
-                                                viewModel.errorMessage ?? 'Usuário Duplicado';
-                                                AuthModals.userRegisterError(context: context);
-                                                _resetForm();
-                                              }
-                                            }else if(_tipoSelecionado == 'aluno') {
-                                              final alunoData = AlunoRequestModel(
-                                                nome: _nameController.text,
-                                                login: _emailController.text,
-                                                senha: _senhaController.text,
-                                                curso: _cursoSelecionado!,
-                                                matricula: int.parse(_matriculaController.text),
-                                              );
-                                              final success = await viewModel.registerNewAluno(alunoData);
-                                              setState(
-                                                    () => isLoading = false,
-                                              );
-                                              print('Salvo com sucesso $success');
-                                              if(success && viewModel.errorMessage == null){
-                                                AuthModals.userCreatedSuccess(context: context);
-                                                LoginRoute().pushReplacement(context);
-                                                _resetForm();
-                                              } else {
-                                                viewModel.errorMessage ?? 'Usuário Duplicado';
-                                                AuthModals.userRegisterError(context: context);
-                                                _resetForm();
-                                              }
-                                            }
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor: Color.fromRGBO(76, 159, 132, 1),
-                                              foregroundColor: Color.fromRGBO(255, 255, 255, 1)
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:
-                                            isLoading
-                                                ? const SizedBox(
-                                              height: 20,
-                                              width: 20,
-                                              child:
-                                              CircularProgressIndicator(
-                                                color: Colors.white,
-                                                strokeWidth: 2,
-                                              ),
-                                            ) :
-                                            Text(
-                                              'Cadastrar',
-                                              style: TextStyle(
-                                                  fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize
-                                                      ?? 18) * fontScale,
-                                                  fontWeight: FontWeight.w500
-                                              ),
-                                            ),
-                                          )
-                                      ),
-                                    ),
-                                    SizedBox(height: 15),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Já possui conta?',
-                                            style: TextStyle(
-                                              color: Theme.of(context).colorScheme.onSurface,
-                                              fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
-                                                  ?? 16) * fontScale,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                          TextButton(
-                                              onPressed: () {
-                                                LoginRoute().pushReplacement(context);
-                                              },
-                                              child: Text(
-                                                'Entre',
-                                                style: TextStyle(
-                                                    color: Theme.of(context).colorScheme.onSurface,
-                                                    fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize
-                                                        ?? 16) * fontScale,
-                                                    fontWeight: FontWeight.w700
-                                                ),
-                                              )
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )
-                            )
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  )
-              )
-            ],
-          )
-        ],
-      ),
+                    ],
+                  ),
+                ],
+              ),
     );
   }
-  _buildIntro(context){
-    return Stack(
+
+  Form buildForm(RegisterViewModel viewModel) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Positioned(
-            left: 40,
-            top: -10,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                'assets/login_register/register_retanguloroxo.png',
-                height: 500,
-              ),
-            ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text("Nome Completo", style: textTheme.bodyLarge),
           ),
-          Positioned(
-            left: 110,
-            top: 0,
-            child: Image.asset(
-              'assets/login_register/register_retanguloverde.png',
-              height: 550,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: TextFormField(
+              controller: _nameController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              decoration: InputDecoration(
+                hintText: 'Digite seu nome',
+                filled: true,
+                fillColor: Color.fromRGBO(252, 249, 248, 1),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ), // dá a borda Material
+                errorText:
+                    isNameError ? errorName : null, // mostra o erro se existir
+              ),
+              validator: (String? value) {
+                final name = NameModel(name: value ?? '');
+                final ValidationResult result = nameValidator.validate(name);
+                if (result.isValid) {
+                  setState(() => isNameError = false);
+                  return null;
+                }
+                setState(() {
+                  isNameError = true;
+                  errorName = 'Nome inválido, ex: João da Silva';
+                });
+                return errorName;
+              },
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 160),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: const EdgeInsets.all(15.0),
+            child: Text("Matrícula", style: textTheme.bodyLarge),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: TextFormField(
+              controller: _matriculaController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly, // 👈 só permite números
+              ],
+              decoration: InputDecoration(
+                hintText: 'Digite sua matrícula',
+                filled: true,
+
+                fillColor: Color.fromRGBO(252, 249, 248, 1),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ), // dá a borda Material
+                errorText:
+                    isMatriculaError
+                        ? errorMatricula
+                        : null, // mostra o erro se existir
+              ),
+              validator: (String? value) {
+                final matricula = MatriculaModel(matricula: value ?? '');
+                final ValidationResult result = matriculaValidator.validate(
+                  matricula,
+                );
+                if (result.isValid) {
+                  setState(() => isMatriculaError = false);
+                  return null;
+                }
+                setState(() {
+                  isMatriculaError = true;
+                  errorMatricula = 'Matrícula inválida, ex: 2022121212121212';
+                });
+                return errorMatricula;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text("E-mail", style: textTheme.bodyLarge),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: TextFormField(
+              controller: _emailController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              decoration: InputDecoration(
+                hintText: 'Digite seu e-mail',
+                filled: true,
+                fillColor: Color.fromRGBO(252, 249, 248, 1),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ), // dá a borda Material
+                errorText:
+                    isEmailError
+                        ? errorEmail
+                        : null, // mostra o erro se existir
+              ),
+              validator: (String? value) {
+                final email = EmailModel(email: value ?? '');
+                final ValidationResult result = emailValidator.validate(email);
+                if (result.isValid) {
+                  setState(() => isEmailError = false);
+                  return null;
+                }
+                setState(() {
+                  isEmailError = true;
+                  errorEmail =
+                      'E-mail inválido, ex: joao.silva@estudante.ifgoiano.edu.br';
+                });
+                return errorEmail;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text("Senha", style: textTheme.bodyLarge),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: TextFormField(
+              controller: _senhaController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              obscureText: !passwordVisible,
+              decoration: InputDecoration(
+                hintText: 'Digite sua senha',
+                filled: true,
+                fillColor: Color.fromRGBO(252, 249, 248, 1),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ),
+                errorText:
+                    isSenhaError
+                        ? errorSenha
+                        : null, // mostra o erro se existir
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    passwordVisible ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      passwordVisible = !passwordVisible;
+                    });
+                  },
+                ),
+              ),
+              validator: (String? value) {
+                final password = PasswordModel(password: value ?? '');
+                final ValidationResult result = senhaValidator.validate(
+                  password,
+                );
+
+                if (result.isValid) {
+                  setState(() => isSenhaError = false);
+                  return null;
+                }
+
+                setState(() {
+                  isSenhaError = true;
+                  errorSenha = 'Deve conter 6 letras.';
+                });
+                return errorSenha;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text("Confirmar senha", style: textTheme.bodyLarge),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: TextFormField(
+              controller: _confirmController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              obscureText: !password2Visible,
+              decoration: InputDecoration(
+                hintText: 'Digite a mesma senha do campo anterior.',
+                filled: true,
+                fillColor: Color.fromRGBO(252, 249, 248, 1),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ), // dá a borda Material
+                errorText:
+                    isConfirmError
+                        ? errorConfirm
+                        : null, // mostra o erro se existir
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    password2Visible ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      password2Visible = !password2Visible;
+                    });
+                  },
+                ),
+              ),
+              validator: (String? value) {
+                final isEqual = value == _senhaController.text;
+                if (isEqual) {
+                  setState(() => isConfirmError = false);
+                  return null;
+                }
+                setState(() {
+                  isConfirmError = true;
+                  errorConfirm =
+                      'Senha inválida, a senha deve ter no mínimo 6 caracteres.';
+                });
+                return errorConfirm;
+              },
+            ),
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text("Quem é você?", style: textTheme.bodyLarge),
+          ),
+          RadioGroup<String>(
+            groupValue: _tipoSelecionado,
+            onChanged: (value) {
+              setState(() {
+                _tipoSelecionado = value;
+                print('O tipo selecionado $_tipoSelecionado');
+              });
+            },
+            child: Column(
               children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child:
-                    HoverableLogo(
-                      onTap: () => AboutUsRoute().go(context),
-                      imagePath: 'assets/logo/logo_expanded_light.svg',
-                      height: 94,
+                RadioListTile<String>(
+                  title: Text(
+                    'Professor',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
+                  value: 'professor',
+                ),
+                RadioListTile<String>(
+                  title: Text(
+                    'Tutor',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  value: 'tutor',
+                ),
+                RadioListTile<String>(
+                  title: Text(
+                    'Intérprete',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  value: 'interprete',
+                ),
+                RadioListTile<String>(
+                  title: Text(
+                    'Aluno',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  value: 'aluno',
                 ),
               ],
             ),
           ),
-          Positioned(
-            left: 110,
-            bottom: 30,
-            child: Image.asset(
-              'assets/login_register/register_monitor.png',
-              height: 396,
+          if (_tipoSelecionado == 'professor') ...[
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Formação (Opcional)", style: textTheme.bodyLarge),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: TextFormField(
+                controller: _formacaoController,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'Digite qual sua formação.',
+                  filled: true,
+                  fillColor: Color.fromRGBO(252, 249, 248, 1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none,
+                  ), // dá a borda Material
+                ),
+              ),
+            ),
+          ] else if (_tipoSelecionado == 'tutor') ...[
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Especialidade", style: textTheme.bodyLarge),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: TextFormField(
+                controller: _especialidadeController,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'Digite qual sua especialidade.',
+                  filled: true,
+                  fillColor: Color.fromRGBO(252, 249, 248, 1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none,
+                  ), // dá a borda Material
+                ),
+              ),
+            ),
+          ] else if (_tipoSelecionado == 'interprete') ...[
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Especialidade", style: textTheme.bodyLarge),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: TextFormField(
+                controller: _especialidade2Controller,
+                style: const TextStyle(color: Color.fromRGBO(22, 29, 27, 1)),
+                decoration: InputDecoration(
+                  hintText: 'Digite qual sua especialidade.',
+                  filled: true,
+                  fillColor: Color.fromRGBO(252, 249, 248, 1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none,
+                  ), // dá a borda Material
+                ),
+              ),
+            ),
+          ] else if (_tipoSelecionado == 'aluno') ...[
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Curso", style: textTheme.bodyLarge),
+            ),
+            DropdownButtonFormField<Cursos>(
+              initialValue: _cursoSelecionado,
+              hint: Text('Selecione um Curso'),
+              items:
+                  Cursos.values.map((curso) {
+                    String label;
+                    switch (curso) {
+                      case Cursos.SI:
+                        label = "Sistemas de Informação";
+                        break;
+                      case Cursos.CIENCIA_COMPUTACAO:
+                        label = "Ciência da computação";
+                        break;
+
+                      case Cursos.ENGENHARIA_DE_SOFTWARE:
+                        label = "Engenharia de Software";
+                        break;
+
+                      case Cursos.TADS:
+                        label = "TADS";
+                        break;
+                    }
+                    return DropdownMenuItem<Cursos>(
+                      value: curso,
+                      child: Text(
+                        label,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _cursoSelecionado = value;
+                });
+              },
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              dropdownColor: Colors.white,
+              isDense: true,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  _buildButtons(viewModel) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed:
+                isLoading
+                    ? null
+                    : () async {
+                      setState(() => isLoading = true);
+                      if (_tipoSelecionado == 'professor') {
+                        final professorData = ProfessorRequestModel(
+                          nome: _nameController.text,
+                          login: _emailController.text,
+                          senha: _senhaController.text,
+                          formacao: _formacaoController.text,
+                          matricula: int.parse(_matriculaController.text),
+                        );
+                        final success = await viewModel.registerNewProfessor(
+                          professorData,
+                        );
+                        setState(() => isLoading = false);
+                        if (success && viewModel.errorMessage == null) {
+                          AuthModals.userCreatedSuccess(context: context);
+                          LoginRoute().pushReplacement(context);
+                          _resetForm();
+                        } else {
+                          viewModel.errorMessage ?? 'Usuário Duplicado';
+                          AuthModals.userRegisterError(context: context);
+                          _resetForm();
+                        }
+                      } else if (_tipoSelecionado == 'tutor') {
+                        final tutorData = TutorRequestModel(
+                          nome: _nameController.text,
+                          login: _emailController.text,
+                          senha: _senhaController.text,
+                          especialidade: _especialidadeController.text,
+                          matricula: int.parse(_matriculaController.text),
+                        );
+                        final success = await viewModel.registerNewTutor(
+                          tutorData,
+                        );
+                        setState(() => isLoading = false);
+                        print('Salvo com sucesso $success');
+                        if (success && viewModel.errorMessage == null) {
+                          AuthModals.userCreatedSuccess(context: context);
+                          LoginRoute().pushReplacement(context);
+                          _resetForm();
+                        } else {
+                          viewModel.errorMessage ?? 'Usuário Duplicado';
+                          AuthModals.userRegisterError(context: context);
+                          _resetForm();
+                        }
+                      } else if (_tipoSelecionado == 'interprete') {
+                        final interpreteData = InterpreteRequestModel(
+                          nome: _nameController.text,
+                          login: _emailController.text,
+                          senha: _senhaController.text,
+                          salary: 0,
+                          especialidade: _especialidadeController.text,
+                          matricula: int.parse(_matriculaController.text),
+                        );
+                        final success = await viewModel.registerNewInterprete(
+                          interpreteData,
+                        );
+                        setState(() => isLoading = false);
+                        print('Salvo com sucesso $success');
+                        if (success && viewModel.errorMessage == null) {
+                          AuthModals.userCreatedSuccess(context: context);
+                          LoginRoute().pushReplacement(context);
+                          _resetForm();
+                        } else {
+                          viewModel.errorMessage ?? 'Usuário Duplicado';
+                          AuthModals.userRegisterError(context: context);
+                          _resetForm();
+                        }
+                      } else if (_tipoSelecionado == 'aluno') {
+                        final alunoData = AlunoRequestModel(
+                          nome: _nameController.text,
+                          login: _emailController.text,
+                          senha: _senhaController.text,
+                          curso: _cursoSelecionado!,
+                          matricula: int.parse(_matriculaController.text),
+                        );
+                        final success = await viewModel.registerNewAluno(
+                          alunoData,
+                        );
+                        setState(() => isLoading = false);
+                        print('Salvo com sucesso $success');
+                        if (success && viewModel.errorMessage == null) {
+                          AuthModals.userCreatedSuccess(context: context);
+                          LoginRoute().pushReplacement(context);
+                          _resetForm();
+                        } else {
+                          viewModel.errorMessage ?? 'Usuário Duplicado';
+                          AuthModals.userRegisterError(context: context);
+                          _resetForm();
+                        }
+                      }
+                    },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colorScheme.secondary,
+              foregroundColor: colorScheme.onSecondary,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+                  isLoading
+                      ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                      : Text(
+                        'Cadastrar',
+                        style: textTheme.bodyLarge?.copyWith(
+                          color: colorScheme.onSecondary,
+                        ),
+                      ),
             ),
           ),
-        ]
+        ),
+        SizedBox(height: 15),
+        SizedBox(
+          width: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Já possui conta?', style: textTheme.bodyLarge),
+              TextButton(
+                onPressed: () {
+                  LoginRoute().pushReplacement(context);
+                },
+                child: Text('Entre', style: textTheme.bodyLarge),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  _buildIntro(context) {
+    return Stack(
+      children: [
+        Positioned(
+          left: 40,
+          top: -10,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/login_register/register_retanguloroxo.png',
+              height: 500,
+            ),
+          ),
+        ),
+        Positioned(
+          left: 110,
+          top: 0,
+          child: Image.asset(
+            'assets/login_register/register_retanguloverde.png',
+            height: 550,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 160),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: HoverableLogo(
+                    onTap: () => AboutUsRoute().go(context),
+                    imagePath: 'assets/logo/logo_expanded_light.svg',
+                    height: 94,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          left: 110,
+          bottom: 30,
+          child: Image.asset(
+            'assets/login_register/register_monitor.png',
+            height: 396,
+          ),
+        ),
+      ],
+    );
+  }
+
+  _buildMobile(RegisterViewModel viewModel) {
+    final textTheme = Theme.of(context).textTheme;
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/icons/Backdround.png',
+            fit: BoxFit.cover, // muito importante
+          ),
+        ),
+
+        Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30.0,
+                vertical: 78,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Cadastre-se",
+                    style: textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 25),
+                    child: FittedBox(
+                      child: SvgPicture.asset(
+                        'assets/icons/Mobile login-pana 1 - singup.svg',
+                      ),
+                    ),
+                  ),
+                  buildForm(viewModel),
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: _buildButtons(viewModel),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

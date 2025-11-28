@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../auth/modal/auth_modals.dart';
+import '../../../../../shell/shell_page.dart';
 
 class BottomBarPublication extends StatefulWidget {
   final int likes;
@@ -10,16 +11,17 @@ class BottomBarPublication extends StatefulWidget {
   final VoidCallback? onLike;
   final VoidCallback? onComment;
   final VoidCallback? onShare;
+  final VoidCallback? onBlocked;
 
   const BottomBarPublication({
     super.key,
     required this.likes,
     required this.comments,
     this.isLiked = false,
-    required this.isLoggedIn ,
+    required this.isLoggedIn,
     this.onLike,
     this.onComment,
-    this.onShare,
+    this.onShare,required this.onBlocked,
   });
 
   @override
@@ -51,7 +53,7 @@ class _BottomBarPublicationState extends State<BottomBarPublication> {
 
   void _toggleLike() {
     if (!widget.isLoggedIn) {
-      showLoginRequiredDialog(context);
+      widget.onBlocked?.call();
       return;
     }
 
@@ -71,7 +73,7 @@ class _BottomBarPublicationState extends State<BottomBarPublication> {
 
   void _handleComment() {
     if (!widget.isLoggedIn) {
-      showLoginRequiredDialog(context);
+      widget.onBlocked?.call();
       return;
     }
     widget.onComment?.call();
@@ -93,9 +95,7 @@ class _BottomBarPublicationState extends State<BottomBarPublication> {
                   _liked
                       ? Icons.favorite_rounded
                       : Icons.favorite_outline_rounded,
-                  color: _liked
-                      ? Theme.of(context).colorScheme.error
-                      : null,
+                  color: _liked ? Theme.of(context).colorScheme.error : null,
                 ),
                 label: Text(_likes.toString()),
               ),

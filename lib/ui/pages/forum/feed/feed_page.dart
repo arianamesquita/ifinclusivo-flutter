@@ -26,6 +26,7 @@ class _FeedPageState extends State<FeedPage> {
   bool _showFab = true;
   final SearchController controller = SearchController();
   FocusNode searchFocus = FocusNode();
+  bool refresh = false;
 
   // Escuta mudanças no texto
 
@@ -127,170 +128,178 @@ class _FeedPageState extends State<FeedPage> {
                         )
                         : null,
                 body: SafeArea(
-                  child: StickyHeaderScrollView(
-                    header: _buildHeader(context),
-                    stickyHeader: _buildPinSearchBar(viewModel, context),
-                    body: [
-                      if (viewModel.state == FeedState.initialLoading)
-                        const SliverFillRemaining(
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      else if (viewModel.state == FeedState.empty)
-                        const SliverFillRemaining(
-                          child: Center(
-                            child: Text("Nenhuma publicação encontrada"),
-                          ),
-                        )
-                      else
-                        SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              if (index < viewModel.publications.length) {
-                                return _centralized(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0,
-                                    ),
-                                    child: PublicacaoCard(
-                                      key: ValueKey(
-                                        viewModel.publications[index].id,
-                                      ),
-                                      isLoggedIn: viewModel.currentUser != null,
-                                      onLike: () {
-                                        viewModel.toggleLikePublication(
-                                          viewModel.publications[index].id,
-                                        );
-                                      },
-                                      model: viewModel.publications[index],
-                                      onTap:
-                                          () => PublicacaoRouter(
-                                            viewModel.publications[index].id,
-                                          ).go(context),
-                                      menuItems:
-                                          (viewModel.currentUser != null &&
-                                                  viewModel.currentUser!.id ==
-                                                      viewModel
-                                                          .publications[index]
-                                                          .usuario
-                                                          .id)
-                                              ? [
-                                                PopupMenuItem(
-                                                  value: "Editar",
-                                                  child: Text("Editar"),
-                                                  onTap: () async {
-                                                    final bool?
-                                                    result = await context.push(
-                                                      NewPublicacaoRouter()
-                                                          .location,
-                                                      extra:
-                                                          viewModel
-                                                              .publications[index],
-                                                    );
+                  child: RefreshIndicator(
 
-                                                    if (result == true) {
-                                                      await viewModel
-                                                          .updatePubication(
+                    onRefresh: () async {
+                      setState(() => refresh = true);
+                     await viewModel.fetchPublications();
+                      setState(() => refresh = false);
+                    },
+                    child: StickyHeaderScrollView(
+                      header: _buildHeader(context),
+                      stickyHeader: _buildPinSearchBar(viewModel, context),
+                      body: [
+                        if (viewModel.state == FeedState.initialLoading && !refresh)
+                          const SliverFillRemaining(
+                            child: Center(child: CircularProgressIndicator()),
+                          )
+                        else if (viewModel.state == FeedState.empty)
+                          const SliverFillRemaining(
+                            child: Center(
+                              child: Text("Nenhuma publicação encontrada"),
+                            ),
+                          )
+                        else
+                          SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                                if (index < viewModel.publications.length) {
+                                  return _centralized(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0,
+                                      ),
+                                      child: PublicacaoCard(
+                                        key: ValueKey(
+                                          viewModel.publications[index].id,
+                                        ),
+                                        isLoggedIn: viewModel.currentUser != null,
+                                        onLike: () {
+                                          viewModel.toggleLikePublication(
+                                            viewModel.publications[index].id,
+                                          );
+                                        },
+                                        model: viewModel.publications[index],
+                                        onTap:
+                                            () => PublicacaoRouter(
+                                              viewModel.publications[index].id,
+                                            ).go(context),
+                                        menuItems:
+                                            (viewModel.currentUser != null &&
+                                                    viewModel.currentUser!.id ==
+                                                        viewModel
+                                                            .publications[index]
+                                                            .usuario
+                                                            .id)
+                                                ? [
+                                                  PopupMenuItem(
+                                                    value: "Editar",
+                                                    child: Text("Editar"),
+                                                    onTap: () async {
+                                                      final bool?
+                                                      result = await context.push(
+                                                        NewPublicacaoRouter()
+                                                            .location,
+                                                        extra:
                                                             viewModel
-                                                                .publications[index]
-                                                                .id,
+                                                                .publications[index],
+                                                      );
+
+                                                      if (result == true) {
+                                                        await viewModel
+                                                            .updatePubication(
+                                                              viewModel
+                                                                  .publications[index]
+                                                                  .id,
+                                                            );
+                                                      }
+                                                    },
+                                                  ),
+                                                  PopupMenuItem(
+                                                    value: "Excluir",
+                                                    child: Text("Excluir"),
+                                                    onTap: () {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            title: const Text(
+                                                              "Confirmar exclusão",
+                                                            ),
+                                                            content: const Text(
+                                                              "Tem certeza que deseja excluir esta publicação? Essa ação não poderá ser desfeita.",
+                                                            ),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                    context,
+                                                                  ).pop();
+                                                                },
+                                                                child: const Text(
+                                                                  "Cancelar",
+                                                                ),
+                                                              ),
+                                                              ElevatedButton(
+                                                                style: ElevatedButton.styleFrom(
+                                                                  backgroundColor:
+                                                                      Theme.of(
+                                                                            context,
+                                                                          )
+                                                                          .colorScheme
+                                                                          .error,
+                                                                  foregroundColor:
+                                                                      Theme.of(
+                                                                            context,
+                                                                          )
+                                                                          .colorScheme
+                                                                          .onError,
+                                                                ),
+                                                                onPressed: () async {
+                                                                  Navigator.of(
+                                                                    context,
+                                                                  ).pop();
+                                                                  viewModel
+                                                                      .deleteCommentsCommand
+                                                                      .execute(
+                                                                        viewModel
+                                                                            .publications[index]
+                                                                            .id,
+                                                                      );
+                                                                },
+                                                                child: const Text(
+                                                                  "Excluir",
+                                                                ),
+                                                              ),
+                                                            ],
                                                           );
-                                                    }
-                                                  },
-                                                ),
-                                                PopupMenuItem(
-                                                  value: "Excluir",
-                                                  child: Text("Excluir"),
-                                                  onTap: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return AlertDialog(
-                                                          title: const Text(
-                                                            "Confirmar exclusão",
-                                                          ),
-                                                          content: const Text(
-                                                            "Tem certeza que deseja excluir esta publicação? Essa ação não poderá ser desfeita.",
-                                                          ),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                  context,
-                                                                ).pop();
-                                                              },
-                                                              child: const Text(
-                                                                "Cancelar",
-                                                              ),
-                                                            ),
-                                                            ElevatedButton(
-                                                              style: ElevatedButton.styleFrom(
-                                                                backgroundColor:
-                                                                    Theme.of(
-                                                                          context,
-                                                                        )
-                                                                        .colorScheme
-                                                                        .error,
-                                                                foregroundColor:
-                                                                    Theme.of(
-                                                                          context,
-                                                                        )
-                                                                        .colorScheme
-                                                                        .onError,
-                                                              ),
-                                                              onPressed: () async {
-                                                                Navigator.of(
-                                                                  context,
-                                                                ).pop();
-                                                                viewModel
-                                                                    .deleteCommentsCommand
-                                                                    .execute(
-                                                                      viewModel
-                                                                          .publications[index]
-                                                                          .id,
-                                                                    );
-                                                              },
-                                                              child: const Text(
-                                                                "Excluir",
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                ),
-                                              ]
-                                              : [
-                                                PopupMenuItem(
-                                                  value: "denunciar",
-                                                  child: Text("Denunciar"),
-                                                  onTap: () {
-                                                    print(
-                                                      "Denunciar publicação",
-                                                    );
-                                                  },
-                                                ),
-                                              ],
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ]
+                                                : [
+                                                  PopupMenuItem(
+                                                    value: "denunciar",
+                                                    child: Text("Denunciar"),
+                                                    onTap: () {
+                                                      print(
+                                                        "Denunciar publicação",
+                                                      );
+                                                    },
+                                                  ),
+                                                ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              } else {
-                                return const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
-                              }
-                            },
-                            childCount:
-                                viewModel.publications.length +
-                                (viewModel.state == FeedState.loadingMore
-                                    ? 1
-                                    : 0),
+                                  );
+                                } else {
+                                  return const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                }
+                              },
+                              childCount:
+                                  viewModel.publications.length +
+                                  (viewModel.state == FeedState.loadingMore
+                                      ? 1
+                                      : 0),
+                            ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -356,11 +365,15 @@ class _FeedPageState extends State<FeedPage> {
                     categories: filters,
                     order: odern,
                   );
-                  _scrollController.animateTo(
-                    0,
-                    duration: const Duration(seconds: 1),
-                    curve: Curves.easeOut,
-                  );
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (_scrollController.hasClients) {
+                      _scrollController.animateTo(
+                        0,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeOut,
+                      );
+                    }
+                  });
                 },
               ),
             ),

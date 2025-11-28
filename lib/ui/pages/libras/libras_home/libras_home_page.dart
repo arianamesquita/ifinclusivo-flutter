@@ -4,6 +4,7 @@ import 'package:if_inclusivo/domain/models/enums/categorias.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
 import 'package:if_inclusivo/ui/core/widgets/sliver_sticky_header.dart';
 import 'package:if_inclusivo/ui/pages/libras/libras_home/widgets/libras_home_header.dart';
+import 'package:if_inclusivo/ui/pages/libras/libras_home/widgets/search_not_found.dart';
 
 import 'package:if_inclusivo/utils/responsive_utils.dart';
 
@@ -30,6 +31,7 @@ class _LibrasHomePageState extends State<LibrasHomePage> {
     controller.dispose();
     super.dispose();
   }
+
   _getItems(context) => [
     FilterBlockGridParams(
       label: 'Redes',
@@ -79,37 +81,81 @@ class _LibrasHomePageState extends State<LibrasHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return ListenableBuilder(
       listenable: widget.viewmodel,
       builder: (context, _) {
         DeviceScreenType device = ResponsiveUtils.getDeviceType(context);
 
-
-
         return device == DeviceScreenType.mobile
             ? _buildMobile()
             : CustomContainerShell(
               child: StickyHeaderScrollView(
-                header: ResponsiveUtils.centralized(context: context, child: LibrasHomeHeader()),
-                stickyHeader: ResponsiveUtils.centralized(context: context, child: _buildSearchBar()),
-                  body: [
-                    SliverToBoxAdapter(
-                      child: ListenableBuilder(
-                          listenable: widget.viewmodel,
-                          builder: (context,_){
-                            final Widget content =
-                            (widget.viewmodel.isSearchActive ||
-                                widget.viewmodel.words.isNotEmpty)
-                                ? ResponsiveUtils.centralized(context: context,child: SearchResult(viewmodel: widget.viewmodel))
-                                : Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 37.0, horizontal: 16),
-                              child: FilterBlockGrid(filterBlockList: _getItems(context)),
-                            );
-                            return content;
-                          }),
-                    ),
-                  ],),
+                header: ResponsiveUtils.centralized(
+                  context: context,
+                  child: LibrasHomeHeader(),
+                ),
+                stickyHeader: ResponsiveUtils.centralized(
+                  context: context,
+                  child: _buildSearchBar(),
+                ),
+                body: [
+                  ListenableBuilder(
+                    listenable: widget.viewmodel,
+                    builder: (context, _) {
+
+                      if (widget.viewmodel.state == LibrasHomeState.loading) {
+                        return const SliverFillRemaining(
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+
+                      if (widget.viewmodel.isSearchActive ||
+                          widget.viewmodel.words.isNotEmpty) {
+                        if (widget.viewmodel.words.isEmpty) {
+                          return SliverFillRemaining(
+                            child: SearchNotFound(
+                              text: 'Não encontramos esta palavra.',
+                              text2: 'Nos ajude a melhorar nosso glossário!',
+                              errorIcon: Icons.error,
+                              onPressed: () {
+                                WordSuggestionRouter().push(context);
+                              },
+                            ),
+                          );
+                        }
+
+                        return SliverToBoxAdapter(
+                          child: ResponsiveUtils.centralized(
+                            context: context,
+                            child: SearchResult(
+                              viewmodel: widget.viewmodel,
+                            ),
+                          ),
+                        );
+                      }
+
+
+
+
+
+
+
+
+                      return SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 37.0,
+                            horizontal: 16,
+                          ),
+                          child: FilterBlockGrid(
+                            filterBlockList: _getItems(context),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             );
       },
     );
@@ -120,74 +166,100 @@ class _LibrasHomePageState extends State<LibrasHomePage> {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: StickyHeaderScrollView(
-          header: LibrasHomeHeader(),
-          stickyHeader: Container(
-            color: colorScheme.surface,
-            child: _buildSearchBar(),
-          ),
-          body: [
-            SliverToBoxAdapter(
-              child: ListenableBuilder(
-                  listenable: widget.viewmodel,
-                  builder: (context,_){
-                    final Widget content =
-                    (widget.viewmodel.isSearchActive ||
-                        widget.viewmodel.words.isNotEmpty)
-                        ? SearchResult(viewmodel: widget.viewmodel)
-                        : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 22.0),
-                            child: Text("Um dicionário de sinais criado para a comunidade",
-                              textAlign: TextAlign.center,
-                              style: textTheme.titleSmall?.copyWith(
-                                  color: colorScheme.primary
-                              ),),
+        header: LibrasHomeHeader(),
+        stickyHeader: Container(
+          color: colorScheme.surface,
+          child: _buildSearchBar(),
+        ),
+        body: [
+          ListenableBuilder(
+            listenable: widget.viewmodel,
+            builder: (context, _) {
+              if (widget.viewmodel.state == LibrasHomeState.loading) {
+                return const SliverFillRemaining(
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+
+              if (widget.viewmodel.isSearchActive ||
+                  widget.viewmodel.words.isNotEmpty) {
+                if (widget.viewmodel.words.isEmpty) {
+                  return SliverFillRemaining(
+                    child: SearchNotFound(
+                      text: 'Não encontramos esta palavra.',
+                      text2: 'Nos ajude a melhorar nosso glossário!',
+                      errorIcon: Icons.error,
+                      onPressed: () {
+                        WordSuggestionRouter().push(context);
+                      },
+                    ),
+                  );
+                }
+
+                return SliverToBoxAdapter(
+                  child: SearchResult(viewmodel: widget.viewmodel),
+                );
+              }
+
+              return SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 22.0),
+                        child: Text(
+                          "Um dicionário de sinais criado para a comunidade",
+                          textAlign: TextAlign.center,
+                          style: textTheme.titleSmall?.copyWith(
+                            color: colorScheme.primary,
                           ),
-                          FilterBlockGrid(filterBlockList: _getItems(context)),
-                        ],
+                        ),
                       ),
-                    );
-                    return content;
-                  }),
-            )
-          ]),
+                      FilterBlockGrid(filterBlockList: _getItems(context)),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
-  _buildSearchBar(){
+
+  _buildSearchBar() {
     return Column(
       spacing: 8,
       children: [
-          SizedBox(height: 5,),
-          Padding(
-          padding: const EdgeInsets.symmetric( horizontal: 8.0,),
+        SizedBox(height: 5),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: ListenableBuilder(
-            listenable:widget.viewmodel ,
-            builder: (context,_) {
+            listenable: widget.viewmodel,
+            builder: (context, _) {
               return CustomSearchBar(
                 suggestions: widget.viewmodel.suggestions,
                 loadingSuggestions: widget.viewmodel.loadingSugestion,
                 onQueryChanged:
                     (q) async =>
-                await widget.viewmodel.searchSuggestions(query: q),
+                        await widget.viewmodel.searchSuggestions(query: q),
                 onSubmit:
                     (value) async =>
-                await widget.viewmodel.fetchLibrasByWord(value),
+                        await widget.viewmodel.fetchLibrasByWord(value),
               );
-            }
+            },
           ),
         ),
-        if(ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile)
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Container(
-            color: Theme.of(context).colorScheme.outline,
-            width: double.infinity,
-            height: 1,
+        if (ResponsiveUtils.getDeviceType(context) == DeviceScreenType.mobile)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Container(
+              color: Theme.of(context).colorScheme.outline,
+              width: double.infinity,
+              height: 1,
+            ),
           ),
-        ),
       ],
     );
   }

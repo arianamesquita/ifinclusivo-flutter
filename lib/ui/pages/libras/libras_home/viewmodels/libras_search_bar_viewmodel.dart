@@ -16,7 +16,7 @@ class LibrasHomeViewModel with ChangeNotifier{
   String _errorMessage = '';
   String get errorMessage => _errorMessage;
 
-  LibrasHomeState _state = LibrasHomeState.loading;
+  LibrasHomeState _state = LibrasHomeState.idle;
   LibrasHomeState get state => _state;
 
   List<LibrasResponseModel> _words = [];

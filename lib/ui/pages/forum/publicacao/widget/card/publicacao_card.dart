@@ -9,6 +9,9 @@ import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/botto
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/content_card.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/list_chips_card.dart';
 
+import '../../../../auth/modal/auth_modals.dart';
+import '../../../../shell/shell_page.dart';
+
 class PublicacaoCard extends StatelessWidget {
   final PublicacaoDetalhadaModel model;
   final void Function()? onTap;
@@ -69,6 +72,15 @@ class PublicacaoCard extends StatelessWidget {
                   isLiked: model.curtidoPeloUsuario,
                   isLoggedIn: isLoggedIn,
                   onLike: onLike,
+                  onBlocked: (){openAppBottomSheet(
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: const LoginRequiredContent(),
+                      );
+                    },
+                  ); ;},
                   onComment: () {
                     PublicacaoRouter(model.id).go(context);
                   },

@@ -22,7 +22,10 @@ class AuthModals {
       barrierColor: Color.fromRGBO(59, 105, 57, 0.5),
 
       builder: (context) {
-        return builder;
+        return Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: builder,
+        );
       },
     ).whenComplete((){
       if(onClose != null) onClose;
@@ -250,25 +253,28 @@ class AuthModals {
       barrierDismissible: true,
       builder: Consumer<LoginViewModel>(
         builder: (context, viewModel, _) {
-          return PopScope(
-            canPop: viewModel.emailState != EmailState.loading,
-            onPopInvokedWithResult: (bool c, dynamic){ if(onClose != null) onClose.call();},
-            child: switch (viewModel.emailState) {
-              EmailState.idle => _RecoverPasswordDialog(
-                onSendPressed: onSendPressed,
-                onClose: onClose,
-              ),
-              EmailState.loading => _loading(context: context),
-              EmailState.success => _recoverPasswordSuccess(
-                context: context,
-                onClose: onClose,
-              ),
-              EmailState.error => _emailNotFound(
-                context: context,
-                onButtonPressed: tryAgain,
-                onClose: onClose,
-              ),
-            },
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: PopScope(
+              canPop: viewModel.emailState != EmailState.loading,
+              onPopInvokedWithResult: (bool c, dynamic){ if(onClose != null) onClose.call();},
+              child: switch (viewModel.emailState) {
+                EmailState.idle => _RecoverPasswordDialog(
+                  onSendPressed: onSendPressed,
+                  onClose: onClose,
+                ),
+                EmailState.loading => _loading(context: context),
+                EmailState.success => _recoverPasswordSuccess(
+                  context: context,
+                  onClose: onClose,
+                ),
+                EmailState.error => _emailNotFound(
+                  context: context,
+                  onButtonPressed: tryAgain,
+                  onClose: onClose,
+                ),
+              },
+            ),
           );
         },
       ),
@@ -287,9 +293,12 @@ class AuthModals {
       barrierDismissible: true,
       builder: Consumer<LoginViewModel>(
         builder: (context, viewModel, _) {
-          return _DeleteAccountDialog(
-            onSendPressed: onSendPressed,
-            onClose: onClose,
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: _DeleteAccountDialog(
+              onSendPressed: onSendPressed,
+              onClose: onClose,
+            ),
           );
         },
       ),
@@ -399,7 +408,7 @@ Future<void> showLoginRequiredDialog(BuildContext context) async {
       ),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: const _LoginRequiredContent(),
+        child: const LoginRequiredContent(),
       ),
     );
   } else {
@@ -416,7 +425,7 @@ Future<void> showLoginRequiredDialog(BuildContext context) async {
             constraints: const BoxConstraints(maxWidth: 420),
             child: const Padding(
               padding: EdgeInsets.all(24),
-              child: _LoginRequiredContent(),
+              child: LoginRequiredContent(),
             ),
           ),
         );
@@ -425,74 +434,76 @@ Future<void> showLoginRequiredDialog(BuildContext context) async {
   }
 }
 
-class _LoginRequiredContent extends StatelessWidget {
-  const _LoginRequiredContent();
+class LoginRequiredContent extends StatelessWidget {
+  const LoginRequiredContent();
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          Icons.lock_outline_rounded,
-          size: 56,
-          color: colorScheme.primary,
-        ),
-        const SizedBox(height: 16),
-        Text(
-          'Faça login para continuar',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.lock_outline_rounded,
+            size: 56,
+            color: colorScheme.primary,
           ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Você precisa estar logado para curtir ou comentar.\nEntre ou crie uma conta gratuita!',
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 24),
-        Row(
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                onPressed: () {
-                  RegisterRoute().push(context);
-                },
-                child: const Text('Criar conta'),
-              ),
+          const SizedBox(height: 16),
+          Text(
+            'Faça login para continuar',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Você precisa estar logado para curtir ou comentar.\nEntre ou crie uma conta gratuita!',
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                   ),
+                  onPressed: () {
+                    RegisterRoute().push(context);
+                  },
+                  child: const Text('Criar conta'),
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  LoginRoute().push(context);
-                },
-                child: const Text('Fazer login'),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Agora não'),
-        ),
-      ],
+              const SizedBox(width: 12),
+              Expanded(
+                child: FilledButton(
+                  style: FilledButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    LoginRoute().push(context);
+                  },
+                  child: const Text('Fazer login'),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Agora não'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -674,11 +685,13 @@ class _DeleteAccountDialogState extends State<_DeleteAccountDialog> {
                 size: 50,
                 color: Colors.red,
               ),
-              Text(
-                'A exclusão da conta é permanente e não pode ser desfeita.',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontStyle: FontStyle.italic,
+              Flexible(
+                child: Text(
+                  'A exclusão da conta é permanente e não pode ser desfeita.',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
             ],

@@ -18,10 +18,10 @@ class _LibrasVideoPlayerWebState extends State<LibrasVideoPlayerWeb> {
     super.initState();
 
     // ID do vídeo (Use o de teste primeiro para garantir)
-    const videoId = 'tcodrIK2P_I';
+    final  videoId = YoutubePlayerController.convertUrlToId(widget.videoUrl);
 
     _controller = YoutubePlayerController.fromVideoId(
-      videoId: videoId,
+      videoId: videoId??'',
       autoPlay: false,
       params: const YoutubePlayerParams(
         showControls: true,
