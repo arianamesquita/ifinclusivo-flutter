@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:if_inclusivo/domain/models/api/request/gen_requests.dart';
+import 'package:if_inclusivo/domain/models/enums/cursos.dart';
 import 'package:if_inclusivo/domain/validators/curso_validator.dart';
 import 'package:if_inclusivo/domain/validators/matricula_validator.dart';
 import 'package:if_inclusivo/domain/validators/name_validator.dart';
@@ -84,6 +86,16 @@ class _SampleCardState extends State<_SampleCard> {
   bool isCursoError = false;
   String errorCurso = '';
 
+  bool _podeEditar(user) {
+    if (user == null) return false;
+
+    return user.roles?.contains(Roles.ROLE_ALUNO) == true ||
+        user.roles?.contains(Roles.ROLE_ALUNO_NAPNE) == true ||
+        user.roles?.contains(Roles.ROLE_PROFESSOR) == true ||
+        user.roles?.contains(Roles.ROLE_TUTOR) == true ||
+        user.roles?.contains(Roles.ROLE_INTERPRETE) == true;
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -121,6 +133,7 @@ class _SampleCardState extends State<_SampleCard> {
     return Consumer<EditProfileViewmodel>(
       builder: (context, viewModel, child) {
         final user = viewModel.usuario;
+        final podeEditar = _podeEditar(user);
 
         return Card(
           elevation: 4,
@@ -131,6 +144,12 @@ class _SampleCardState extends State<_SampleCard> {
               _buildIntroFoto(context, user?.imgPerfil),
               const SizedBox(height: 50),
               _buildForm(context, user),
+              const SizedBox(height: 50),
+              ElevatedButton.icon(
+                onPressed: podeEditar ? () => _onSavePressed(context) : null,
+                icon: const Icon(Icons.save_outlined),
+                label: const Text("Salvar alterações"),
+              ),
             ],
           ),
         );
@@ -209,7 +228,7 @@ class _SampleCardState extends State<_SampleCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Coluna 1 - Nome / Matrícula
-          Expanded(
+          Flexible(
             child: Column(
               children: [
                 _buildField(
@@ -396,4 +415,128 @@ class _SampleCardState extends State<_SampleCard> {
       ],
     );
   }
+
+  void _onSavePressed(BuildContext context) {
+    final viewModel = context.read<EditProfileViewmodel>();
+    final user = viewModel.usuario;
+
+    // Validação
+    if (isNameError || isMatriculaError || isCursoError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Corrija os erros antes de salvar."),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    if (user?.roles?.contains(Roles.ROLE_ALUNO) == true ||
+        user?.roles?.contains(Roles.ROLE_ALUNO_NAPNE) == true) {
+      _salvarAluno(viewModel);
+    }
+    else if (user?.roles?.contains(Roles.ROLE_PROFESSOR) == true) {
+      _salvarProfessor(viewModel);
+    }
+    else if (user?.roles?.contains(Roles.ROLE_TUTOR) == true) {
+      _salvarTutor(viewModel);
+    }
+    else if (user?.roles?.contains(Roles.ROLE_INTERPRETE) == true) {
+      _salvarInterprete(viewModel);
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Perfil atualizado!"),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    setState(() {
+      _isEditingName = false;
+      _isEditingBiografia = false;
+      _isEditingCurso = false;
+      _isEditingMatricula = false;
+    });
+  }
+
+  void _salvarAluno(EditProfileViewmodel viewModel) {
+    final user = viewModel.usuario;
+
+    AlunoDetailsRequestModel aluno = AlunoDetailsRequestModel(
+      nome: _isEditingName && _nameController.text.isNotEmpty
+          ? _nameController.text
+          : user?.nome ?? '',
+      matricula: _isEditingMatricula && _matriculaController.text.isNotEmpty
+          ? int.parse(_matriculaController.text)
+          : user?.matricula ?? 0,
+      curso: _isEditingCurso && _cursoController.text.isNotEmpty
+          ? Cursos.SI
+          : Cursos.SI,
+    );
+
+    viewModel.updateAluno(aluno);
+  }
+
+
+  void _salvarProfessor(EditProfileViewmodel viewModel) {
+    final user = viewModel.usuario;
+
+    ProfessorDetailsRequestModel professor = ProfessorDetailsRequestModel(
+      nome: _isEditingName && _nameController.text.isNotEmpty
+          ? _nameController.text
+          : user?.nome ?? '',
+      matricula: _isEditingMatricula && _matriculaController.text.isNotEmpty
+          ? int.parse(_matriculaController.text)
+          : user?.matricula ?? 0,
+      formacao: _isEditingCurso && _cursoController.text.isNotEmpty
+          ? _cursoController.text
+          : user?.nome ?? '',
+    );
+
+    viewModel.updateProfessor(professor);
+  }
+
+
+  void _salvarTutor(EditProfileViewmodel viewModel) {
+    final user = viewModel.usuario;
+
+    TutorDetailsRequestModel tutor = TutorDetailsRequestModel(
+      nome: _isEditingName && _nameController.text.isNotEmpty
+          ? _nameController.text
+          : user?.nome ?? '',
+      matricula: _isEditingMatricula && _matriculaController.text.isNotEmpty
+          ? int.parse(_matriculaController.text)
+          : user?.matricula ?? 0,
+      especialidade: _isEditingBiografia && _biografiaController.text.isNotEmpty
+          ? _biografiaController.text
+          : user?.nome ?? '',
+    );
+
+    viewModel.updateTutor(tutor);
+  }
+
+
+  void _salvarInterprete(EditProfileViewmodel viewModel) {
+    final user = viewModel.usuario;
+
+    InterpreteDetailsRequestModel interprete = InterpreteDetailsRequestModel(
+      nome: _isEditingName && _nameController.text.isNotEmpty
+          ? _nameController.text
+          : user?.nome ?? '',
+      matricula: _isEditingMatricula && _matriculaController.text.isNotEmpty
+          ? int.parse(_matriculaController.text)
+          : user?.matricula ?? 0,
+      especialidade: _isEditingBiografia && _biografiaController.text.isNotEmpty
+          ? _biografiaController.text
+          : user?.nome ?? '',
+      salary: _isEditingMatricula && _matriculaController.text.isNotEmpty
+          ? double.tryParse(_matriculaController.text) ?? 0
+          : 0,
+    );
+
+    viewModel.updateInterprete(interprete);
+  }
+
+
 }

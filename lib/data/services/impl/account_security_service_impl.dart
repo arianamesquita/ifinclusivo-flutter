@@ -90,7 +90,7 @@ class AccountSecurityServiceImpl implements AccountSecurityService {
 
   @override
   Future<Map<String, dynamic>> updateTutor({required Map<String, dynamic> tutorDetails}) async{
-    final response = await _dio.put('/professores',data: tutorDetails);
+    final response = await _dio.put('/tutores',data: tutorDetails);
     return response.data;
   }
 
