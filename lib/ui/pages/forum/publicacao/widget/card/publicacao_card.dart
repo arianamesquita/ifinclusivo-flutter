@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:if_inclusivo/domain/models/api/response/gen_responses.dart';
 import 'package:if_inclusivo/routing/app_router.dart';
+import 'package:if_inclusivo/utils/responsive_utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/account_header.dart';
 import 'package:if_inclusivo/ui/pages/forum/publicacao/widget/card/widgets/bottom_bar_publication.dart';
@@ -72,15 +73,41 @@ class PublicacaoCard extends StatelessWidget {
                   isLiked: model.curtidoPeloUsuario,
                   isLoggedIn: isLoggedIn,
                   onLike: onLike,
-                  onBlocked: (){openAppBottomSheet(
-                    isScrollControlled: true,
-                    builder: (BuildContext context) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: const LoginRequiredContent(),
+                  onBlocked: (){
+                    if(ResponsiveUtils.getDeviceType(context) ==DeviceScreenType.mobile) {
+                      openAppBottomSheet(
+                        isScrollControlled: true,
+                        builder: (BuildContext context) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0),
+                            child: const LoginRequiredContent(),
+                          );
+                        },
                       );
-                    },
-                  ); ;},
+                    }else {
+                       showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            insetPadding: const EdgeInsets.all(24),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 420),
+                              child: const Padding(
+                                padding: EdgeInsets.all(24),
+                                child: LoginRequiredContent(),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
+
+                      },
                   onComment: () {
                     PublicacaoRouter(model.id).go(context);
                   },
