@@ -257,7 +257,7 @@ _$AutorCardModelImpl _$$AutorCardModelImplFromJson(Map<String, dynamic> json) =>
     _$AutorCardModelImpl(
       id: (json['id'] as num).toInt(),
       nome: json['nome'] as String,
-      imgPerfil: json['imgPerfil'] as String,
+      imgPerfil: json['imgPerfil'] as String?,
     );
 
 Map<String, dynamic> _$$AutorCardModelImplToJson(

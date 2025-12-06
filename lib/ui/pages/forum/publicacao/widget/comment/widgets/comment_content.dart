@@ -8,7 +8,7 @@ import 'actions_bar_comment.dart';
 class CommentContent extends StatelessWidget {
   final String userName;
   final String? taggedUser;
-  final String imgPath;
+  final String? imgPath;
   final DateTime dateCreation;
   final List<PopupMenuEntry<dynamic>> menuItems;
   final PublicacaoViewModel viewModel;

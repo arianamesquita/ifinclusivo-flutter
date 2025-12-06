@@ -3903,7 +3903,7 @@ AutorCardModel _$AutorCardModelFromJson(Map<String, dynamic> json) {
 mixin _$AutorCardModel {
   int get id => throw _privateConstructorUsedError;
   String get nome => throw _privateConstructorUsedError;
-  String get imgPerfil => throw _privateConstructorUsedError;
+  String? get imgPerfil => throw _privateConstructorUsedError;
 
   /// Serializes this AutorCardModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -3922,7 +3922,7 @@ abstract class $AutorCardModelCopyWith<$Res> {
     $Res Function(AutorCardModel) then,
   ) = _$AutorCardModelCopyWithImpl<$Res, AutorCardModel>;
   @useResult
-  $Res call({int id, String nome, String imgPerfil});
+  $Res call({int id, String nome, String? imgPerfil});
 }
 
 /// @nodoc
@@ -3942,7 +3942,7 @@ class _$AutorCardModelCopyWithImpl<$Res, $Val extends AutorCardModel>
   $Res call({
     Object? id = null,
     Object? nome = null,
-    Object? imgPerfil = null,
+    Object? imgPerfil = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -3957,10 +3957,10 @@ class _$AutorCardModelCopyWithImpl<$Res, $Val extends AutorCardModel>
                     : nome // ignore: cast_nullable_to_non_nullable
                         as String,
             imgPerfil:
-                null == imgPerfil
+                freezed == imgPerfil
                     ? _value.imgPerfil
                     : imgPerfil // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as String?,
           )
           as $Val,
     );
@@ -3976,7 +3976,7 @@ abstract class _$$AutorCardModelImplCopyWith<$Res>
   ) = __$$AutorCardModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String nome, String imgPerfil});
+  $Res call({int id, String nome, String? imgPerfil});
 }
 
 /// @nodoc
@@ -3995,7 +3995,7 @@ class __$$AutorCardModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nome = null,
-    Object? imgPerfil = null,
+    Object? imgPerfil = freezed,
   }) {
     return _then(
       _$AutorCardModelImpl(
@@ -4010,10 +4010,10 @@ class __$$AutorCardModelImplCopyWithImpl<$Res>
                 : nome // ignore: cast_nullable_to_non_nullable
                     as String,
         imgPerfil:
-            null == imgPerfil
+            freezed == imgPerfil
                 ? _value.imgPerfil
                 : imgPerfil // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as String?,
       ),
     );
   }
@@ -4036,7 +4036,7 @@ class _$AutorCardModelImpl implements _AutorCardModel {
   @override
   final String nome;
   @override
-  final String imgPerfil;
+  final String? imgPerfil;
 
   @override
   String toString() {
@@ -4079,7 +4079,7 @@ abstract class _AutorCardModel implements AutorCardModel {
   const factory _AutorCardModel({
     required final int id,
     required final String nome,
-    required final String imgPerfil,
+    required final String? imgPerfil,
   }) = _$AutorCardModelImpl;
 
   factory _AutorCardModel.fromJson(Map<String, dynamic> json) =
@@ -4090,7 +4090,7 @@ abstract class _AutorCardModel implements AutorCardModel {
   @override
   String get nome;
   @override
-  String get imgPerfil;
+  String? get imgPerfil;
 
   /// Create a copy of AutorCardModel
   /// with the given fields replaced by the non-null parameter values.

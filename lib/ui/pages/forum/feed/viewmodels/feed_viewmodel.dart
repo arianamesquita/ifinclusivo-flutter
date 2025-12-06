@@ -134,6 +134,7 @@ class FeedViewModel extends ChangeNotifier implements PublicationsViewModel {
       },
       (onFailure) {
         errorMessage = onFailure.toString();
+        print(onFailure);
         _state = FeedState.error;
       },
     );

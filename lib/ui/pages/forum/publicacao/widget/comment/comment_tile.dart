@@ -17,7 +17,7 @@ class CommentTile extends StatefulWidget {
   final int? parentId;
   final int? userMark;
   final String userName;
-  final String imgPath;
+  final String? imgPath;
   final int autorId;
   final String? taggedUser;
   final int? taggedId;
